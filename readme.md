@@ -2,7 +2,7 @@ BattlePHP
 ==========
 BattlePHP is a small open source MVC PHP framework by examples.
 
-It includes some websites we've made using it, that ranges from the most basic single page apps (Partycul, CrappyCrop, FingerZen) to the more mature websites like Sawhat (another text-based-wiki).
+It includes some sample-websites we've made, that ranges from the most basic single page apps (Partycul, CrappyCrop, FingerZen) to the more mature websites like Sawhat (another text-based-wiki).
 
 Demo : 
 http://labelcarrote.com/battle/ 
