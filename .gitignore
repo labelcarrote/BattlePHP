@@ -1,0 +1,9 @@
+*.txtold
+*.zip
+main.log
+src/battle/tmp/
+src/battle/tmp/tpl_comp/*
+src/battle/app/fingerzen/temp/
+src/battle/app/labelcarrote/*
+src/battle/app/flipapart/*
+src/battle/app/pipix/*

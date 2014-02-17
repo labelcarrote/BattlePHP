@@ -1,0 +1,83 @@
+@CHARSET "UTF-8";
+/* ---- OOCSS - Grid.css --- */
+.line,.lastUnit{overflow:hidden; *overflow:visible;*zoom:1;}
+.unit{float:left;}
+.unitRight{float:right;}
+.size1of1{float:none;}
+.size1of2{width:50%;}
+.size1of3{width:33.33333%;}
+.size2of3{width:66.66666%;}
+.size1of4{width:25%;}
+.size3of4{width:75%;}
+.size1of5{width:20%;}
+.size2of5{width:40%;}
+.size3of5{width:60%;}
+.size4of5{width:80%;}
+.lastUnit{float:none;width:auto;_position:relative;_left:-3px;_margin-right:-3px;}
+
+/* -------------------------------- */
+/* --------- FINGER ZEN ----------- */
+/* -------------------------------- */
+
+/* ---- Base Rules / Element Selector ---- */
+body{
+	font: 100%/1.2 Arial, Verdana, sans-serif;
+	text-align: left;
+	background-color: #222;
+	color: #fff;
+	/*line-height: 2.0;*/
+}
+section, article, header, footer, nav, aside, hgroup{
+	display: block;
+}
+h1, .h1{font-size:2em;font-weight:bold; font-style: normal;}
+h2, .h2{font-size:1.67em;font-weight:bold; font-style: normal;}
+h3, .h3{font-size:1.3em; font-weight:bold; font-style: normal;}
+h4, .h4{font-size:1.25em; font-weight:normal; font-style: normal;}
+h5, .h5{font-size:1.15em; font-weight:bold; font-style: normal;}
+h6, .h6{font-size:1em; font-weight:normal;  font-style: italic;}
+a{
+	text-decoration: none;
+	color: #ff9933;
+}
+a:hover{
+	/*text-decoration: underline;*/
+	color: #ff9900;
+}
+/* ---- Layout ---- */
+.content{
+	margin: auto;
+	width: 480px;
+}
+.block{ padding: 0; }
+.hidden{ display: none; }
+.hidden_background{ background-color: transparent !important; }
+
+p{
+	font: 100%/1.2 'Open Sans', Tahoma,Geneva, Arial, Verdana, sans-serif;
+	margin: 16px 0px;
+}
+section {
+	margin-bottom: 32px;
+}
+header{
+	border-bottom: 2px solid #fff;
+	vertical-align: bottom;
+	margin-bottom: 16px;
+}
+h3{
+	border-bottom: 2px solid #fff;
+	padding: 4px 0px;
+}
+.maintitle{
+	margin-top: 42px;
+}
+
+/* Skins*/
+.transparent{
+	background: rgb(0, 0, 0);
+	background: rgba(0, 0, 0, 0.4);
+}
+
+/* ---- HEADER ---- */
+

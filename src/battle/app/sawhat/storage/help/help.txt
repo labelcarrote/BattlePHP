@@ -1,0 +1,28 @@
+help
+lastedit: 20140128_2001
+color: #F90
+
+---- H1 ----
+---- H1 (bis)
+--- H2 ---
+--- H2 (bis)
+-- H3 ---
+-- H3 (bis)
+
+http://link
+LINK http://link
+- LINK http://link 
+- LINK http://link
+[url]http://link[/url]
+[url=http://link]Link[/url]
+#help
+
+[img]http://labelcarrote.com/image/bigcarrote.png[/img]
+
+@c5b9a399d63afdf7f44e03c9ec35009d45d6708d_m.gif
+
+[help]
+
+[help|help]
+
+[help|help|help]

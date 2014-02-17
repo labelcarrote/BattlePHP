@@ -1,0 +1,13 @@
+home
+lastedit: 20140217_0202
+color: #F90
+
+This is a wiki card containing other wiki cards.
+You can edit this card by pressing the EDIT button at the bottom!
+Want to go back to battle.php ? http://labelcarrote.com/battle
+#help
+
+--- TIPS
+#webdev
+
+[sawhat]
