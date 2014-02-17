@@ -5,7 +5,7 @@
 		<meta name="description" content="Framework by Examples." />
 		<meta name="author" content="label carrote"/>
 		<meta name="keywords" content="label carrote, battle, jon dalton, touchypunchy, p2b, moustachu, mitch" />
-		<title>Battle.PHP</title>
+		<title>BattlePHP</title>
 		<link rel="stylesheet" href="public/css/reset.css" />
 		<link rel="stylesheet" href="public/css/index.css" />
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
@@ -17,12 +17,12 @@
                 <header>
                     <div class="maintitle">
                         <a href="{$root_url}">
-                            <h1>Battle.PHP</h1>
+                            <h1>BattlePHP</h1>
                         </a>
                     </div>
                 </header>
                 <section>
-                    <p>Battle.PHP is a small open source MVC PHP framework by examples.</p>
+                    <p>BattlePHP is a small open source MVC PHP framework by examples.</p>
                     <p>"Framework by examples" means it is given with some websites we've made using it, that ranges from the most basic single page apps ('Partycul', 'FingerZen'...) to the more mature websites like 'Sawhat' (another text-based-wiki).
                     </p>
                     <p>Examples :</p>
