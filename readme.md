@@ -6,11 +6,12 @@ BattlePHP is a small open source MVC PHP framework by examples.
 Demo : 
 http://labelcarrote.com/battle/ 
 
-Features :
+Features
+--------
 - Included many delightfull samples 
-- Best Practices, as much as possible
+- Follows Best Practices, as much as possible
 - Simple "REST routing" by folder hierarchy convention (also uses some sinatra-inspired query parameters retrieval)
-- Uses smarty for templating (optional)
+- Uses Smarty for templating (optional)
 - Uses pdo / mysql in authentication layer (optional)
 
 Hierarchy
