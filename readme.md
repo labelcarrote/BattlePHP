@@ -1,15 +1,15 @@
 BattlePHP
 ==========
 BattlePHP is a small open source MVC PHP framework by examples.
-"Framework by examples" means it is given with some websites we've made using it, that ranges from the most basic single page apps ('Partycul', 'FingerZen'...) to the more mature websites like 'Sawhat' (another text-based-wiki).
+"Framework by examples" means it is given with some websites we've made using it, that ranges from the most basic single page apps ('Partycul', 'FingerZen','CrappyCrop') to the more mature websites like 'Sawhat' (another text-based-wiki).
 
 Demo : 
 http://labelcarrote.com/battle/ 
 
 Features
 --------
-- Included many delightfull samples 
-- Follows Best Practices, as much as possible
+- Includes many delightfull samples 
+- Follows best practices as much as possible
 - Simple "REST routing" by folder hierarchy convention (also uses some sinatra-inspired query parameters retrieval)
 - Uses Smarty for templating (optional)
 - Uses pdo / mysql in authentication layer (optional)
@@ -27,7 +27,7 @@ Hierarchy
 Installation
 ------------
 - Download and unzip in your web directory
-- go to http://.../src/battle/ in your browser
+- Go to http://[your_web_directory]/src/battle/ in your favorite browser
 
 Optional (for examples that require a database) :
 - Change your database access in config/config.php
