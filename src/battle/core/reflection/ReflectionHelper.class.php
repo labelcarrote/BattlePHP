@@ -6,8 +6,10 @@
  * @author touchypunchy
  */
 class ReflectionHelper{
+
+	// ---- yUML ----
     
-    // Generate yUML class diagram definition from folder.
+    // Generate yUML class diagram definition from each ".class.php" files in folder.
     // example: [User|+Forename+;Surname;+HashedPassword;-Salt|+Login();+Logout()]
     public static function generate_yuml_class_diagram_definitions($app_folder = null){
 
@@ -60,7 +62,7 @@ class ReflectionHelper{
 		return $diagrams;
     }
 
-    // Generate yUML class diagram definition from CREATE TABLE statements in sql files contained in given folder.
+    // Generate yUML class diagram definition from each "CREATE TABLE" statements in every sql files contained in given folder.
     // example: [btl_user|id int(11);name varchar(255);]
     public static function generate_yuml_class_diagram_definitions_from_sql($app_folder){
     	if($app_folder === null)

@@ -72,8 +72,8 @@ class Controller{
 	// ---- AUTH MANAGEMENT ----
 	// -------------------------
 
-	// TODO : move to authcontroller (executed after requested action)
 	// Checks if user is authentified and assign authentication template-variables
+	// TODO : move to authcontroller (executed after requested action)
 	private function assign_auth_values(){
 		$is_authenticated = AuthHelper::is_authenticated();
 		$this->assign('logged', $is_authenticated);
@@ -126,14 +126,6 @@ class Controller{
 		$this->assign_auth_values();//TODO Move To authcontroller
 		$this->assign_custom_values();
 		$this->view_manager->display_view($this->content_template);
-	}
-	
-	/**
-	 * Displays an error page with a message
-	 */
-	protected function display_page_error($message){
-		$this->assign('message',$message);
-		$this->view_manager->display_page($this->page_error);
 	}
 
 	/**

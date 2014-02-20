@@ -14,9 +14,9 @@
 		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.6/jquery.mousewheel.js"></script>
 		<style>
-		html{ 
+		/*html{ 
 		    -ms-touch-action: none;
-		}
+		}*/
 		body{
 			background-repeat:repeat;
 			font: 16px/1.5 'Raleway', Arial, Verdana, sans-serif;
@@ -38,6 +38,8 @@
 			font: 16px/1.5  Arial, Verdana, sans-serif !important;
 		}
 		.crop_container{
+			-ms-touch-action: none;
+			touch-action: none;
 			width: 100%;
 			height: 500px;
 			overflow: hidden;
@@ -72,7 +74,7 @@
 
 				function init(){
 					container = $('.crop_container');
-					img_to_crop = $('.to_crop',container);
+					img_to_crop = $('img',container);
 					
 					// get image dimensions
 					var img = new Image();

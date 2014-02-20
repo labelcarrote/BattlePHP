@@ -14,7 +14,7 @@ class ActionMain extends Controller{
 				$success = file_put_contents('app/crappycrop/public/images/result.jpg', $data);
 			}
 		}
-		$this->display_view('index3.tpl');
+		$this->display_view('index4.tpl');
 	}
 }
 ?>
