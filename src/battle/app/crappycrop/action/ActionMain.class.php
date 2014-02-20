@@ -1,7 +1,12 @@
 <?php
 require_once 'core/storage/Uploader.class.php';
+require_once 'core/imaging/ImageHelper.class.php';
 
 class ActionMain extends Controller{
+
+	const IMAGE_SOURCE_PATH = 'app/crappycrop/public/images/lechat.jpg';
+	const IMAGE_RESULT_PATH = 'app/crappycrop/public/images/result.jpg';
+
 	public function index(){
 		if(isset($_POST['data'])){
 			$res = json_decode(stripcslashes($_POST['data']),true);
@@ -12,6 +17,19 @@ class ActionMain extends Controller{
 				$img = str_replace(' ', '+', $img);
 				$data = base64_decode($img);
 				$success = file_put_contents('app/crappycrop/public/images/result.jpg', $data);
+			}else if($submit == "crop_and_save"){
+				$crop_data = $res['crop_data'];
+				$sx = $crop_data['sx'];
+				$sy = $crop_data['sy'];
+				$sw = $crop_data['sw'];
+				$sh = $crop_data['sh'];
+				$dx = $crop_data['dx'];
+				$dy = $crop_data['dy'];
+				$dw = $crop_data['dw'];
+				$dh = $crop_data['dh'];
+				$fw = $crop_data['fw'];
+				$fh = $crop_data['fh'];
+				ImageHelper::draw_image(self::IMAGE_SOURCE_PATH, self::IMAGE_RESULT_PATH, $sx, $sy, $sw, $sh, $dx, $dy, $dw, $dh, $fw, $fh);
 			}
 		}
 		$this->display_view('index4.tpl');

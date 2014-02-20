@@ -129,7 +129,7 @@
 		}
 
 		// get cropped image (canvas generated)
-		self.getDataURL = function() {
+		self.get_data_url = function() {
 			var canvas = document.createElement('canvas'), 
 				ctx = canvas.getContext('2d');
 
@@ -149,11 +149,29 @@
 				sh = img_real_height, // source h
 				dx = img_to_crop.position().left / scale, // destination x
 				dy = img_to_crop.position().top / scale, // destination y
-				dw = (img_real_width / canvas.width) * img_current_width, // destination w
-				dh = (img_real_height / canvas.height) * img_current_height // destination h
-			ctx.drawImage(img,sx,sy,sw,sh,dx,dy,sw,sh);
+				dw = img_real_width, // destination w
+				dh = img_real_height // destination h
+			ctx.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh);
 
 			return canvas.toDataURL();
+		}
+
+		self.get_crop_data = function(){
+			var scale = img_current_width / img_real_width;
+			var final_width = ((container.width() - img_current_width) / scale) + img_real_width,
+				final_height = ((container.height() - img_current_height) / scale) + img_real_height;
+			return {
+				fw : final_width, // final image width 
+				fh : final_height, // final image height
+				sx : 0, // source x
+				sy : 0, // source y
+				sw : img_real_width, // source w 
+				sh : img_real_height, // source h
+				dx : img_to_crop.position().left / scale, // destination x
+				dy : img_to_crop.position().top / scale, // destination y
+				dw : img_real_width, // destination w
+				dh : img_real_height // destination h
+			};
 		}
 
 		// ---- helpers / private methods

@@ -10,6 +10,7 @@ class ImageHelper{
 	const SMALL_SIZE = 320;  // s_
 	const MEDIUM_SIZE = 960; // m_
 	const LARGE_SIZE = 1920; // l_
+	const EXTRA_LARGE_SIZE = 3840; // l_
 
 	const JPG_QUALITY = 90; // 0-100 (0:small,ugly - 100:fat,beautifull)
 	const PNG_QUALITY = 6;  // 0-9 (0:nocompression - 9:maxcompress)
@@ -110,9 +111,9 @@ class ImageHelper{
 
 	public static function crop_image($source_image_path, $thumbnail_image_path, $x1, $y1, $w1, $h1, $max_width = null, $max_height = null){
 		if($max_width === null)
-			$max_width = self::MEDIUM_SIZE;
+			$max_width = self::LARGE_SIZE;
 		if($max_height === null)
-			$max_height = self::MEDIUM_SIZE;
+			$max_height = self::LARGE_SIZE;
 
 		list($source_image_width, $source_image_height, $source_image_type) = getimagesize($source_image_path);
 		$source_gd_image = self::create_gd_image($source_image_path,$source_image_type);
@@ -128,6 +129,28 @@ class ImageHelper{
 
 		$thumbnail_gd_image = imagecreatetruecolor($thumbnail_image_width, $thumbnail_image_height);
 		imagecopyresampled($thumbnail_gd_image, $source_gd_image, 0, 0, $x1, $y1, $thumbnail_image_width, $thumbnail_image_height, $w1, $h1);
+		self::save_gd_image($thumbnail_gd_image, $source_image_type, $thumbnail_image_path);
+		imagedestroy($source_gd_image);
+		imagedestroy($thumbnail_gd_image);
+		return true;
+	}
+
+	public static function draw_image($source_image_path, $thumbnail_image_path, $sx, $sy, $sw, $sh, $dx, $dy, $dw, $dh, $result_image_width, $result_image_height, $max_width = null, $max_height = null){
+		if($max_width === null)
+			$max_width = self::EXTRA_LARGE_SIZE;
+		if($max_height === null)
+			$max_height = self::EXTRA_LARGE_SIZE;
+		if($result_image_width > $max_width || $result_image_height > $max_height)
+			return false;
+
+		list($source_image_width, $source_image_height, $source_image_type) = getimagesize($source_image_path);
+		$source_gd_image = self::create_gd_image($source_image_path,$source_image_type);
+		if($source_gd_image === false)
+			return false;
+
+		$thumbnail_gd_image = imagecreatetruecolor($result_image_width, $result_image_height);
+
+		imagecopyresampled($thumbnail_gd_image, $source_gd_image, $dx, $dy, $sx, $sy, $dw, $dh, $sw, $sh);
 		self::save_gd_image($thumbnail_gd_image, $source_image_type, $thumbnail_image_path);
 		imagedestroy($source_gd_image);
 		imagedestroy($thumbnail_gd_image);

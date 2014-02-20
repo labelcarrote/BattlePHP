@@ -50,7 +50,7 @@
 			position: absolute;
 			height: auto;
 		}
-		
+
 		</style>
 		{literal}
 		<script type="text/javascript">
@@ -77,7 +77,12 @@
 			});
 			$(".upload").on('click', function (){
 				var submit_url = $('#upload_form').attr("action"),
-					dataString = JSON.stringify({submit: "save", image: cropy.getDataURL()});
+					dataString = JSON.stringify({submit: "save", image: cropy.get_data_url()});
+				$.post(submit_url, {data : dataString}, function(){ location.reload(true)});
+			});
+			$(".server_crop").on('click', function (){
+				var submit_url = $('#upload_form').attr("action"),
+					dataString = JSON.stringify({submit: "crop_and_save", crop_data: cropy.get_crop_data()});
 				$.post(submit_url, {data : dataString}, function(){ location.reload(true)});
 			});
 		});
@@ -99,6 +104,7 @@
 					<a class="zoom_in" href="#">ZOOM IN</a>
 					<a class="zoom_out" href="#">ZOOM OUT</a>
 					<a class="upload" href="#">UPLOAD CROP</a>
+					<a class="server_crop" href="#">SERVER CROP</a>
 				</div>
 				<!-- Crop Container -->
 				<div class="crop_container">
