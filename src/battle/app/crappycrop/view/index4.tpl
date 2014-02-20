@@ -19,7 +19,6 @@
 		/* ---- General ---- */
 		body { font: 16px/1.5 'Raleway', Arial, Verdana, sans-serif; }
 		#upload_form a{ font: 16px/1.5  Arial, Verdana, sans-serif !important; }
-
 		.left{ float: left; }
 		.right{ float: right; }
 		.clear{ clear: both; }

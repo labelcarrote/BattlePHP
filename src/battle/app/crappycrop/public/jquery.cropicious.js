@@ -14,10 +14,10 @@
 		// Add a reverse reference to the DOM object
 		self.$element.data("Cropicious", self);
 
-		$.Cropicious.defaultOptions = {};
-
 		// options 
-		var zoom_scale_step = 0.1;
+		$.Cropicious.defaultOptions = {};
+		var zoom_scale_step = 0.1,
+			output_img_quality = 0.92;
 					
 		var container,
 			img_to_crop,
@@ -28,9 +28,8 @@
 			y_pos,
 			x_pos,
 			last_scale = 1,
-			zoom_scale_step = 0.1,
-			zoom_in_scale_step = 1 - zoom_scale_step,
-			zoom_out_scale_step = 1 + zoom_scale_step,
+			zoom_in_scale_step = 1 + zoom_scale_step,
+			zoom_out_scale_step = 1 - zoom_scale_step,
 			is_pinching = false;
 
 
@@ -153,7 +152,12 @@
 				dh = img_real_height // destination h
 			ctx.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh);
 
-			return canvas.toDataURL();
+			var img_src = img_to_crop.attr('src');
+			var mime_type = (string_ends_with(img_src,"jpg") || string_ends_with(img_src,"jpeg"))
+				? "image/jpeg"
+				: "image/png";
+
+			return canvas.toDataURL(mime_type,output_img_quality);
 		}
 
 		self.get_crop_data = function(){
@@ -219,6 +223,10 @@
 			}
 			x_pos = img_to_crop.position().left + (img_current_width / 2);
 			y_pos = img_to_crop.position().top + (img_current_height / 2);
+		}
+
+		function string_ends_with(str, suffix) {
+		    return str.toLowerCase().indexOf(suffix.toLowerCase(), str.length - suffix.length) > -1;
 		}
 
 		// !!!

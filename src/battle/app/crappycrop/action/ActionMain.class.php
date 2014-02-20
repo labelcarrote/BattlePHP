@@ -7,15 +7,27 @@ class ActionMain extends Controller{
 	const IMAGE_SOURCE_PATH = 'app/crappycrop/public/images/lechat.jpg';
 	const IMAGE_RESULT_PATH = 'app/crappycrop/public/images/result.jpg';
 
+	private function str_starts_with($haystack, $needle)
+	{
+	     $length = strlen($needle);
+	     return (substr($haystack, 0, $length) === $needle);
+	}
+
 	public function index(){
 		if(isset($_POST['data'])){
 			$res = json_decode(stripcslashes($_POST['data']),true);
 			$submit = $res['submit'];
 			if($submit == "save"){
 				$img = $res['image'];
-				$img = str_replace('data:image/png;base64,', '', $img);
+				if($this->str_starts_with($img,"data:image/png")){
+					$img = str_replace('data:image/png;base64,', '', $img);
+				}else{
+					$img = str_replace('data:image/jpeg;base64,', '', $img);
+				}
 				$img = str_replace(' ', '+', $img);
 				$data = base64_decode($img);
+
+				//Note : result.jpg should be result.png sometimes ! 
 				$success = file_put_contents('app/crappycrop/public/images/result.jpg', $data);
 			}else if($submit == "crop_and_save"){
 				$crop_data = $res['crop_data'];
