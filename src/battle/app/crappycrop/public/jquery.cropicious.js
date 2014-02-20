@@ -4,19 +4,19 @@
  */
 (function ($){
 
-    $.Cropicious = function(element, options){
-    	var self = this;
+	$.Cropicious = function(element, options){
+		var self = this;
 
-    	// Access to jQuery and DOM versions of element
-        self.$element = $(element);
-        self.element = element;
+		// Access to jQuery and DOM versions of element
+		self.$element = $(element);
+		self.element = element;
 
-        // Add a reverse reference to the DOM object
-        self.$element.data("Cropicious", self);
+		// Add a reverse reference to the DOM object
+		self.$element.data("Cropicious", self);
 
-        $.Cropicious.defaultOptions = {};
+		$.Cropicious.defaultOptions = {};
 
-    	// options 
+		// options 
 		var zoom_scale_step = 0.1;
 					
 		var container,
@@ -35,23 +35,23 @@
 
 
 		self.init = function(){
-            self.options = $.extend({},$.Cropicious.defaultOptions, options);
-            
-            container = self.$element;
-            img_to_crop = $('img',container);
+			self.options = $.extend({},$.Cropicious.defaultOptions, options);
+			
+			container = self.$element;
+			img_to_crop = $('img',container);
 
 			// get image dimensions
 			var img = new Image();
 			img.src = img_to_crop.attr('src');
 			img.onload = function () {
-	  			img_real_width = img.width;
-	  			img_real_height = img.height;
-	  			img_current_width = img_real_width;
+				img_real_width = img.width;
+				img_real_height = img.height;
+				img_current_width = img_real_width;
 				img_current_height = img_real_height;
 				
 				// resize image to fit container
-	  			self.fit_in();
-	  		}
+				self.fit_in();
+			}
 
 			// hammer events
 			container.hammer().on('touch drag pinch pinchin pinchout release doubletap',
@@ -60,7 +60,7 @@
 
 			// mousewheel event
 			container.on('mousewheel', eventHandlers.handle_mousewheel);
-        };
+		};
 
 		// ---- event handlers
 
@@ -204,19 +204,19 @@
 		}
 
 		// !!!
-        self.init();
-    };
-    
-    $.fn.Cropicious = function(options){
-        return this.each(function(){
-            new $.Cropicious(this, options);
-        });
-    };
-    
-    // This function breaks the chain, but returns
-    // the cropicious if it has been attached to the object.
-    $.fn.getCropicious = function(){
-        return this.data("Cropicious");
-    };
+		self.init();
+	};
+	
+	$.fn.Cropicious = function(options){
+		return this.each(function(){
+			new $.Cropicious(this, options);
+		});
+	};
+	
+	// This function breaks the chain, but returns
+	// the cropicious if it has been attached to the object.
+	$.fn.getCropicious = function(){
+		return this.data("Cropicious");
+	};
 
 }(jQuery));
