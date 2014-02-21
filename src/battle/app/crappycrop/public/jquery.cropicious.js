@@ -41,7 +41,6 @@
 
 			// get image dimensions
 			var img = new Image();
-			img.src = img_to_crop.attr('src');
 			img.onload = function () {
 				img_real_width = img.width;
 				img_real_height = img.height;
@@ -49,8 +48,10 @@
 				img_current_height = img_real_height;
 				
 				// resize image to fit container
+				img_to_crop.toggleClass("hidden");
 				self.fit_in();
 			}
+			img.src = img_to_crop.attr('src');
 
 			// hammer events
 			container.hammer().on('touch drag pinch pinchin pinchout release doubletap',
@@ -101,11 +102,13 @@
 
 		// resize image to fit in container
 		self.fit_in = function(){
-			x_pos = (container.width() / 2);
-			y_pos = (container.height() / 2);
-			var zoom_scale = (img_real_width / img_real_height > container.width() / container.height())
-				? container.width() / img_current_width
-				: container.height() / img_current_height;
+			var container_width = container.width(),
+				container_height = container.height();
+			x_pos = (container_width / 2);
+			y_pos = (container_height / 2);
+			var zoom_scale = (img_real_width / img_real_height > container_width / container_height)
+				? container_width / img_current_width
+				: container_height / img_current_height;
 			zoom(zoom_scale);
 		}
 

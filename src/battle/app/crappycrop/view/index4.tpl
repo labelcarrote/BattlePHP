@@ -22,16 +22,16 @@
 		.left{ float: left; }
 		.right{ float: right; }
 		.clear{ clear: both; }
-		
+		.hidden{ display: none !important; }
+
 		.content{
 			max-width: 960px;
 			margin: auto;
 			text-align: center;
 			margin-top: 24px;
 		}
-		.content img{
+		img.result {
 			width: 100%;
-			height: auto;
 		}
 
 		/* --- CrappyCrop / Protocrop / Cropicious ---- */
@@ -47,7 +47,6 @@
 		}
 		.crop_container img{
 			position: absolute;
-			height: auto;
 		}
 
 		</style>
@@ -107,7 +106,7 @@
 				</div>
 				<!-- Crop Container -->
 				<div class="crop_container">
-					<img alt="" src="{$current_app_url}public/images/lechat.jpg"/>
+					<img class="hidden" alt="" src="{$current_app_url}public/images/lechat.jpg"/>
 				</div>
 				<!-- END Crop Container -->
 			</form>

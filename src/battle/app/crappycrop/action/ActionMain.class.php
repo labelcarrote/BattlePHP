@@ -27,7 +27,7 @@ class ActionMain extends Controller{
 				$img = str_replace(' ', '+', $img);
 				$data = base64_decode($img);
 
-				//Note : result.jpg should be result.png sometimes ! 
+				//Note : result.jpg should be result.png sometimes ! But for the sake of this example, let's put that aside!
 				$success = file_put_contents('app/crappycrop/public/images/result.jpg', $data);
 			}else if($submit == "crop_and_save"){
 				$crop_data = $res['crop_data'];
