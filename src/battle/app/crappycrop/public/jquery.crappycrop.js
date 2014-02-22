@@ -1,10 +1,10 @@
 /*! 
- * jQuery Cropicious plugin v0.1 - JQuery + Hammer Crop Plugin 
- * https://github.com/labelcarrote/Cropicious
+ * jQuery CrappyCrop plugin v0.1 - JQuery + Hammer Crop Plugin 
+ * https://github.com/labelcarrote/CrappyCrop
  */
 (function ($){
 
-	$.Cropicious = function(element, options){
+	$.CrappyCrop = function(element, options){
 		var self = this;
 
 		// Access to jQuery and DOM versions of element
@@ -12,10 +12,10 @@
 		self.element = element;
 
 		// Add a reverse reference to the DOM object
-		self.$element.data("Cropicious", self);
+		self.$element.data("CrappyCrop", self);
 
 		// options 
-		$.Cropicious.defaultOptions = {};
+		$.CrappyCrop.defaultOptions = {};
 		var zoom_scale_step = 0.1,
 			output_img_quality = 0.92;
 					
@@ -32,9 +32,8 @@
 			zoom_out_scale_step = 1 - zoom_scale_step,
 			is_pinching = false;
 
-
 		self.init = function(){
-			self.options = $.extend({},$.Cropicious.defaultOptions, options);
+			self.options = $.extend({},$.CrappyCrop.defaultOptions, options);
 			
 			container = self.$element;
 			img_to_crop = $('img',container);
@@ -114,11 +113,13 @@
 
 		// resize image to fill container (aka "fit out")
 		self.fit_out = function(){
-			x_pos = (container.width() / 2);
-			y_pos = (container.height() / 2);
-			var zoom_scale = (img_real_width / img_real_height > container.width() / container.height()) 
-				? container.height() / img_current_height
-				: container.width() / img_current_width;
+			var container_width = container.width(),
+				container_height = container.height();
+			x_pos = (container_width / 2);
+			y_pos = (container_height / 2);
+			var zoom_scale = (img_real_width / img_real_height > container_width / container_height) 
+				? container_height / img_current_height
+				: container_width / img_current_width;
 			zoom(zoom_scale);
 		}
 
@@ -236,16 +237,16 @@
 		self.init();
 	};
 	
-	$.fn.Cropicious = function(options){
+	$.fn.CrappyCrop = function(options){
 		return this.each(function(){
-			new $.Cropicious(this, options);
+			new $.CrappyCrop(this, options);
 		});
 	};
 	
 	// This function breaks the chain, but returns
-	// the cropicious if it has been attached to the object.
-	$.fn.getCropicious = function(){
-		return this.data("Cropicious");
+	// the CrappyCrop if it has been attached to the object.
+	$.fn.getCrappyCrop = function(){
+		return this.data("CrappyCrop");
 	};
 
 }(jQuery));

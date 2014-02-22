@@ -13,7 +13,7 @@
 		<script type="text/javascript" src="{$root_url}lib/jquery/jquery-1.10.2.min.js"></script>
 		<script type="text/javascript" src="{$root_url}lib/hammer/jquery.hammer-full.min.js"></script>
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.6/jquery.mousewheel.js"></script>
-		<script type="text/javascript" src="{$current_app_url}public/jquery.cropicious.js"></script>
+		<script type="text/javascript" src="{$current_app_url}public/jquery.crappycrop.js"></script>
 		<style>
 
 		/* ---- General ---- */
@@ -23,6 +23,7 @@
 		.right{ float: right; }
 		.clear{ clear: both; }
 		.hidden{ display: none !important; }
+		.marginbottom{ margin-bottom: 12px; }
 
 		.content{
 			max-width: 960px;
@@ -54,11 +55,11 @@
 		<script type="text/javascript">
 		$(window).load(function(){
 			var crops = $(".crop_container");
-			// Cropicious the image container
-			crops.Cropicious();
+			// CrappyCrop the image container
+			crops.CrappyCrop();
 
-			// Get the first Cropicious
-			var cropy = crops.first().getCropicious();
+			// Get the first CrappyCrop
+			var cropy = crops.first().getCrappyCrop();
 			
 			// Try the public methods
 			$('.fit_in').on('click', function(){
@@ -89,8 +90,8 @@
 	</head>
 	<body>
 		<div class="content">
-			<div>
-				<div class="left"><strong>PROTOCROP</strong></div>
+			<div class="">
+				<div class="left"><strong>CrappyCrop.js</strong></div>
 				<div class="right"><a href="#">FORK / DOWNLOAD</a></div>
 				<div class="clear"></div>
 			</div>
