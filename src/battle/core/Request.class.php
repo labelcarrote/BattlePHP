@@ -21,10 +21,11 @@ class Request{
 
     public static function get_application_virtual_root(){
     	$sub_domain = explode(".",$_SERVER['HTTP_HOST'])[0];
-    	if($sub_domain !== "" && $sub_domain !== "www" && $sub_domain !== "flipapart" && $sub_domain !== "labelcarrote" && $sub_domain !== "localhost")
-        	return "/";
-        else
-        	return self::get_root_url().self::get_application()."/";        	
+    	$sub_domain = $sub_domain[0];
+
+    	return ($sub_domain !== "" && $sub_domain !== "www" && $sub_domain !== "flipapart" && $sub_domain !== "labelcarrote" && $sub_domain !== "localhost")
+    		? "/"
+    		: self::get_root_url().self::get_application()."/";       	
     }
 
 	public static function get_application_root(){

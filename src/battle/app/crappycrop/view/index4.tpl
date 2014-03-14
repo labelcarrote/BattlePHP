@@ -39,6 +39,7 @@
 		.crop_container{
 			-ms-touch-action: none;
 			touch-action: none;
+			cursor: move;
 			width: 100%;
 			height: 500px;
 			overflow: hidden;
@@ -90,11 +91,11 @@
 	</head>
 	<body>
 		<div class="content">
-			<div class="">
+			<header>
 				<div class="left"><strong>CrappyCrop.js</strong></div>
 				<div class="right"><a href="#">FORK / DOWNLOAD</a></div>
 				<div class="clear"></div>
-			</div>
+			</header>
 			
 			<form id="upload_form" action="{$current_app_virtual_url}">
 				<div>
@@ -122,7 +123,7 @@
 				<img class="result" alt="" src="{$current_app_url}public/images/result.jpg">
 			</a>
 			
-			<p>Label Carrote 2014</p>
+			<p>Flip Apart / Label Carrote 2014</p>
 		</div>
 	</body>
 </html>

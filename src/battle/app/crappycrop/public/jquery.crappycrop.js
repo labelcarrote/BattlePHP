@@ -153,7 +153,7 @@
 				dx = img_to_crop.position().left / scale, // destination x
 				dy = img_to_crop.position().top / scale, // destination y
 				dw = img_real_width, // destination w
-				dh = img_real_height // destination h
+				dh = img_real_height; // destination h
 			ctx.drawImage(img,sx,sy,sw,sh,dx,dy,dw,dh);
 
 			var img_src = img_to_crop.attr('src');
