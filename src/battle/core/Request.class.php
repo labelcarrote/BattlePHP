@@ -20,7 +20,7 @@ class Request{
     }
 
     public static function get_application_virtual_root(){
-    	$sub_domain = explode(".",$_SERVER['HTTP_HOST'])[0];
+    	$sub_domain = explode(".",$_SERVER['HTTP_HOST']);
     	$sub_domain = $sub_domain[0];
 
     	return ($sub_domain !== "" && $sub_domain !== "www" && $sub_domain !== "flipapart" && $sub_domain !== "labelcarrote" && $sub_domain !== "localhost")
