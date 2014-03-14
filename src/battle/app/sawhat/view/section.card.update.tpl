@@ -4,7 +4,7 @@
             <input type="hidden" name="name" value="{$card->name}"/>
             <fieldset>
                 <legend class="borderbottomorange">
-                    <a href="{$root_url}sawhat/{$card->name}"><h1>Update {$card->name} !</h1></a>
+                    <a href="{$current_app_virtual_url}{$card->name}"><h1>Update {$card->name} !</h1></a>
                 </legend>
 
                 <!--  Color for headers, links and horizontal bar  -->

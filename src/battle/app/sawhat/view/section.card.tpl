@@ -4,7 +4,7 @@
     {include file="element.card.tpl"}
     </section>
     <div class="margin">
-        <a class="btn btn-large btn-block" href="{$root_url}sawhat/{$card->name}/edit">Edit</a>
+        <a class="btn btn-large btn-block" href="{$current_app_virtual_url}{$card->name}/edit">Edit</a>
     </div>
     <br>
 </div>

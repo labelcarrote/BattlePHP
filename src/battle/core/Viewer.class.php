@@ -47,6 +47,7 @@ class Viewer extends Smarty{
 	private function assign_config_infos(){
 		$this->assign(Configuration::ROOT_URL, Request::get_root_url());
 		$this->assign(Configuration::CURRENT_APP_VIRTUAL_URL, Request::get_application_virtual_root());
+		// TODO : deal with single app (if monoapp -> current_app_url = root_url (+ htacess biz))
 		$this->assign(Configuration::CURRENT_APP_URL, Request::get_application_root());
 		$this->assign('full_url',Request::get_full_url());
 	}

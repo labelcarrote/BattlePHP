@@ -2,7 +2,7 @@
 	{if !isset($card)}
 		<div class="banner">
 			<div class="left">
-				<a href="{$root_url}sawhat/">
+				<a href="{$current_app_virtual_url}">
 					<h1 style="">404</h1>
 				</a>
 			</div>
@@ -11,7 +11,7 @@
 	{else}
 		<div class="banner">
 			<div class="left">
-				<a href="{if $card->is_recursive}{$root_url}sawhat/{else}{$root_url}sawhat/{$card->name}{/if}">
+				<a href="{if $card->is_recursive}{$current_app_virtual_url}{else}{$current_app_virtual_url}{$card->name}{/if}">
 					<h1 style="color:{$card->color}">{$card->name}</h1>
 				</a>
 			</div>
