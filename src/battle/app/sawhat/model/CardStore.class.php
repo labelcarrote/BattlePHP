@@ -18,9 +18,9 @@ class CardStore{
 		foreach (glob($dir,GLOB_ONLYDIR) as $filename)
 			$result[] = self::get(basename($filename));
 		return $result;
-    }
+	}
 	
-    public static function exist($card_name){
+	public static function exist($card_name){
 		$card_name = strtolower($card_name);
 		$folder = self::get_folder()."$card_name/";
 		$filename = $folder.$card_name.".txt";

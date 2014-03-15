@@ -4,14 +4,14 @@ class Card{
 	public $is_recursive;
 	public $color = "#F90";
 	public $properties;
-    public $last_edit;
+	public $last_edit;
 	public $name;
 	public $text_code;
-    public $elements;
+	public $elements;
 	public $files;
-    
-    public function __construct($name = null, $lines = null, $recursive = true){
-    	$this->name = $name;
+	
+	public function __construct($name = null, $lines = null, $recursive = true){
+		$this->name = $name;
 		$this->lines = $lines;
 		$lines_count = count($lines);
 		$this->is_recursive = $recursive;
@@ -68,7 +68,7 @@ class CardElement{
 		// parse line ...
 		$line = stripslashes($line);
 
-    	// links (1/2)
+		// links (1/2)
 		$line = preg_replace('/\[url=(.+?)\](.*?)\[\/url\]/', '<a style="color:'.$card_color.'" href="$1">$2</a>', $line);
 		$line = preg_replace('/\[url\](.*?)\[\/url\]/', '<a style="color:'.$card_color.'" href="$1">$1</a>', $line);
 		$line = preg_replace('/ (https?:[\S]+) /', ' <a style="color:'.$card_color.'" href="$1">$1</a> ', $line);
@@ -104,17 +104,17 @@ class CardElement{
 		}
 		// Headers/titles
 		elseif(preg_match('/^[\-]{2} (.*)$/',$clean,$matches)){
-			$this->html = "<h3>".trim($matches[1], "-")."</h3>";
+			$this->html = "<h4>".trim($matches[1], "-")."</h4>";
 		}
 		elseif(preg_match('/^[\-]{3} (.*)$/',$clean,$matches)){
-			$this->html = "<h2>".trim($matches[1], "-")."</h2>";
+			$this->html = "<h3>".trim($matches[1], "-")."</h3>";
 		}
 		elseif(preg_match('/^[\-]{4,} (.*)$/',$clean,$matches)){
-			$this->html = "<h1>".trim($matches[1], "-")."</h1>";
+			$this->html = "<h2>".trim($matches[1], "-")."</h2>";
 		}
 		// Link to card
 		elseif(preg_match('/^\#([\S]*)$/',$clean,$matches)){
-			$this->html = '<a style="color:'.$card_color.'" href="'.Request::get_root_url().'sawhat/'.$matches[1].'">'.$matches[1].'</a><br>';
+			$this->html = '<a style="color:'.$card_color.'" href="'.Request::get_application_virtual_root().$matches[1].'">'.$matches[1].'</a><br>';
 		}
 		// Local File / Image
 		elseif(preg_match('/^\@([\S]*)$/',$clean,$matches)){

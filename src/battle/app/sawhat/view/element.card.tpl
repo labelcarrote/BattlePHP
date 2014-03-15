@@ -11,14 +11,25 @@
 	{else}
 		<div class="banner">
 			<div class="left">
-				<a href="{if $card->is_recursive}{$current_app_virtual_url}{else}{$current_app_virtual_url}{$card->name}{/if}">
-					<h1 style="color:{$card->color}">{$card->name}</h1>
+				<h1 style="color:{$card->color}">
+				{if $card->is_recursive}
+					<a href="{$current_app_virtual_url}">
+						&lsaquo;
+					</a>
+				{/if}
+				<a href="{$current_app_virtual_url}{$card->name}" style="color:{$card->color}">
+					{$card->name}
 				</a>
+				</h1>
 			</div>
 			{if !$logged and $card->is_private}
 				<div class="right margintop" style="color:{$card->color}">PRIVATE</div>
 			{else}
-				{if $card->is_recursive}<div class="right margintop" style="color:{$card->color}">{$card->last_edit}</div>{/if}
+				{if $card->is_recursive}
+					<div class="right margintop" style="color:{$card->color}">{$card->last_edit}</div>
+				{else}
+					<a class="right margintop" href="{$current_app_virtual_url}{$card->name}/edit">EDIT</a>
+				{/if}
 			{/if}
 			<div class="clear"></div>
 		</div>
@@ -33,7 +44,7 @@
 			{foreach from=$card->elements item=element}
 				{if isset($element->cards)}
 					{if count($element->cards) == 3 or count($element->cards) == 2 or count($element->cards) == 1}
-						<div class="line darker">
+						<div class="line darker"><!-- striped -->
 						{foreach from=$element->cards item=cardinside}
 							<div class="unit size1of{count($element->cards)} ">
 							{include file="element.card.tpl" card=$cardinside}
@@ -52,7 +63,7 @@
 		<div class="border smallpadding">
 			<ul>
 			{foreach from=$card->files item=file}
-				<li><a style="color:{$card->color}" href="{$root_url}{$file->fullname}">{$file->name}</a></li>
+				<li><a style="color:{$card->color}" href="{$current_app_virtual_url}{$file->fullname}">{$file->name}</a></li>
 			{/foreach}
 			</ul>
 		</div>

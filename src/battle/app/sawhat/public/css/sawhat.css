@@ -24,7 +24,7 @@ body{
 	font: 100%/1.5 Arial, Verdana, sans-serif;
 	text-align: left;
 	background-color: #fff;
-	color: #000;
+	color: #555;
 	word-wrap:break-word;
 }
 section, article, header, footer, nav, aside, hgroup{ display: block; }
@@ -34,6 +34,7 @@ h3, .h3{font-size:1.3em; font-weight:bold; font-style: normal;}
 h4, .h4{font-size:1.25em; font-weight:normal; font-style: normal;}
 h5, .h5{font-size:1.15em; font-weight:bold; font-style: normal;}
 h6, .h6{font-size:1em; font-weight:normal;  font-style: italic;}
+h1 { color: #f90; }
 a{ text-decoration: none; color: #f90; }
 a:hover{ color: #f93; }
 article{ padding: 0; }
@@ -73,6 +74,22 @@ img{
 .borderbottomorange{ border-bottom: 6px solid #f90; }
 .fullwidth { width: 100%;}
 .clear {clear: both;}
+
+/* "Bigger than life" Liners */
+.darker.striped {
+	background: #ddd;
+	background: rgba(0,0,0,0.1);
+	background: -moz-linear-gradient(-45deg,  rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 12%, rgba(0,0,0,0) 12%, rgba(0,0,0,0) 38%, rgba(0,0,0,0.1) 38%, rgba(0,0,0,0.1) 62%, rgba(0,0,0,0) 62%, rgba(0,0,0,0) 88%, rgba(0,0,0,0.1) 88%, rgba(0,0,0,0.1) 100%);
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(0,0,0,0.1)), color-stop(12%,rgba(0,0,0,0.1)), color-stop(12%,rgba(0,0,0,0)), color-stop(38%,rgba(0,0,0,0)), color-stop(38%,rgba(0,0,0,0.1)), color-stop(62%,rgba(0,0,0,0.1)), color-stop(62%,rgba(0,0,0,0)), color-stop(88%,rgba(0,0,0,0)), color-stop(88%,rgba(0,0,0,0.1)), color-stop(100%,rgba(0,0,0,0.1)));
+	background: -webkit-linear-gradient(-45deg,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.1) 12%,rgba(0,0,0,0) 12%,rgba(0,0,0,0) 38%,rgba(0,0,0,0.1) 38%,rgba(0,0,0,0.1) 62%,rgba(0,0,0,0) 62%,rgba(0,0,0,0) 88%,rgba(0,0,0,0.1) 88%,rgba(0,0,0,0.1) 100%);
+	background: -o-linear-gradient(-45deg,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.1) 12%,rgba(0,0,0,0) 12%,rgba(0,0,0,0) 38%,rgba(0,0,0,0.1) 38%,rgba(0,0,0,0.1) 62%,rgba(0,0,0,0) 62%,rgba(0,0,0,0) 88%,rgba(0,0,0,0.1) 88%,rgba(0,0,0,0.1) 100%);
+	background: -ms-linear-gradient(-45deg,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.1) 12%,rgba(0,0,0,0) 12%,rgba(0,0,0,0) 38%,rgba(0,0,0,0.1) 38%,rgba(0,0,0,0.1) 62%,rgba(0,0,0,0) 62%,rgba(0,0,0,0) 88%,rgba(0,0,0,0.1) 88%,rgba(0,0,0,0.1) 100%);
+	background: linear-gradient(135deg,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.1) 12%,rgba(0,0,0,0) 12%,rgba(0,0,0,0) 38%,rgba(0,0,0,0.1) 38%,rgba(0,0,0,0.1) 62%,rgba(0,0,0,0) 62%,rgba(0,0,0,0) 88%,rgba(0,0,0,0.1) 88%,rgba(0,0,0,0.1) 100%);
+	-webkit-background-size: 10px 10px;
+	-moz-background-size: 10px 10px;
+	background-size: 10px 10px;
+}
+
 
 /* ---- Layout ---- */
 .content{

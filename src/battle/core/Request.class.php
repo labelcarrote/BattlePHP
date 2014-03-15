@@ -70,9 +70,7 @@ class Request{
 	 * otherwise returns the default value.
 	 */
 	public static function isset_or(&$check, $default = NULL){
-		return (isset($check))
-			? $check
-			: $default;
+		return (isset($check)) ? $check	: $default;
 	}
 
 	/**
