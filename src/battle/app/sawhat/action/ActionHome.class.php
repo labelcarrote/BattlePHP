@@ -10,7 +10,7 @@ require_once 'core/model/AjaxResult.class.php';
 // - add a ajax method to get a specific page (with edit feature?)
 // - + add some client side / js for inplace open/edit
 
-class ActionMain extends Controller{
+class ActionHome extends Controller{
 
 	// Display the home page containing the home card if it exists, 
 	// all the cards otherwise.

@@ -16,6 +16,9 @@ class Configuration{
 	const PRODUCTION_MODE = true;
 	const MAIN_LOG_FILE = "main.log";
 
+	// Mono App : set to "" or comment this for multiple app
+	//const MONO_APP = "sawhat";
+
 	// smarty configuration
 	const SMARTY_TEMPLATE_DIR = "/view";
 	const SMARTY_COMPIL_DIR = "tmp/tpl_comp";

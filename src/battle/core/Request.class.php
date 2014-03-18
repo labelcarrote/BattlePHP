@@ -20,12 +20,16 @@ class Request{
     }
 
     public static function get_application_virtual_root(){
-    	$sub_domain = explode(".",$_SERVER['HTTP_HOST']);
-    	$sub_domain = $sub_domain[0];
+    	if(defined("Configuration::MONO_APP") && Configuration::MONO_APP !== ""){
+    		return self::get_root_url();
+    	}else{
+	    	$sub_domain = explode(".",$_SERVER['HTTP_HOST']);
+	    	$sub_domain = $sub_domain[0];
 
-    	return ($sub_domain !== "" && $sub_domain !== "www" && $sub_domain !== "flipapart" && $sub_domain !== "labelcarrote" && $sub_domain !== "localhost")
-    		? "/"
-    		: self::get_root_url().self::get_application()."/";       	
+	    	return ($sub_domain !== "" && $sub_domain !== "www" && $sub_domain !== "flipapart" && $sub_domain !== "labelcarrote" && $sub_domain !== "localhost")
+	    		? "/"
+	    		: self::get_root_url().self::get_application()."/";
+    	}
     }
 
 	public static function get_application_root(){

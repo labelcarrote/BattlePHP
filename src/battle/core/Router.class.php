@@ -19,11 +19,22 @@ class Router{
 	 * Run : redirect to action specified in query and run it
 	 */
 	public static function run(){
-		$application = Request::from_query_to_session('application',self::DEFAULT_APPLICATION);
-		$controller = Request::from_query_to_session('controller',self::DEFAULT_CONTROLLER);
-		$action = Request::from_query_to_session('action',self::DEFAULT_ACTION);
-		Request::from_query_to_session('param',null);
-		self::go_to_action($controller,$action,$application);
+		// MONO APP
+		if(defined("Configuration::MONO_APP") && Configuration::MONO_APP !== ""){
+			$_SESSION["application"] = $application = Configuration::MONO_APP;
+			$_SESSION["controller"] = $controller = Request::isset_or($_GET["application"],self::DEFAULT_CONTROLLER);
+			$_SESSION["action"] = $action = Request::isset_or($_GET["controller"],self::DEFAULT_ACTION);
+			$_SESSION["param"] = $param =  Request::isset_or($_GET["action"],null);
+			self::go_to_action($controller,$action,$application);
+		}
+		// MULTIPLE APPS
+		else{
+			$application = Request::from_query_to_session('application',self::DEFAULT_APPLICATION);
+			$controller = Request::from_query_to_session('controller',self::DEFAULT_CONTROLLER);
+			$action = Request::from_query_to_session('action',self::DEFAULT_ACTION);
+			Request::from_query_to_session('param',null);
+			self::go_to_action($controller,$action,$application);
+		}
 	}
 
 	/**
