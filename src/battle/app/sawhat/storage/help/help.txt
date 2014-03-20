@@ -1,28 +1,50 @@
 help
-lastedit: 20140128_2001
+lastedit: 20140319_1703
 color: #F90
 
----- H1 ----
----- H1 (bis)
---- H2 ---
---- H2 (bis)
--- H3 ---
--- H3 (bis)
-
-http://link
-LINK http://link
-- LINK http://link 
+===== a 3 columns layout
+[column=3]
+==== header examples ====
+===== H2 =====
+===== H2 (bis)
+==== H3 ====
+==== H3 (bis)
+=== H4 ===
+=== H4 (bis)
+== H5 ==
+== H5 (bis)
+= H6 =
+= H6 (bis)
+==== How to link
+=== ... and make list
+- http://link
 - LINK http://link
-[url]http://link[/url]
-[url=http://link]Link[/url]
+- LINK http://link 
+1 LINK http://link
+2 [url]http://link[/url]
+3 [url=http://link]Link[/url]
 #help
-
+==== this column has 2 columns
+[column=2]
+=== image from url
 [img]http://labelcarrote.com/image/bigcarrote.png[/img]
-
+=== internal image
 @c5b9a399d63afdf7f44e03c9ec35009d45d6708d_m.gif
+[/column]
+[/column]
 
+    Power users can use code:
+    [some_code]
+    (note that those lines are code: &lt;a href=&quot;example.com&quot;&gt;famous website&lt;/a&gt;)
+    if(banane === false){
+        echo 'fraise';
+        exit();
+    }
+
+===== you can insert cards in card ...
 [help]
 
+===== ... and display them as columns
 [help|help]
 
 [help|help|help]

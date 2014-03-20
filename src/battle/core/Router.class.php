@@ -24,7 +24,7 @@ class Router{
 			$_SESSION["application"] = $application = Configuration::MONO_APP;
 			$_SESSION["controller"] = $controller = Request::isset_or($_GET["application"],self::DEFAULT_CONTROLLER);
 			$_SESSION["action"] = $action = Request::isset_or($_GET["controller"],self::DEFAULT_ACTION);
-			$_SESSION["param"] = $param =  Request::isset_or($_GET["action"],null);
+			$_SESSION["param"] = $param = Request::isset_or($_GET["action"],null);
 			self::go_to_action($controller,$action,$application);
 		}
 		// MULTIPLE APPS
@@ -32,7 +32,14 @@ class Router{
 			$application = Request::from_query_to_session('application',self::DEFAULT_APPLICATION);
 			$controller = Request::from_query_to_session('controller',self::DEFAULT_CONTROLLER);
 			$action = Request::from_query_to_session('action',self::DEFAULT_ACTION);
-			Request::from_query_to_session('param',null);
+			$param = Request::from_query_to_session('param',null);
+
+			if($param == null){
+				//shift "REST url params in query" to the left to make action becomes params
+				$newparams = $controller;
+				$newparams .= ($action != self::DEFAULT_ACTION) ? "/".$action : "";
+				Request::set_params($newparams);
+			}
 			self::go_to_action($controller,$action,$application);
 		}
 	}
@@ -105,9 +112,9 @@ class Router{
 						// try to invoke the default method (ex: "index")
 						try{
 							//shift "REST url params in query" to the left to make action becomes params
-							$newparams = $controller;
+							/*$newparams = $controller;
 							$newparams .= ($action != self::DEFAULT_ACTION) ? "/".$action : "";
-							Request::set_params($newparams);
+							Request::set_params($newparams);*/
 							$method = $class->getMethod(self::DEFAULT_ACTION);
 							$method->invoke($instance);
 						}

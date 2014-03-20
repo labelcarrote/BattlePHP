@@ -16,7 +16,7 @@ class Configuration{
 	const PRODUCTION_MODE = true;
 	const MAIN_LOG_FILE = "main.log";
 
-	// Mono App : set to "" or comment this for multiple app
+	// Mono App : set to "" or comment this for multiple apps
 	//const MONO_APP = "sawhat";
 
 	// smarty configuration

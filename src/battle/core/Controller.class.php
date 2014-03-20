@@ -72,12 +72,31 @@ class Controller{
 	// ---- AUTH MANAGEMENT ----
 	// -------------------------
 
+
+	// TEMP HELPER
+    private function is_db_available(){
+    	$host = Configuration::DB_HOST;
+		$dbname = Configuration::DB_NAME;
+		$dbuser = Configuration::DB_USER;
+		$dbpass = Configuration::DB_PASS;
+		$con = null;
+		try{
+			$con = new PDO("mysql:host=$host;dbname=$dbname", $dbuser, $dbpass, array(PDO::ATTR_PERSISTENT => true));
+		}
+		catch(PDOException $e){
+			return false;
+		}
+		$con = null;
+		return true;
+    }
+
+
 	// Checks if user is authentified and assign authentication template-variables
 	// TODO : move to authcontroller (executed after requested action)
 	private function assign_auth_values(){
 		$is_authenticated = AuthHelper::is_authenticated();
 		$this->assign('logged', $is_authenticated);
-		if($is_authenticated){
+		if($is_authenticated && $this->is_db_available()){
 			// check if logged in local server
 			$this->assign('admin', AuthHelper::is_current_user_admin());
 			$this->assign('userprofile', AuthHelper::get_user_infos());

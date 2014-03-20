@@ -3,9 +3,9 @@ require_once ('app/sawhat/model/CardFactory.class.php');
 require_once ('core/storage/FileSystemIO.class.php');
 
 class CardStore{
+	
 	const DIR = "storage/";
 	const EXT = ".txt";
-	const MAX_RECURSIVE_LEVEL = 2;
 	
 	public static function get_folder(){
 		return "app/sawhat/".self::DIR;
@@ -21,33 +21,34 @@ class CardStore{
 	}
 	
 	public static function exist($card_name){
+		$card_name = strtolower($card_name);
 		$folder = self::get_folder()."$card_name/";
 		$filename = $folder.$card_name.".txt";
 		return file_exists($filename);
 	}
 
-	public static function get($card_name, $recursive_level = 0){
+	public static function get($card_name, $recursive = true){
+		$card_name = strtolower($card_name);
 		$folder = self::get_folder()."$card_name/";
 		$filename = $folder.$card_name.".txt";
-		if(!file_exists($filename)){
-			$lines = array();
-		} else {
-			$lines = file($filename);
-		}
+		if(!file_exists($filename))
+			return null;
 		
-		$card = new Card($card_name,$lines,$recursive_level); 
+		$lines = file($filename);
+		$card = new Card($card_name,$lines,$recursive); 
 		$card->files = FileSystemIO::get_files_in_dir($folder.'{*.jpg,*.jpeg,*.JPG,*.png,*.gif}');
 		return $card;
 	}
 
-	public static function upsert($card_name, $lines, $color = DEFAULT_CARD_COLOR, $isprivate){
+	public static function upsert($card_name, $lines, $color = "#f90", $isprivate){
 		if(empty($card_name) || empty($lines))
-			return false;
+			return;
 
+		$card_name = strtolower($card_name);
 		$lastedit = date("Ymd_Hm");
 		$filenamenoext = self::get_folder()."".$card_name."/".$card_name;	
 		$filename = self::get_folder()."".$card_name."/".$card_name.self::EXT;
-		$isprivate_as_string = ($isprivate) ? "is_private\n" : "";
+		$isprivate_as_string = ($isprivate) ? "isprivate\n" : "";
 		if(file_exists($filename)){
 			// UPDATE : save current first !
 			copy($filename,$filenamenoext."_".$lastedit.self::EXT."old");
@@ -56,7 +57,7 @@ class CardStore{
 			mkdir(dirname($filename));
 
 		$lines = "$card_name\nlastedit: $lastedit\ncolor: $color\n$isprivate_as_string\n".$lines;
-		return file_put_contents($filename,htmlentities($lines,ENT_COMPAT,'UTF-8'));
+		file_put_contents($filename,strip_tags($lines));
 	}
 }
 ?>
