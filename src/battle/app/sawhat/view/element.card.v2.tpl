@@ -27,8 +27,7 @@
 		{else}
 <div>
 {foreach from=$card->elements item=element}
-{if isset($element->cards)}
-{if count($element->cards) > 0}
+{if isset($element->cards) && count($element->cards) > 0}
 <div class="column_container">
 {foreach from=$element->cards item=cardinside}
 <div class="unit size1of{count($element->cards)}">
@@ -38,12 +37,10 @@
 </div>
 {/foreach}
 </div>
-{/if}
 {else}
 {$element->html}
 {/if}
 {/foreach}
-{/if}
 <div class="clearer"></div>
 </div>
 		</div>
@@ -56,5 +53,7 @@
 			</ul>
 		</div>
 		{/if}
+{/if}
+		
 	{/if}
 </div>
