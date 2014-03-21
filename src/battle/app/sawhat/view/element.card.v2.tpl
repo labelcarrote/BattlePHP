@@ -44,7 +44,7 @@
 <div class="clearer"></div>
 </div>
 		</div>
-		{if $card->is_recursive && count($card->files) > 0}
+		{if count($card->files) > 0}
 		<div class="border smallpadding">
 			<ul>
 			{foreach from=$card->files item=file}
@@ -53,7 +53,6 @@
 			</ul>
 		</div>
 		{/if}
-{/if}
-		
+	{/if}
 	{/if}
 </div>
