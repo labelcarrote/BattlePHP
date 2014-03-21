@@ -1,30 +1,30 @@
 <div class="sawhat">
 	{if !isset($card)}
-		<div class="banner">
-			<div class="left">
-				<div>
-					<a href="{$current_app_virtual_url}" class="white_text">
-					404
-					</a>
-				</div>
-			</div>
-			<div class="clear"></div>
-		</div>
-		<div class="things">
+	<div class="banner">
+		<div class="left">
 			<div>
-				ERROR: included card doesn't exist.
-				<div class="clearer"></div>
+				<a href="{$current_app_virtual_url}" class="white_text">
+				404
+				</a>
 			</div>
 		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="things">
+		<div>
+			ERROR: included card doesn't exist.
+			<div class="clearer"></div>
+		</div>
+	</div>
 	{else}
-		{include file="element.card.banner.tpl" card=$card}
-		<div style="border-color:{$card->color};" class="things">
-			{if !$logged and $card->is_private}
-				<form id="sawhatlogin" method="post" enctype="multipart/form-data">
-					<input class="input-large" type="password" id="password" name="password" value="" size="20" /><br/>
-					<button type="submit" class="btn" name="submit" value="login">Show Card</button>
-				</form> 
-			{else}
+	{include file="element.card.banner.tpl" card=$card}
+	<div style="border-color:{$card->color};" class="things">
+		{if !$logged and $card->is_private}
+		<form id="sawhatlogin" method="post" enctype="multipart/form-data">
+			<input class="input-large" type="password" id="password" name="password" value="" size="20" /><br/>
+			<button type="submit" class="btn" name="submit" value="login">Show Card</button>
+		</form> 
+		{else}
 <div>
 {foreach from=$card->elements item=element}
 {if isset($element->cards)}

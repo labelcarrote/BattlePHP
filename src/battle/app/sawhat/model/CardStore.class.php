@@ -1,6 +1,6 @@
 <?php
-require_once ('app/sawhat/model/CardFactory.class.php');
-require_once ('core/storage/FileSystemIO.class.php');
+require_once 'app/sawhat/model/CardFactory.class.php';
+require_once 'core/storage/FileSystemIO.class.php';
 
 class CardStore{
 	const DIR = "storage/";
@@ -29,33 +29,28 @@ class CardStore{
 	public static function get($card_name, $recursive_level = 0){
 		$folder = self::get_folder()."$card_name/";
 		$filename = $folder.$card_name.".txt";
-		if(!file_exists($filename)){
-			$lines = array();
-		} else {
-			$lines = file($filename);
-		}
-		
+		$lines = (!file_exists($filename)) ? array() : file($filename);
 		$card = new Card($card_name,$lines,$recursive_level); 
 		$card->files = FileSystemIO::get_files_in_dir($folder.'{*.jpg,*.jpeg,*.JPG,*.png,*.gif}');
 		return $card;
 	}
 
-	public static function upsert($card_name, $lines, $color = DEFAULT_CARD_COLOR, $isprivate){
+	public static function upsert($card_name, $lines, $color, $is_private){
 		if(empty($card_name) || empty($lines))
 			return false;
 
-		$lastedit = date("Ymd_Hm");
+		$last_edit = date("Ymd_Hm");
 		$filenamenoext = self::get_folder()."".$card_name."/".$card_name;	
 		$filename = self::get_folder()."".$card_name."/".$card_name.self::EXT;
-		$isprivate_as_string = ($isprivate) ? "is_private\n" : "";
+		$is_private_as_string = ($is_private) ? "is_private\n" : "";
 		if(file_exists($filename)){
 			// UPDATE : save current first !
-			copy($filename,$filenamenoext."_".$lastedit.self::EXT."old");
+			copy($filename,$filenamenoext."_".$last_edit.self::EXT."old");
 		}
 		if(!is_dir(dirname($filename)))
 			mkdir(dirname($filename));
 
-		$lines = "$card_name\nlastedit: $lastedit\ncolor: $color\n$isprivate_as_string\n".$lines;
+		$lines = "$card_name\nlastedit: $last_edit\ncolor: $color\n$is_private_as_string\n".$lines;
 		return file_put_contents($filename,htmlentities($lines,ENT_COMPAT,'UTF-8'));
 	}
 }
