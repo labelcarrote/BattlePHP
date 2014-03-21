@@ -1,6 +1,14 @@
 help
-lastedit: 20140319_1703
-color: #F90
+lastedit: 20140321_1903
+color: #ff69a6
+
+Basic text sh*t:
+[b]bold[/b]
+*bold 2*
+[u]underlined[/u]
+[s]stroke[/s]
+[i]italic[/i]
+[b][i][u]bold italic underlined[/u][/i][/b]
 
 ===== a 3 columns layout
 [column=3]
@@ -20,9 +28,9 @@ color: #F90
 - http://link
 - LINK http://link
 - LINK http://link 
-1 LINK http://link
-2 [url]http://link[/url]
-3 [url=http://link]Link[/url]
+1- LINK http://link
+2- [url]http://link[/url]
+3- [url=http://link]Link[/url]
 #help
 ==== this column has 2 columns
 [column=2]
@@ -32,7 +40,6 @@ color: #F90
 @c5b9a399d63afdf7f44e03c9ec35009d45d6708d_m.gif
 [/column]
 [/column]
-
     Power users can use code:
     [some_code]
     (note that those lines are code: &lt;a href=&quot;example.com&quot;&gt;famous website&lt;/a&gt;)
