@@ -20,7 +20,47 @@ class ActionHome extends Controller{
 
 		// check if any form submission (save or login-to-see-the-private-card)
 		if(isset($_POST['submit'])){
-			if($_POST['submit'] == "save"){
+			$submit_action = $_POST['submit'];
+			switch ($submit_action) {
+				case 'save' : {
+					$card_name = Request::isset_or($_POST['name'], "home");
+					$card_color = Request::isset_or($_POST['color'], Card::DEFAULT_COLOR);
+					$card_lines = Request::isset_or($_POST['card'], "");
+					$is_private = isset($_POST['is_private']);
+					$card = CardStore::get($card_name);
+
+					// do nothing if card is private and user is not authentified
+					if($card === null || !$card->is_private || ($card->is_private && $logged)){
+						$json = array(
+							'is_saved' => CardStore::upsert($card_name,$card_lines,$card_color,$is_private),
+							'return_url' => Request::get_application_virtual_root().$card_name
+						);
+						echo json_encode($json);
+						exit(0);
+					}
+					break;
+				}
+				case 'login' : {
+					$identity = new Identity();
+					$identity->password = Request::isset_or($_POST['password'], "prout");
+					$result_code = AuthHelper::authenticate(AuthHelper::AuthTypePassword,$identity);
+					$logged = AuthHelper::is_authenticated();
+
+					if($result_code > 0){
+						// TODO Error::get_message($result_code);
+						$this->add_error("error $result_code");
+					}else{
+						$this->assign("logged", true);
+						//header("Location: ".Request::get_application_virtual_root());
+					}
+					break;
+				}
+				case 'logout' : {
+					AuthHelper::unauthenticate();
+					break;
+				}
+			}
+			/*if($_POST['submit'] == "save"){
 				$card_name = Request::isset_or($_POST['name'], "home");
 				$card_color = Request::isset_or($_POST['color'], Card::DEFAULT_COLOR);
 				$card_lines = Request::isset_or($_POST['card'], "");
@@ -51,6 +91,9 @@ class ActionHome extends Controller{
 					//header("Location: ".Request::get_application_virtual_root());
 				}
 			}
+			elseif($_POST['submit'] == "logout"){
+				AuthHelper::unauthenticate();
+			}*/
 		}
 		$params = Request::get_params("@cardname/@action");
 		if($params){

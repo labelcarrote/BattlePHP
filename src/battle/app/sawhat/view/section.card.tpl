@@ -15,3 +15,10 @@
 	</section>
 </div>
 {/if}
+<div>
+	{if $logged}
+	<form class="right" method="POST">
+		<button class="btn btn-link" type="submit" name="submit" value="logout">Logout</button> 
+	</form>
+	{/if}
+</div>
