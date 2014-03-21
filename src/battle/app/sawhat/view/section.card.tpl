@@ -15,7 +15,11 @@
 	</section>
 </div>
 {/if}
-<div>
+<div class="content">
+	<div class="left">
+		<a href="{$current_app_virtual_url}all_cards">all cards</a>
+	</div>
+
 	{if $logged}
 	<form class="right" method="POST">
 		<button class="btn btn-link" type="submit" name="submit" value="logout">Logout</button> 
