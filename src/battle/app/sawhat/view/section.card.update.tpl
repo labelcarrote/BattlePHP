@@ -8,34 +8,33 @@
 						<i>{if $card->exists}Update{else}Create{/if}</i> <a href="{$current_app_virtual_url}{$card->name}" class="white_text">{$card->display_name}</a>
 					</h1>
 				</legend>
-	
-				<!--  Color for headers, links and horizontal bar  -->
-				<span class="help-inline">Color : </span>
-				<input type="text"class="input-large" name="color" placeholder="ex: #FF9900" value="{if $card->exists}{$card->color}{/if}">
-				<div class="color_picker hidden">
-					<div class="color_picker_item" data-color="#000"></div>
-					<div class="color_picker_item" data-color="#fff"></div>
-					<div class="color_picker_item" data-color="#2b2b2b"></div>
-					<div class="color_picker_item" data-color="#f90"></div>
-					<div class="color_picker_item" data-color="#ff6523"></div>
-					<div class="color_picker_item" data-color="#5bc0de"></div>
-					<br>
-					<div class="color_picker_item" data-color="#7cfc00"></div>
-					<div class="color_picker_item" data-color="#1497a2"></div>
-					<div class="color_picker_item" data-color="#ffd801"></div>
-					<div class="color_picker_item" data-color="#ff2b08"></div>
-					<div class="color_picker_item" data-color="#00ccff"></div>
-					<div class="color_picker_item" data-color="#ff69a6"></div>
-					<div class="clearer"></div>
+				<div class="padding">
+					<!--  Color for headers, links and horizontal bar  -->
+					<span class="help-inline">Color : </span>
+					<input type="text"class="input-large" name="color" placeholder="ex: #FF9900" value="{if $card->exists}{$card->color}{/if}">
+					<div class="color_picker hidden">
+						<div class="color_picker_item" data-color="#000"></div>
+						<div class="color_picker_item" data-color="#fff"></div>
+						<div class="color_picker_item" data-color="#2b2b2b"></div>
+						<div class="color_picker_item" data-color="#f90"></div>
+						<div class="color_picker_item" data-color="#ff6523"></div>
+						<div class="color_picker_item" data-color="#5bc0de"></div>
+						<br class="clearer">
+						<div class="color_picker_item" data-color="#7cfc00"></div>
+						<div class="color_picker_item" data-color="#1497a2"></div>
+						<div class="color_picker_item" data-color="#ffd801"></div>
+						<div class="color_picker_item" data-color="#ff2b08"></div>
+						<div class="color_picker_item" data-color="#00ccff"></div>
+						<div class="color_picker_item" data-color="#ff69a6"></div>
+						<div class="clearer"></div>
+					</div>
+					<!-- Private Card ? -->
+					<label class="checkbox">
+						<input type="checkbox" name="is_private" {if $card->is_private}checked{/if}> Is Private ?
+					</label>
 				</div>
-			  
-			  <!-- Private Card ? -->
-			  <label class="checkbox">
-				 <input type="checkbox" name="is_private" {if $card->is_private}checked{/if}> Is Private ?
-			  </label>
-	
 			  <!-- TEXT -->
-			  <div id="editor_container" class="margintop">
+			  <div id="editor_container">
 				 <pre id="editor">{$card->text_code}</pre>
 			  </div>
 			  <!-- 
@@ -73,11 +72,17 @@
 			  </div>
 		   </div>
 		   <div id="files">
-			  <ul>
-				 {foreach from=$card->files item=file}
-				 <li>@{$file->name} (<a style="color:{$card->color}" href="{$root_url}{$file->fullname}" alt="{$file->name}">see</a>) size : {$file->size}</li>
-				 {/foreach}
-			  </ul>
+			<img id="image_preview" alt="image preview" src="" />
+			<ul>
+			   {foreach from=$card->files item=file}
+			   <li>
+				<a style="color:{$card->color}" href="{$root_url}{$file->fullname}" title="{$file->name}" class="image_link left block">@{$file->name}</a>
+				<span class="image_size left block">{$file->human_readable_size}</span>
+				<div class="clearer_left"></div>
+			   </li>
+			   {/foreach}
+			</ul>
+			<div class="clearer"></div>
 		   </div>
 	    </div>
 	</section>

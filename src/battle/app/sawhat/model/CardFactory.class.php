@@ -37,12 +37,19 @@ class Card{
 				// close multiple line tag
 				if($previous_is_multiple_line 
 					&& (!$card_element->multiple_line || $previous_html_closure_tag != $card_element->html_closure_tag))
-					$this->elements[] = (object)array('html'=>'</'.$previous_html_closure_tag.'>');
+				{
+					$tag_added = $previous_html_closure_tag == 'pre' ? '</code>' : '';
+					$this->elements[] = (object)array('html'=>$tag_added.'</'.$previous_html_closure_tag.'>');
+				}
 				
 				// open multiple line tag
 				if($card_element->multiple_line	
 					&& (!$previous_is_multiple_line || $previous_html_closure_tag != $card_element->html_closure_tag))
-					$this->elements[] = (object)array('html'=>'<'.$card_element->html_closure_tag.' '.($card_element->html_closure_tag == 'pre' ? 'class="code"' : '').'>');
+				{
+					$class = $card_element->html_closure_tag == 'pre' ? 'class="code line-numbers"' : '';
+					$tag_added = $card_element->html_closure_tag == 'pre' ? '<code class="language-php">' : '';
+					$this->elements[] = (object)array('html'=>'<'.$card_element->html_closure_tag.' '.$class.'>'.$tag_added);
+				}
 				
 				$this->elements[] = $card_element;
 				
@@ -166,7 +173,7 @@ class CardElement{
 		$this->html .= $need_newline ? '<br>' : '';
 	}
 	
-	public static function bbcode_to_html($string, $color = '', $recursive_level = 0){
+	public static function bbcode_to_html($string, $color = '', $recursive_level = 0, $need_string_cleaning = true){
 		$multiple_line = false;
 		$closure_tag = '';
 		$html = $string;
@@ -181,8 +188,8 @@ class CardElement{
 		}
 
 		// parse line ...
-		$html = stripslashes(trim(strip_tags($html)));
-
+		$html = $need_string_cleaning ? stripslashes(trim(strip_tags($html))) : $html;
+		
 		// CLASSIC BBCODE
 		// columns
 		$html = preg_replace('/\[column=(\d)\]/', '<div class="column_$1">', $html);
@@ -191,23 +198,42 @@ class CardElement{
 		$html = preg_replace('/\[url=(.+)\](.+)\[\/url\]/', '<a style="color:'.$color.'" href="$1">$2</a>', $html);
 		$html = preg_replace('/\[url\](.+)\[\/url\]/', '<a style="color:'.$color.'" href="$1">$1</a>', $html);
 		// images (1/2)
-		$html = preg_replace('/\[img=(.*?)\]/', '<img src="$1" alt="" />', $html);
-		$html = preg_replace('/\[img\](.*?)\[\/img\]/', '<img src="$1" alt="" />', $html);
-		
+		$html = preg_replace('/\[img=(.+)\]/', '<img src="$1" alt="" />', $html);
+		$html = preg_replace('/\[img\](.+)\[\/img\]/', '<img src="$1" alt="" />', $html);
+		// text u,i,s,b
+		if(preg_match('/(.*)\[u\](.+)\[\/u\](.*)/',$html,$matches)){
+			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
+			$html = $matches[1].'<u>'.$html['html_code'].'</u>'.$matches[3];
+		}
+		if(preg_match('/(.*)\[i\](.+)\[\/i\](.*)/',$html,$matches)){
+			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
+			$html = $matches[1].'<i>'.$html['html_code'].'</i>'.$matches[3];
+		}
+		if(preg_match('/(.*)\[s\](.+)\[\/s\](.*)/',$html,$matches)){
+			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
+			$html = $matches[1].'<s>'.$html['html_code'].'</s>'.$matches[3];
+		}
+		if(preg_match('/(.*)\[b\](.+)\[\/b\](.*)/',$html,$matches)){
+			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
+			$html = $matches[1].'<b>'.$html['html_code'].'</b>'.$matches[3];
+		}
+		if(preg_match('/(.*)\*(.+)\*(.*)/',$html,$matches)){
+			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
+			$html = $matches[1].'<b>'.$html['html_code'].'</b>'.$matches[3];
+		}
 		// List
-		if(preg_match('/^(\d+|\-) (.*)$/',$html,$matches)){
-			$html = self::bbcode_to_html(trim($matches[2], '- '),$color,$recursive_level);
+		if(preg_match('/^(\d+\-|\-) (.+)$/',$html,$matches)){
+			$html = self::bbcode_to_html(trim($matches[2], '- '),$color,$recursive_level,false);
 			$html = '<li>'.$html['html_code'].'</li>';
 			$multiple_line = true;
 			$closure_tag = $matches[1] !== '-' ? 'ol' : 'ul';
 		}
-		
 		// Images (2/2)
-		if(preg_match('/^(https?:.+\.(?:png|jpg|jpe?g|gif))?$/',$html,$matches)){
+		elseif(preg_match('/^(https?:.+\.(?:png|jpg|jpe?g|gif))?$/',$html,$matches)){
 			$html = '<img src="[ROOT_URL]'.$matches[1].'" alt="image"/>';
 		}
 		// Links (2/2)
-		elseif(preg_match('/^(.*) (https?:[\S]+)$/',$html,$matches)){
+		elseif(preg_match('/^(.+) (https?:[\S]+)$/',$html,$matches)){
 			$html = '<a style="color:'.$color.'" href="'.$matches[2].'">'.$matches[1].'</a>';
 		}
 		elseif(preg_match('/^(https?:[\S]+)$/',$html,$matches)){
@@ -217,19 +243,15 @@ class CardElement{
 			$html = $matches[1].'<a style="color:'.$color.'" href="'.$matches[2].'">'.$matches[2].'</a>'.$matches[3];
 		}
 		// Headers/titles
-		elseif(preg_match('/^([\=]{1,5}) (.*)$/',$html,$matches)){
+		elseif(preg_match('/^([\=]{1,5}) (.+)$/',$html,$matches)){
 			$header_level = (7-count(str_split($matches[1]))) + $recursive_level;
 			$tag_name = $header_level <= 6 ? 'h'.$header_level : 'div';
 			$html = '<'.$tag_name.' style="border-color:'.$color.'">'.trim($matches[2], '= ').'</'.$tag_name.'>';
 		}
-		elseif(preg_match('/^[\-]{2} (.*)$/',$html,$matches)){
-			$html = "<h4 class='noborder'>".trim($matches[1], "-")."</h4>";
-		}
-		elseif(preg_match('/^[\-]{3} (.*)$/',$html,$matches)){
-			$html = "<h3 class='noborder'>".trim($matches[1], "-")."</h3>";
-		}
-		elseif(preg_match('/^[\-]{4,} (.*)$/',$html,$matches)){
-			$html = "<h2 class='noborder'>".trim($matches[1], "-")."</h2>";
+		elseif(preg_match('/^([\-]{2,}) (.+)$/',$html,$matches)){
+			$header_level = 7-count(str_split($matches[1])) + $recursive_level;
+			$tag_name = $header_level < 4 ? 'h'.$header_level : 'h4';
+			$html = '<'.$tag_name.' class="noborder">'.trim($matches[2], '- ').'</'.$tag_name.'>';
 		}
 		// Link to card
 		elseif(preg_match('/^\#([\S]*)$/',$html,$matches)){

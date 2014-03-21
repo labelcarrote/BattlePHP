@@ -111,11 +111,13 @@ img{
 .fullwidth { width: 100%;}
 .clear {clear: both;}
 .clearer {clear: both;height: 0;margin: 0;padding: 0;display: block;}
+.clear_left, .clearer_left {clear: left;}
+.clear_right, .clearer_right {clear: right;}
 .big { font-size: 1.1em; }
 .bigger { font-size: 1.2em; }
 .striked {text-decoration:line-through;}
 .light { font-weight: normal; }
-
+.block { display: block; }
 
 /* ---- Layout ---- */
 .content{
@@ -261,6 +263,7 @@ header{
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	padding: 6px;
+	margin: 0;
 }
 .color_picker {
 	position: absolute;
@@ -306,6 +309,24 @@ header{
 	position: absolute;
 	top: 0;
 	left: 12px;
+}
+/* File list */
+.image_link {
+	width: 22em;
+}
+.image_size {
+	width: 4em;
+	text-align: right;
+}
+#image_preview {
+	float: right;
+	max-height: 150px;
+	max-width: 200px;
+	border: 1px solid #ccc;
+	padding: 3px;
+	color: #999;
+	vertical-align: middle;
+	text-align: center;
 }
 
 /* ACE EDITOR */
@@ -384,4 +405,3 @@ header{
 		column-count:1;
 	}
 }
-

@@ -62,14 +62,20 @@ $(document).ready(function(){
 				related_input.val(color);
 				self.slideUp(200);
 			});
-		})
+		});
+	});
+	
+	// IMAGE PREVIEW //
+	$('#files').on('click','.image_link',function(e){
+		e.preventDefault();
+		$('#image_preview').attr('src',$(this).attr('href'));
 	});
 })
 
 $(window).load(function(){
 	function send_formdatawithupload(formData){
 		var xhr = new XMLHttpRequest();
-		var submit_url = $('#card_edit_form').attr("action") + "/api";
+		var submit_url = $('#card_edit_form').attr("action") + "api";
 		xhr.open("POST",submit_url,true);
 		xhr.upload.onprogress = function(event){
 			var percentage = Math.floor(event.loaded / event.total * 100);

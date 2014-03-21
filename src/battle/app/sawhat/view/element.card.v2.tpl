@@ -48,7 +48,7 @@
 		<div class="border smallpadding">
 			<ul>
 			{foreach from=$card->files item=file}
-				<li><a style="color:{$card->color}" href="{$current_app_virtual_url}{$file->fullname}">{$file->name}</a></li>
+				<li><a style="color:{$card->color}" href="{$root_url}{$file->fullname}">{$file->name}</a></li>
 			{/foreach}
 			</ul>
 		</div>
