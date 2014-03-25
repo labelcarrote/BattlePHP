@@ -271,7 +271,8 @@ class CardElement{
 		}
 		// Link to card
 		elseif(preg_match('/^\#([\S]*)$/',$html,$matches)){
-			$html = '<a style="color:'.$color.'" href="[ROOT_URL]'.$matches[1].'"><b><span class="bigger">&rsaquo;</span>&nbsp;'.$matches[1].'</b></a>';
+			$html = '<a style="color:'.$color.'" href="[ROOT_URL]'.$matches[1].'"><b><span class="bigger">&rsaquo;</span>&nbsp;'.$matches[1]
+			.'</b></a> <a href="#" class="load_card" data-action="load" data-card-name="'.$matches[1].'" style="color:'.$color.'">( load )</a>';
 		}
 		// Local File / Image
 		elseif(preg_match('/^\@([\S]*)$/',$html,$matches)){

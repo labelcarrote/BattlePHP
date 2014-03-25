@@ -65,37 +65,52 @@ class ActionHome extends Controller{
 			}
 		}
 		
-		$params = Request::get_params("@cardname/@action");
+		$params = Request::get_params("@card_name/@action");
 		if($params){
 			switch($params['action']){
 				case 'edit':
-					$ass_card = CardStore::get($params['cardname']);
+					$ass_card = CardStore::get($params['card_name']);
 					$this->assign('card',$ass_card);
 					if(($ass_card->is_private && $logged) || !$ass_card->is_private){
-						$ass_card->history = CardStore::get_card_history($params['cardname']);
+						$ass_card->history = CardStore::get_card_history($params['card_name']);
 						$this->display_page('section.card.update.tpl');
 					}else{
 						$this->display_page('section.card.tpl');
 					}
 					break;
-				case 'all_cards':
-					$ass_cards = CardStore::get_all($params['cardname']);
-					if(!empty($ass_cards))
-						$this->assign('cards',$ass_cards);
-					$this->display_page('section.card.tpl');
+				case 'as_code':
+					$result = new AjaxResult();
+					if($params['card_name'] == 'all_cards'){
+						$result->body = "";
+					}else{
+						$card = CardStore::get($params['card_name']);
+						$result->body = $card->text_code;
+					}
+					echo $result->to_json();
+					break;
+				case 'as_html':
+					$result = new AjaxResult();
+					if($params['card_name'] == 'all_cards'){
+						$result->body = "";
+					}else{
+						$ass_card = CardStore::get($params['card_name']);
+						$this->assign('card',$ass_card);
+						$result->body = $this->fetch_view('element.card.v2.tpl');
+					}
+					echo $result->to_json();
 					break;
 			}
 			return;
 		}
-		elseif($params = Request::get_params("@cardname")){
-			if($params['cardname'] == 'all_cards'){
+		elseif($params = Request::get_params("@card_name")){
+			if($params['card_name'] == 'all_cards'){
 				$ass_cards = CardStore::get_all();
 				if(!empty($ass_cards)){
 					$this->assign('cards',$ass_cards);
 					$this->display_page('section.card.tpl');
 				}
 			}else{
-				$ass_card = CardStore::get($params['cardname']);
+				$ass_card = CardStore::get($params['card_name']);
 				$this->assign('card',$ass_card);
 				$this->display_page('section.card.tpl');
 			}
@@ -141,31 +156,6 @@ class ActionHome extends Controller{
 				}
 			}
 		}
-		// GET WIP
-		else{
-			$params = Request::get_params("@action/@params");
-			if($params){
-				switch($params['action']){
-					case 'edit':
-						$ass_card = CardStore::get($params['cardname']);
-						$this->assign('card',$ass_card);
-						if(($ass_card->is_private && $logged) || !$ass_card->is_private){
-							$ass_card->history = CardStore::get_card_history($params['cardname']);
-							$this->display_page('section.card.update.tpl');
-						}else{
-							$this->display_page('section.card.tpl');
-						}
-						break;
-					case 'all_cards':
-						$ass_cards = CardStore::get_all($params['cardname']);
-						if(!empty($ass_cards))
-							$this->assign('cards',$ass_cards);
-						$this->display_page('section.card.tpl');
-						break;
-				}
-			}
-		}
-
 		echo $result->to_json();
 	}
 }

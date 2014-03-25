@@ -139,4 +139,31 @@ $(window).load(function(){
 			}
 		});
 	});
+
+	// Load Card Dynamically
+	$('body').on('click','.load_card',function(e){
+		//card to load 
+		var card_action = $(this).attr("data-action");
+		var element = $(this);
+		if(card_action === "load"){
+			var card_name = $(this).attr("data-card-name");
+			$.ajax({
+				url: card_name+"/as_html",
+				type: 'get',
+				dataType: 'json',
+				success: function(data) {
+					/*alert(data.body);*/
+					element.after(data.body);
+					element.attr("data-action","unload")
+					element.text("( unload )")
+				}
+			});
+		}
+		else{
+			$(this).next().remove();
+			element.attr("data-action","load");
+			element.text("( load )")
+		}
+	});
+
 });
