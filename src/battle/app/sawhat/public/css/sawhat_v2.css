@@ -89,11 +89,14 @@ img{
 .padding{ padding: 12px; }
 .smallpadding{ padding: 6px; }
 .smallestpadding{ padding: 2px; }
+.paddingleftright{ padding: 0px 12px; }
 .margin{ margin: 12px; }
 .smallmargin{ margin: 6px; }
 .smallermargin{ margin: 3px; }
 .margintop{ margin-top: 12px; }
 .marginbottom{ margin-bottom: 12px; }
+.marginleft{ margin-left: 12px; }
+.marginright{ margin-right: 12px; }
 .margintopbottom{ margin-top: 12px; margin-bottom: 12px; }
 .marginleftright{ margin-left: 12px; margin-right: 12px; }
 .error{ color : red; font-weight: bold; }
@@ -370,6 +373,17 @@ footer input {
 	margin: 0 !important;
 }
 
+
+/* ---- Bootstrap fixes ---- */
+
+form{ margin: 0;}
+
+.btn-link {
+	display: inline;
+	padding: 0;
+	color: #ccc;
+	font-size: 1em;
+}
 
 /* ---- Media Queries ---- */
 

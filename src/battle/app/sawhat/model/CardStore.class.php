@@ -60,5 +60,13 @@ class CardStore{
 		$lines = "$card_name\nlastedit: $last_edit\ncolor: $color\n$is_private_as_string\n".$lines;
 		return file_put_contents($filename,htmlentities($lines,ENT_COMPAT,'UTF-8'));
 	}
+
+	// ---- History
+
+	public static function get_card_history($card_name){
+		// look for .txtold files in card folder 
+		$folder = self::get_folder()."$card_name/*".self::EXT."old";
+		return FileSystemIO::get_files_in_dir($folder);
+	}
 }
 ?>

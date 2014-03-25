@@ -71,10 +71,12 @@ class ActionHome extends Controller{
 				case 'edit':
 					$ass_card = CardStore::get($params['cardname']);
 					$this->assign('card',$ass_card);
-					if(($ass_card->is_private && $logged) || !$ass_card->is_private)
+					if(($ass_card->is_private && $logged) || !$ass_card->is_private){
+						$ass_card->history = CardStore::get_card_history($params['cardname']);
 						$this->display_page('section.card.update.tpl');
-					else
+					}else{
 						$this->display_page('section.card.tpl');
+					}
 					break;
 				case 'all_cards':
 					$ass_cards = CardStore::get_all($params['cardname']);
@@ -100,7 +102,6 @@ class ActionHome extends Controller{
 			return;
 		}
 
-		// TODO : show home 
 		$ass_card = CardStore::get("home");
 		if($ass_card->exists){
 			$this->assign('card',$ass_card);
@@ -117,6 +118,7 @@ class ActionHome extends Controller{
 	// and the errors if any error occured
 	public function api(){
 		$result = new AjaxResult();
+		// POST
 		if(isset($_POST['submit'])) {
 			$submit = $_POST['submit'];
 			if($submit == "addfile"){
@@ -139,6 +141,31 @@ class ActionHome extends Controller{
 				}
 			}
 		}
+		// GET WIP
+		else{
+			$params = Request::get_params("@action/@params");
+			if($params){
+				switch($params['action']){
+					case 'edit':
+						$ass_card = CardStore::get($params['cardname']);
+						$this->assign('card',$ass_card);
+						if(($ass_card->is_private && $logged) || !$ass_card->is_private){
+							$ass_card->history = CardStore::get_card_history($params['cardname']);
+							$this->display_page('section.card.update.tpl');
+						}else{
+							$this->display_page('section.card.tpl');
+						}
+						break;
+					case 'all_cards':
+						$ass_cards = CardStore::get_all($params['cardname']);
+						if(!empty($ass_cards))
+							$this->assign('cards',$ass_cards);
+						$this->display_page('section.card.tpl');
+						break;
+				}
+			}
+		}
+
 		echo $result->to_json();
 	}
 }

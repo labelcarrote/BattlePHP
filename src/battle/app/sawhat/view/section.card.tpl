@@ -33,8 +33,8 @@
 		<b class="bigger">&rsaquo;&nbsp;</b><a href="{$current_app_virtual_url}">Home</a>
 	</div>
 	<form method="POST" class="right">
-			<input type="text" class="input-medium" name="search" placeholder="search one word only" value="" required="required" pattern="[a-zA-Z0-9\-]+">
-			<button class="btn" type="submit" name="submit" value="search">search</button> 
-		</form>
+		<input type="text" class="input-medium" name="search" placeholder="search one word only" value="" required="required" pattern="[a-zA-Z0-9\-]+">
+		<button class="btn" type="submit" name="submit" value="search">search</button> 
+	</form>
 	<div class="clearer"></div>
 </footer>

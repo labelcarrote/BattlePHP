@@ -13,6 +13,7 @@ class Card{
 	public $elements;
 	public $files;
 	public $exists = false;
+	public $history;
 	
 	public function __construct($name, $lines = array(), $recursive_level = 0){
 		$this->exists = CardStore::exist($name);
