@@ -58,17 +58,31 @@ class ActionHome extends Controller{
 					AuthHelper::unauthenticate();
 					break;
 				}
+				case 'search' : {
+					header('location: '.Request::get_application_virtual_root().$_POST['search'].'/all_cards');
+					break;
+				}
 			}
 		}
 		
 		$params = Request::get_params("@cardname/@action");
 		if($params){
-			$ass_card = CardStore::get($params['cardname']);
-			$this->assign('card',$ass_card);
-			if(($ass_card->is_private && $logged) || !$ass_card->is_private)
-				$this->display_page('section.card.update.tpl');
-			else
-				$this->display_page('section.card.tpl');
+			switch($params['action']){
+				case 'edit':
+					$ass_card = CardStore::get($params['cardname']);
+					$this->assign('card',$ass_card);
+					if(($ass_card->is_private && $logged) || !$ass_card->is_private)
+						$this->display_page('section.card.update.tpl');
+					else
+						$this->display_page('section.card.tpl');
+					break;
+				case 'all_cards':
+					$ass_cards = CardStore::get_all($params['cardname']);
+					if(!empty($ass_cards))
+						$this->assign('cards',$ass_cards);
+					$this->display_page('section.card.tpl');
+					break;
+			}
 			return;
 		}
 		elseif($params = Request::get_params("@cardname")){

@@ -1,5 +1,5 @@
 help
-lastedit: 20140321_1903
+lastedit: 20140325_1203
 color: #ff69a6
 
 Basic text sh*t:
@@ -8,6 +8,7 @@ Basic text sh*t:
 [u]underlined[/u]
 [s]stroke[/s]
 [i]italic[/i]
+_italic 2_
 [b][i][u]bold italic underlined[/u][/i][/b]
 
 ===== a 3 columns layout
@@ -40,6 +41,7 @@ Basic text sh*t:
 @c5b9a399d63afdf7f44e03c9ec35009d45d6708d_m.gif
 [/column]
 [/column]
+
     Power users can use code:
     [some_code]
     (note that those lines are code: &lt;a href=&quot;example.com&quot;&gt;famous website&lt;/a&gt;)
@@ -47,6 +49,20 @@ Basic text sh*t:
         echo 'fraise';
         exit();
     }
+
+[code=php]
+    function some_php_code($id=null){
+        echo 'banane';
+        exit(0);
+    }
+[/code]
+
+[code=javascript]
+    var code_exmaple = function(){
+        alert('some JS code&quot; !');
+        return true;
+    };
+[/code]
 
 ===== you can insert cards in card ...
 [help]

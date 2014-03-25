@@ -10,7 +10,7 @@
 	</a>
 	</h{$card->recursive_level+1}>
 	{if !$logged and $card->is_private}
-		<div class="right margintop ">PRIVATE</div>
+		<div class="right align_right "><span class="lighter_text">PRIVATE</span></div>
 	{elseif !$card->exists}
 		<div class="right align_right">
 			<a class="lighter_text" href="{$current_app_virtual_url}{$card->name}/edit">CREATE</a>

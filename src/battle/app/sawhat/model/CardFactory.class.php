@@ -38,6 +38,11 @@ class Card{
 				if($previous_is_multiple_line 
 					&& (!$card_element->multiple_line || $previous_html_closure_tag != $card_element->html_closure_tag))
 				{
+					// clean previous line //
+					$last_element_id = count($this->elements) - 1;
+					$this->elements[$last_element_id]->html = str_replace("\n",'',$this->elements[$last_element_id]->html);
+					$this->elements[$last_element_id]->html = str_replace("\r",'',$this->elements[$last_element_id]->html);
+					
 					$tag_added = $previous_html_closure_tag == 'pre' ? '</code>' : '';
 					$this->elements[] = (object)array('html'=>$tag_added.'</'.$previous_html_closure_tag.'>');
 				}
@@ -46,8 +51,8 @@ class Card{
 				if($card_element->multiple_line	
 					&& (!$previous_is_multiple_line || $previous_html_closure_tag != $card_element->html_closure_tag))
 				{
-					$class = $card_element->html_closure_tag == 'pre' ? 'class="code line-numbers"' : '';
-					$tag_added = $card_element->html_closure_tag == 'pre' ? '<code class="language-php">' : '';
+					$class = $card_element->html_closure_tag == 'pre' ? 'class="code line-numbers language-none"' : '';
+					$tag_added = $card_element->html_closure_tag == 'pre' ? '<code class="language-none">' : '';
 					$this->elements[] = (object)array('html'=>'<'.$card_element->html_closure_tag.' '.$class.'>'.$tag_added);
 				}
 				
@@ -86,9 +91,12 @@ class Card{
 		return '';
 	}
 	public static function get_display_name($card_name){
-		$s = array('_','-');
-		$r = ' ';
-		return str_replace($s,$r,$card_name);
+		$card_name = preg_replace('/([a-zA-Z0-9]+)(_|\-){1}([a-zA-Z0-9]+)/','$1 $3',$card_name);
+		$card_name = preg_replace('/([a-zA-Z0-9]+)__([a-zA-Z0-9]+)/','$1: $2',$card_name);
+		$card_name = preg_replace('/([a-zA-Z0-9]+)--([a-zA-Z0-9]+)/','$1-$2',$card_name);
+		$card_name = preg_replace('/([a-zA-Z0-9]+)_-_([a-zA-Z0-9]+)/','$1 - $2',$card_name);
+		
+		return $card_name;
 	}
 }
 
@@ -178,7 +186,7 @@ class CardElement{
 		$closure_tag = '';
 		$html = $string;
 
-		// Code => no more parsing
+		// Code (1/2) => no more parsing
 		if(preg_match('/^  (.+)$/',$html,$matches)){
 			//$clean = '<pre class="code">'.$matches[1].'</pre>';
 			$html = $matches[1];
@@ -186,11 +194,14 @@ class CardElement{
 			$closure_tag = 'pre';
 			return array('html_code' => $html, 'multiple_line' => $multiple_line, 'closure_tag' => $closure_tag);
 		}
-
+		
 		// parse line ...
 		$html = $need_string_cleaning ? stripslashes(trim(strip_tags($html))) : $html;
 		
 		// CLASSIC BBCODE
+		// code (2/2)
+		$html = preg_replace('/^\[code=(\w+)\]$/', '<pre class="code line-numbers language-$1"><code>', $html);
+		$html = preg_replace('/^\[\/code\]$/', '</code></pre>', $html);
 		// columns
 		$html = preg_replace('/\[column=(\d)\]/', '<div class="column_$1">', $html);
 		$html = preg_replace('/\[\/column\]/', '</div>', $html);
@@ -209,6 +220,10 @@ class CardElement{
 			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
 			$html = $matches[1].'<i>'.$html['html_code'].'</i>'.$matches[3];
 		}
+		if(preg_match('/(.*)_([a-zA-Z0-9 _-]+)_(.*)/',$html,$matches)){
+			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
+			$html = $matches[1].'<i>'.$html['html_code'].'</i>'.$matches[3];
+		}
 		if(preg_match('/(.*)\[s\](.+)\[\/s\](.*)/',$html,$matches)){
 			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
 			$html = $matches[1].'<s>'.$html['html_code'].'</s>'.$matches[3];
@@ -217,7 +232,7 @@ class CardElement{
 			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
 			$html = $matches[1].'<b>'.$html['html_code'].'</b>'.$matches[3];
 		}
-		if(preg_match('/(.*)\*(.+)\*(.*)/',$html,$matches)){
+		if(preg_match('/(.*)\*([a-zA-Z0-9 _-]+)\*(.*)/',$html,$matches)){
 			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
 			$html = $matches[1].'<b>'.$html['html_code'].'</b>'.$matches[3];
 		}

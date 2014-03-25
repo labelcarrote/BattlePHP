@@ -37,18 +37,20 @@
 </div>
 {/foreach}
 </div>
-{else}
-{$element->html}
-{/if}
+{else}{$element->html}{/if}
 {/foreach}
 <div class="clearer"></div>
 </div>
 		</div>
 		{if count($card->files) > 0}
-		<div class="border smallpadding">
+		<div class="border smallpadding files">
+			<div class="image_preview hidden">
+				<img alt="image preview" src="" />
+				<div class="vertical_align_ghost"></div>
+			</div>
 			<ul>
 			{foreach from=$card->files item=file}
-				<li><a style="color:{$card->color}" href="{$root_url}{$file->fullname}">{$file->name}</a></li>
+				<li><a style="color:{$card->color}" href="{$root_url}{$file->fullname}" class="image_link">{$file->name}</a></li>
 			{/foreach}
 			</ul>
 		</div>

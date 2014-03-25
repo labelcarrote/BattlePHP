@@ -11,12 +11,19 @@ class CardStore{
 		return "app/sawhat/".self::DIR;
 	}
 	
-	public static function get_all(){
+	public static function get_all($filter = null){
 		$result = array();
 		// look for text files in folder sawhat
 		$dir = self::get_folder()."*";
-		foreach (glob($dir,GLOB_ONLYDIR) as $filename)
-			$result[] = self::get(basename($filename));
+		foreach (glob($dir,GLOB_ONLYDIR) as $filename){
+			$basename = basename($filename);
+			if(
+				is_null($filter) ||
+				(!is_null($filter) && strpos($filter,'-') === 0 && stripos($basename,trim($filter,'-')) === false) ||
+				(!is_null($filter) && strpos($filter,'-') !== 0 && stripos($basename,$filter) !== false)
+			)
+				$result[] = self::get($basename);
+		}
 		return $result;
 	}
 	

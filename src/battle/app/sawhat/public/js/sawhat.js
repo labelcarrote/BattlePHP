@@ -66,9 +66,13 @@ $(document).ready(function(){
 	});
 	
 	// IMAGE PREVIEW //
-	$('#files').on('click','.image_link',function(e){
+	$('.files').on('click','.image_link',function(e){
 		e.preventDefault();
-		$('#image_preview').attr('src',$(this).attr('href'));
+		$(this).closest('.files').find('.image_preview img').attr('src',$(this).attr('href')).focus();
+		$(this).closest('.files').find('.image_preview').fadeIn(200);
+	});
+	$('.files').on('click','.image_preview',function(){
+		$(this).fadeOut(200);
 	});
 })
 

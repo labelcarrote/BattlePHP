@@ -37,7 +37,7 @@
 body{
 	font: 100%/1.5 Arial, Verdana, sans-serif;
 	text-align: left;
-	background-color: #ccc;
+	background-color: #666;
 	color: #555;
 	word-wrap:break-word;
 }
@@ -67,14 +67,6 @@ article{ padding: 0; }
 
 /* Forms */
 fieldset{ width: 100%; }
-input{
-	margin: 0 0 12px 0;
-	color: #000;
-	background: #fff;
-	border: 1px solid #000000;
-}
-fieldset input{ width: 99%; }
-textarea{ width: 950px; padding: 3px;}
 img{
     max-width: 100%;
 }
@@ -87,7 +79,7 @@ img{
 .right{float: right;}
 .align_right{text-align: right;}
 .align_middle{vertical-align: middle;}
-.vertical_align_ghost { display: inline-block;height: 100%;width: 10px;vertical-align: middle; }
+.vertical_align_ghost { display: inline-block;height: 100%;width: 0;vertical-align: middle; }
 .darker{ background: rgba(0, 0, 0, 0.1); }
 .darker_text{ color: rgba(0, 0, 0, 0.3); }
 .lighter_text{ color: rgba(255,255,255, 0.6); }
@@ -124,10 +116,16 @@ img{
 	margin: auto;
 	padding: 12px;
 	/*max-width: 960px;*/
+	background-color: #ccc;
 }
 header{
 	border-bottom: 2px solid #fff;
 	vertical-align: bottom;
+}
+footer.content{
+	background-color: #666;
+	color: #999;
+	min-height: 150px;
 }
 .content > section > .sawhat,
 .content > section > div > .sawhat {
@@ -312,21 +310,30 @@ header{
 }
 /* File list */
 .image_link {
-	width: 22em;
+	width: 26em;
 }
 .image_size {
-	width: 4em;
+	width: 6em;
 	text-align: right;
 }
-#image_preview {
-	float: right;
-	max-height: 150px;
-	max-width: 200px;
-	border: 1px solid #ccc;
-	padding: 3px;
-	color: #999;
+.image_preview {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
 	vertical-align: middle;
 	text-align: center;
+	z-index: 20;
+	background: rgba(80,80,80,0.4);
+}
+.image_preview img {
+	display: inline-block;
+	vertical-align: middle;
+	max-height: 100%;
+	max-width: 100%;
+	box-shadow: 0 0 20px rgba(0,0,25,0.4);
+	cursor: pointer;
 }
 
 /* ACE EDITOR */
@@ -342,6 +349,27 @@ header{
     bottom: 0;
     left: 0;
 }
+
+/* Footer */
+footer a,
+footer .btn-link {
+	display: inline;
+	padding: 0;
+	color: #ccc;
+	font-weight: bold;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+	font-size: 1em;
+}
+footer a:hover,
+footer .btn-link:hover {
+	color: #eee;
+	text-decoration: none;
+}
+footer form,
+footer input {
+	margin: 0 !important;
+}
+
 
 /* ---- Media Queries ---- */
 

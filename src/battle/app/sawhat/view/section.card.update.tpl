@@ -71,8 +71,11 @@
 				 </div>
 			  </div>
 		   </div>
-		   <div id="files">
-			<img id="image_preview" alt="image preview" src="" />
+		   <div id="files" class="files">
+			<div class="image_preview hidden">
+				<img alt="image preview" src="" />
+				<div class="vertical_align_ghost"></div>
+			</div>
 			<ul>
 			   {foreach from=$card->files item=file}
 			   <li>
