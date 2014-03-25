@@ -33,46 +33,46 @@
 						<input type="checkbox" name="is_private" {if $card->is_private}checked{/if}> Is Private ?
 					</label>
 				</div>
-			  <!-- TEXT -->
-			  <div id="editor_container">
-				 <pre id="editor">{$card->text_code}</pre>
-			  </div>
-			  <!-- 
-			  <textarea class="hidden" type="text" name="card"></textarea>
-			   -->
-		   </fieldset>
+				<!-- TEXT -->
+				<div id="editor_container">
+					<pre id="editor">{$card->text_code}</pre>
+				</div>
+				<!-- 
+				<textarea class="hidden" type="text" name="card"></textarea>
+				-->
+			</fieldset>
 		</form>
 	
 		<!-- SUBMIT -->
 		<div class="padding darker">
-		   <button id="editor_save" class="btn btn-primary">Save</button>
-		   <a class="btn btn-secondary" href="{$current_app_virtual_url}{$card->name}">Cancel</a>
+			<button id="editor_save" class="btn btn-primary">Save</button>
+			<a class="btn btn-secondary" href="{$current_app_virtual_url}{$card->name}">Cancel</a>
 		</div>
 	
 		<!-- FILES -->
 		<div class="border padding darker">
 			<h2>Files</h2>
-		   	<div class="line margintopbottom">
-			  	<div class="unit size1of5">
-				 	<form id="addfileform" class="">
+			<div class="line margintopbottom">
+				<div class="unit size1of5">
+					<form id="addfileform" class="">
 						<input type="hidden" name="name" value="{$card->name}">
 						<div class="fileupload fileupload-new" data-provides="fileupload">
 							<span class="btn btn-file">
-							   	<span class="fileupload-new">Attach / Upload File</span>
-							   	<span class="fileupload-exists">Attach / Upload File</span>
-							   	<input name="file" id="file" type="file">
+								<span class="fileupload-new">Attach / Upload File</span>
+								<span class="fileupload-exists">Attach / Upload File</span>
+								<input name="file" id="file" type="file">
 							</span>
 						</div>
-				 	</form>   
-			  	</div>
-			  	<div class="unit size4of5">
+					</form>   
+				</div>
+				<div class="unit size4of5">
 					<div class="uploadprogress">
 					<div class="bar"></div>
 					<p>Progress</p>
 					</div>
-			  	</div>
-		   	</div>
-		   	<div id="files" class="files">
+				</div>
+			</div>
+			<div id="files" class="files">
 				<div class="image_preview hidden">
 					<img alt="image preview" src="" />
 					<div class="vertical_align_ghost"></div>
@@ -94,8 +94,8 @@
 		<div class="padding marginbottom">
 			<h2>History</h2>
 			<ul>
-			   	{foreach from=$card->history item=old_version}
-			   	<li>
+				{foreach from=$card->history item=old_version}
+				<li>
 					<span class="left block">{$old_version->name}</span>
 					<span class="image_size left block">{$old_version->human_readable_size}</span>
 					<form method="POST">
@@ -103,8 +103,8 @@
 						<button class="btn btn-link marginleft" style="color:{$card->color}" type="submit" name="submit" value="set_as_current">Set as current (wip)</button> 
 					</form>
 					<div class="clearer_left"></div>
-			   	</li>
-		   		{/foreach}
+				</li>
+				{/foreach}
 			</ul>
 		</div>
 	</section>
