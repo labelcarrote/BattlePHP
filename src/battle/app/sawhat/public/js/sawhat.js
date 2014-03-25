@@ -140,6 +140,24 @@ $(window).load(function(){
 		});
 	});
 
+	// Card Edit : Set As Current
+	$('body').on('click','.load_card_as_current',function(e){
+		//card to load 
+		var element = $(this);
+		var card_name = $(this).attr("data-card-name");
+		var card_version = $(this).attr("data-card-version");
+		$.ajax({
+			url: "as_code?card_version="+card_version,
+			type: 'get',
+			dataType: 'json',
+			success: function(data) {
+				var editor = ace.edit("editor");
+				editor.setValue(data.body);
+			}
+		});
+	
+	});
+
 	// Load Card Dynamically
 	$('body').on('click','.load_card',function(e){
 		//card to load 

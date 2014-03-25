@@ -98,10 +98,7 @@
 				<li>
 					<span class="left block">{$old_version->name}</span>
 					<span class="image_size left block">{$old_version->human_readable_size}</span>
-					<form method="POST">
-						<input type="hidden" name="card_version" value="{$old_version->name}">
-						<button class="btn btn-link marginleft" style="color:{$card->color}" type="submit" name="submit" value="set_as_current">Set as current (wip)</button> 
-					</form>
+					<a href="#" class="load_card_as_current marginleftright" data-card-name="{$card->name}" data-card-version="{$old_version->name}">Set as current card</a>
 					<div class="clearer_left"></div>
 				</li>
 				{/foreach}

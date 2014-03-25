@@ -68,5 +68,15 @@ class CardStore{
 		$folder = self::get_folder()."$card_name/*".self::EXT."old";
 		return FileSystemIO::get_files_in_dir($folder);
 	}
+
+	public static function get_card_version($card_name,$version){
+		// look for .txtold file in card folder 
+		$folder = self::get_folder()."$card_name/";
+		$filename = self::get_folder()."$card_name/$version";
+		$lines = (!file_exists($filename)) ? array() : file($filename);
+		$card = new Card($card_name,$lines,0); 
+		$card->files = FileSystemIO::get_files_in_dir($folder.'{*.jpg,*.jpeg,*.JPG,*.png,*.gif}');
+		return $card;
+	}
 }
 ?>

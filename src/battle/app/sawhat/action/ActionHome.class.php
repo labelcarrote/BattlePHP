@@ -83,8 +83,14 @@ class ActionHome extends Controller{
 					if($params['card_name'] == 'all_cards'){
 						$result->body = "";
 					}else{
-						$card = CardStore::get($params['card_name']);
-						$result->body = $card->text_code;
+						$card_version = Request::isset_or($_GET["card_version"],null);
+						if($card_version !== null){
+							$old_card = CardStore::get_card_version($params['card_name'],$card_version);
+							$result->body = $old_card->text_code;
+						}else{
+							$card = CardStore::get($params['card_name']);
+							$result->body = $card->text_code;
+						}
 					}
 					echo $result->to_json();
 					break;
