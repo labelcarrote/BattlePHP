@@ -39,7 +39,11 @@ class FileSystemIO{
 		// FROM: http://jeffreysambells.com/2012/10/25/human-readable-filesize-php
 		$size = array('o','ko','Mo','Go','To','Po','Eo','Zo','Yo');
 		$factor = floor((strlen($bytes) - 1) / 3);
-		return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
+		return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . " " .@$size[$factor];
+	}
+
+	public static function delete_file($file_path){
+		return unlink($file_path);
 	}
 }
 ?>
