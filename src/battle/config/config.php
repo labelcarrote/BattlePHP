@@ -17,7 +17,7 @@ class Configuration{
 	const MAIN_LOG_FILE = "main.log";
 
 	// Mono App : set to "" or comment this for multiple apps
-	const MONO_APP = "sawhat";
+	//const MONO_APP = "sawhat";
 
 	// smarty configuration
 	const SMARTY_TEMPLATE_DIR = "/view";

@@ -38,7 +38,7 @@ class CardStore{
 		$filename = $folder.$card_name.".txt";
 		$lines = (!file_exists($filename)) ? array() : file($filename);
 		$card = new Card($card_name,$lines,$recursive_level); 
-		$card->files = FileSystemIO::get_files_in_dir($folder.'{*.jpg,*.jpeg,*.JPG,*.png,*.gif}');
+		$card->files = FileSystemIO::get_files_in_dir($folder.'{*.jpg,*.jpeg,*.JPG,*.png,*.gif,*.zip}');
 		return $card;
 	}
 
@@ -49,7 +49,7 @@ class CardStore{
 		$last_edit = date("Ymd_Hm");
 		$filenamenoext = self::get_folder()."".$card_name."/".$card_name;	
 		$filename = self::get_folder()."".$card_name."/".$card_name.self::EXT;
-		$is_private_as_string = ($is_private) ? "is_private\n" : "";
+		$is_private_as_string = ($is_private) ? "is_private\r\n" : "";
 		if(file_exists($filename)){
 			// UPDATE : save current first !
 			copy($filename,$filenamenoext."_".$last_edit.self::EXT."old");
@@ -57,7 +57,9 @@ class CardStore{
 		if(!is_dir(dirname($filename)))
 			mkdir(dirname($filename));
 
-		$lines = "$card_name\nlastedit: $last_edit\ncolor: $color\n$is_private_as_string\n".$lines;
+		$lines = "$card_name\r\nlastedit: $last_edit\r\ncolor: $color\r\n$is_private_as_string\r\n".$lines;
+		/*$lines = preg_replace('~\R~u', "\r\n", $lines);*/
+		/*$lines = preg_replace('/\r\r\n/', "\r\n", $lines);*/
 		return file_put_contents($filename,htmlentities($lines,ENT_COMPAT,'UTF-8'));
 	}
 

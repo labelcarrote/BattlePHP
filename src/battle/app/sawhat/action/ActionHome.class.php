@@ -145,7 +145,7 @@ class ActionHome extends Controller{
 			if($submit == "addfile"){
 				$card_name = Request::isset_or($_POST['name'], "");
 				if($card_name != "" && CardStore::exist($card_name)){
-					$extensions = array(".jpg",".png",".jpeg",".JPG",".gif");
+					$extensions = array(".jpg",".png",".jpeg",".JPG",".gif",".zip");
 					try{
 						$file = Uploader::process_form_file("file",CardStore::get_folder().$card_name,2000000,$extensions);
 					}catch(Exception $e){ 
