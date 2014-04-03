@@ -249,12 +249,6 @@ class CardElement{
 				$html = '<a style="color:'.$card_color.'" href="[IMAGE_URL]'.$matches[1].'">'.$matches[1].'</a>';
 		}
 		
-		if($need_string_cleaning){
-			// parse markdown
-			$parsedown = new Parsedown();
-			$html = $parsedown->parse($html);
-		}
-		
 		return array('html_code' => $html, 'multiple_line' => $multiple_line, 'closure_tag' => $closure_tag);
 	}
 }
