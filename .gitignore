@@ -1,5 +1,6 @@
 *.txtold
 *.zip
+*.bak
 main.log
 src/battle/tmp/
 src/battle/tmp/tpl_comp/*
