@@ -131,14 +131,9 @@ class CardElement{
 		
 		$this->card_name = $card_name;
 		
-		// replace vars and newlines
-		$s = array('[ROOT_URL]','[IMAGE_URL]',"\r","\n");
-		$r = array(
-			Request::get_application_virtual_root(),
-			Request::get_root_url().CardStore::get_folder().$this->card_name.'/',
-			'',
-			''
-		);
+		// Replace newlines
+		$s = array("\r","\n");
+		$r = array('','');
 		$line = str_replace($s,$r,$line);
 		
 		// Cards!
@@ -165,7 +160,7 @@ class CardElement{
 		}
 		// Parse line
 		else{
-			$bbcode_array = self::bbcode_to_html($line,$card_color,$recursive_level);
+			$bbcode_array = $this->bbcode_to_html($line,$card_color,$recursive_level);
 			$this->multiple_line = $bbcode_array['multiple_line'];
 			$this->html_closure_tag = $bbcode_array['closure_tag'];
 			$this->coding_language = $bbcode_array['coding_language'];
@@ -174,7 +169,7 @@ class CardElement{
 		}
 	}
 	
-	public static function bbcode_to_html($string, $color = '', $recursive_level = 0, $need_string_cleaning = true){
+	public function bbcode_to_html($string, $color = '', $recursive_level = 0, $need_string_cleaning = true){
 		$multiple_line = false;
 		$closure_tag = '';
 		$html = $string;
@@ -204,11 +199,11 @@ class CardElement{
 		$html = preg_replace('/\[img\](.+)\[\/img\]/', '<img src="$1" alt="" />', $html);
 		// text u,i,s,b
 		if(preg_match('/(.*)\[u\](.+)\[\/u\](.*)/',$html,$matches)){
-			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
+			$html = $this->bbcode_to_html($matches[2],$color,$recursive_level,false);
 			$html = $matches[1].'<u>'.$html['html_code'].'</u>'.$matches[3];
 		}
 		if(preg_match('/(.*)\[i\](.+)\[\/i\](.*)/',$html,$matches)){
-			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
+			$html = $this->bbcode_to_html($matches[2],$color,$recursive_level,false);
 			$html = $matches[1].'<i>'.$html['html_code'].'</i>'.$matches[3];
 		}
 		if(preg_match('/(.*)\[s\](.+)\[\/s\](.*)/',$html,$matches)){
@@ -216,12 +211,12 @@ class CardElement{
 			$html = $matches[1].'<s>'.$html['html_code'].'</s>'.$matches[3];
 		}
 		if(preg_match('/(.*)\[b\](.+)\[\/b\](.*)/',$html,$matches)){
-			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
+			$html = $this->bbcode_to_html($matches[2],$color,$recursive_level,false);
 			$html = $matches[1].'<b>'.$html['html_code'].'</b>'.$matches[3];
 		}
 		// List
 		if(preg_match('/^(\d+\-|\-) (.+)$/',$html,$matches)){
-			$html = self::bbcode_to_html(trim($matches[2], '- '),$color,$recursive_level,false);
+			$html = $this->bbcode_to_html(trim($matches[2], '- '),$color,$recursive_level,false);
 			$html = '<li>'.$html['html_code'].'</li>';
 			$multiple_line = true;
 			$closure_tag = $matches[1] !== '-' ? 'ol' : 'ul';
@@ -263,6 +258,14 @@ class CardElement{
 			else
 				$html = '<a style="color:'.$card_color.'" href="[IMAGE_URL]'.$matches[1].'">'.$matches[1].'</a>';
 		}
+		
+		// Replace vars
+		$s = array('[ROOT_URL]','[IMAGE_URL]');
+		$r = array(
+			Request::get_application_virtual_root(),
+			Request::get_root_url().CardStore::get_folder().$this->card_name.'/',
+		);
+		$html = str_replace($s,$r,$html);
 		
 		if($need_string_cleaning){
 			// parse markdown
