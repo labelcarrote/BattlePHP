@@ -112,7 +112,6 @@ class ActionHome extends Controller{
 			return;
 		}
 		elseif($params = Request::get_params("@card_name")){
-			var_dump($_GET);
 			if($params['card_name'] == 'all_cards'){
 				$ass_cards = CardStore::get_all();
 				if(!empty($ass_cards)){
