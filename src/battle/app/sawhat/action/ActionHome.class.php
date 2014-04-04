@@ -105,6 +105,12 @@ class ActionHome extends Controller{
 					}
 					echo $result->to_json();
 					break;
+				case 'all_cards':
+					$ass_cards = CardStore::get_all($params['card_name']);
+					if(!empty($ass_cards))
+						$this->assign('cards',$ass_cards);
+					$this->display_page('section.card.tpl');
+					break;
 			}
 			return;
 		}

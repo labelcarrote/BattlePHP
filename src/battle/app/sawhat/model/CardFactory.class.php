@@ -25,8 +25,8 @@ class Card{
 		$this->elements = array();
 		$init = true;
 		$element = null;
-		$previous_is_multiple_line = false;
-		$previous_html_closure_tag = '';
+		$previous_element = (object)array('multiple_line'=>false,'html_closure_tag'=>'');
+		$need_closure = false;
 
 		foreach($lines as $line){
 			if($init){
@@ -36,36 +36,50 @@ class Card{
 				$card_element = new CardElement($name,$this->color,$line,$recursive_level);
 
 				// close multiple line tag
-				if($previous_is_multiple_line 
-					&& (!$card_element->multiple_line || $previous_html_closure_tag != $card_element->html_closure_tag))
+				if($previous_element->multiple_line
+					&& (!$card_element->multiple_line || $previous_element->html_closure_tag != $card_element->html_closure_tag))
 				{
-					// clean previous line //
-					$last_element_id = count($this->elements) - 1;
-					$this->elements[$last_element_id]->html = str_replace("\n",'',$this->elements[$last_element_id]->html);
-					$this->elements[$last_element_id]->html = str_replace("\r",'',$this->elements[$last_element_id]->html);
-					
-					$tag_added = $previous_html_closure_tag == 'pre' ? '</code>' : '';
-					$this->elements[] = (object)array('html'=>$tag_added.'</'.$previous_html_closure_tag.'>');
+					$this->elements[] = $this->close_mutliple_line_tag($previous_element);
+					$need_closure = false;
 				}
-				
 				// open multiple line tag
 				if($card_element->multiple_line	
-					&& (!$previous_is_multiple_line || $previous_html_closure_tag != $card_element->html_closure_tag))
+					&& (!$previous_element->multiple_line || $previous_element->html_closure_tag != $card_element->html_closure_tag))
 				{
-					$class = $card_element->html_closure_tag == 'pre' ? 'class="code line-numbers language-none"' : '';
-					$tag_added = $card_element->html_closure_tag == 'pre' ? '<code class="language-none">' : '';
-					$this->elements[] = (object)array('html'=>'<'.$card_element->html_closure_tag.' '.$class.'>'.$tag_added);
+					$this->elements[] = $this->open_mutliple_line_tag($card_element);
+					$need_closure = true;
 				}
 				
-				$this->elements[] = $card_element;
+				if($card_element->html_closure_tag == 'pre')
+					$card_element->html .= "\r\n";
 				
-				$previous_is_multiple_line = $card_element->multiple_line;
-				$previous_html_closure_tag = $card_element->html_closure_tag;
+				if(empty($card_element->coding_language))
+					$this->elements[] = $card_element;
+				
+				$previous_element = $card_element;
 			}
-
 			if(trim($line) == '')
 				$init = false;
 		}
+		if($need_closure){
+			$this->elements[] = $this->close_mutliple_line_tag($previous_element);
+		}
+	}
+	
+	private function open_mutliple_line_tag($card_element){
+		$coding_language = !empty($card_element->coding_language) ? 'language-'.$card_element->coding_language : 'language-none';
+		$class = $card_element->html_closure_tag == 'pre' ? 'class="code line-numbers '.$coding_language.'"' : '';
+		$tag_added = $card_element->html_closure_tag == 'pre' ? '<code class="'.$coding_language.'">' : '';
+		
+		return (object)array('html'=>'<'.$card_element->html_closure_tag.' '.$class.'>'.$tag_added);
+	}
+	private function close_mutliple_line_tag($card_element){
+		$last_element_id = count($this->elements) - 1;
+		$this->elements[$last_element_id]->html = str_replace("\n",'',$this->elements[$last_element_id]->html);
+		$this->elements[$last_element_id]->html = str_replace("\r",'',$this->elements[$last_element_id]->html);
+		$tag_added = $card_element->html_closure_tag == 'pre' ? '</code>' : '';
+		
+		return (object)array('html'=>$tag_added.'</'.$card_element->html_closure_tag.'>');
 	}
 	
 	public function parse_special_properties($line){
@@ -106,6 +120,7 @@ class CardElement{
 	public $cards;
 	public $multiple_line = false;
 	public $html_closure_tag = '';
+	public $coding_language = '';
 	
 	public function __construct($card_name, $card_color, $line, $recursive_level = 0){
 		// Empty line
@@ -115,55 +130,29 @@ class CardElement{
 		}
 		
 		$this->card_name = $card_name;
-		$need_newline = true;
-		$html_tags_needing_no_newline = array(
-			'li',
-			'div',
-			'h1',
-			'h2',
-			'h3',
-			'h4',
-			'h5',
-			'h6',
-			'pre'
-		);
 		
-		$bbcode_array = self::bbcode_to_html($line,$card_color,$recursive_level);
-		$this->multiple_line = $bbcode_array['multiple_line'];
-		$this->html_closure_tag = $bbcode_array['closure_tag'];
-		$clean = $bbcode_array['html_code'];
-
-		// replace vars
-		$s = array('[ROOT_URL]','[IMAGE_URL]');
+		// replace vars and newlines
+		$s = array('[ROOT_URL]','[IMAGE_URL]',"\r","\n");
 		$r = array(
 			Request::get_application_virtual_root(),
-			Request::get_root_url().CardStore::get_folder().$this->card_name.'/'
+			Request::get_root_url().CardStore::get_folder().$this->card_name.'/',
+			'',
+			''
 		);
-		$clean = str_replace($s,$r,$clean);
-		
-		// find html element
-		$html_tag = '';
-		if(preg_match('/^<(\w+)( |>).+$/',$clean,$matches))
-			$html_tag = $matches[1];
-		elseif(preg_match('/^.*<\/(\w+)>$/',$clean,$matches))
-			$html_tag = $matches[1];
-
-		$need_newline = in_array($html_tag,$html_tags_needing_no_newline) || $this->html_closure_tag == 'pre' ? false : $need_newline;
+		$line = str_replace($s,$r,$line);
 		
 		// Cards!
-		if(preg_match('/^\[([\S]*)\]$/',$clean,$matches)){
+		if(preg_match('/^\[([a-zA-Z0-9\|_-]+)\]$/',$line,$matches)){
 			$cards_names = array_slice(explode('|', $matches[1]),0,3);
 			$column_count = count($cards_names);
 			if(!isset($this->cards))
 				$recursive_level++;
-			
 			$this->html .= '<div class="column_container">';
 			foreach($cards_names as $card_name) {
 				if($recursive_level < CardStore::MAX_RECURSIVE_LEVEL)
 					$this->cards[] = CardStore::get($card_name,$recursive_level);
 				elseif($recursive_level == CardStore::MAX_RECURSIVE_LEVEL)
 					$included_card = CardStore::get($card_name,$recursive_level);
-				
 				if(isset($included_card)){
 					$view_manager = Viewer::getInstance();
 					$view_manager->assign('logged',AuthHelper::is_authenticated());
@@ -173,13 +162,16 @@ class CardElement{
 				}
 			}
 			$this->html .= '</div>';
-			$need_newline = false;
 		}
-		// ...
+		// Parse line
 		else{
-			$this->html = $clean;
+			$bbcode_array = self::bbcode_to_html($line,$card_color,$recursive_level);
+			$this->multiple_line = $bbcode_array['multiple_line'];
+			$this->html_closure_tag = $bbcode_array['closure_tag'];
+			$this->coding_language = $bbcode_array['coding_language'];
+			$line = $bbcode_array['html_code'];
+			$this->html = $line;
 		}
-		$this->html .= $need_newline ? '<br>' : '';
 	}
 	
 	public static function bbcode_to_html($string, $color = '', $recursive_level = 0, $need_string_cleaning = true){
@@ -189,20 +181,18 @@ class CardElement{
 
 		// Code (1/2) => no more parsing
 		if(preg_match('/^  (.+)$/',$html,$matches)){
-			//$clean = '<pre class="code">'.$matches[1].'</pre>';
 			$html = $matches[1];
+			preg_match('/```(\w+)/',$matches[1],$coding_language);
+			$coding_language = isset($coding_language[1]) ? $coding_language[1] : '';
 			$multiple_line = true;
 			$closure_tag = 'pre';
-			return array('html_code' => $html, 'multiple_line' => $multiple_line, 'closure_tag' => $closure_tag);
+			return array('html_code' => $html, 'multiple_line' => $multiple_line, 'closure_tag' => $closure_tag, 'coding_language' => $coding_language);
 		}
 		
 		// parse line ...
 		$html = $need_string_cleaning ? stripslashes(trim(strip_tags($html))) : $html;
 		
 		// CLASSIC BBCODE
-		// code (2/2)
-		$html = preg_replace('/^\[code=(\w+)\]$/', '<pre class="code line-numbers language-$1"><code>', $html);
-		$html = preg_replace('/^\[\/code\]$/', '</code></pre>', $html);
 		// columns
 		$html = preg_replace('/\[column=(\d)\]/', '<div class="column_$1">', $html);
 		$html = preg_replace('/\[\/column\]/', '</div>', $html);
@@ -221,19 +211,11 @@ class CardElement{
 			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
 			$html = $matches[1].'<i>'.$html['html_code'].'</i>'.$matches[3];
 		}
-		if(preg_match('/(.*)_([a-zA-Z0-9 _-]+)_(.*)/',$html,$matches)){
-			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
-			$html = $matches[1].'<i>'.$html['html_code'].'</i>'.$matches[3];
-		}
 		if(preg_match('/(.*)\[s\](.+)\[\/s\](.*)/',$html,$matches)){
 			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
 			$html = $matches[1].'<s>'.$html['html_code'].'</s>'.$matches[3];
 		}
 		if(preg_match('/(.*)\[b\](.+)\[\/b\](.*)/',$html,$matches)){
-			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
-			$html = $matches[1].'<b>'.$html['html_code'].'</b>'.$matches[3];
-		}
-		if(preg_match('/(.*)\*([a-zA-Z0-9 _-]+)\*(.*)/',$html,$matches)){
 			$html = self::bbcode_to_html($matches[2],$color,$recursive_level,false);
 			$html = $matches[1].'<b>'.$html['html_code'].'</b>'.$matches[3];
 		}
@@ -253,10 +235,10 @@ class CardElement{
 			$html = '<a style="color:'.$color.'" href="'.$matches[2].'">'.$matches[1].'</a>';
 		}
 		elseif(preg_match('/^(https?:[\S]+)$/',$html,$matches)){
-			$html = '<a style="color:'.$color.'" href="'.$matches[1].'">'.$matches[1].'</a>';
+			$html = '<a style="color:'.$color.'" href="'.$matches[1].'">'.preg_replace('/https?:\/\//','',$matches[1]).'</a>';
 		}
 		elseif(preg_match('/(\s)+(https?:[\S]+)(\s)+/',$html,$matches)){
-			$html = $matches[1].'<a style="color:'.$color.'" href="'.$matches[2].'">'.$matches[2].'</a>'.$matches[3];
+			$html = $matches[1].'<a style="color:'.$color.'" href="'.$matches[2].'">'.preg_replace('/https?:\/\//','',$matches[2]).'</a>'.$matches[3];
 		}
 		// Headers/titles
 		elseif(preg_match('/^([\=]{1,5}) (.+)$/',$html,$matches)){
@@ -282,7 +264,13 @@ class CardElement{
 				$html = '<a style="color:'.$card_color.'" href="[IMAGE_URL]'.$matches[1].'">'.$matches[1].'</a>';
 		}
 		
-		return array('html_code' => $html, 'multiple_line' => $multiple_line, 'closure_tag' => $closure_tag);
+		if($need_string_cleaning){
+			// parse markdown
+			$parsedown = new Parsedown();
+			$html = $parsedown->parse($html);
+		}
+		
+		return array('html_code' => $html, 'multiple_line' => $multiple_line, 'closure_tag' => $closure_tag, 'coding_language' => '');
 	}
 }
 ?>
