@@ -163,7 +163,7 @@ class ActionHome extends Controller{
 
 					// returns files
 					$card = CardStore::get($card_name);
-					$this->assign('files', $card->files);
+					$this->assign("card", $card);
 					$body = $this->fetch_view("element.file_set.tpl");
 					$result->body = $body;
 				}

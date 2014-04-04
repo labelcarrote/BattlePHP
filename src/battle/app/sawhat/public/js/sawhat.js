@@ -66,12 +66,13 @@ $(document).ready(function(){
 	});
 	
 	// IMAGE PREVIEW //
-	$('.files').on('click','.image_link',function(e){
+	$(document).on('click','.files .image_link',function(e){
 		e.preventDefault();
-		$(this).closest('.files').find('.image_preview img').attr('src',$(this).attr('href')).focus();
-		$(this).closest('.files').find('.image_preview').fadeIn(200);
+		var element = $(this).closest('.files');
+		element.find('.image_preview img').attr('src',$(this).attr('href')).focus();
+		element.find('.image_preview').fadeIn(200);
 	});
-	$('.files').on('click','.image_preview',function(){
+	$(document).on('click','.files .image_preview',function(){
 		$(this).fadeOut(200);
 	});
 })
@@ -91,6 +92,7 @@ $(window).load(function(){
 		}
 		xhr.onload = function(oEvent){
 			var result = "";
+			var percentage = 0;
 		    if (xhr.status != 200){
 		    	$(".uploadprogress p").html("Error " + xhr.status + " occurred uploading your file.");
 		    }else{
