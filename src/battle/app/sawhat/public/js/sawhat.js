@@ -155,7 +155,6 @@ $(window).load(function(){
 				editor.setValue(data.body);
 			}
 		});
-	
 	});
 
 	// Load Card Dynamically
@@ -170,7 +169,6 @@ $(window).load(function(){
 				type: 'get',
 				dataType: 'json',
 				success: function(data) {
-					/*alert(data.body);*/
 					element.after(data.body);
 					element.attr("data-action","unload")
 					element.text("( unload )")
@@ -182,6 +180,11 @@ $(window).load(function(){
 			element.attr("data-action","load");
 			element.text("( load )")
 		}
+	});
+
+	// Toggle Content Width
+	$('body').on('click','#toggle_width',function(e){
+		$('.content').toggleClass("width_constraint");
 	});
 
 });
