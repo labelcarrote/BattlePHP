@@ -29,7 +29,11 @@ require_once('config/config.php');
 function autoloadcore($classname) {
 	if((@include_once $classname.'.class.php') === false) {
 		// try other naming convention
-		include_once $classname.'.php';
+		if((@include_once $classname.'.class.php') === false) {
+			// and try again for fu***g Smarty sh**y naming convention
+			include_once strtolower($classname).'.php';
+		}
+		
 	}
 }
     
