@@ -120,7 +120,7 @@ class ActionHome extends Controller{
 				}
 			}else{
 				// TEMP FIX for wrong get_params() behavior
-				$card_name = (isset($_GET['controller']) || $_GET['controller'] == null) 
+				$card_name = (isset($_GET['controller']) || (array_key_exists('controller',$_GET) && $_GET['controller'] === null)) 
 					? $params['card_name'] 
 					: ConfigurationSawhat::DEFAULT_CARD_NAME;
 				$ass_card = CardStore::get($card_name);
