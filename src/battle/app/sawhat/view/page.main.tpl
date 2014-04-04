@@ -17,7 +17,9 @@
 		<script type="text/javascript" src="{$root_url}lib/prism/prism.js"></script>
 	</head>
 	<body>
-		{include file=$content}
+		<div id="super_wrapper">
+			{include file=$content}
+		</div>
 		<script type="text/javascript" src="{$current_app_url}public/js/sawhat.js"></script>
 	</body>
 </html>
