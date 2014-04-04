@@ -28,12 +28,8 @@ require_once('config/config.php');
 // include core in autoload
 function autoloadcore($classname) {
 	if((@include_once $classname.'.class.php') === false) {
-		// try other naming convention
-		if((@include_once $classname.'.class.php') === false) {
-			// and try again for fu***g Smarty sh**y naming convention
-			include_once strtolower($classname).'.php';
-		}
-		
+		// try again for fu***g Smarty sh**y naming convention
+		include_once strtolower($classname).'.php';
 	}
 }
     
