@@ -1,6 +1,6 @@
 <?php
 /*
- * Main configuration table $GLOBAL_CONF
+ * Main configuration
  *
  * Notes :
  * - path are relative to the project root web folder (the php entry point, index.php)
