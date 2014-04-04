@@ -8,6 +8,7 @@ ini_set('default_charset', 'UTF-8');
 ini_set('arg_separator.output','&amp;' );
 
 // set include path
+ini_set('include_path', './');
 $include_path = array(
 	'core/',
 	'lib/smarty/sysplugins/',

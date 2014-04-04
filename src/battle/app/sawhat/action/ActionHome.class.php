@@ -120,7 +120,9 @@ class ActionHome extends Controller{
 				}
 			}else{
 				// TEMP FIX for wrong get_params() behavior
-				$card_name = (isset($_GET['controller'])) ? $params['card_name'] : ConfigurationSawhat::DEFAULT_CARD_NAME;
+				$card_name = (isset($_GET['controller']) || $_GET['controller'] == null) 
+					? $params['card_name'] 
+					: ConfigurationSawhat::DEFAULT_CARD_NAME;
 				$ass_card = CardStore::get($card_name);
 				$this->assign('card',$ass_card);
 				$this->display_page('section.card.tpl');

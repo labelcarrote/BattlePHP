@@ -182,6 +182,7 @@ $(window).load(function(){
 		}
 	});
 
+	// Toggle Content Width
 	function init_width_mode(){
 		var element = $('#toggle_width');
 		var width_mode = (localStorage["width_mode"] != undefined)
@@ -193,8 +194,6 @@ $(window).load(function(){
 			$('.content').addClass("width_constraint");
 		localStorage["width_mode"] = width_mode;
 	}
-
-	// Toggle Content Width
 	$('body').on('click','#toggle_width',function(e){
 		e.preventDefault();
 		var element = $(this);
