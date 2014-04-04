@@ -48,9 +48,11 @@ class Request{
 	 * $params = get_params("/@username/rien/@projectname") // -> url = truc/jon/rien/poneysize
 	 * echo $params["username"]; // jon !
 	 * echo $params["projectname"]; // poneysize !
+	 *
+	 * TODO : remove last "/" if exist before explode
+	 * TODO : CLARIFY parameters shift in mono / multi app scenario
 	 */
 	public static function get_params($pattern){
-		// TODO: remove last "/" if exist before explode
 		$result = false;
 		$params = explode('/',$_SESSION['param']);
 		$expected_params = explode('/',$pattern);

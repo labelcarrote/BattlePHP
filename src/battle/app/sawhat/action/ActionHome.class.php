@@ -1,4 +1,5 @@
 <?php
+require_once 'app/sawhat/config/config_sawhat.php';
 require_once 'app/sawhat/model/CardFactory.class.php';
 require_once 'app/sawhat/model/CardStore.class.php';
 require_once 'core/storage/Uploader.class.php';
@@ -6,10 +7,6 @@ require_once 'core/auth/AuthHelper.class.php';
 require_once 'core/model/AjaxResult.class.php';
 
 // SAWHAT main controller
-// TODO : 
-// - add a ajax method to get a specific page (with edit feature?)
-// - + add some client side / js for inplace open/edit
-
 class ActionHome extends Controller{
 
 	// Display the home page containing the home card if it exists, 
@@ -23,7 +20,7 @@ class ActionHome extends Controller{
 			$submit_action = $_POST['submit'];
 			switch ($submit_action) {
 				case 'save' : {
-					$card_name = Request::isset_or($_POST['name'], "home");
+					$card_name = Request::isset_or($_POST['name'], ConfigurationSawhat::DEFAULT_CARD_NAME);
 					$card_color = Request::isset_or($_POST['color'], Card::DEFAULT_COLOR);
 					$card_lines = Request::isset_or($_POST['card'], "");
 					$is_private = isset($_POST['is_private']);
@@ -115,6 +112,7 @@ class ActionHome extends Controller{
 			return;
 		}
 		elseif($params = Request::get_params("@card_name")){
+			var_dump($_GET);
 			if($params['card_name'] == 'all_cards'){
 				$ass_cards = CardStore::get_all();
 				if(!empty($ass_cards)){
@@ -122,14 +120,16 @@ class ActionHome extends Controller{
 					$this->display_page('section.card.tpl');
 				}
 			}else{
-				$ass_card = CardStore::get($params['card_name']);
+				// TEMP FIX for wrong get_params() behavior
+				$card_name = (isset($_GET['controller'])) ? $params['card_name'] : ConfigurationSawhat::DEFAULT_CARD_NAME;
+				$ass_card = CardStore::get($card_name);
 				$this->assign('card',$ass_card);
 				$this->display_page('section.card.tpl');
 			}
 			return;
 		}
 
-		$ass_card = CardStore::get("home");
+		$ass_card = CardStore::get(ConfigurationSawhat::DEFAULT_CARD_NAME);
 		if($ass_card->exists){
 			$this->assign('card',$ass_card);
 		}else{
