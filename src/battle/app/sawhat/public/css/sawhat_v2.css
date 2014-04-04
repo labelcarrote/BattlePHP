@@ -71,6 +71,13 @@ img{
     max-width: 100%;
 }
 
+*:not(pre) > code {
+	background: #eee;
+	border: 1px solid #ccc;
+	vertical-align: middle;
+	padding: 0.2em;
+}
+
 /* "One Liners" */
 .hidden{ display: none; }
 .hidden_background{ background-color: transparent !important; }
