@@ -182,9 +182,37 @@ $(window).load(function(){
 		}
 	});
 
+	function init_width_mode(){
+		var element = $('#toggle_width');
+		var width_mode = (localStorage["width_mode"] != undefined)
+			? localStorage["width_mode"]
+			: element.attr("data-width-mode");
+		if(width_mode === "stretch")
+			$('.content').removeClass("width_constraint");
+		else
+			$('.content').addClass("width_constraint");
+		localStorage["width_mode"] = width_mode;
+	}
+
 	// Toggle Content Width
 	$('body').on('click','#toggle_width',function(e){
-		$('.content').toggleClass("width_constraint");
+		e.preventDefault();
+		var element = $(this);
+		var width_mode = (localStorage["width_mode"] != undefined)
+			? localStorage["width_mode"]
+			: element.attr("data-width-mode");
+		if(width_mode === "stretch"){
+			$('.content').addClass("width_constraint");
+			width_mode = "constraint";
+			element.attr("data-width-mode",width_mode);
+		}else{
+			$('.content').removeClass("width_constraint");
+			width_mode = "stretch";
+			element.attr("data-width-mode",width_mode);
+		}
+		localStorage["width_mode"] = width_mode;
 	});
+
+	init_width_mode();
 
 });

@@ -32,7 +32,7 @@
 		<br>
 		<b class="bigger">&rsaquo;&nbsp;</b><a href="{$current_app_virtual_url}">Home</a>
 		<br>
-		<b class="bigger">&rsaquo;&nbsp;</b><a id="toggle_width" href="#" data-width-mode="normal">Toggle Width</a>
+		<b class="bigger">&rsaquo;&nbsp;</b><a id="toggle_width" href="#" data-width-mode="stretch">Toggle Width</a>
 	</div>
 	<form method="POST" class="right">
 		<input type="text" class="input-medium" name="search" placeholder="search one word only" value="" required="required" pattern="[a-zA-Z0-9\-]+">
