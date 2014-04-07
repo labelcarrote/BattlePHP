@@ -5,7 +5,7 @@
 ini_set('default_charset', 'UTF-8');
 
 // set separator to &amp; instead of & (W3C)
-ini_set('arg_separator.output','&amp;' );
+ini_set('arg_separator.output','&amp;');
 
 // set include path
 $include_path = array(

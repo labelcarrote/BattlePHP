@@ -1,6 +1,5 @@
 <div class="image_preview hidden">
-	<img alt="image preview" src="" />
-	<div class="vertical_align_ghost"></div>
+	<img alt="image preview" src="" class="verticaly_centered" />
 </div>
 <ul>
 	{foreach from=$card->files item=file}

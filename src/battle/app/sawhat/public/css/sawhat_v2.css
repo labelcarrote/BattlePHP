@@ -86,7 +86,6 @@ img{
 .right{float: right;}
 .align_right{text-align: right;}
 .align_middle{vertical-align: middle;}
-.vertical_align_ghost { display: inline-block;height: 100%;width: 0;vertical-align: middle; }
 .darker{ background: rgba(0, 0, 0, 0.1); }
 .darker_text{ color: rgba(0, 0, 0, 0.3); }
 .lighter_text{ color: rgba(255,255,255, 0.6); }
