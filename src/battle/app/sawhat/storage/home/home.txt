@@ -1,14 +1,17 @@
 home
-lastedit: 20140404_1804
+lastedit: 20140408_1704
 color: #F90
 
-This is a wiki card containing other wiki cards.
+This is a wiki card containing other wiki cards.  
 You can edit this card by pressing the EDIT button at the bottom!
-Want to go back to battle.php ? http://labelcarrote.com/battle
+Want to go back to battle.php ? http://labelcarrote.com/battle  
 #help
+
 #all_cards
+
 #sawhat
 
-[sawhat]
 
-[webdev]
+[#sawhat]
+
+[#webdev]
