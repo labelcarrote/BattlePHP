@@ -98,6 +98,7 @@ class ActionHome extends Controller{
 					}else{
 						$ass_card = CardStore::get($params['card_name']);
 						$this->assign('card',$ass_card);
+						$this->assign('logged',$logged);
 						$result->body = $this->fetch_view('element.card.v2.tpl');
 					}
 					echo $result->to_json();
