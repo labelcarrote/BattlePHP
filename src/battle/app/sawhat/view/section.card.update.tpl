@@ -1,9 +1,10 @@
 <div class="content line">
-	<section class="unit size1of1 white">
+	<section class="unit size1of1 white" {if $card->exists}id="{$card->name}"{/if}>
+		{if $card->exists}<style>{$card->style_definition}</style>{/if}
 		<form id="card_edit_form" class="form-inline" method="POST" enctype="multipart/form-data" action="{$current_app_virtual_url}">
 			<input type="hidden" name="name" value="{$card->name}"/>
 			<fieldset>
-				<legend class="banner" {if $card->exists}style="background-color:{$card->color}"{/if}>
+				<legend class="banner">
 					<h1 class="lighter_text">
 						<i>{if $card->exists}Update{else}Create{/if}</i> <a href="{$current_app_virtual_url}{$card->name}" class="white_text">{$card->display_name}</a>
 					</h1>

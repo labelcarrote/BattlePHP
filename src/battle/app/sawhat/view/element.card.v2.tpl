@@ -1,4 +1,4 @@
-<div class="sawhat">
+<div class="sawhat" {if isset($card)}id="{$card->name}"{/if}>
 	{if !isset($card)}
 	<div class="banner">
 		<div class="left">
@@ -17,8 +17,9 @@
 		</div>
 	</div>
 	{else}
+	<style>{$card->style_definition}</style>
 	{include file="element.card.banner.tpl" card=$card}
-	<div style="border-color:{$card->color};" class="things">
+	<div class="things">
 		{if !$logged and $card->is_private}
 		<form id="sawhatlogin" method="post" enctype="multipart/form-data">
 			<input class="input-large" type="password" id="password" name="password" value="" size="20" /><br/>
@@ -26,19 +27,7 @@
 		</form> 
 		{else}
 <div>
-{foreach from=$card->elements item=element}
-{if isset($element->cards) && count($element->cards) > 0}
-<div class="column_container">
-{foreach from=$element->cards item=cardinside}
-<div class="unit size1of{count($element->cards)}">
-<div class="darker include">
-{include file="element.card.v2.tpl" card=$cardinside}
-</div>
-</div>
-{/foreach}
-</div>
-{else}{$element->html}{/if}
-{/foreach}
+{$card->html}
 <div class="clearer"></div>
 </div>
 		</div>
@@ -49,7 +38,7 @@
 			</div>
 			<ul>
 			{foreach from=$card->files item=file}
-				<li><a style="color:{$card->color}" href="{$root_url}{$file->fullname}" class="image_link">{$file->name}</a></li>
+				<li><a href="{$root_url}{$file->fullname}" class="image_link">{$file->name}</a></li>
 			{/foreach}
 			</ul>
 		</div>

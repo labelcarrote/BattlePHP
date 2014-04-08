@@ -1,4 +1,4 @@
-<div class="banner" {if $card->exists}style="background-color:{$card->color}"{/if}>
+<div class="banner">
 	<h{$card->recursive_level+1}>
 	{if !$card->is_recursive}
 		<a href="{$current_app_virtual_url}" class="lighter_text">

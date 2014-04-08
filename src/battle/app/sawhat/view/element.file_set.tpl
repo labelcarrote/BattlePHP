@@ -4,7 +4,7 @@
 <ul>
 	{foreach from=$card->files item=file}
 	<li>
-		<a style="color:{$card->color}" href="{$root_url}{$file->fullname}" title="{$file->name}" class="image_link left block">@{$file->name}</a>
+		<a href="{$root_url}{$file->fullname}" title="{$file->name}" class="image_link left block">@{$file->name}</a>
 		<span class="image_size left block">{$file->human_readable_size}</span>
 		<div class="clearer_left"></div>
 	</li>
