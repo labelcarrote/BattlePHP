@@ -1,0 +1,25 @@
+help__header
+lastedit: 20140326_1703
+color: #f90
+
+You can add header using this markdown syntax:
+    Header with border:
+        ===== header text =====
+        ===== header text
+    Header without border:
+        ----- header text -----
+        ----- header text
+
+The header level depends on the number of &quot;=&quot; or &quot;-&quot; sign you add: 5 represent a &quot;h2&quot;, 1 is for &quot;h6&quot;. &quot;h5&quot; and &quot;h6&quot; can only be written with &quot;=&quot; signs but don't worry, you shouldn't use them anyway.
+&quot;h1&quot; is the card title.
+Note that the header level increase if you insert a card in an other card.
+
+Here what headers will look like:
+===== H2
+----- H2
+==== H3
+---- H3
+=== H4
+--- H4
+== H5
+= H6

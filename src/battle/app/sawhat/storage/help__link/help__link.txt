@@ -1,0 +1,12 @@
+help__link
+lastedit: 20140407_1604
+color: #f90
+
+You can make link in different ways:
+This is [an example](http://example.com/ &quot;Title&quot;) inline link.
+[This link](http://example.net/) has no title attribute.
+
+2- [url]http://link[/url]
+3- [url=http://link]Link[/url]
+
+je veux cr&eacute;er un lien http://www.banane.com c'est cool

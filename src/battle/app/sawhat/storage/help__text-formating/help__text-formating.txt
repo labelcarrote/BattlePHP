@@ -1,0 +1,25 @@
+help__text-formating
+lastedit: 20140404_0904
+color: #f90
+
+You can format text using those classic bbcode syntax:
+    [b]bold text[/b]
+    [i]italic text[/i]
+    [u]underlined text[/u]
+    [s]stroke text[/s]
+Or those markdown syntax:
+    *emphase text*
+    _emphase text_
+    **strong text**
+    __strong text__
+    ~~stroke text~~
+
+Here is what it's going to look like:
+[b]bold[/b]
+[u]underlined[/u]
+[s]stroke[/s]
+[i]italic[/i]
+[b][i][u]bold italic underlined[/u][/i][/b]
+*emphased*
+__strong__
+~~stroke~~
