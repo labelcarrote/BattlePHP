@@ -96,7 +96,6 @@ class Card{
 
 		// @TODO : need cleaning ?
 		//$this->html = stripslashes(strip_tags($this->html));
-		
 	}
 	
 	private function get_style_definition(){
@@ -254,15 +253,15 @@ class CardElement{
 			$html = $matches[1].'<b>'.$html['html_code'].'</b>'.$matches[3];
 		}
 		// List
-		if(preg_match('/^(\d+\-|\-) (.+)$/',$html,$matches)){
-			$html = $this->bbcode_to_html(trim($matches[2], '- '),$recursive_level);
-			$html = '<li>'.$html['html_code'].'</li>';
-			$multiple_line = true;
-			$closure_tag = $matches[1] !== '-' ? 'ol' : 'ul';
-		}
+		//if(preg_match('/^(\d+\-|\-) (.+)$/',$html,$matches)){
+		//	$html = $this->bbcode_to_html(trim($matches[2], '- '),$recursive_level);
+		//	$html = '<li>'.$html['html_code'].'</li>';
+		//	$multiple_line = true;
+		//	$closure_tag = $matches[1] !== '-' ? 'ol' : 'ul';
+		//}
 		// Images (2/2)
 		elseif(preg_match('/^(https?:.+\.(?:png|jpg|jpe?g|gif))?$/',$html,$matches)){
-			$html = '<img src="[ROOT_URL]'.$matches[1].'" alt="image"/>';
+			$html = '<img src="[ROOT_URL]'.$matches[1].'" alt="image" />';
 		}
 		// Headers/titles
 		elseif(preg_match('/^([\=]{1,5}) (.+)$/',$html,$matches)){
