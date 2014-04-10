@@ -238,14 +238,14 @@ class CardElement{
 			$html = '<img src="[ROOT_URL]'.$matches[1].'" alt="image" />';
 		}
 		// Headers/titles
-		elseif(preg_match('/^([\=]{1,5}) (.+)$/',$html,$matches)){
+		elseif(preg_match('/^([\=]{1,}) (.+)$/',$html,$matches)){
 			$header_level = (7-count(str_split($matches[1]))) + $recursive_level;
-			$tag_name = $header_level <= 6 ? 'h'.$header_level : 'div';
+			$tag_name = $header_level <= 6 ? 'h'.$header_level : 'h6';
 			$html = '<'.$tag_name.'>'.trim($matches[2], '= ').'</'.$tag_name.'>';
 		}
 		elseif(preg_match('/^([\-]{2,}) (.+)$/',$html,$matches)){
 			$header_level = 7-count(str_split($matches[1])) + $recursive_level;
-			$tag_name = $header_level < 4 ? 'h'.$header_level : 'h4';
+			$tag_name = $header_level < 5 ? 'h'.$header_level : 'h5';
 			$html = '<'.$tag_name.' class="noborder">'.trim($matches[2], '- ').'</'.$tag_name.'>';
 		}
 		// Link to card
