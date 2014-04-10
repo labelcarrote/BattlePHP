@@ -33,7 +33,8 @@ class Card{
 			if($init){
 				$this->parse_special_properties($line);
 			}else{
-				$this->text_code .= stripslashes($line);
+				$this->text_code .= $line;
+				$line = html_entity_decode($line);
 				$card_element = new CardElement($name,$line,$recursive_level);
 
 				// close multiple line tag

@@ -60,7 +60,7 @@ class CardStore{
 		$lines = "$card_name\r\nlastedit: $last_edit\r\ncolor: $color\r\n$is_private_as_string\r\n".$lines;
 		$lines = str_replace("\r\n", "\n", $lines);
 		$lines = str_replace("\r", "\n", $lines);
-		return file_put_contents($filename,$lines);
+		return file_put_contents($filename,htmlentities($lines,ENT_COMPAT,'UTF-8'));
 	}
 
 	// ---- History
