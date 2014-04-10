@@ -261,6 +261,11 @@ class CardElement{
 				$html = '<a href="[IMAGE_URL]'.$matches[1].'">'.$matches[1].'</a>';
 		}
 		
+		// replace special chars
+		$s = array('(R)','(C)','(TM)','<3');
+		$r = array('&reg;','&copy;','&trade;','&hearts;');
+		$html = str_replace($s,$r,$html);
+		
 		// Replace vars
 		$s = array('[ROOT_URL]','[IMAGE_URL]');
 		$r = array(
