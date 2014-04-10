@@ -100,7 +100,7 @@ class Card{
 	
 	private function get_style_definition(){
 		$this->style_definition =
-			'#'.$this->name.' a:not(.white_text):not(.lighter_text):not(.darker_text){color:'.$this->color.';}'
+			'#'.$this->name.' a:not(.white_text):not(.lighter_text):not(.black_text):not(.darker_text){color:'.$this->color.';}'
 			.'#'.$this->name.' h2,#'.$this->name.' h3,#'.$this->name.' h4,#'.$this->name.' .things{border-color:'.$this->color.';}'
 			.'#'.$this->name.' .banner{background-color:'.$this->color.';}'
 		;
@@ -194,7 +194,7 @@ class CardElement{
 					$view_manager->assign('logged',AuthHelper::is_authenticated());
 					$view_manager->assign('card',$included_card);
 					$banner_content = $view_manager->fetch_view('element.card.banner.tpl');
-					$this->html .= '<div class="size1of'.$column_count.' left">'.$banner_content.'</div>';
+					$this->html .= '<div class="size1of'.$column_count.' left" id="'.$included_card->name.'"><style>'.$included_card->style_definition.'</style>'.$banner_content.'</div>';
 				}
 			}
 			$this->html .= '</div>';
