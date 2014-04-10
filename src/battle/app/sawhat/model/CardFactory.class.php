@@ -229,38 +229,11 @@ class CardElement{
 		// columns
 		$html = preg_replace('/\[column=(\d)\]/', '<div class="column_$1">', $html);
 		$html = preg_replace('/\[\/column\]/', '</div>', $html);
-		// links (1/2)
-		$html = preg_replace('/\[url=(.+)\](.+)\[\/url\]/', '<a href="$1">$2</a>', $html);
-		$html = preg_replace('/\[url\](.+)\[\/url\]/', '<a href="$1">$1</a>', $html);
 		// images (1/2)
 		$html = preg_replace('/\[img=(.+)\]/', '<img src="$1" alt="" />', $html);
 		$html = preg_replace('/\[img\](.+)\[\/img\]/', '<img src="$1" alt="" />', $html);
-		// text u,i,s,b
-		if(preg_match('/(.*)\[u\](.+)\[\/u\](.*)/',$html,$matches)){
-			$html = $this->bbcode_to_html($matches[2],$recursive_level);
-			$html = $matches[1].'<u>'.$html['html_code'].'</u>'.$matches[3];
-		}
-		if(preg_match('/(.*)\[i\](.+)\[\/i\](.*)/',$html,$matches)){
-			$html = $this->bbcode_to_html($matches[2],$recursive_level);
-			$html = $matches[1].'<i>'.$html['html_code'].'</i>'.$matches[3];
-		}
-		if(preg_match('/(.*)\[s\](.+)\[\/s\](.*)/',$html,$matches)){
-			$html = self::bbcode_to_html($matches[2],$recursive_level);
-			$html = $matches[1].'<s>'.$html['html_code'].'</s>'.$matches[3];
-		}
-		if(preg_match('/(.*)\[b\](.+)\[\/b\](.*)/',$html,$matches)){
-			$html = $this->bbcode_to_html($matches[2],$recursive_level);
-			$html = $matches[1].'<b>'.$html['html_code'].'</b>'.$matches[3];
-		}
-		// List
-		//if(preg_match('/^(\d+\-|\-) (.+)$/',$html,$matches)){
-		//	$html = $this->bbcode_to_html(trim($matches[2], '- '),$recursive_level);
-		//	$html = '<li>'.$html['html_code'].'</li>';
-		//	$multiple_line = true;
-		//	$closure_tag = $matches[1] !== '-' ? 'ol' : 'ul';
-		//}
 		// Images (2/2)
-		elseif(preg_match('/^(https?:.+\.(?:png|jpg|jpe?g|gif))?$/',$html,$matches)){
+		if(preg_match('/^(https?:.+\.(?:png|jpg|jpe?g|gif))?$/',$html,$matches)){
 			$html = '<img src="[ROOT_URL]'.$matches[1].'" alt="image" />';
 		}
 		// Headers/titles
