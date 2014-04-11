@@ -245,32 +245,41 @@ class Parsedown
                     break;
 
                 case 'quote':
-
                     if ($line === '')
                     {
                         $contextData['interrupted'] = true;
-
                         continue 2;
                     }
-
                     if (preg_match('/^>[ ]?(.*)/', $line, $matches))
                     {
                         $block['content'] []= $matches[1];
-
                         continue 2;
                     }
-
                     if (empty($contextData['interrupted']))
                     {
                         $block['content'] []= $line;
-
                         continue 2;
                     }
-
                     $context = null;
-
                     break;
-
+			case 'column':
+                    if ($line === '')
+                    {
+                        $contextData['interrupted'] = true;
+                        continue 2;
+                    }
+                    if (preg_match('/^\|{1,2}[ ](.*)/', $line, $matches))
+                    {
+                        $block['content'] []= $matches[1];
+                        continue 2;
+                    }
+                    if (empty($contextData['interrupted']))
+                    {
+                        $block['content'] []= $line;
+                        continue 2;
+                    }
+                    $context = null;
+                    break;
                 case 'code':
 
                     if ($line === '')
@@ -626,31 +635,43 @@ class Parsedown
                     break;
 
                 case '>':
-
                     if (preg_match('/^>[ ]?(.*)/', $line, $matches))
                     {
                         $blocks []= $block;
-
                         $block = array(
                             'name' => 'blockquote',
                             'content type' => 'lines',
                             'content' => array(
-                                $matches[1],
-                            ),
+                                $matches[1]
+                            )
                         );
-
                         $context = 'quote';
                         $contextData = array();
-
                         continue 2;
                     }
-
                     break;
-
+			case '|':
+                    if (preg_match('/^(\|{1,2})[ ](.*)/', $line, $matches))
+                    {
+					$blocks []= $block;
+					$block = array(
+						'name' => 'div',
+						'content type' => 'lines',
+						'content' => array(
+							$matches[2]
+						),
+						'attributes' => array(
+							'class' => 'column_'.(strlen($matches[1])+1)
+						)
+					);
+					$context = 'column';
+					$contextData = array();
+					continue 2;
+                    }
+                    break;
+				
                 case '[':
-
                     $position = strpos($line, ']:');
-
                     if ($position)
                     {
                         $reference = array();
@@ -769,6 +790,7 @@ class Parsedown
                             'name' => 'hr',
                             'content' => null,
                         );
+				    $context = null;
 
                         continue 2;
                     }
@@ -877,6 +899,7 @@ class Parsedown
 
                 if ($block['content'] === null)
                 {
+				
                     $markup .= ' />';
 
                     continue;
@@ -887,41 +910,30 @@ class Parsedown
                 }
             }
 
-            switch ($block['content type'])
-            {
-                case null:
-
-                    $markup .= $block['content'];
-
-                    break;
-
-                case 'line':
-
-                    $markup .= $this->parseLine($block['content']);
-
-                    break;
-
-                case 'lines':
-
-                    $result = $this->findBlocks($block['content'], $block['name']);
-
-                    if (is_string($result)) # dense li
-                    {
-                        $markup .= $this->parseLine($result);
-
-                        break;
-                    }
-
-                    $markup .= $this->compile($result);
-
-                    break;
-
-                case 'blocks':
-
-                    $markup .= $this->compile($block['content']);
-
-                    break;
-            }
+			if(array_key_exists('content type',$block)){
+				switch ($block['content type'])
+				{
+					case null:
+						$markup .= $block['content'];
+						break;
+					case 'line':
+						$markup .= $this->parseLine($block['content']);
+						break;
+					case 'lines':
+						$result = $this->findBlocks($block['content'], $block['name']);
+						if (is_string($result)) # dense li
+						{
+							$markup .= $this->parseLine($result);
+							break;
+						}
+						$markup .= $this->compile($result);
+						break;
+					case 'blocks':
+						$markup .= $this->compile($block['content']);
+						break;
+				}
+			}
+            
 
             if (isset($block['name']))
             {
@@ -1323,7 +1335,7 @@ class Parsedown
     );
 
     private static $specialCharacters = array(
-        '\\', '`', '*', '_', '{', '}', '[', ']', '(', ')', '>', '#', '+', '-', '.', '!',
+        '\\', '`', '*', '_', '{', '}', '[', ']', '(', ')', '>', '|', '#', '+', '-', '.', '!',
     );
 
     private static $textLevelElements = array(

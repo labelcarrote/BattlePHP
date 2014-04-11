@@ -61,6 +61,15 @@ h3,h4 {
 h4 {
 	border-style: dashed;
 }
+hr {
+	height: 1px;
+	color: #ccc;
+	background: #ccc;
+	border: 0;
+	width: 96%;
+	margin: 0.5em auto;
+	break-before: avoid;
+}
 a{ text-decoration: none; color: #999; }
 a:hover{ color: #999; color: rgba(0,0,0,0.3); }
 article{ padding: 0; }
@@ -76,6 +85,9 @@ img{
 	border: 1px solid #ccc;
 	vertical-align: middle;
 	padding: 0.2em;
+}
+p {
+	margin: 0.5em auto;
 }
 
 /* "One Liners" */

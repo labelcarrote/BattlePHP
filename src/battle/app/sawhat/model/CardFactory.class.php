@@ -85,7 +85,7 @@ class Card{
 							.'</div>'
 						;
 					}
-				$this->html .= '</div>';
+				$this->html .= '<div class="clearer"></div></div>';
 			} else {
 				$this->html .= $element->html;
 			}
@@ -166,7 +166,7 @@ class CardElement{
 	public function __construct($card_name, $line, $recursive_level = 0){
 		// Empty line
 		if(trim($line) === ''){
-			$this->html = '<br>';
+			$this->html = '';
 			return;
 		}
 		
@@ -227,9 +227,6 @@ class CardElement{
 		}
 		
 		// CLASSIC BBCODE
-		// columns
-		$html = preg_replace('/\[column=(\d)\]/', '<div class="column_$1">', $html);
-		$html = preg_replace('/\[\/column\]/', '</div>', $html);
 		// images (1/2)
 		$html = preg_replace('/\[img=(.+)\]/', '<img src="$1" alt="" />', $html);
 		$html = preg_replace('/\[img\](.+)\[\/img\]/', '<img src="$1" alt="" />', $html);
