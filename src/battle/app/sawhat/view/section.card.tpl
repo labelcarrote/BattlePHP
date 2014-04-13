@@ -2,7 +2,8 @@
 <div class="content line">
 	{foreach from=$cards item=card}
 	<section class="unit size1of3">
-		<div class="smallermargin">
+		<div class="smallermargin" id="{$card->name}">
+			<style>{$card->style_definition}</style>
 			{include file="element.card.banner.tpl"}
 		</div>
 	</section>

@@ -33,7 +33,8 @@ class Card{
 			if($init){
 				$this->parse_special_properties($line);
 			}else{
-				$this->text_code .= stripslashes($line);
+				$this->text_code .= $line;
+				$line = html_entity_decode($line);
 				$card_element = new CardElement($name,$line,$recursive_level);
 
 				// close multiple line tag
@@ -96,12 +97,11 @@ class Card{
 
 		// @TODO : need cleaning ?
 		//$this->html = stripslashes(strip_tags($this->html));
-		
 	}
 	
 	private function get_style_definition(){
 		$this->style_definition =
-			'#'.$this->name.' a:not(.white_text):not(.lighter_text):not(.darker_text){color:'.$this->color.';}'
+			'#'.$this->name.' a:not(.white_text):not(.lighter_text):not(.black_text):not(.darker_text){color:'.$this->color.';}'
 			.'#'.$this->name.' h2,#'.$this->name.' h3,#'.$this->name.' h4,#'.$this->name.' .things{border-color:'.$this->color.';}'
 			.'#'.$this->name.' .banner{background-color:'.$this->color.';}'
 		;
@@ -195,7 +195,7 @@ class CardElement{
 					$view_manager->assign('logged',AuthHelper::is_authenticated());
 					$view_manager->assign('card',$included_card);
 					$banner_content = $view_manager->fetch_view('element.card.banner.tpl');
-					$this->html .= '<div class="size1of'.$column_count.' left">'.$banner_content.'</div>';
+					$this->html .= '<div class="size1of'.$column_count.' left" id="'.$included_card->name.'"><style>'.$included_card->style_definition.'</style>'.$banner_content.'</div>';
 				}
 			}
 			$this->html .= '</div>';
@@ -230,49 +230,22 @@ class CardElement{
 		// columns
 		$html = preg_replace('/\[column=(\d)\]/', '<div class="column_$1">', $html);
 		$html = preg_replace('/\[\/column\]/', '</div>', $html);
-		// links (1/2)
-		$html = preg_replace('/\[url=(.+)\](.+)\[\/url\]/', '<a href="$1">$2</a>', $html);
-		$html = preg_replace('/\[url\](.+)\[\/url\]/', '<a href="$1">$1</a>', $html);
 		// images (1/2)
 		$html = preg_replace('/\[img=(.+)\]/', '<img src="$1" alt="" />', $html);
 		$html = preg_replace('/\[img\](.+)\[\/img\]/', '<img src="$1" alt="" />', $html);
-		// text u,i,s,b
-		if(preg_match('/(.*)\[u\](.+)\[\/u\](.*)/',$html,$matches)){
-			$html = $this->bbcode_to_html($matches[2],$recursive_level);
-			$html = $matches[1].'<u>'.$html['html_code'].'</u>'.$matches[3];
-		}
-		if(preg_match('/(.*)\[i\](.+)\[\/i\](.*)/',$html,$matches)){
-			$html = $this->bbcode_to_html($matches[2],$recursive_level);
-			$html = $matches[1].'<i>'.$html['html_code'].'</i>'.$matches[3];
-		}
-		if(preg_match('/(.*)\[s\](.+)\[\/s\](.*)/',$html,$matches)){
-			$html = self::bbcode_to_html($matches[2],$recursive_level);
-			$html = $matches[1].'<s>'.$html['html_code'].'</s>'.$matches[3];
-		}
-		if(preg_match('/(.*)\[b\](.+)\[\/b\](.*)/',$html,$matches)){
-			$html = $this->bbcode_to_html($matches[2],$recursive_level);
-			$html = $matches[1].'<b>'.$html['html_code'].'</b>'.$matches[3];
-		}
-		// List
-		if(preg_match('/^(\d+\-|\-) (.+)$/',$html,$matches)){
-			$html = $this->bbcode_to_html(trim($matches[2], '- '),$recursive_level);
-			$html = '<li>'.$html['html_code'].'</li>';
-			$multiple_line = true;
-			$closure_tag = $matches[1] !== '-' ? 'ol' : 'ul';
-		}
 		// Images (2/2)
-		elseif(preg_match('/^(https?:.+\.(?:png|jpg|jpe?g|gif))?$/',$html,$matches)){
-			$html = '<img src="[ROOT_URL]'.$matches[1].'" alt="image"/>';
+		if(preg_match('/^(https?:.+\.(?:png|jpg|jpe?g|gif))?$/',$html,$matches)){
+			$html = '<img src="[ROOT_URL]'.$matches[1].'" alt="image" />';
 		}
 		// Headers/titles
-		elseif(preg_match('/^([\=]{1,5}) (.+)$/',$html,$matches)){
+		elseif(preg_match('/^([\=]{1,}) (.+)$/',$html,$matches)){
 			$header_level = (7-count(str_split($matches[1]))) + $recursive_level;
-			$tag_name = $header_level <= 6 ? 'h'.$header_level : 'div';
+			$tag_name = $header_level <= 6 ? 'h'.$header_level : 'h6';
 			$html = '<'.$tag_name.'>'.trim($matches[2], '= ').'</'.$tag_name.'>';
 		}
 		elseif(preg_match('/^([\-]{2,}) (.+)$/',$html,$matches)){
 			$header_level = 7-count(str_split($matches[1])) + $recursive_level;
-			$tag_name = $header_level < 4 ? 'h'.$header_level : 'h4';
+			$tag_name = $header_level < 5 ? 'h'.$header_level : 'h5';
 			$html = '<'.$tag_name.' class="noborder">'.trim($matches[2], '- ').'</'.$tag_name.'>';
 		}
 		// Link to card
@@ -287,6 +260,11 @@ class CardElement{
 			else
 				$html = '<a href="[IMAGE_URL]'.$matches[1].'">'.$matches[1].'</a>';
 		}
+		
+		// replace special chars
+		$s = array('(R)','(C)','(TM)','<3');
+		$r = array('&reg;','&copy;','&trade;','&hearts;');
+		$html = str_replace($s,$r,$html);
 		
 		// Replace vars
 		$s = array('[ROOT_URL]','[IMAGE_URL]');

@@ -1,25 +1,45 @@
 help__header
-lastedit: 20140326_1703
-color: #f90
+lastedit: 20140410_1604
+color: #ff6523
 
-You can add header using this markdown syntax:
-    Header with border:
-        ===== header text =====
-        ===== header text
-    Header without border:
-        ----- header text -----
-        ----- header text
+There's plenty of way writing a header.  
+*Setext style* is obtained by appending `=` or `-` signs in a the line above the header text:
+    Header 1
+    ========
+    Header 2
+    --------
 
-The header level depends on the number of &quot;=&quot; or &quot;-&quot; sign you add: 5 represent a &quot;h2&quot;, 1 is for &quot;h6&quot;. &quot;h5&quot; and &quot;h6&quot; can only be written with &quot;=&quot; signs but don't worry, you shouldn't use them anyway.
-&quot;h1&quot; is the card title.
-Note that the header level increase if you insert a card in an other card.
+*Atx style* uses 1 to 6 `#` character in the front of your header text to define H1 to H6 header levels:
+    # Header 1
+    ## Header 2
+    ###### Header 6
 
-Here what headers will look like:
-===== H2
------ H2
-==== H3
----- H3
-=== H4
---- H4
-== H5
-= H6
+*Sawhat style* let you add two different styled headers by appending `=` and `-` signs in font of the header text in a *reversed Atx style* way:
+    ===== Underlined header 2
+    ----- Normal header 2
+    ==== Underlined header 3
+    ---- Normal header 3
+    = Underlined header 6
+    Normal header 6 cannot be written with - signs.
+
+**_Side notes_**  
+H1 level shouldn't be used in *Sawhat* as the card title is already a first level header.  
+For the sake of the writers please choose a syntax and stick to it (we recommend the **Sawhat style**).  
+Header level increase if you insert a card in an other card.
+Please avoid H5 and H6 header levels because they shouldn't exist at all, if you have more than 4 level of header in your document you should think about refactoring it and/or subdivide your card.  
+In *Atx* and *Sawhat* syntax you can &quot;close&quot; your headers like this `==== H3 ====`, some likes to have it bigger.
+
+
+**_Header examples_**
+[column=3]
+====== H1 ======
+===== H2 =====
+----- H2 -----
+==== H3 ====
+---- H3 ----
+=== H4 ===
+--- H4 ---
+== H5 ==
+-- H5 --
+= H6 =
+[/column]
