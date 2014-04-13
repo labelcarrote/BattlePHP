@@ -2,59 +2,12 @@ help
 lastedit: 20140410_1504
 color: #ff6523
 
-<<<<<<< HEAD
-Basic text sh*t:  
-[b]bold[/b]  
-*bold 2*  
-[u]underlined[/u]  
-[s]stroke[/s]  
-[i]italic[/i]  
-_italic 2_  
-[b][i][u]bold italic underlined[/u][/i][/b]  
-http://link.com   
- http://link.dd 
-- http://link.dd
-- LINK http://link
-
-===== a 3 columns layout
-[column=3]
-==== header examples ====
-===== H2 =====
-===== H2 (bis)
-==== H3 ====
-==== H3 (bis)
-=== H4 ===
-=== H4 (bis)
-== H5 ==
-== H5 (bis)
-= H6 =
-= H6 (bis)
-==== How to link
-=== ... and make list
-http://link.com   
- http://link.dd 
-- http://link.dd
-- LINK http://link
-1- LINK http://link 
-2- [url]http://link[/url]
-3- [url=http://link]Link[/url]
-#help
-==== this column has 2 columns
-[column=2]
-=== image from url
-[img]http://labelcarrote.com/image/bigcarrote.png[/img]
-=== internal image
-@c5b9a399d63afdf7f44e03c9ec35009d45d6708d_m.gif
-[/column]
-[/column]
-=======
 ===== Main principles 
 [**Sawhat**](https://github.com/labelcarrote/BattlePHP) is a card based wiki.  
 As it is a wiki, you can edit everything the way you like for everyone but unlike other *classic* wiki, the card based interface means there's no hierarchical link between cards. It's more like you'd have a gigantic post-it (R) wall with a search functionality.
 
 ===== Syntax
 Syntax is based on [markdown](https://daringfireball.net/projects/markdown) with some adjustments.
->>>>>>> 0ac2f4dbdf77d05db4b899271eda0352f46c5fad
 
 [#help__text-formating|#help__link]
 [#help__header|#help__layout]
