@@ -1,5 +1,5 @@
 webdev
-lastedit: 20140321_1203
+lastedit: 20140408_1704
 color: #2b2b2b
 
 [column=2]
@@ -19,6 +19,7 @@ color: #2b2b2b
 
 ===== Icons =====
 https://www.iconfinder.com/
+http://www.iconfinder.com/
 
 ===== Design =====
 - Dribble http://dribbble.com

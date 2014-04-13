@@ -1,5 +1,5 @@
 help__link
-lastedit: 20140407_1604
+lastedit: 20140408_1704
 color: #f90
 
 You can make link in different ways:
@@ -10,3 +10,5 @@ This is [an example](http://example.com/ &quot;Title&quot;) inline link.
 3- [url=http://link]Link[/url]
 
 je veux cr&eacute;er un lien http://www.banane.com c'est cool
+
+http://www.banane.com

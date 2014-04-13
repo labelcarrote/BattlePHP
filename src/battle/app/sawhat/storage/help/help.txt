@@ -10,6 +10,10 @@ Basic text sh*t:
 [i]italic[/i]  
 _italic 2_  
 [b][i][u]bold italic underlined[/u][/i][/b]  
+http://link.com   
+ http://link.dd 
+- http://link.dd
+- LINK http://link
 
 ===== a 3 columns layout
 [column=3]
@@ -26,10 +30,11 @@ _italic 2_
 = H6 (bis)
 ==== How to link
 === ... and make list
-- http://link
+http://link.com   
+ http://link.dd 
+- http://link.dd
 - LINK http://link
-- LINK http://link 
-1- LINK http://link
+1- LINK http://link 
 2- [url]http://link[/url]
 3- [url=http://link]Link[/url]
 #help
