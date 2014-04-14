@@ -1,5 +1,5 @@
-<div class="content line">
-	<section class="unit size1of1 white" {if $card->exists}id="{$card->name}"{/if}>
+<div class="content">
+	<section class="white" {if $card->exists}id="{$card->name}"{/if}>
 		{if $card->exists}<style>{$card->style_definition}</style>{/if}
 		<form id="card_edit_form" class="form-inline" method="POST" enctype="multipart/form-data" action="{$current_app_virtual_url}">
 			<input type="hidden" name="name" value="{$card->name}"/>
@@ -12,7 +12,7 @@
 				<div class="padding">
 					<!--  Color for headers, links and horizontal bar  -->
 					<span class="help-inline">Color : </span>
-					<input type="text"class="input-large" name="color" placeholder="ex: #FF9900" value="{if $card->exists}{$card->color}{/if}">
+					<input type="text" class="input-large" name="color" placeholder="ex: #FF9900" value="{if $card->exists}{$card->color}{/if}">
 					<div class="color_picker hidden">
 						<div class="color_picker_item" data-color="#000"></div>
 						<div class="color_picker_item" data-color="#fff"></div>
@@ -35,8 +35,10 @@
 					</label>
 				</div>
 				<!-- TEXT -->
-				<div id="editor_container">
+				<div id="editor-mask">
+					<div id="editor-container">
 					<pre id="editor">{$card->text_code}</pre>
+					</div>
 				</div>
 				<!-- 
 				<textarea class="hidden" type="text" name="card"></textarea>
