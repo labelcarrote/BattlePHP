@@ -1,31 +1,28 @@
 help__layout
-lastedit: 20140410_1604
+lastedit: 20140411_1504
 color: #ff6523
 
-Text (or other elements, but typicaly text) can be cut and displayed as columns. Just wrap text with `[column=2][/column]` or `[column=3][/column]` (yup! old *bbcode style* syntax) for dividing it by 2 or 3 columns (obviously).  
+Text (or other elements, but typicaly text) can be cut and displayed as columns. Just add `|` (for 2 columns) or `||` (for 3 columns) in front of each line of the text you want to divide in column.  
 Please keep in mind that this uses css3 rules which means it might not work perfectly on every browser as the time we speak. If it's the case for you please change your browser/device/life to enjoy the future.
 
-
-Those layout can be upgraded with nice horizontal bar inside your cards by placing 3 or more `*`, `-` or `_` on a line by themselves (example above).
-
+Those layout can be upgraded with nice horizontal bar inside your cards by placing 3 or more `*`, `-` or `_` on a line by themselves (example below).
 
 === 2 columns layout
-[column=2]
- Lorem ipsum dolor sit amet, **consectetur adipiscing** elit. Nulla pulvinar eleifend lacus adipiscing luctus. Pellentesque rhoncus, tortor at rhoncus porta, quam ipsum pellentesque nunc, at placerat risus augue vitae massa. Quisque iaculis ullamcorper mi a tincidunt. Integer eget pharetra turpis.  
----------------------- 
-Nunc elementum, elit eget iaculis accumsan, est nulla commodo eros, a pellentesque orci neque euismod felis. Suspendisse sodales consequat sapien vitae ultrices. Fusce nec quam consequat, blandit risus quis, rhoncus diam. Fusce vel ligula risus. Quisque nec ante pellentesque, auctor turpis ut, convallis felis. Proin vitae urna nec augue pulvinar pretium nec sit amet turpis. Proin porttitor sapien id elit mattis, quis vulputate risus tincidunt.  
-___________________________
-Vivamus semper ac nisl vel egestas. Donec quis lorem malesuada erat commodo vestibulum. Sed diam justo, condimentum sit amet semper eget, ultrices id mi. Sed viverra diam et arcu sollicitudin consequat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris pulvinar orci a porta porta. Sed non leo dignissim, tincidunt nulla vitae, suscipit tortor. Nam pulvinar vehicula sapien sit amet posuere.
+| Lorem ipsum dolor sit amet, **consectetur adipiscing** elit. Nulla pulvinar eleifend lacus adipiscing luctus. Pellentesque rhoncus, tortor at rhoncus porta, quam ipsum pellentesque nunc, at placerat risus augue vitae massa. Quisque iaculis ullamcorper mi a tincidunt. Integer eget pharetra turpis.  
+| ---------------------- 
+| Nunc elementum, elit eget iaculis accumsan, est nulla commodo eros, a pellentesque orci neque euismod felis. Suspendisse sodales consequat sapien vitae ultrices. Fusce nec quam consequat, blandit risus quis, rhoncus diam.
+| Fusce vel ligula risus. Quisque nec ante pellentesque, auctor turpis ut, convallis felis. Proin vitae urna nec augue pulvinar pretium nec sit amet turpis. Proin porttitor sapien id elit mattis, quis vulputate risus  tincidunt.
+| ___________________________
+| Vivamus semper ac nisl vel egestas. Donec quis lorem malesuada erat commodo vestibulum. Sed diam justo, condimentum sit amet semper eget, ultrices id mi. Sed viverra diam et arcu sollicitudin consequat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris pulvinar orci a porta porta. Sed non leo dignissim, tincidunt nulla vitae, suscipit tortor. Nam pulvinar vehicula sapien sit amet posuere.
+| 
+| Ut eleifend egestas magna sed feugiat. Nam iaculis nibh sed faucibus tristique. Ut vel lobortis felis, vitae semper arcu. Nulla suscipit, quam vitae ultrices iaculis, ligula magna aliquam nisi, at tempor mauris mauris nec risus. Praesent arcu augue, lacinia interdum feugiat a, condimentum nec nunc. Cras auctor mollis tortor id condimentum. Pellentesque ut ipsum sagittis, gravida sapien nec, viverra odio. Pellentesque eu mi in ipsum tempus vulputate. Nunc hendrerit sapien ac ligula vulputate, ac ullamcorper lorem convallis. Nunc tristique ullamcorper orci eu dictum. Sed fringilla massa sed nisi congue consequat. Ut at nisi suscipit velit laoreet faucibus vitae at libero. Aliquam tortor massa, accumsan quis volutpat eget, scelerisque a nunc. Integer a lectus dui. Vestibulum nunc orci, sagittis ut diam vel, varius condimentum velit. Quisque tincidunt sem in libero rutrum ultricies. 
 
-Ut eleifend egestas magna sed feugiat. Nam iaculis nibh sed faucibus tristique. Ut vel lobortis felis, vitae semper arcu. Nulla suscipit, quam vitae ultrices iaculis, ligula magna aliquam nisi, at tempor mauris mauris nec risus. Praesent arcu augue, lacinia interdum feugiat a, condimentum nec nunc. Cras auctor mollis tortor id condimentum. Pellentesque ut ipsum sagittis, gravida sapien nec, viverra odio. Pellentesque eu mi in ipsum tempus vulputate. Nunc hendrerit sapien ac ligula vulputate, ac ullamcorper lorem convallis. Nunc tristique ullamcorper orci eu dictum. Sed fringilla massa sed nisi congue consequat. Ut at nisi suscipit velit laoreet faucibus vitae at libero. Aliquam tortor massa, accumsan quis volutpat eget, scelerisque a nunc. Integer a lectus dui. Vestibulum nunc orci, sagittis ut diam vel, varius condimentum velit. Quisque tincidunt sem in libero rutrum ultricies. 
-[/column]
 === 3 columns layout
-[column=3]
- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar eleifend lacus adipiscing luctus. Pellentesque rhoncus, tortor at rhoncus porta, quam ipsum pellentesque nunc, at placerat risus augue vitae massa. Quisque iaculis ullamcorper mi a tincidunt. Integer eget pharetra turpis. Nunc elementum, elit eget iaculis accumsan, est nulla commodo eros, a pellentesque orci neque euismod felis. Suspendisse sodales consequat sapien vitae ultrices. Fusce nec quam consequat, blandit risus quis, rhoncus diam. Fusce vel ligula risus. Quisque nec ante pellentesque, auctor turpis ut, convallis felis. Proin vitae urna nec augue pulvinar pretium nec sit amet turpis. Proin porttitor sapien id elit mattis, quis vulputate risus tincidunt.
-*******************************
-Vivamus semper ac nisl vel egestas. Donec quis lorem malesuada erat commodo vestibulum. Sed diam justo, condimentum sit amet semper eget, ultrices id mi. Sed viverra diam et arcu sollicitudin consequat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris pulvinar orci a porta porta. Sed non leo dignissim, tincidunt nulla vitae, suscipit tortor. Nam pulvinar vehicula sapien sit amet posuere.
-
-Ut eleifend egestas magna sed feugiat. Nam iaculis nibh sed faucibus tristique. Ut vel lobortis felis, vitae semper arcu. Nulla suscipit, quam vitae ultrices iaculis, ligula magna aliquam nisi, at tempor mauris mauris nec risus.
-* * * * * * * * * * * * * * *
-Praesent arcu augue, lacinia interdum feugiat a, condimentum nec nunc. Cras auctor mollis tortor id condimentum. Pellentesque ut ipsum sagittis, gravida sapien nec, viverra odio. Pellentesque eu mi in ipsum tempus vulputate. Nunc hendrerit sapien ac ligula vulputate, ac ullamcorper lorem convallis. Nunc tristique ullamcorper orci eu dictum. Sed fringilla massa sed nisi congue consequat. Ut at nisi suscipit velit laoreet faucibus vitae at libero. Aliquam tortor massa, accumsan quis volutpat eget, scelerisque a nunc. Integer a lectus dui. Vestibulum nunc orci, sagittis ut diam vel, varius condimentum velit. Quisque tincidunt sem in libero rutrum ultricies. 
-[/column]
+|| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar eleifend lacus adipiscing luctus. Pellentesque rhoncus, tortor at rhoncus porta, quam ipsum pellentesque nunc, at placerat risus augue vitae massa.
+|| Quisque iaculis ullamcorper mi a tincidunt. Integer eget pharetra turpis. Nunc elementum, elit eget iaculis accumsan, est nulla commodo eros, a pellentesque orci neque euismod felis. Suspendisse sodales consequat sapien vitae ultrices. Fusce nec quam consequat, blandit risus quis, rhoncus diam. Fusce vel ligula risus. Quisque nec ante pellentesque, auctor turpis ut, convallis felis. Proin vitae urna nec augue pulvinar pretium nec sit amet turpis. Proin porttitor sapien id elit mattis, quis vulputate risus tincidunt.
+|| *******************************
+|| Vivamus semper ac nisl vel egestas. Donec quis lorem malesuada erat commodo vestibulum. Sed diam justo, condimentum sit amet semper eget, ultrices id mi. Sed viverra diam et arcu sollicitudin consequat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris pulvinar orci a porta porta. Sed non leo dignissim, tincidunt nulla vitae, suscipit tortor. Nam pulvinar vehicula sapien sit amet posuere.
+|| 
+|| Ut eleifend egestas magna sed feugiat. Nam iaculis nibh sed faucibus tristique. Ut vel lobortis felis, vitae semper arcu. Nulla suscipit, quam vitae ultrices iaculis, ligula magna aliquam nisi, at tempor mauris mauris nec risus.
+|| * * * * * * * * * * * * * * *
+|| Praesent arcu augue, lacinia interdum feugiat a, condimentum nec nunc. Cras auctor mollis tortor id condimentum. Pellentesque ut ipsum sagittis, gravida sapien nec, viverra odio. Pellentesque eu mi in ipsum tempus vulputate. Nunc hendrerit sapien ac ligula vulputate, ac ullamcorper lorem convallis. Nunc tristique ullamcorper orci eu dictum. Sed fringilla massa sed nisi congue consequat. Ut at nisi suscipit velit laoreet faucibus vitae at libero. Aliquam tortor massa, accumsan quis volutpat eget, scelerisque a nunc. Integer a lectus dui. Vestibulum nunc orci, sagittis ut diam vel, varius condimentum velit. Quisque tincidunt sem in libero rutrum ultricies. 

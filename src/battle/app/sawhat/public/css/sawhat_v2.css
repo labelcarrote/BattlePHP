@@ -61,6 +61,15 @@ h3,h4 {
 h4 {
 	border-style: dashed;
 }
+hr {
+	height: 1px;
+	color: #ccc;
+	background: #ccc;
+	border: 0;
+	width: 96%;
+	margin: 0.5em auto;
+	break-before: avoid;
+}
 a{ text-decoration: none; color: #999; }
 a:hover{ color: #999; color: rgba(0,0,0,0.3); }
 article{ padding: 0; }
@@ -76,6 +85,12 @@ img{
 	border: 1px solid #ccc;
 	vertical-align: middle;
 	padding: 0.2em;
+}
+p {
+	/* C'est quoi ca ?! C'est le margin qui fout des décallages moche partout dans le texte à cause du parsedown qui fout des p P partout ! Mais ouais ! */
+	/*margin: 0.5em auto;*/
+	/* Ca c'est pas beaucoup mieux, mais ça nique pas les margin de 12px entre le banner et le texte */
+	margin: 0 auto 0.5em auto;
 }
 
 /* "One Liners" */
@@ -353,17 +368,29 @@ footer.content{
 }
 
 /* ACE EDITOR */
-#editor_container { 
+
+#editor-mask {
+	overflow-y: hidden;
+	min-height: 1000px;
+}
+#editor-container {
 	position: relative;
-	height: 460px;
+	min-height: 1000px;
 }
 #editor {
 	border: 1px solid rgba(0, 0, 0, 0.05);
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+	position: relative;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+/*#editor .ace_sb {
+	display: none;
+}*/
+
+.ace_scrollbar {
+    display: none !important;
 }
 
 /* Footer */

@@ -2,13 +2,17 @@
 // -----------------------
 // Sawhat.js
 // -----------------------
+
 if(typeof ace !== 'undefined'){
 	var editor = ace.edit("editor");
 	editor.getSession().setUseWrapMode(true);
 	editor.setShowPrintMargin(false);
+	editor.setOptions({
+		/*minLines: 12,*/
+        maxLines: 1000,
+        autoScrollEditorIntoView: true
+    });
 	editor.resize();
-	//editor.setTheme("ace/theme/monokai");
-	//editor.getSession().setMode("ace/mode/javascript");
 }
 
 $(document).ready(function(){
@@ -195,6 +199,10 @@ $(window).load(function(){
 		else
 			$('.content').addClass("width_constraint");
 		localStorage["width_mode"] = width_mode;
+		if(typeof ace !== 'undefined'){
+			var editor = ace.edit("editor");
+			editor.resize();
+		}
 	}
 	$('body').on('click','#toggle_width',function(e){
 		e.preventDefault();
