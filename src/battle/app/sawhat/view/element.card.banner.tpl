@@ -23,5 +23,5 @@
 	{else}
 		<a class="right lighter_text" href="{$current_app_virtual_url}{$card->name}/edit">EDIT</a>
 	{/if}
-	<br class="clearer">
+	<div class="clearer"></div>
 </div>

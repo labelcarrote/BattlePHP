@@ -555,86 +555,58 @@ class Parsedown
 
                     break;
 
-                case '<':
-
+               case '<':
                     $position = strpos($line, '>');
-
-                    if ($position > 1)
-                    {
-                        $substring = substr($line, 1, $position - 1);
-
-                        $substring = chop($substring);
-
-                        if (substr($substring, -1) === '/')
-                        {
-                            $isClosing = true;
-
-                            $substring = substr($substring, 0, -1);
-                        }
-
-                        $position = strpos($substring, ' ');
-
-                        if ($position)
-                        {
-                            $name = substr($substring, 0, $position);
-                        }
-                        else
-                        {
-                            $name = $substring;
-                        }
-
-                        $name = strtolower($name);
-
-                        if ($name[0] == 'h' and strpos('r123456', $name[1]) !== false) #  hr, h1, h2, ...
-                        {
-                            if ($name == 'hr')
-                            {
-                                $isClosing = true;
-                            }
-                        }
-                        elseif ( ! ctype_alpha($name))
-                        {
-                            break;
-                        }
-
-                        if (in_array($name, self::$textLevelElements))
-                        {
-                            break;
-                        }
-
-                        $blocks []= $block;
-
-                        $block = array(
-                            'name' => null,
-                            'content type' => null,
-                            'content' => $indentedLine,
-                        );
-
-                        if (isset($isClosing))
-                        {
-                            unset($isClosing);
-
-                            continue 2;
-                        }
-
-                        $context = 'markup';
-                        $contextData = array(
-                            'start' => '<'.$name.'>',
-                            'end' => '</'.$name.'>',
-                            'depth' => 0,
-                        );
-
-                        if (stripos($line, $contextData['end']) !== false)
-                        {
-                            $context = null;
-                        }
-
-                        continue 2;
+                    if ($position > 1){
+					$substring = substr($line, 1, $position - 1);
+					$substring = chop($substring);
+					if (substr($substring, -1) === '/'){
+						// auto closing tag
+						$isClosing = true;
+						$substring = substr($substring, 0, -1);
+					}
+					$position = strpos($substring, ' ');
+					if ($position){
+						$name = substr($substring, 0, $position);
+					}else{
+						$name = $substring;
+					}
+					$name = strtolower($name);
+					if ($name[0] == 'h' and strpos('r123456', $name[1]) !== false){
+						#  hr, h1, h2, ...
+						if ($name == 'hr'){
+							$isClosing = true;
+						}
+					}elseif ( ! ctype_alpha($name)){
+						break;
+					}
+					
+					if (in_array($name, self::$textLevelElements)){
+						break;
+					}
+					$blocks []= $block;
+					$block = array(
+						'name' => null,
+						'content type' => null,
+						'content' => $indentedLine,
+					);
+					if (isset($isClosing)){
+						unset($isClosing);
+						continue 2;
+					}
+					$context = 'markup';
+					$contextData = array(
+						'start' => '<'.$name.'',
+						'end' => '</'.$name.'>',
+						'depth' => 0,
+					);
+					if (stripos($line, $contextData['end']) !== false){
+						$context = null;
+					}
+					continue 2;
                     }
-
                     break;
-
-                case '>':
+               case '>':
                     if (preg_match('/^>[ ]?(.*)/', $line, $matches))
                     {
                         $blocks []= $block;
@@ -744,7 +716,6 @@ class Parsedown
 
                 case '`':
                 case '~':
-
                     if (preg_match('/^([`]{3,}|[~]{3,})[ ]*(\w+)?[ ]*$/', $line, $matches))
                     {
                         $blocks []= $block;
@@ -850,18 +821,19 @@ class Parsedown
             {
                 $blocks []= $block;
 
-                $block = array(
-                    'name' => 'p',
-                    'content type' => 'line',
-                    'content' => $line,
-                );
+			$block = array(
+				'name' => 'p',
+				'content type' => 'line',
+				'content' => $line,
+			 );
 
-                if ($blockContext === 'li' and empty($blocks[1]))
-                {
-                    $block['name'] = null;
-                }
+			 if ($blockContext === 'li' and empty($blocks[1]))
+			 {
+				$block['name'] = null;
+			 }
 
-                $context = 'paragraph';
+			 $context = 'paragraph';
+                
             }
         }
 
