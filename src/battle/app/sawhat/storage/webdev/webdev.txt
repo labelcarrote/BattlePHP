@@ -1,197 +1,259 @@
 webdev
-lastedit: 20140321_1203
+lastedit: 20140414_2304
 color: #2b2b2b
 
-[column=2]
-===== Color =====
-- Kuler https://kuler.adobe.com/create/color-wheel/?base=2&amp;rule=Complementary&amp;selected=4&amp;name=My%20Kuler%20Theme&amp;mode=rgb&amp;rgbvalues=0.7,0.3514830082320031,0,1,0.6093609303227103,0.2153973687568923,1,0.5021185831885759,0,0,0.532411614218131,0.7,0,0.7605880203116158,1
-- Color Lovers http://www.colourlovers.com
-- Color wheel http://colorschemedesigner.com
-- Traditionnal Colors of Japan http://2xup.org/repos
-- Color Blender http://meyerweb.com/eric/tools/color-blend
-- Color Theory http://worqx.com/color/combinations.htm
+==== Color ====
+- [Kuler](https://kuler.adobe.com/create/color-wheel/?base=2&amp;rule=Complementary&amp;selected=4&amp;name=My%20Kuler%20Theme&amp;mode=rgb&amp;rgbvalues=0.7,0.3514830082320031,0,1,0.6093609303227103,0.2153973687568923,1,0.5021185831885759,0,0,0.532411614218131,0.7,0,0.7605880203116158,1)
+- [Color Lovers](http://www.colourlovers.com)
+- [Color wheel](http://colorschemedesigner.com)
+- [Traditionnal Colors of Japan](http://2xup.org/repos)
+- [Color Blender](http://meyerweb.com/eric/tools/color-blend)
+- [Color Theory](http://worqx.com/color/combinations.htm)
 
-===== Fonts =====
-- Google Fonts http://www.google.com/fonts
-- Selection de Google Fonts http://typewelike.wirsindsmyk.de/
-- fontsquirrel.com http://www.fontsquirrel.com
-- Font theory (readability &amp; co) http://webaim.org/techniques/fonts
+==== Fonts ====
+- [Google Fonts](http://www.google.com/fonts)
+- [Selection de Google Fonts](http://typewelike.wirsindsmyk.de/)
+- [fontsquirrel.com](http://www.fontsquirrel.com)
+- [Font theory (readability &amp; co)](http://webaim.org/techniques/fonts)
+- http://fortawesome.github.io/Font-Awesome/
 
-===== Icons =====
+==== Icons ====
 https://www.iconfinder.com/
 
-===== Design =====
-- Dribble http://dribbble.com
-- Etapes http://etapes.com
-- Smashing Magazine http://www.smashingmagazine.com/category/design/
-- Blog du Web Design http://www.blogduwebdesign.com
-- Aseprite : Animated sprite editor &amp; pixel art tool http://www.aseprite.org/
-- MediaQueri.es http://mediaqueri.es/
-- Riki Tanone http://riki.co.nz/
-- Freebiesbug (psd, icons &amp; free resources for designer) http://freebiesbug.com/
+==== Design ====
+- [Dribble](http://dribbble.com)
+- [Etapes](http://etapes.com)
+- [Smashing Magazine](http://www.smashingmagazine.com/category/design/)
+- [Blog du Web Design](http://www.blogduwebdesign.com)
+- [Aseprite : Animated sprite editor &amp; pixel art tool](http://www.aseprite.org/)
+- [MediaQueri.es](http://mediaqueri.es/)
+- [Riki Tanone](http://riki.co.nz/)
+- [Freebiesbug (psd, icons &amp; free resources for designer)](http://freebiesbug.com/)
 
-===== Textures =====
-- subtlepatterns.com http://subtlepatterns.com
-- patternify.com http://www.patternify.com
-- CSS3 Patterns http://lea.verou.me/css3patterns
-- Noise Texture Generator http://www.noisetexturegenerator.com
+==== Textures ====
+- [subtlepatterns.com](http://subtlepatterns.com)
+- [patternify.com](http://www.patternify.com)
+- [CSS3 Patterns](http://lea.verou.me/css3patterns)
+- [Noise Texture Generator](http://www.noisetexturegenerator.com)
 
-===== HTML =====
-- WebPlatform.org ? http://www.webplatform.org/
-- diveintohtml5.org http://diveintohtml5.org
-- validator.w3.org http://validator.w3.org
-- caniuse.com http://caniuse.com
-- Quirks Mode Compatibility Table http://www.quirksmode.org/compatibility.html
-- Mathias Bynens : mine d'or http://mathiasbynens.be/notes
+==== Documentation ====
+Diagrams:
+- [Web Sequence Diagrams](http://www.websequencediagrams.com/)
+- [yUML.me Class Diagrams](http://yuml.me/)
 
-===== CSS =====
-- OOCSS : le slide http://www.slideshare.net/stubbornella/object-oriented-css
-- OOCSS : le site (grids : line unit size1of3 = cool) http://oocss.org/ 
-- CSS Lint : &quot;Will hurt your feelings (And help you code better)&quot; http://csslint.net/
-- em vs px vs pt (SPOIL : em won!) http://kyleschaeffer.com/best-practices/css-font-size-em-vs-px-vs-pt-vs/
-- Mail Chimp UI Design Patterns http://www.flickr.com/photos/aarronwalter/5579386649/sizes/o/in/photostream/
-- Roman Komarov : CSS Fun Experiment (.ru = good shit) http://kizu.ru/en/fun/ 
-- Lea Verou's Animatable (css animation) http://leaverou.github.io/animatable/
+Quality:
+- http://ericholscher.com/blog/2014/feb/27/how-i-judge-documentation-quality/
+- http://jacobian.org/writing/great-documentation/
 
-===== JavaScript =====
-- Mozilla's About Javascript http://developer.mozilla.org/en/docs/About_JavaScript
-- Javascript Bad Practices http://james.padolsey.com/javascript/javascript-bad-practices/
-- Shichuan Javascript Patterns http://shichuan.github.com/javascript-patterns/
-- Douglas Crockford : Grand maitre Javascript http://www.crockford.com/ 
-- John Resig : Grand cr&eacute;ateur JQuery http://ejohn.org/
-- Nicholas Zackas : Grand tueur Javascript http://www.nczonline.net/
-- JavaScript APIs you&rsquo;ve never heard of (and some you have) http://www.nczonline.net/blog/2012/11/13/javascript-apis-youve-never-heard-of/
-- JSHint: JS Code Quality Tool Online http://www.jshint.com/
-- Timing Events http://www.w3schools.com/js/js_timing.asp
-- Validation Formulaire Best Practices http://openweb.eu.org/articles/validation_formulaire/
-- Properties of Interpreters on the Browser Environment that allow Privilege Escalation https://code.google.com/p/google-caja/wiki/AttackVectors
-- http://larsjung.de/h5ai/ 
+Presentation:
+- http://slid.es
 
-===== JS Loader =====
-- YepNope (as in Modernizer) http://yepnopejs.com/
-- Require.js http://requirejs.org/
-- Comparatif YepNope vs Require vs Labs vs &quot;nothing&quot; http://msdn.microsoft.com/en-us/magazine/hh227261.aspx
+==== HTML ====
+- [WebPlatform.org ?](http://www.webplatform.org/)
+- [diveintohtml5.org](http://diveintohtml5.org)
+- [validator.w3.org](http://validator.w3.org)
+- [caniuse.com](http://caniuse.com)
+- [Quirks Mode Compatibility Table](http://www.quirksmode.org/compatibility.html)
+- [Mathias Bynens : mine d'or](http://mathiasbynens.be/notes)
+- http://alistapart.com/
 
-===== UI Framework / Data Visualisation / Animation =====
-- Bootstrap http://getbootstrap.com/getting-started/
-- Bootstrap live customizer http://bootswatchr.com/
-- Footable (mobile friendly table, compatible w/ bootstrap)
-- D3JS : Data Driven Document, lib pour faire de beaux diagrammes (en SVG ou en Canvas) http://d3js.org/
-- Fastclick (fix click delay on ios/andros) https://github.com/ftlabs/fastclick
-- Processing.js : processing en js, maintenu par John Resig (cr&eacute;ateur de JQuery) http://processingjs.org/
-- Knockout.js (data-binding &amp; mvvm) http://knockoutjs.com/index.html
-- Backbone.js (mvc) http://backbonejs.org/
-- Two.js http://workshop.chromeexperiments.com/
-- GSAP : Greensock Animation Platform http://www.greensock.com/get-started-js/
+==== CSS ====
+- [OOCSS : le slide](http://www.slideshare.net/stubbornella/object-oriented-css)
+- [OOCSS : le site (grids : line unit size1of3 = cool)](http://oocss.org/)
+- [CSS Lint : &quot;Will hurt your feelings (And help you code better)&quot;](http://csslint.net/)
+- [em vs px vs pt (SPOIL : em won!)](http://kyleschaeffer.com/best-practices/css-font-size-em-vs-px-vs-pt-vs/)
+- [Mail Chimp UI Design Patterns](http://www.flickr.com/photos/aarronwalter/5579386649/sizes/o/in/photostream/)
+- [Roman Komarov : CSS Fun Experiment (.ru = good shit)](http://kizu.ru/en/fun/)
+- [Lea Verou's Animatable (css animation)](http://leaverou.github.io/animatable/)
 
-- Web Sequence Diagrams http://www.websequencediagrams.com/
-- yUML.me Class Diagrams http://yuml.me/
+==== JavaScript ====
+- http://superherojs.com/
+- [Mozilla's About Javascript](http://developer.mozilla.org/en/docs/About_JavaScript)
+- [Javascript Bad Practices](http://james.padolsey.com/javascript/javascript-bad-practices/)
+- [Shichuan Javascript Patterns](http://shichuan.github.com/javascript-patterns/)
+- [Douglas Crockford : Grand maitre Javascript](http://www.crockford.com/)
+- [John Resig : Grand cr&eacute;ateur JQuery](http://ejohn.org/)
+- [John Resig's advanced javascript interactive tutorial](http://ejohn.org/apps/learn/)
+- [Nicholas Zackas : Grand tueur Javascript](http://www.nczonline.net/)
+- [JavaScript APIs you&rsquo;ve never heard of (and some you have)](http://www.nczonline.net/blog/2012/11/13/javascript-apis-youve-never-heard-of/)
+- [JSHint: JS Code Quality Tool Online](http://www.jshint.com/)
+- [Timing Events](http://www.w3schools.com/js/js_timing.asp)
+- [Validation Formulaire Best Practices](http://openweb.eu.org/articles/validation_formulaire/)
+- [Properties of Interpreters on the Browser Environment that allow Privilege Escalation](https://code.google.com/p/google-caja/wiki/AttackVectors)
+- http://larsjung.de/h5ai/
+- [Parallax bitches](http://wagerfield.github.io/parallax/)
 
-===== Mark Down =====
+---- Jquery Plugin ----
+- http://starter.pixelgraphics.us/ 
+
+---- JS Loader ----
+- [YepNope (as in Modernizer)](http://yepnopejs.com/)
+- [Require.js](http://requirejs.org/)
+- [Comparatif YepNope vs Require vs Labs vs &quot;nothing&quot;](http://msdn.microsoft.com/en-us/magazine/hh227261.aspx)
+
+---- UI Framework / Data Visualisation / Animation ----
+- [Bootstrap](http://getbootstrap.com/getting-started/)
+- [Bootstrap live customizer](http://bootswatchr.com/)
+- [Footable (mobile friendly table, compatible w/ bootstrap)](https://github.com/bradvin/FooTable)
+- [Fastclick (fix click delay on ios/andros)](https://github.com/ftlabs/fastclick)
+- [D3JS : Data Driven Document, lib pour faire de beaux diagrammes (en SVG ou en Canvas)](http://d3js.org/)
+
+- Easel.js Tween.js etc http://www.createjs.com
+- [Raphael.js](http://raphaeljs.com/) a &eacute;t&eacute; remplac&eacute; par [Snap.svg](http://snapsvg.io/)
+- [Three.js : la lib 3D du moment](http://threejs.org/)
+- [Knockout.js (data-binding &amp; mvvm)](http://knockoutjs.com/index.html)
+- [Processing.js : processing en js, maintenu par John Resig (cr&eacute;ateur de JQuery)](http://processingjs.org/)
+- [Backbone.js (mvc)](http://backbonejs.org/)
+
+- [GSAP : Greensock Animation Platform](http://www.greensock.com/get-started-js/)
+- [Two.js](http://workshop.chromeexperiments.com/)
+
+---- Calendar ----
+- [CLNDR : Calendar jquery (w/ html template)](https://github.com/kylestetz/CLNDR)
+- [Cal-HeatMap (use d3.js)](http://kamisama.github.io/cal-heatmap/)
+
+---- Touch ----
+- [Hammer.js](http://eightmedia.github.io/hammer.js/)
+- [Hand.js explications](http://blogs.msdn.com/b/davrous/archive/2013/02/20/handling-touch-in-your-html5-apps-thanks-to-the-pointer-events-of-ie10-and-windows-8.aspx)
+- [Hand.js](http://www.catuhe.com/msdn/handjs/index.html)
+
+---- Crop ----
+- [CrappyCrop](http://labelcarrote.com/battle/crappycrop)
+- [JCrop](http://deepliquid.com/content/Jcrop.html)
+- [JQuery Cropbox](https://github.com/acornejo/jquery-cropbox)
+- http://codecanyon.net/item/image-crop/full_screen_preview/5348464
+
+---- Upload ----
+- http://www.plupload.com/
+- http://designmodo.com/create-upload-form/
+
+---- Text Editor ----
+- [Ace (default text editor of Github, StackO, Sawhat &amp; Khan Academy)](http://ace.c9.io/#nav=about)
+
+Syntax highliter:
+- [Prism : Syntax highliter (w/ colors)](http://prismjs.com/)
+
+Diff:
+- [jQuery.PrettyTextDiff](https://github.com/arnab/jQuery.PrettyTextDiff)
+
+==== PHP ====
+- [PHP Best Practices](https://phpbestpractices.org/)
+- [I18N &amp; Smarty](http://www.schittkowski.de/?q=node/20)
+- [YII Framework](http://www.yiiframework.com/)
+http://www.yiiframework.com/doc/guide/1.1/en/basics.best-practices)
+http://www.yiiframework.com/doc/guide/1.1/fr/form.model)
+- [CodePad (Console en ligne)](http://codepad.org/)
+
+---- WordPress ----
+http://pippinsplugins.com/should-you-open-source-your-plugins/
+http://www.whodunit.fr/plugins-wordpress-site-institutionnels/
+
+Plugins:
+- [YOAST SEO](http://yoast.com/wordpress/seo/)
+- [Visual Composer](http://vc.wpbakery.com/)
+- [Royal Slider](http://dimsemenov.com/plugins/royal-slider/)
+- [WPML Mutilingue](http://wpml.org/fr/)
+
+---- Mark Down / Textile ----
 - http://parsedown.org/ 
+- https://github.com/kzykhys/Ciconia
+- http://mojomojo.org/documentation/textile_vs_markdown
+- http://en.wikipedia.org/wiki/Lightweight_markup_language
 
-===== Cookies / Client Storage =====
+---- Code Analyser ----
+CodeSniffer
+- version web (sans pear!) : http://www.webcodesniffer.net/
+
+Sonarqube : 
+- http://docs.codehaus.org/display/SONAR/Setup+and+Upgrade
+- http://nemo.sonarqube.org/dashboard/index/net.php.pear.phpcodesniffer
+
+==== Cookies / Client Storage ====
 - Local Storage &gt; Cookie,  5MB &gt; 4KB, and it works everywhere (IE8+) !
 - http://diveintohtml5.info/storage.html 
 
-===== IFrame =====
-- iFrame height resize cross domain https://github.com/davidjbradshaw/iframe-resizer
-- iFrame height resize cross domain (SO) http://stackoverflow.com/questions/17375735/cross-domain-but-control-both-domains-set-the-height-of-an-iframe-per-its-cont
+==== IFrame ====
+- [iFrame height resize cross domain](https://github.com/davidjbradshaw/iframe-resizer)
+- [iFrame height resize cross domain (SO)](http://stackoverflow.com/questions/17375735/cross-domain-but-control-both-domains-set-the-height-of-an-iframe-per-its-cont)
 
-===== Speeeeed =====
-- YSlow http://developer.yahoo.com/yslow/
-- Google Page Speed http://developers.google.com/speed/pagespeed
+==== Speeeeed ====
+- [YSlow](http://developer.yahoo.com/yslow/)
+- [Google Page Speed](http://developers.google.com/speed/pagespeed)
 
 Content Delivery Network : 
 - CloudFlare CDN (gratuit) https://www.cloudflare.com
 - CloudFlare a aussi un CDN global pour les librairies JS moins connues http://cdnjs.com/
 
-===== PHP ===== 
-- I18N &amp; Smarty http://www.schittkowski.de/?q=node/20
-- YII Framework http://www.yiiframework.com/
-http://www.yiiframework.com/doc/guide/1.1/en/basics.best-practices
-http://www.yiiframework.com/doc/guide/1.1/fr/form.model
-- CodePad (Console en ligne) http://codepad.org/
+==== Search Engine Optimization ====
+- [Google Anal](http://www.google.com/analytics/)
+- [SEO Toolkit (made by... microsoft!)](http://www.microsoft.com/web/seo)
+- [12 search engine optimizations seo you should always do](http://www.followsteph.com/2008/01/23/12-search-engine-optimizations-seo-you-should-always-do/)
+- [Wordtracker : exploring keyword trends](http://www.wordtracker.com/)
 
+==== Clouds ====
+- [Above the clouds : A Berkeley View of Cloud Computing (2009) PDF](http://www.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-28.pdf)
+- [High Scalability : Build bigger, faster, stronger Websites](http://highscalability.com/all-time-favorites/)
+- [Johannes Vermorel : Cloud computing, machine learning and startups](http://vermorel.com/)
+- [BizSpark (=MSDN Ultimate) with Azure](http://www.windowsazure.com/en-us/offers/ms-azr-0057p/)
+- [Asana API Documentation : Perfection](http://developer.asana.com/documentation/)
 
-===== Search Engine Optimization =====
-- Google Anal http://www.google.com/analytics/
-- SEO Toolkit (made by... microsoft!) http://www.microsoft.com/web/seo
-- 12 search engine optimizations seo you should always do http://www.followsteph.com/2008/01/23/12-search-engine-optimizations-seo-you-should-always-do/
-- Wordtracker : exploring keyword trends http://www.wordtracker.com/
+==== Emailing ====
+- [MailChimp : How To Code Email](http://kb.mailchimp.com/article/how-to-code-html-emails)
+- [MailChimp : My Image Won't Upload / Can't Preview Images](http://kb.mailchimp.com/article/my-images-wont-upload-cant-preview-images)
+- [outlook.com la michtonneuse des lineheight](http://www.emailonacid.com/forum/viewthread/43/)
 
-===== Clouds =====
-- Above the clouds : A Berkeley View of Cloud Computing (2009) PDF http://www.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-28.pdf
-- High Scalability : Build bigger, faster, stronger Websites http://highscalability.com/all-time-favorites/
-- Johannes Vermorel : Cloud computing, machine learning and startups http://vermorel.com/
-- BizSpark (=MSDN Ultimate) with Azure http://www.windowsazure.com/en-us/offers/ms-azr-0057p/
-- Asana API Documentation : Perfection http://developer.asana.com/documentation/
+==== Map ==== 
+[Mapbox : beautifull open street maps ($)](https://www.mapbox.com/)
 
-===== Emailing =====
-- MailChimp : How To Code Email http://kb.mailchimp.com/article/how-to-code-html-emails
-- MailChimp : My Image Won't Upload / Can't Preview Images http://kb.mailchimp.com/article/my-images-wont-upload-cant-preview-images
-- outlook.com la michtonneuse des lineheight http://www.emailonacid.com/forum/viewthread/43/
+==== ANALytics ====
+http://piwik.org/
 
-===== Map ===== 
-Mapbox : beautifull open street maps ($) https://www.mapbox.com/
+==== Marketing / Business ====
+http://successfulsoftware.net/articles/  
+http://successfulsoftware.net/2011/05/26/evaluating-software-product-ideas/  
+http://successfulsoftware.net/2008/10/17/hacking-the-press/  
+http://successfulsoftware.net/2007/08/07/if-you-arent-embarrassed-by-v10-you-didnt-release-it-early-enough/  
+[Network effect](http://en.wikipedia.org/wiki/Network_effect)  
+http://www.softwarebyrob.com/2010/09/30/your-market-is-smaller-than-you-think/  
+http://moz.com/blog/how-to-build-a-content-marketing-strategy  
+[Steve Jobs 1980](http://www.youtube.com/watch?v=0lvMgMrNDlg)  
+[Steve Jobs 1985](http://www.youtube.com/watch?v=_9TsrZ5iqwo)  
+[Steve Jobs 1991](http://www.youtube.com/watch?v=uQ-G99rh0p8)  
+http://www.fool.com/investing/general/2013/09/09/the-25-smartest-things-jeff-bezos-has-ever-said.aspx  
+http://www.appsumo.com/sumo-jerky/  
 
-===== Marketing / Business =====
-http://successfulsoftware.net/articles/
-http://successfulsoftware.net/2011/05/26/evaluating-software-product-ideas/
-http://successfulsoftware.net/2008/10/17/hacking-the-press/
-http://successfulsoftware.net/2007/08/07/if-you-arent-embarrassed-by-v10-you-didnt-release-it-early-enough/
-Network effect http://en.wikipedia.org/wiki/Network_effect
-http://www.softwarebyrob.com/2010/09/30/your-market-is-smaller-than-you-think/
-http://moz.com/blog/how-to-build-a-content-marketing-strategy
-Steve Jobs 1980 http://www.youtube.com/watch?v=0lvMgMrNDlg
-Steve Jobs 1985 http://www.youtube.com/watch?v=_9TsrZ5iqwo
-Steve Jobs 1991 http://www.youtube.com/watch?v=uQ-G99rh0p8
-http://www.fool.com/investing/general/2013/09/09/the-25-smartest-things-jeff-bezos-has-ever-said.aspx
-http://www.appsumo.com/sumo-jerky/
+- press releases  
+https://brandfolder.com/sphero2  
+http://mailchimp.com/about/press-resources/  
+http://techcrunch.com/2011/01/12/news-about-news/  
 
-- press releases 
-https://brandfolder.com/sphero2
-http://mailchimp.com/about/press-resources/
-http://techcrunch.com/2011/01/12/news-about-news/
-
-- data 
+- data  
 http://www.crunchbase.com/
 
-===== User Testing =====
+==== User Testing ====
 http://www.usertesting.com/
 
-===== Intranet Software =====
-http://www.nngroup.com/articles/intranet-design/
-http://fr.aceproject.com/forfaits/intranet/
+==== Intranet Software ====
+http://www.nngroup.com/articles/intranet-design/  
+http://fr.aceproject.com/forfaits/intranet/  
 
-===== Client Proposals =====
+==== Client Proposals ====
 http://www.bidsketch.com/
 
-===== Courses / University Online =====
-https://www.udacity.com
-https://www.coursera.org/
-https://www.edx.org/
-http://www.codecademy.com/
-https://www.khanacademy.org/
+==== Inspiration ====
+http://www.polarb.com/polls  
+http://www.vagrantup.com/  
+https://www.wetransfer.com/  
+https://www.mturk.com/  
+http://www.kaggle.com  
 
-===== Inspiration =====
-http://www.polarb.com/polls
-http://www.vagrantup.com/
-https://www.wetransfer.com/
-https://www.mturk.com/
-http://www.kaggle.com
+==== Elo Mr Yellow ====
+http://mediaparks.co.uk/php/elo-rating-system  
+http://stackoverflow.com/questions/3848004/facemash-algorithm  
+http://en.wikipedia.org/wiki/Glicko_rating_system  
+http://research.microsoft.com/en-us/projects/trueskill/faq.aspx  
 
-===== WordPress =====
-http://pippinsplugins.com/should-you-open-source-your-plugins/
-http://www.whodunit.fr/plugins-wordpress-site-institutionnels/
-
-Plugins:
-- YOAST SEO http://yoast.com/wordpress/seo/
-- WPML Mutilingue http://wpml.org/fr/
-
-===== Elo Mr Yellow =====
-http://mediaparks.co.uk/php/elo-rating-system
-http://stackoverflow.com/questions/3848004/facemash-algorithm
-http://en.wikipedia.org/wiki/Glicko_rating_system
-http://research.microsoft.com/en-us/projects/trueskill/faq.aspx
-[/column]
+==== Notes ====
+  n = LF = 0x0A (10 in decimal) new line in linux/unix/Mac OS X.  
+  r = CR = 0x0D (13 in decimal) new line in Mac OSes from the 80s and 90s (e.g., apple II through Mac OS-9)
+  rn = CR LF = new line in Windows/DOS.

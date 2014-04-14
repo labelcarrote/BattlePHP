@@ -87,7 +87,10 @@ img{
 	padding: 0.2em;
 }
 p {
-	margin: 0.5em auto;
+	/* C'est quoi ca ?! C'est le margin qui fout des décallages moche partout dans le texte à cause du parsedown qui fout des p P partout ! Mais ouais ! */
+	/*margin: 0.5em auto;*/
+	/* Ca c'est pas beaucoup mieux, mais ça nique pas les margin de 12px entre le banner et le texte */
+	margin: 0 auto 0.5em auto;
 }
 
 /* "One Liners" */
