@@ -1,13 +1,12 @@
 webdev
-lastedit: 20140414_2304
+lastedit: 20140415_0004
 color: #2b2b2b
 
 ==== Color ====
 - [Kuler](https://kuler.adobe.com/create/color-wheel/?base=2&amp;rule=Complementary&amp;selected=4&amp;name=My%20Kuler%20Theme&amp;mode=rgb&amp;rgbvalues=0.7,0.3514830082320031,0,1,0.6093609303227103,0.2153973687568923,1,0.5021185831885759,0,0,0.532411614218131,0.7,0,0.7605880203116158,1)
 - [Color Lovers](http://www.colourlovers.com)
 - [Color wheel](http://colorschemedesigner.com)
-- [Traditionnal Colors of Japan](http://2xup.org/repos)
-- [Color Blender](http://meyerweb.com/eric/tools/color-blend)
+- [Traditionnal Colors of Japan](http://2xup.org/repos)- [Color Blender](http://meyerweb.com/eric/tools/color-blend)
 - [Color Theory](http://worqx.com/color/combinations.htm)
 
 ==== Fonts ====
@@ -19,6 +18,7 @@ color: #2b2b2b
 
 ==== Icons ====
 https://www.iconfinder.com/
+http://www.iconfinder.com/
 
 ==== Design ====
 - [Dribble](http://dribbble.com)
@@ -37,15 +37,15 @@ https://www.iconfinder.com/
 - [Noise Texture Generator](http://www.noisetexturegenerator.com)
 
 ==== Documentation ====
-Diagrams:
+**Diagrams:**
 - [Web Sequence Diagrams](http://www.websequencediagrams.com/)
 - [yUML.me Class Diagrams](http://yuml.me/)
 
-Quality:
+**Quality:**
 - http://ericholscher.com/blog/2014/feb/27/how-i-judge-documentation-quality/
 - http://jacobian.org/writing/great-documentation/
 
-Presentation:
+**Presentation:**
 - http://slid.es
 
 ==== HTML ====
@@ -222,12 +222,12 @@ http://moz.com/blog/how-to-build-a-content-marketing-strategy
 http://www.fool.com/investing/general/2013/09/09/the-25-smartest-things-jeff-bezos-has-ever-said.aspx  
 http://www.appsumo.com/sumo-jerky/  
 
-- press releases  
+**press releases**   
 https://brandfolder.com/sphero2  
 http://mailchimp.com/about/press-resources/  
 http://techcrunch.com/2011/01/12/news-about-news/  
 
-- data  
+**data**  
 http://www.crunchbase.com/
 
 ==== User Testing ====
@@ -257,3 +257,4 @@ http://research.microsoft.com/en-us/projects/trueskill/faq.aspx
   n = LF = 0x0A (10 in decimal) new line in linux/unix/Mac OS X.  
   r = CR = 0x0D (13 in decimal) new line in Mac OSes from the 80s and 90s (e.g., apple II through Mac OS-9)
   rn = CR LF = new line in Windows/DOS.
+

@@ -9,9 +9,9 @@ if(typeof ace !== 'undefined'){
 	editor.setShowPrintMargin(false);
 	editor.setOptions({
 		minLines: 12,
-        maxLines: Infinity,
-        autoScrollEditorIntoView: true
+        maxLines: Infinity
     });
+    editor.setAutoScrollEditorIntoView();
 	editor.resize();
 }
 
