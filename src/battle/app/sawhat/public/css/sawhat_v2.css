@@ -98,7 +98,7 @@ p {
 .right{float: right;}
 .align_right{text-align: right;}
 .align_middle{vertical-align: middle;}
-.darker{ background: rgba(0, 0, 0, 0.1); }
+.darker{ background: rgba(0, 0, 0, 0.04); }
 .darker_text{ color: rgba(0, 0, 0, 0.3); }
 .lighter_text{ color: rgba(255,255,255, 0.6); }
 .white { background-color: #fff; }
@@ -370,11 +370,9 @@ footer.content{
 
 #editor-mask {
 	overflow-y: hidden;
-	min-height: 1000px;
 }
 #editor-container {
 	position: relative;
-	min-height: 1000px;
 }
 #editor {
 	border: 1px solid rgba(0, 0, 0, 0.05);
@@ -384,10 +382,6 @@ footer.content{
 	bottom: 0;
 	left: 0;
 }
-/*#editor .ace_sb {
-	display: none;
-}*/
-
 .ace_scrollbar {
     display: none !important;
 }

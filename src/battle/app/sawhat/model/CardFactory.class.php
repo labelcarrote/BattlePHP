@@ -101,7 +101,7 @@ class Card{
 	
 	private function get_style_definition(){
 		$this->style_definition =
-			'#'.$this->name.' a:not(.white_text):not(.lighter_text):not(.black_text):not(.darker_text){color:'.$this->color.';}'
+			'#'.$this->name.' a:not(.white_text):not(.lighter_text):not(.black_text):not(.darker_text):not(.btn){color:'.$this->color.';}'
 			.'#'.$this->name.' h2,#'.$this->name.' h3,#'.$this->name.' h4,#'.$this->name.' .things{border-color:'.$this->color.';}'
 			.'#'.$this->name.' .banner{background-color:'.$this->color.';}'
 		;
