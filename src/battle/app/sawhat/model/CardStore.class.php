@@ -68,7 +68,7 @@ class CardStore{
 	public static function get_card_history($card_name){
 		// look for .txtold files in card folder 
 		$folder = self::get_folder()."$card_name/*".self::EXT."old";
-		return FileSystemIO::get_files_in_dir($folder);
+		return array_reverse(FileSystemIO::get_files_in_dir($folder));
 	}
 
 	public static function get_card_version($card_name,$version){
