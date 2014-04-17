@@ -2,7 +2,6 @@
 // -----------------------
 // Sawhat.js
 // -----------------------
-
 if(typeof ace !== 'undefined'){
 	var editor = ace.edit("editor");
 	editor.getSession().setUseWrapMode(true);

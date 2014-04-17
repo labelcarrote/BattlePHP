@@ -198,7 +198,7 @@ class CardElement{
 					$this->html .= '<div class="size1of'.$column_count.' left" id="'.$included_card->name.'"><style>'.$included_card->style_definition.'</style>'.$banner_content.'</div>';
 				}
 			}
-			$this->html .= '</div>';
+			$this->html .= '<div class="clearer"></div></div>';
 		}
 		// Parse line
 		else{

@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	{else}
-	<style>{$card->style_definition}</style>
+	<style scoped>{$card->style_definition}</style>
 	{include file="element.card.banner.tpl" card=$card}
 	<div class="things">
 		{if !$logged and $card->is_private}
@@ -26,13 +26,13 @@
 			<button type="submit" class="btn" name="submit" value="login">Show Card</button>
 		</form> 
 		{else}
-<div>
+<div class="marginbottom">
 {$card->html}
 <div class="clearer"></div>
 </div>
 		</div>
 		{if count($card->files) > 0}
-		<div class="border smallpadding files">
+		<div class="border smallpadding files marginbottom">
 			<div class="image_preview hidden">
 				<img alt="image preview" src="" class="verticaly_centered" />
 			</div>
