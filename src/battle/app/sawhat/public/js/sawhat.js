@@ -11,6 +11,7 @@ if(typeof ace !== 'undefined'){
         maxLines: 1000,
         autoScrollEditorIntoView: true
     });
+    editor.setAutoScrollEditorIntoView();
 	editor.resize();
 }
 
