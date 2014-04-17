@@ -460,7 +460,7 @@ form{ margin: 0;}
 @media screen and (max-width: 800px) {
 	.unit{ float: none;}
 	.size1of3,.size1of2,.size1of1,.size4of5,.size1of5{ width: 100%;	}
-	.content {
+	.content:not(footer) {
 		padding: 0;
 	}
 	.include {
