@@ -196,7 +196,8 @@ footer.content{
 
 /* ---- Card Content ---- */
 .things{
-	padding: 12px;
+	/* must add 1px margin due to firefox bug */
+	padding: 12px 12px 1px;
 }
 .things ul li{
 	list-style: circle inside;
@@ -205,6 +206,7 @@ footer.content{
 	list-style: decimal-leading-zero inside;
 }
 
+.column_container .size1of1,
 .column_container .size1of2,
 .column_container .size1of3 {
 	padding: 0;
