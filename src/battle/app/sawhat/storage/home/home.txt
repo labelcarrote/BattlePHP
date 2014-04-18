@@ -11,6 +11,3 @@ Want to go back to battle.php ? http://labelcarrote.com/battle
 #help
 
 [#webdev]
-
-
-

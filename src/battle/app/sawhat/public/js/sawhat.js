@@ -119,10 +119,25 @@ $(window).load(function(){
 	 	send_formdatawithupload(data);
 	});
 
+
 	// Card Edit Form Submission
-	$('#editor_save').click(function(e){
-		var btn = $(this);
-		var editor_console = $("#editor_console");
+
+	if(typeof ace !== 'undefined'){
+		var editor = ace.edit("editor");
+		editor.commands.addCommand({
+		    name: 'myCommand',
+		    bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
+		    exec: function(editor) {
+		    	save_card($("#editor_save"));
+		        //...
+		    },
+		    readOnly: true // false if this command should not apply in readOnly mode
+		});
+	}
+
+	function save_card(save_button){
+		var btn = save_button,
+			editor_console = $("#editor_console");
 
 		$('<input />').attr('type', 'hidden')
 			.attr('name', 'card')
@@ -151,6 +166,10 @@ $(window).load(function(){
 				}
 			}
 		});
+	}
+
+	$('#editor_save').click(function(e){
+		save_card($(this));
 	});
 
 	// Card Edit : Set As Current

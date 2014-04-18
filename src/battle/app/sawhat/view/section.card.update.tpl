@@ -49,7 +49,7 @@
 		<!-- SUBMIT -->
 		<div class="padding darker">
 			<button id="editor_save" class="btn btn-primary">Save</button>
-			<a class="btn btn-secondary paddingright" href="{$current_app_virtual_url}{$card->name}">Cancel</a>
+			<a class="btn btn-secondary paddingright" href="{$current_app_virtual_url}{$card->name}">Back to Card</a>
 			<span id="editor_console" class="paddingleft"></span>
 		</div>
 	
