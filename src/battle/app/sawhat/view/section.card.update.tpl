@@ -49,11 +49,12 @@
 		<!-- SUBMIT -->
 		<div class="padding darker">
 			<button id="editor_save" class="btn btn-primary">Save</button>
-			<a class="btn btn-secondary" href="{$current_app_virtual_url}{$card->name}">Cancel</a>
+			<a class="btn btn-secondary paddingright" href="{$current_app_virtual_url}{$card->name}">Cancel</a>
+			<span id="editor_console" class="paddingleft"></span>
 		</div>
 	
 		<!-- FILES -->
-		<div class="border padding darker">
+		<div class="border padding">
 			<h2>Files</h2>
 			<div class="line margintopbottom">
 				<div class="unit size1of5">
@@ -82,7 +83,7 @@
 		</div>
 
 		<!-- HISTORY -->
-		<div class="padding marginbottom">
+		<div class="padding marginbottom darker">
 			<h2>History</h2>
 			<ul>
 				{foreach from=$card->history item=old_version}
@@ -97,8 +98,8 @@
 		</div>
 	</section>
 </div>
-<footer class="content">
-	<div class="left">
+<footer class="content ">
+	<div class="left ">
 		{if $logged}
 		<form method="POST">
 			<b class="bigger">&rsaquo;&nbsp;</b><button class="btn btn-link" type="submit" name="submit" value="logout">Logout</button> 

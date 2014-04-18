@@ -1,5 +1,5 @@
 home
-lastedit: 20140414_1604
+lastedit: 20140418_0204
 color: #F90
 
 This is a wiki card containing other wiki cards.  
@@ -11,3 +11,6 @@ Want to go back to battle.php ? http://labelcarrote.com/battle
 #help
 
 [#webdev]
+
+
+

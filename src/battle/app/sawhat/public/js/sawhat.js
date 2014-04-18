@@ -121,6 +121,9 @@ $(window).load(function(){
 
 	// Card Edit Form Submission
 	$('#editor_save').click(function(e){
+		var btn = $(this);
+		var editor_console = $("#editor_console");
+
 		$('<input />').attr('type', 'hidden')
 			.attr('name', 'card')
 			.attr('value', editor.getSession().getValue())
@@ -131,6 +134,9 @@ $(window).load(function(){
 		    .appendTo('#card_edit_form');
 
 		// ajax post
+		btn.prop("disabled",true);
+		editor_console.html("Saving...");
+
 		var submit_url = $('#card_edit_form').attr("action");
 		$.ajax({
 			url: submit_url,
@@ -139,7 +145,9 @@ $(window).load(function(){
 			data: $("#card_edit_form").serialize(),
 			success: function(data) {
 				if(data.is_saved !== false){
-					document.location.href = data.return_url;
+					btn.prop("disabled",false);
+					editor_console.html("Last save : " + new Date());
+					//document.location.href = data.return_url;
 				}
 			}
 		});
