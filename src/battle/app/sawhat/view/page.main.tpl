@@ -17,7 +17,7 @@
 		<script type="text/javascript" src="{$root_url}lib/prism/prism.js"></script>
 	</head>
 	<body>
-		<div id="super_wrapper">
+		<div><!-- id="super_wrapper" TODO : FIX Scrolling -->
 			{include file=$content}
 		</div>
 		<script type="text/javascript" src="{$current_app_url}public/js/sawhat.js"></script>

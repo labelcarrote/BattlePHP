@@ -121,7 +121,6 @@ $(window).load(function(){
 
 
 	// Card Edit Form Submission
-
 	if(typeof ace !== 'undefined'){
 		var editor = ace.edit("editor");
 		editor.commands.addCommand({
@@ -129,7 +128,6 @@ $(window).load(function(){
 		    bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
 		    exec: function(editor) {
 		    	save_card($("#editor_save"));
-		        //...
 		    },
 		    readOnly: true // false if this command should not apply in readOnly mode
 		});
