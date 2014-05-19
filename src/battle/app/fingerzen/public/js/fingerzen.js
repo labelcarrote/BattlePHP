@@ -57,15 +57,29 @@ function FingerZen(text){
 		});
 	 	
 		document.addEventListener("keydown",function(e){
-			if(typeof e.key === 'undefined' || e.key.lastIndexOf("F", 0) === 0)
-				return;
-			
-			self.status = e.key + " " + e.keyCode + e.charCode;
+			e = e || event;
+			/*if(typeof e.key === 'undefined' || e.key.lastIndexOf("F", 0) === 0)
+				return;*/
+
+			/*alert(e.key + " , " + e.keyCode + " , " +e.charCode);
+			self.status = e.key + " " + e.keyCode + e.charCode;*/
 			if (e.key === "Backspace" || e.key === "Enter" || e.key === "Del" || e.key === "Delete"
 				|| e.key === "Space" || e.key === "."){
 				e.preventDefault();
 				self.screen.push_character(e.key);
-				//finger_zen.status = e.key + " " +e.keyCode + e.charCode;
+			}else{
+				var key;
+				switch(e.keyCode){
+					case 8  : key = "Backspace";break;
+					case 37 : key = "Left";break;
+					case 38 : key = "Up";break;
+					case 39 : key = "Right";break;
+					case 40 : key = "Down";break;
+				}
+				if(typeof key !== 'undefined'){
+					e.preventDefault();
+					self.screen.push_character(key);
+				}
 			}
 		});
 	

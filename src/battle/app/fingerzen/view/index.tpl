@@ -8,7 +8,7 @@
 		<title>FINGER ZEN</title>
 		<link rel="stylesheet" href="{$root_url}public/css/reset.css" />
 		<link rel="stylesheet" href="{$current_app_url}public/css/fingerzen.css" />
-		<script type="text/javascript" src="{$root_url}lib/jquery/jquery.js"></script>
+		<script type="text/javascript" src="{$root_url}lib/jquery/jquery-1.10.2.min.js"></script>
 		<script type="text/javascript" src="{$current_app_url}public/js/fingerzen.js"></script>
 	</head>
 	<body>
