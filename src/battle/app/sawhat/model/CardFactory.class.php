@@ -108,19 +108,14 @@ class Card{
 	}
 	
 	private function open_mutliple_line_tag($card_element){
-		$coding_language = !empty($card_element->coding_language) ? 'language-'.$card_element->coding_language : 'language-none';
-		$class = $card_element->html_closure_tag == 'pre' ? 'class="code line-numbers '.$coding_language.'"' : '';
-		$tag_added = $card_element->html_closure_tag == 'pre' ? '<code class="'.$coding_language.'">' : '';
-		
-		return (object)array('html'=>'<'.$card_element->html_closure_tag.' '.$class.'>'.$tag_added);
+		return (object)array('html'=>'<'.$card_element->html_closure_tag.'>');
 	}
 	private function close_mutliple_line_tag($card_element){
 		$last_element_id = count($this->elements) - 1;
 		$this->elements[$last_element_id]->html = str_replace("\n",'',$this->elements[$last_element_id]->html);
 		$this->elements[$last_element_id]->html = str_replace("\r",'',$this->elements[$last_element_id]->html);
-		$tag_added = $card_element->html_closure_tag == 'pre' ? '</code>' : '';
 		
-		return (object)array('html'=>$tag_added.'</'.$card_element->html_closure_tag.'>');
+		return (object)array('html'=>'</'.$card_element->html_closure_tag.'>');
 	}
 	
 	public function parse_special_properties($line){
@@ -216,23 +211,10 @@ class CardElement{
 		$closure_tag = '';
 		$html = $string;
 
-		// Code (1/2) => no more parsing
-		if(preg_match('/^  (.+)$/',$html,$matches)){
-			$html = $matches[1];
-			preg_match('/```(\w+)/',$matches[1],$coding_language);
-			$coding_language = isset($coding_language[1]) ? $coding_language[1] : '';
-			$multiple_line = true;
-			$closure_tag = 'pre';
-			return array('html_code' => $html, 'multiple_line' => $multiple_line, 'closure_tag' => $closure_tag, 'coding_language' => $coding_language);
-		}
-		
 		// CLASSIC BBCODE
-		// images (1/2)
-		$html = preg_replace('/\[img=(.+)\]/', '<img src="$1" alt="" />', $html);
-		$html = preg_replace('/\[img\](.+)\[\/img\]/', '<img src="$1" alt="" />', $html);
 		// Images (2/2)
 		if(preg_match('/^(https?:.+\.(?:png|jpg|jpe?g|gif))?$/',$html,$matches)){
-			$html = '<img src="[ROOT_URL]'.$matches[1].'" alt="image" />';
+			$html = '<img src="'.$matches[1].'" alt="image" />';
 		}
 		// Headers/titles
 		elseif(preg_match('/^([\=]{1,}) (.+)$/',$html,$matches)){

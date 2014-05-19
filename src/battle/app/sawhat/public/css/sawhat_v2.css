@@ -71,20 +71,34 @@ a{ text-decoration: none; color: #999; }
 a:hover{ color: #999; color: rgba(0,0,0,0.3); }
 article{ padding: 0; }
 
-/* Forms */
 fieldset{ width: 100%; }
+
 img{
     max-width: 100%;
+    vertical-align: middle;
 }
 
 *:not(pre) > code {
+	font-family: Consolas, Monaco, 'Andale Mono', monospace;
 	background: #eee;
 	border: 1px solid #ccc;
 	vertical-align: middle;
-	padding: 0.2em;
+	padding: 0 0.3em;
 }
+
+blockquote {
+	border-left: 2px solid rgba(0,0,0,0.2);
+	background: rgba(0,0,0,0.05);
+	padding: 0 0.5em;
+}
+
 p {
 	margin: 0 auto 0.5em auto;
+}
+
+table th, table td { padding: 0.2em 0.4em; border: 1px solid rgba(0,0,0,0.2); }
+tbody tr:nth-child(odd) {
+   background-color: rgba(0,0,0,0.1);
 }
 
 /* "One Liners" */
@@ -201,9 +215,11 @@ footer.content{
 	padding: 12px 12px 1px;
 }
 .things ul li{
+	padding-left: 1em;
 	list-style: square inside;/*circle inside;*/
 }
 .things ol li{
+	padding-left: 1em;
 	list-style: decimal-leading-zero inside;
 }
 
@@ -274,16 +290,7 @@ footer.content{
 	column-count:2;
 }
 
-.include .things { border-width: 0; }
-.code { 
-	font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
-	display: block;
-	padding: 3px 12px;
-	background-color: rgba(0,0,0,0.1);
-	overflow: auto;
-	/*white-space: normal;*/
-	/*word-break: keep-all;*/
-}
+.include .things { border-width: 0; background: rgba(0,0,0,0.05); }
 
 /* ---- Card Edit ---- */
 #card_edit_form legend {
@@ -358,7 +365,6 @@ footer.content{
 }
 
 /* ACE EDITOR */
-
 #editor-mask {
 	overflow-y: hidden;
 }

@@ -98,8 +98,8 @@
 		</div>
 	</section>
 </div>
-<footer class="content ">
-	<div class="left ">
+<footer class="content">
+	<div class="left">
 		{if $logged}
 		<form method="POST">
 			<b class="bigger">&rsaquo;&nbsp;</b><button class="btn btn-link" type="submit" name="submit" value="logout">Logout</button> 

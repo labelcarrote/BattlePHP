@@ -515,8 +515,14 @@ class Parsedown
                             'name' => 'code',
                             'content type' => null,
                             'content' => $string,
+					   'attributes' => array(
+						'class' => 'language-none'
+					   )
                         ),
                     ),
+				'attributes' => array(
+					'class' => 'code line-numbers language-none'
+				)
                 );
 
                 $context = 'code';
@@ -730,14 +736,15 @@ class Parsedown
                                     'content' => '',
                                 ),
                             ),
+					   'attributes' => array(
+							'class' => 'code line-numbers'
+						)
                         );
 
-                        if (isset($matches[2]))
-                        {
-                            $block['content'][0]['attributes'] = array(
-                                'class' => 'language-'.$matches[2],
-                            );
-                        }
+					$block['content'][0]['attributes'] = array(
+						'class' => 'language-'.(isset($matches[2]) ? $matches[2] : 'none'),
+					);
+                        
 
                         $context = 'fenced code';
                         $contextData = array(
