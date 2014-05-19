@@ -290,7 +290,7 @@ footer.content{
 	column-count:2;
 }
 
-.include .things { border-width: 0; background: rgba(0,0,0,0.05); }
+.include .things { border-width: 0; }
 
 /* ---- Card Edit ---- */
 #card_edit_form legend {
