@@ -68,6 +68,7 @@ class ActionHome extends Controller{
 				case 'edit':
 					$ass_card = CardStore::get($params['card_name']);
 					$this->assign('card',$ass_card);
+					$this->add_breadcrumb_item(($ass_card->exists ? '<i>edit:</i>' : '<i>create:</i>').' '.$ass_card->display_name);
 					if(($ass_card->is_private && $logged) || !$ass_card->is_private){
 						$ass_card->history = CardStore::get_card_history($params['card_name']);
 						$this->display_page('section.card.update.tpl');
@@ -104,6 +105,7 @@ class ActionHome extends Controller{
 					echo $result->to_json();
 					break;
 				case 'all_cards':
+					$this->add_breadcrumb_item(!is_null($params['card_name']) ? '<i>search:</i> '.$params['card_name'] : 'All cards');
 					$ass_cards = CardStore::get_all($params['card_name']);
 					if(!empty($ass_cards))
 						$this->assign('cards',$ass_cards);
@@ -114,6 +116,7 @@ class ActionHome extends Controller{
 		}
 		elseif($params = Request::get_params("@card_name")){
 			if($params['card_name'] == 'all_cards'){
+				$this->add_breadcrumb_item('All cards');
 				$ass_cards = CardStore::get_all();
 				if(!empty($ass_cards)){
 					$this->assign('cards',$ass_cards);
@@ -125,6 +128,7 @@ class ActionHome extends Controller{
 					? $params['card_name'] 
 					: ConfigurationSawhat::DEFAULT_CARD_NAME;
 				$ass_card = CardStore::get($card_name);
+				$this->add_breadcrumb_item($ass_card->display_name);
 				$this->assign('card',$ass_card);
 				$this->display_page('section.card.tpl');
 			}
@@ -133,8 +137,10 @@ class ActionHome extends Controller{
 
 		$ass_card = CardStore::get(ConfigurationSawhat::DEFAULT_CARD_NAME);
 		if($ass_card->exists){
+			$this->add_breadcrumb_item($ass_card->display_name);
 			$this->assign('card',$ass_card);
 		}else{
+			$this->add_breadcrumb_item('All cards');
 			$ass_cards = CardStore::get_all();
 			if(!empty($ass_cards))
 				$this->assign('cards',$ass_cards);
@@ -171,6 +177,19 @@ class ActionHome extends Controller{
 			}
 		}
 		echo $result->to_json();
+	}
+	
+	// adds breadcrumb item from url history
+	private function add_breadcrumb_item($item_name){
+		$_SESSION['breadcrumb'] = !isset($_SESSION['breadcrumb']) ? array() : $_SESSION['breadcrumb'];
+		$current_url = 'http'.(!empty($s['HTTPS']) && $s['HTTPS'] == 'on' ? 's' : '').'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+		if(empty($_SESSION['breadcrumb']) || $_SESSION['breadcrumb'][count($_SESSION['breadcrumb'])-1]['url'] != $current_url){
+			$_SESSION['breadcrumb'][] = array('url' => $current_url, 'name' => $item_name);
+		}
+		if(count($_SESSION['breadcrumb']) >= 6){
+			array_shift($_SESSION['breadcrumb']);
+		}
+		$this->assign('breadcrumb',$_SESSION['breadcrumb']);
 	}
 }
 ?>

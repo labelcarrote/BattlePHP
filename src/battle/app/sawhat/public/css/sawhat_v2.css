@@ -90,6 +90,7 @@ blockquote {
 	border-left: 2px solid rgba(0,0,0,0.2);
 	background: rgba(0,0,0,0.05);
 	padding: 0 0.5em;
+	margin-left: 0.5em;
 }
 
 p {
@@ -163,13 +164,13 @@ tbody tr:nth-child(odd) {
 }
 .content{
 	margin: auto;
-	padding: 12px;
+	padding: 0 12px 12px;
 	background-color: #ccc;
 }
 
 .width_constraint{
 	max-width: 960px;
-	background-color: transparent;
+	/*background-color: transparent;*/
 }
 
 header{
@@ -180,6 +181,7 @@ footer.content{
 	background-color: #666;
 	color: #999;
 	min-height: 150px;
+	padding-top: 12px;
 }
 .content > section > .sawhat,
 .content > section > div > .sawhat {
@@ -207,6 +209,25 @@ footer.content{
 	line-height: 40px;
 	margin: 0;
 	border: 0;
+}
+
+/* ---- Breadcrumb ---- */
+.breadcrumb {
+	padding: 0;
+	margin: 0 0 6px 0;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+	border-radius: 0;
+	background: transparent;
+	color: rgba(0,0,0,0.2);
+}
+.breadcrumb a {
+	color: rgba(0,0,0,0.4);
+}
+.breadcrumb a.last {
+	font-weight: bold;
+}
+.breadcrumb a:hover {
+	color: #fff;
 }
 
 /* ---- Card Content ---- */
@@ -454,6 +475,7 @@ form{ margin: 0;}
 	.content:not(footer) {
 		padding: 0;
 	}
+	.breadcrumb { padding: 6px 6px 0; }
 	.include {
 		margin: 0 -6px;
 	}
