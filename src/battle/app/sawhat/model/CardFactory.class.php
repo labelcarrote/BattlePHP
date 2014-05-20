@@ -219,17 +219,6 @@ class CardElement{
 		if(preg_match('/^(https?:.+\.(?:png|jpg|jpe?g|gif))?$/',$html,$matches)){
 			$html = '<img src="'.$matches[1].'" alt="image" />';
 		}
-		// Headers/titles
-		elseif(preg_match('/^([\=]{1,}) (.+)$/',$html,$matches)){
-			$header_level = (7-count(str_split($matches[1]))) + $recursive_level;
-			$tag_name = $header_level <= 6 ? 'h'.$header_level : 'h6';
-			$html = '<'.$tag_name.'>'.trim($matches[2], '= ').'</'.$tag_name.'>';
-		}
-		elseif(preg_match('/^([\-]{2,}) (.+)$/',$html,$matches)){
-			$header_level = 7-count(str_split($matches[1])) + $recursive_level;
-			$tag_name = $header_level < 5 ? 'h'.$header_level : 'h5';
-			$html = '<'.$tag_name.' class="noborder">'.trim($matches[2], '- ').'</'.$tag_name.'>';
-		}
 		// Link to card
 		elseif(preg_match('/^\#([\S]*)$/',$html,$matches)){
 			$html = '<a href="[ROOT_URL]'.$matches[1].'"><b><span class="bigger">&rsaquo;</span>&nbsp;'.$matches[1]
@@ -242,11 +231,6 @@ class CardElement{
 			else
 				$html = '<a href="[IMAGE_URL]'.$matches[1].'">'.$matches[1].'</a>';
 		}
-		
-		// replace special chars
-		$s = array('(R)','(C)','(TM)','<3');
-		$r = array('&reg;','&copy;','&trade;','&hearts;');
-		$html = str_replace($s,$r,$html);
 		
 		// Replace vars
 		$s = array('[ROOT_URL]','[IMAGE_URL]');

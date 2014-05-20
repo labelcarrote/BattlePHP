@@ -21,7 +21,9 @@
 <div class="content">
 	{include file="element.breadcrumb.tpl"}
 	<section class="size1of1">
+	<div class="sawhat things">
 	No card were found.
+	</div>
 	</section>
 </div>
 {/if}

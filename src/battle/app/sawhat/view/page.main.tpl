@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="{$root_url}public/css/reset.css" />
 		<link rel="stylesheet" href="{$root_url}lib/bootstrap/bootstrap.min.css" />
 		<link rel="stylesheet" href="{$root_url}lib/bootstrap/jasny-bootstrap.min.css" />
-		<link rel="stylesheet" href="{$root_url}lib/prism/prism_okaida.css" />
+		<link rel="stylesheet" href="{$root_url}lib/prism/prism_okaida_mod.css" />
 		<link rel="stylesheet" href="{$current_app_url}public/css/sawhat_v2.css" />
 		<script type="text/javascript" src="{$root_url}lib/jquery/jquery.js"></script>
 		<script type="text/javascript" src="{$root_url}lib/bootstrap/jasny-bootstrap.min.js"></script>

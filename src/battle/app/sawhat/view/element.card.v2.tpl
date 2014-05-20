@@ -26,10 +26,8 @@
 			<button type="submit" class="btn" name="submit" value="login">Show Card</button>
 		</form> 
 		{else}
-<div class=""><!-- marginbottom -->
 {$card->html}
 <div class="clearer"></div>
-</div>
 		</div>
 		{if count($card->files) > 0}
 		<div class="border smallpadding files marginbottom">
