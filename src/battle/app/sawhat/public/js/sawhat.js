@@ -78,6 +78,27 @@ $(document).ready(function(){
 	$(document).on('click','.files .image_preview',function(){
 		$(this).fadeOut(200);
 	});
+	
+	// ANCHOR LINK SMOOTH SCROLL
+	$('a[href^=#]').on('click',function(e) {
+		e.preventDefault();
+		var target = $(this.hash);
+		if(this.hash !== ''){
+			// check if id=hash exists or try name=hash instead
+			target = target.length ? target : $('[name='+this.hash.slice(1)+']');
+			if(target.length){
+				$('html,body').animate({
+					scrollTop: target.offset().top 
+				}, 500);
+			}
+		} else {
+			$('html,body').animate({
+				scrollTop: 0
+			}, 500);
+		}
+		
+		return false;
+	});
 })
 
 $(window).load(function(){
