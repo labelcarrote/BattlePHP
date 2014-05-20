@@ -233,7 +233,7 @@ footer.content{
 /* ---- Card Content ---- */
 .things{
 	/* must add 1px margin due to firefox bug */
-	padding: 12px 12px 1px;
+	padding: 12px 12px;/* 1px;*/
 }
 .things ul li{
 	padding-left: 1em;

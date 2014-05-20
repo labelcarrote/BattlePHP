@@ -26,7 +26,7 @@
 			<button type="submit" class="btn" name="submit" value="login">Show Card</button>
 		</form> 
 		{else}
-<div class="marginbottom">
+<div class=""><!-- marginbottom -->
 {$card->html}
 <div class="clearer"></div>
 </div>
