@@ -1,5 +1,5 @@
 webdev
-lastedit: 20140418_0304
+lastedit: 20140519_1905
 color: #2b2b2b
 
 ==== Color ====
@@ -14,7 +14,7 @@ color: #2b2b2b
 - [Google Fonts](http://www.google.com/fonts)
 - [Selection de Google Fonts](http://typewelike.wirsindsmyk.de/)
 - [fontsquirrel.com](http://www.fontsquirrel.com)
-- [Font theory (readability &amp;amp; co)](http://webaim.org/techniques/fonts)
+- [Font theory (readability &amp; co)](http://webaim.org/techniques/fonts)
 - http://fortawesome.github.io/Font-Awesome/
 
 ==== Icons ====
