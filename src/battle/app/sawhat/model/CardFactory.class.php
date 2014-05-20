@@ -142,10 +142,13 @@ class Card{
 		return '';
 	}
 	public static function get_display_name($card_name){
-		$card_name = preg_replace('/([a-zA-Z0-9]+)(_|\-){1}([a-zA-Z0-9]+)/','$1 $3',$card_name);
-		$card_name = preg_replace('/([a-zA-Z0-9]+)__([a-zA-Z0-9]+)/','$1: $2',$card_name);
-		$card_name = preg_replace('/([a-zA-Z0-9]+)--([a-zA-Z0-9]+)/','$1-$2',$card_name);
-		$card_name = preg_replace('/([a-zA-Z0-9]+)_-_([a-zA-Z0-9]+)/','$1 - $2',$card_name);
+		// bad hack: we use ? as a temporary pattern to insert -
+		$card_name = str_replace('_-_',' ? ',$card_name);
+		$card_name = str_replace('--','?',$card_name);
+		$card_name = str_replace('__',': ',$card_name);
+		$card_name = str_replace('_',' ',$card_name);
+		$card_name = str_replace('-',' ',$card_name);
+		$card_name = str_replace('?','-',$card_name);
 		
 		return $card_name;
 	}
