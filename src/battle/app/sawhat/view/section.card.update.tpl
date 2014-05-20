@@ -12,7 +12,7 @@
 				<div class="padding">
 					<!--  Color for headers, links and horizontal bar  -->
 					<span class="help-inline">Color : </span>
-					<input type="text" class="input-large" name="color" placeholder="ex: #FF9900" value="{if $card->exists}{$card->color}{/if}">
+					<input type="text" class="input-large" name="color" placeholder="ex: #FF9900" value="{if $card->exists}{$card->color}{/if}" pattern="^#[a-fA-F0-9]{literal}{{/literal}3,6{literal}}{/literal}$">
 					<div class="color_picker hidden">
 						<div class="color_picker_item" data-color="#000"></div>
 						<div class="color_picker_item" data-color="#fff"></div>

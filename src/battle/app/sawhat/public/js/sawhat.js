@@ -43,6 +43,11 @@ $(document).ready(function(){
 		var related_color_picker = $(this).next('.color_picker');
 		$(this).on({
 			'focus' : function(){
+				var position = $(this).position();
+				related_color_picker.css({
+					'left' : position.left+'px',
+					'top' : (position.top+$(this).outerHeight()-3)+'px'
+				});
 				related_color_picker.slideDown(200);
 			},
 			'blur' : function(){
@@ -52,12 +57,7 @@ $(document).ready(function(){
 	});
 	$('.color_picker').each(function(){
 		var related_input = $(this).prev('input[name="color"]');
-		var position = related_input.position();
 		var self = $(this);
-		$(this).css({
-			'left' : position.left+'px',
-			'top' : (position.top+related_input.outerHeight()-3)+'px'
-		});
 		$(this).find('.color_picker_item').each(function(){
 			var color = $(this).attr('data-color');
 			$(this).css('background-color',color);
@@ -146,24 +146,31 @@ $(window).load(function(){
 		    .attr('value', "save")
 		    .appendTo('#card_edit_form');
 
-		// ajax post
-		btn.prop("disabled",true);
-		editor_console.html("Saving...");
-
-		var submit_url = $('#card_edit_form').attr("action");
-		$.ajax({
-			url: submit_url,
-			type: 'post',
-			dataType: 'json',
-			data: $("#card_edit_form").serialize(),
-			success: function(data) {
-				if(data.is_saved !== false){
-					btn.prop("disabled",false);
-					editor_console.html("Last save : " + new Date());
-					//document.location.href = data.return_url;
+		// check format
+		var pattern = new RegExp($('input[name="color"]').attr('pattern'));
+		if(!$('input[name="color"]').val().match(pattern)){
+			editor_console.html('<span class="error">Chosen color is not a valid hexadecimal value.</span>');
+		} else {
+			// ajax post
+			var submit_url = $('#card_edit_form').attr("action");
+			$.ajax({
+				url: submit_url,
+				type: 'post',
+				dataType: 'json',
+				data: $("#card_edit_form").serialize(),
+				beforeSend: function() {
+					btn.prop("disabled",true);
+					editor_console.html("Saving...");
+				},
+				success: function(data) {
+					if(data.is_saved !== false){
+						btn.prop("disabled",false);
+						editor_console.html("Last save : " + new Date());
+						//document.location.href = data.return_url;
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 
 	$('#editor_save').click(function(e){
