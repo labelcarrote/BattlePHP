@@ -1,0 +1,102 @@
+syntax__expert
+lastedit: 20140521_0805
+color: #ff6523
+
+===== Inserting cards =====
+Cards can be inserted in cards to go to some crazy recursivity.  
+Just write `#card_name` on its own line to create a link to a card that could be dynamically inserted:  
+#inserted_card
+
+To insert card directly without creating a link, use `[#card_name]` on its own line. Using this syntax, it's possible to insert up to three cards that will be displayed as columns, just separate card names with pipes `|` like this `[#inserted_card|#inserted_card]`:  
+[#inserted_card|#inserted_card]
+
+
+===== Quoting =====
+You can add quoted text by prefixing lines with `&gt;` like you'd do in an e-mail (if you're someone who used the internet before '96).  
+You can add quoted text inside quoted text by adding `&gt;` levels.
+&gt; Here's an example of *quoted* text  
+&gt; how nice !
+&gt;
+&gt; &gt; Robert said : &quot;what ?&quot;  
+&gt; &gt; inside this quote
+&gt; 
+&gt; Bob.
+
+
+
+===== Horizontal bar =====
+You can be upgrade your text by adding nice horizontal bars inside your cards.  
+Place 3 or more `*`, `-` or `_` on a line by themselves.
+&gt; So nice !
+&gt; __________________
+&gt; wonderfull
+
+
+
+===== Columns =====
+Text (or other elements, but typicaly text) can be cut and displayed as columns.  
+Just add `|` (for 2 columns) or `||` (for 3 columns) in front of each line of the text you want to divide in column.
+
+Please keep in mind that this uses css3 rules which means it might not work perfectly on every browser as the time we speak. If it's the case for you please change your browser/device/life to enjoy the future.  
+Furthermore this behaviour as not been optimized yet and might slightly bug when associated with other syntax patterns.
+
+&gt; | Nunc elementum, elit eget iaculis accumsan, est nulla commodo eros, a pellentesque orci neque euismod felis. Suspendisse sodales consequat sapien vitae ultrices. Fusce nec quam consequat, blandit risus quis, rhoncus diam.
+&gt; | 
+&gt; | Lorem ipsum dolor sit amet, *consectetur adipiscing* elit. 
+&gt; | 
+&gt; | Nulla pulvinar eleifend lacus adipiscing luctus. Pellentesque rhoncus, tortor at rhoncus porta, quam ipsum pellentesque nunc, at placerat risus augue vitae massa.  
+&gt; | Quisque iaculis ullamcorper mi a tincidunt. Integer eget pharetra turpis.  
+
+
+
+===== Tables =====
+As an extension of markdown and thanks to GitHub table has been made possible in the syntax.  
+You can use pipes `|` and hyphens `-` to create beautiful tables.  
+By adding colons `:` within the header row, you can align text in a column.  
+   
+| Left          | Center          | Right         |
+|:--------------|:---------------:|--------------:|
+| column 1      | this column is  |        TOTALS |
+| is            | centered        |           250 |
+| left aligned  | ...             |            23 |
+   
+Here's the code for this table:
+```
+| Left          | Center            | Right         |
+|:--------------|:-----------------:|--------------:|
+| column 1      | this column is    | TOTALS        |
+| is            | centered          | 250           |
+| left aligned  | ...               | 23            |
+```
+
+
+===== Code =====
+You can write code inline by surrounding it with ` ` `.
+&gt; `This is a code &lt;span&gt;`
+
+Blocks of code are made possible by using 3 ` ` ` to frame the coded lines.  
+If you're feeling lazy, just indent your lines with 1 *Tab* (or 4 *spaces*).  
+Lines can be indented inside a code block as it should be.
+&gt; ```
+&gt; if($this-&gt;is_code){
+&gt;     $this-&gt;display_indented_code();
+&gt; }
+&gt; ```
+
+Specific languages can be syntaxicaly colored by adding the language name after the ````` tag before code.
+Supported languages currently are: php, javascript and css.
+
+&gt; ```php
+&gt; // this is an exemple of php code
+&gt; function some_php_code($id=null){
+&gt;     echo 'banane';
+&gt;     exit(0);
+&gt; }
+&gt; ```
+&gt; 
+&gt; ```javascript
+&gt; /* this is an example of javascript code */
+&gt; var code_example = function(){
+&gt;     alert('JS code');
+&gt;     return true;
+&gt; };

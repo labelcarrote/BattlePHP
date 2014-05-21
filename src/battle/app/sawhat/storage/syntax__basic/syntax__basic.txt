@@ -1,0 +1,111 @@
+syntax__basic
+lastedit: 20140521_1305
+color: #ff6523
+
+===== Emphasis and special characters =====
+A paragraph is one or more line followed by an empty line. Because of this, you have to specify when you want to make a `&lt;br&gt;` (aka. *newline*) by adding two space at the end of the line.
+
+You can _emphase text_ by wrapping it with `*` or `_` characters. To make **strong text**, wrap it with double `*` or `_`.  
+Stroke ~~word~~ text is done by wrapping it with `~~`.  
+Multiple wrapping is possible (**_~~what ?~~_**) but not recommended in a readability point of view.
+
+Some special characters are available by wrapping uppercase characters in parenthesis like R, C and TM :  
+&gt; (R)  
+&gt; (C)  
+&gt; (TM)  
+&gt; Power users will know how to make a &lt;3 ;-)
+
+You can always escape a charcater used in te syntax by adding a backslash `\` before :
+&gt; \*banana\*
+
+
+
+===== [#]Links =====
+Classic markdown [link](http://www.example.com) are made like this: `[link text](http://www.example.com)`.  
+You can add a [title to your link](http://www.example.com &quot;Example title&quot;) by adding it right after the url like this: `[link text](http://www.example.com &quot;Link title&quot;)`.  
+You can also directly type an url to create an automatic link http://example.com.
+
+For lisibility, you can also use [reference links][1] using this syntax `[link name][link_id]`. This referenced link will be defined at the end of your document by using this syntax `[link_id] http://exmaple.com &quot;Link title&quot;` (of course *title* is optional).
+
+To create an anchor to link to, add `[#]` before the word you want to be the anchor.  
+You can then create a [link](#Links) to it.
+
+[1]: http://exmaple.com &quot;Reference link&quot;
+
+
+
+===== Images =====
+Image syntax looks like url beginning with an exclamation mark: `![Alt text](/path/to/img.jpg &quot;Optional title&quot;)`  
+Like for url, you can just be lazy and type the url to your image directly.
+&gt; Here is `![Windows icon](http://res2.windows.microsoft.com/resources/4.2/wol/shared/images/win8_logo_144x144.png &quot;Windows icon&quot;)`  
+&gt; ![Windows icon](http://res2.windows.microsoft.com/resources/4.2/wol/shared/images/win8_logo_144x144.png &quot;Windows icon&quot;)
+
+You can also add image attached to a card by copying the link name `@somegibberish.jpg` at the bottom of the card you attached the file to (pfff!)!  
+@b5e4bcadb285767b704504140af9cfa5.gif
+
+Please keep in mind that there's no way to define image size for now, large images will use 100% of the card width.
+
+
+
+===== Headers =====
+There's plenty of way writing a header.  
+*Setext style* is obtained by appending `=` or `-` signs in a the line above the header text:
+```
+Header 1
+========
+Header 2
+--------
+```
+
+*Atx style* uses 1 to 6 `#` character in the front of your header text to define H1 to H6 header levels:
+```
+# Header 1
+## Header 2
+###### Header 6
+```
+
+**[#]Sawhat style** let you add two different styled headers by appending `=` and `-` signs in front of the header text in a *reversed Atx style* way:
+```
+===== Underlined header 2
+----- Normal header 2
+==== Underlined header 3
+---- Normal header 3
+= Underlined header 6
+Normal header 6 cannot be written with - signs.
+```
+
+--- Side notes ---
+H1 level shouldn't be used in *Sawhat* as the card title is already a first level header.  
+For the sake of the writers please choose a syntax and stick to it (we recommend the [**Sawhat style**](#Sawhat)).  
+Header level increase if you insert a card in an other card.
+Please avoid H5 and H6 header levels because they shouldn't exist at all, if you have more than 4 level of header in your document you should think about refactoring it and/or subdivide your card.  
+In *Atx* and *Sawhat* syntax you can *close* your headers like this `==== H3 ====`, some likes to have it bigger.
+
+--- Header examples ---
+&gt; ====== H1 ======
+&gt; ===== H2 =====
+&gt; ----- H2 -----
+&gt; ==== H3 ====
+&gt; ---- H3 ----
+&gt; === H4 ===
+&gt; --- H4 ---
+&gt; == H5 ==
+&gt; -- H5 --
+&gt; = H6 =
+
+
+
+===== Lists =====
+Unordered lists are made by using asterisks `*`, pluses `+` or hyphens `-` as markers.  
+You can nest multiple list by adding indentation (using *Tab* key).
+&gt; - un-
+&gt; - -ordered
+&gt;    - list
+&gt;    - in
+&gt;    - list
+&gt; - list
+
+Ordered lists use a number followed by a period `.`.  
+&gt; 1. add items
+&gt; 2. order them
+&gt; 3. profit !

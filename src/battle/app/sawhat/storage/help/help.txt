@@ -1,13 +1,49 @@
 help
-lastedit: 20140410_1504
+lastedit: 20140521_0805
 color: #ff6523
 
 ===== Main principles 
 [**Sawhat**](https://github.com/labelcarrote/BattlePHP) is a card based wiki.  
 As it is a wiki, you can edit everything the way you like for everyone but unlike other *classic* wiki, the card based interface means there's no hierarchical link between cards. It's more like you'd have a gigantic post-it (R) wall with a search functionality.
 
-===== Syntax
-Syntax is based on [markdown](https://daringfireball.net/projects/markdown) with some adjustments.
 
-[#help__text-formating|#help__link]
-[#help__header|#help__layout]
+
+===== Basic usage
+==== Creating a card
+Cards can be accessed by typing their name in the url. If you type an url that is not already used as a card name, Sawhat will show you an empty card with an *Edit* link to create it.
+
+Since it's url encoded, you can only use *Latin characters* (from *a* to *z* and from *A* to *Z*) and *Arabic numerals* (from *0* to *9*).  
+You can use underscores `_` or hyphens `-` to add spaces.  
+Double underscore will create a colon followed by a space `: ` and a double hyphen will result in a single one `-`.
+
+&gt; typing `test__insert-a-B--card_-_like_a_boss`  
+&gt; will create a card named `test: insert a B-card - like a boss`
+
+Once your card name is chosen, you can create its content. Keep reading to know how.
+
+==== Editing a card
+Once you're in the card edit page you'll find the card parameters first.  
+The color will be used to display the card header and card links. Just click the input to access the color picker or type a color in an hexadecimal form.  
+*&quot;Is Private ?&quot;* checkbox is used to make the card private, assuming you know the password to access it ... which you don't ...
+
+Next is the text zone where you will write the card content.  
+There's a few rules to format text based on Markdown syntax, read more about it in the [*Syntax*](#Syntax) section below.  
+Click the *Save* button or simply hit *Ctrl+S* anytime to save your card.
+
+You can upload and attach files to a card by using the *Files* section in the *Edit* page.
+
+Finally there's a quick history of your card at the bottom of the page allowing you to go back to a previous version.
+
+==== Searching a card
+A search is available at the bottom of any page.  
+Search is restricted to *one* word and in card name only for now.  
+Add an hyphen `-` to your queried word in the search-box to search for cards *not* containing the word.
+
+
+
+===== [#]Syntax
+Syntax is based on [Markdown](https://daringfireball.net/projects/markdown) with some adjustments.
+
+#syntax__basic
+
+#syntax__expert
