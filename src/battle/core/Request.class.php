@@ -36,10 +36,10 @@ class Request{
         return self::get_root_url()."app/".self::get_application()."/";
     }
 
-    public static function get_full_url(){
-    	//TODO : HTTPS 
-    	return "http://{$_SERVER['HTTP_HOST']}";
-    }
+	public static function get_full_url(){
+		$protocol = 'http'.(isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 's' : '');
+		return $protocol.'://'.$_SERVER['HTTP_HOST'];
+	}
 	
 	/**
 	 * Parses url param and return param array
