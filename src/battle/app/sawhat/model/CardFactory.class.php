@@ -72,26 +72,25 @@ class Card{
 		foreach($this->elements AS $k => $element){
 			if(isset($element->cards) && count($element->cards) > 0){
 				$this->html .= '<div class="column_container">';
-					foreach($element->cards AS $card){
-						$view_manager = Viewer::getInstance();
-						$view_manager->assign('logged',AuthHelper::is_authenticated());
-						$view_manager->assign('card',$card);
-						$card_content = $view_manager->fetch_view('element.card.v2.tpl');
-						$this->html .=
-							'<div class="unit size1of'.count($element->cards).'">'
-								.'<div class="darker include">'
-									.$card_content
-								.'</div>'
+				foreach($element->cards AS $card){
+					$view_manager = Viewer::getInstance();
+					$view_manager->assign('logged',AuthHelper::is_authenticated());
+					$view_manager->assign('card',$card);
+					$card_content = $view_manager->fetch_view('element.card.v2.tpl');
+					$this->html .= 
+						'<div class="unit size1of'.count($element->cards).'">'
+							.'<div class="darker include">'
+								.str_replace("\t",'',$card_content)
 							.'</div>'
-						;
-					}
+						.'</div>'
+					;
+				}
 				$this->html .= '<div class="clearer"></div></div>';
 			} else {
 				$this->html .= $element->html;
 			}
 		}
 		// over-parse with external parser
-		$this->html = str_replace("\t",'',$this->html);
 		$parsedown = new Parsedown();
 		$this->html = $parsedown->parse($this->html);
 
@@ -221,11 +220,11 @@ class CardElement{
 		}
 		// Link to card
 		elseif(preg_match('/^\#([\S]*)$/',$html,$matches)){
-			$html = '<a href="[ROOT_URL]'.$matches[1].'"><b><span class="bigger">&rsaquo;</span>&nbsp;'.$matches[1]
-			.'</b></a> <a href="#" class="load_card" data-action="load" data-card-name="'.$matches[1].'">( load )</a>';
+			$html = '<a href="[ROOT_URL]'.$matches[1].'"><b><span class="bigger">&rsaquo;</span>&nbsp;'.Card::get_display_name($matches[1])
+			.'</b></a> <a class="load_card" data-action="load" data-card-name="'.$matches[1].'">( load )</a>';
 		}
 		// Local File / Image
-		elseif(preg_match('/^\@([\S]*)$/',$html,$matches)){
+		elseif(preg_match('/^\@([\S]+)$/',$html,$matches)){
 			if(preg_match('/^\@.+\.(?:png|jpg|jpe?g|gif)?$/',$html)) 
 				$html = '<img src="[IMAGE_URL]'.$matches[1].'" alt="image" />';
 			else
