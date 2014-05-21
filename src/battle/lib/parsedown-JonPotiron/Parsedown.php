@@ -84,451 +84,417 @@ class Parsedown
 	#
 	# Private
  
-	private function findBlocks(array $lines, $blockContext = null)
-	{
+	private function findBlocks(array $lines, $blockContext = null){
 		$block = null;
   
 		$context = null;
 		$contextData = null;
   
-		foreach ($lines as $line)
-		{
-            $indentedLine = $line;
-
-            $indentation = 0;
-
-            while(isset($line[$indentation]) and $line[$indentation] === ' ')
-            {
-                $indentation++;
-            }
-
-            if ($indentation > 0)
-            {
-                $line = ltrim($line);
-            }
-
-            # ~
-
-            switch ($context)
-            {
-                case null:
-
-                    $contextData = null;
-
-                    if ($line === '')
-                    {
-                        continue 2;
-                    }
-
-                    break;
-
-                # ~~~ javascript
-                # var message = 'Hello!';
-
-                case 'fenced code':
-
-                    if ($line === '')
-                    {
-                        $block['content'][0]['content'] .= "\n";
-
-                        continue 2;
-                    }
-
-                    if (preg_match('/^[ ]*'.$contextData['marker'].'{3,}[ ]*$/', $line))
-                    {
-                        $context = null;
-                    }
-                    else
-                    {
-                        if ($block['content'][0]['content'])
-                        {
-                            $block['content'][0]['content'] .= "\n";
-                        }
-
-                        $string = htmlspecialchars($indentedLine, ENT_NOQUOTES, 'UTF-8');
-
-                        $block['content'][0]['content'] .= $string;
-                    }
-
-                    continue 2;
-
-                case 'markup':
-
-                    if (stripos($line, $contextData['start']) !== false) # opening tag
-                    {
-                        $contextData['depth']++;
-                    }
-
-                    if (stripos($line, $contextData['end']) !== false) # closing tag
-                    {
-                        if ($contextData['depth'] > 0)
-                        {
-                            $contextData['depth']--;
-                        }
-                        else
-                        {
-                            $context = null;
-                        }
-                    }
-
-                    $block['content'] .= "\n".$indentedLine;
-
-                    continue 2;
-
-                case 'li':
-
-                    if ($line === '')
-                    {
-                        $contextData['interrupted'] = true;
-
-                        continue 2;
-                    }
-
-                    if ($contextData['indentation'] === $indentation and preg_match('/^'.$contextData['marker'].'[ ]+(.*)/', $line, $matches))
-                    {
-                        if (isset($contextData['interrupted']))
-                        {
-                            $nestedBlock['content'] []= '';
-
-                            unset($contextData['interrupted']);
-                        }
-
-                        unset($nestedBlock);
-
-                        $nestedBlock = array(
-                            'name' => 'li',
-                            'content type' => 'lines',
-                            'content' => array(
-                                $matches[1],
-                            ),
-                        );
-
-                        $block['content'] []= & $nestedBlock;
-
-                        continue 2;
-                    }
-
-                    if (empty($contextData['interrupted']))
-                    {
-                        $value = $line;
-
-                        if ($indentation > $contextData['baseline'])
-                        {
-                            $value = str_repeat(' ', $indentation - $contextData['baseline']) . $value;
-                        }
-
-                        $nestedBlock['content'] []= $value;
-
-                        continue 2;
-                    }
-
-                    if ($indentation > 0)
-                    {
-                        $nestedBlock['content'] []= '';
-
-                        $value = $line;
-
-                        if ($indentation > $contextData['baseline'])
-                        {
-                            $value = str_repeat(' ', $indentation - $contextData['baseline']) . $value;
-                        }
-
-                        $nestedBlock['content'] []= $value;
-
-                        unset($contextData['interrupted']);
-
-                        continue 2;
-                    }
-
-                    $context = null;
-
-                    break;
-
-                case 'quote':
-                    if ($line === '')
-                    {
-                        $contextData['interrupted'] = true;
-                        continue 2;
-                    }
-                    if (preg_match('/^>[ ]?(.*)/', $line, $matches))
-                    {
-                        $block['content'] []= $matches[1];
-                        continue 2;
-                    }
-                    if (empty($contextData['interrupted']))
-                    {
-                        $block['content'] []= $line;
-                        continue 2;
-                    }
-                    $context = null;
-                    break;
-			case 'column':
-                    if ($line === '')
-                    {
-                        $contextData['interrupted'] = true;
-                        continue 2;
-                    }
-                    if (preg_match('/^\|{1,2}[ ](.*)/', $line, $matches))
-                    {
-                        $block['content'] []= $matches[1];
-                        continue 2;
-                    }
-                    if (empty($contextData['interrupted']))
-                    {
-                        $block['content'] []= $line;
-                        continue 2;
-                    }
-                    $context = null;
-                    break;
-                case 'code':
-
-                    if ($line === '')
-                    {
-                        $contextData['interrupted'] = true;
-
-                        continue 2;
-                    }
-
-                    if ($indentation >= 4)
-                    {
-                        if (isset($contextData['interrupted']))
-                        {
-                            $block['content'][0]['content'] .= "\n";
-
-                            unset($contextData['interrupted']);
-                        }
-
-                        $block['content'][0]['content'] .= "\n";
-
-                        $string = htmlspecialchars($line, ENT_NOQUOTES, 'UTF-8');
-                        $string = str_repeat(' ', $indentation - 4) . $string;
-
-                        $block['content'][0]['content'] .= $string;
-
-                        continue 2;
-                    }
-
-                    $context = null;
-
-                    break;
-
-                case 'table':
-
-                    if ($line === '')
-                    {
-                        $context = null;
-
-                        continue 2;
-                    }
-
-                    if (strpos($line, '|') !== false)
-                    {
-                        $nestedBlocks = array();
-
-                        $substring = preg_replace('/^[|][ ]*/', '', $line);
-                        $substring = preg_replace('/[|]?[ ]*$/', '', $substring);
-
-                        $parts = explode('|', $substring);
-
-                        foreach ($parts as $index => $part)
-                        {
-                            $substring = trim($part);
-
-                            $nestedBlock = array(
-                                'name' => 'td',
-                                'content type' => 'line',
-                                'content' => $substring,
-                            );
-
-                            if (isset($contextData['alignments'][$index]))
-                            {
-                                $nestedBlock['attributes'] = array(
-                                    'align' => $contextData['alignments'][$index],
-                                );
-                            }
-
-                            $nestedBlocks []= $nestedBlock;
-                        }
-
-                        $nestedBlock = array(
-                            'name' => 'tr',
-                            'content type' => 'blocks',
-                            'content' => $nestedBlocks,
-                        );
-
-                        $block['content'][1]['content'] []= $nestedBlock;
-
-                        continue 2;
-                    }
-
-                    $context = null;
-
-                    break;
-
-                case 'paragraph':
-
-                    if ($line === '')
-                    {
-                        $block['name'] = 'p'; # dense li
-
-                        $context = null;
-
-                        continue 2;
-                    }
-
-                    if ($line[0] === '=' and chop($line, '=') === '')
-                    {
-                        $block['name'] = 'h1';
-
-                        $context = null;
-
-                        continue 2;
-                    }
-
-                    if ($line[0] === '-' and chop($line, '-') === '')
-                    {
-                        $block['name'] = 'h2';
-
-                        $context = null;
-
-                        continue 2;
-                    }
-
-                    if (strpos($line, '|') !== false and strpos($block['content'], '|') !== false and chop($line, ' -:|') === '')
-                    {
-                        $values = array();
-
-                        $substring = trim($line, ' |');
-
-                        $parts = explode('|', $substring);
-
-                        foreach ($parts as $part)
-                        {
-                            $substring = trim($part);
-
-                            $value = null;
-
-                            if ($substring[0] === ':')
-                            {
-                                $value = 'left';
-                            }
-
-                            if (substr($substring, -1) === ':')
-                            {
-                                $value = $value === 'left' ? 'center' : 'right';
-                            }
-
-                            $values []= $value;
-                        }
-
-                        # ~
-
-                        $nestedBlocks = array();
-
-                        $substring = preg_replace('/^[|][ ]*/', '', $block['content']);
-                        $substring = preg_replace('/[|]?[ ]*$/', '', $substring);
-
-                        $parts = explode('|', $substring);
-
-                        foreach ($parts as $index => $part)
-                        {
-                            $substring = trim($part);
-
-                            $nestedBlock = array(
-                                'name' => 'th',
-                                'content type' => 'line',
-                                'content' => $substring,
-                            );
-
-                            if (isset($values[$index]))
-                            {
-                                $value = $values[$index];
-
-                                $nestedBlock['attributes'] = array(
-                                    'align' => $value,
-                                );
-                            }
-
-                            $nestedBlocks []= $nestedBlock;
-                        }
-
-                        # ~
-
-                        $block = array(
-                            'name' => 'table',
-                            'content type' => 'blocks',
-                            'content' => array(),
-                        );
-
-                        $block['content'] []= array(
-                            'name' => 'thead',
-                            'content type' => 'blocks',
-                            'content' => array(),
-                        );
-
-                        $block['content'] []= array(
-                            'name' => 'tbody',
-                            'content type' => 'blocks',
-                            'content' => array(),
-                        );
-
-                        $block['content'][0]['content'] []= array(
-                            'name' => 'tr',
-                            'content type' => 'blocks',
-                            'content' => array(),
-                        );
-
-                        $block['content'][0]['content'][0]['content'] = $nestedBlocks;
-
-                        # ~
-
-                        $context = 'table';
-
-                        $contextData = array(
-                            'alignments' => $values,
-                        );
-
-                        # ~
-
-                        continue 2;
-                    }
-
-                    break;
-
-                default:
-
-                    throw new Exception('Unrecognized context - '.$context);
-            }
-
-            if ($indentation >= 4)
-            {
-                $blocks []= $block;
-
-                $string = htmlspecialchars($line, ENT_NOQUOTES, 'UTF-8');
-                $string = str_repeat(' ', $indentation - 4) . $string;
-
-                $block = array(
-                    'name' => 'pre',
-                    'content type' => 'blocks',
-                    'content' => array(
-                        array(
-                            'name' => 'code',
-                            'content type' => null,
-                            'content' => $string,
-					   'attributes' => array(
-						'class' => 'language-none'
-					   )
-                        ),
-                    ),
-				'attributes' => array(
-					'class' => 'code line-numbers language-none'
-				)
-                );
-
-                $context = 'code';
-
-                continue;
-            }
+		foreach ($lines as $line){
+			$indentedLine = $line;
+   
+			$indentation = 0;
+			while(isset($line[$indentation]) and $line[$indentation] === ' '){
+				$indentation++;
+			}
+			if ($indentation > 0){
+				$line = ltrim($line);
+			}
+   
+			# ~
+
+			switch ($context) {
+				case null:
+					$contextData = null;
+					if ($line === ''){
+						continue 2;
+					}
+				    break;
+				# ~~~ javascript
+				# var message = 'Hello!';
+				case 'fenced code':
+					if ($line === ''){
+						$block['content'][0]['content'] .= "\n";
+						continue 2;
+					}
+					if (preg_match('/^[ ]*'.$contextData['marker'].'{3,}[ ]*$/', $line)){
+						$context = null;
+					} else {
+						if ($block['content'][0]['content']){
+							$block['content'][0]['content'] .= "\n";
+						}
+						$string = htmlspecialchars($indentedLine, ENT_NOQUOTES, 'UTF-8');
+						$block['content'][0]['content'] .= $string;
+					}
+					continue 2;
+				case 'markup':
+					if (stripos($line, $contextData['start']) !== false){
+						# opening tag
+						$contextData['depth'] += substr_count($line,$contextData['start']);
+					}
+					if (stripos($line, $contextData['end']) !== false){
+						# closing tag
+						$contextData['depth'] -= substr_count($line,$contextData['end']);
+					}
+					if($contextData['depth'] == 0){
+						$context = null;
+					}
+					$block['content'] .= "\n".$indentedLine;
+					continue 2;
+				case 'li':
+    
+				    if ($line === '')
+				    {
+					   $contextData['interrupted'] = true;
+    
+					   continue 2;
+				    }
+    
+				    if ($contextData['indentation'] === $indentation and preg_match('/^'.$contextData['marker'].'[ ]+(.*)/', $line, $matches))
+				    {
+					   if (isset($contextData['interrupted']))
+					   {
+						  $nestedBlock['content'] []= '';
+    
+						  unset($contextData['interrupted']);
+					   }
+    
+					   unset($nestedBlock);
+    
+					   $nestedBlock = array(
+						  'name' => 'li',
+						  'content type' => 'lines',
+						  'content' => array(
+							 $matches[1],
+						  ),
+					   );
+    
+					   $block['content'] []= & $nestedBlock;
+    
+					   continue 2;
+				    }
+    
+				    if (empty($contextData['interrupted']))
+				    {
+					   $value = $line;
+    
+					   if ($indentation > $contextData['baseline'])
+					   {
+						  $value = str_repeat(' ', $indentation - $contextData['baseline']) . $value;
+					   }
+    
+					   $nestedBlock['content'] []= $value;
+    
+					   continue 2;
+				    }
+    
+				    if ($indentation > 0)
+				    {
+					   $nestedBlock['content'] []= '';
+    
+					   $value = $line;
+    
+					   if ($indentation > $contextData['baseline'])
+					   {
+						  $value = str_repeat(' ', $indentation - $contextData['baseline']) . $value;
+					   }
+    
+					   $nestedBlock['content'] []= $value;
+    
+					   unset($contextData['interrupted']);
+    
+					   continue 2;
+				    }
+    
+				    $context = null;
+    
+				    break;
+    
+				case 'quote':
+				    if ($line === '')
+				    {
+					   $contextData['interrupted'] = true;
+					   continue 2;
+				    }
+				    if (preg_match('/^>[ ]?(.*)/', $line, $matches))
+				    {
+					   $block['content'] []= $matches[1];
+					   continue 2;
+				    }
+				    if (empty($contextData['interrupted']))
+				    {
+					   $block['content'] []= $line;
+					   continue 2;
+				    }
+				    $context = null;
+				    break;
+			    case 'column':
+				    if ($line === '')
+				    {
+					   $contextData['interrupted'] = true;
+					   continue 2;
+				    }
+				    if (preg_match('/^\|{1,2}[ ](.*)/', $line, $matches))
+				    {
+					   $block['content'] []= $matches[1];
+					   continue 2;
+				    }
+				    if (empty($contextData['interrupted']))
+				    {
+					   $block['content'] []= $line;
+					   continue 2;
+				    }
+				    $context = null;
+				    break;
+				case 'code':
+    
+				    if ($line === '')
+				    {
+					   $contextData['interrupted'] = true;
+    
+					   continue 2;
+				    }
+    
+				    if ($indentation >= 4)
+				    {
+					   if (isset($contextData['interrupted']))
+					   {
+						  $block['content'][0]['content'] .= "\n";
+    
+						  unset($contextData['interrupted']);
+					   }
+    
+					   $block['content'][0]['content'] .= "\n";
+    
+					   $string = htmlspecialchars($line, ENT_NOQUOTES, 'UTF-8');
+					   $string = str_repeat(' ', $indentation - 4) . $string;
+    
+					   $block['content'][0]['content'] .= $string;
+    
+					   continue 2;
+				    }
+    
+				    $context = null;
+    
+				    break;
+    
+				case 'table':
+    
+				    if ($line === '')
+				    {
+					   $context = null;
+    
+					   continue 2;
+				    }
+    
+				    if (strpos($line, '|') !== false)
+				    {
+					   $nestedBlocks = array();
+    
+					   $substring = preg_replace('/^[|][ ]*/', '', $line);
+					   $substring = preg_replace('/[|]?[ ]*$/', '', $substring);
+    
+					   $parts = explode('|', $substring);
+    
+					   foreach ($parts as $index => $part)
+					   {
+						  $substring = trim($part);
+    
+						  $nestedBlock = array(
+							 'name' => 'td',
+							 'content type' => 'line',
+							 'content' => $substring,
+						  );
+    
+						  if (isset($contextData['alignments'][$index]))
+						  {
+							 $nestedBlock['attributes'] = array(
+								'align' => $contextData['alignments'][$index],
+							 );
+						  }
+    
+						  $nestedBlocks []= $nestedBlock;
+					   }
+    
+					   $nestedBlock = array(
+						  'name' => 'tr',
+						  'content type' => 'blocks',
+						  'content' => $nestedBlocks,
+					   );
+    
+					   $block['content'][1]['content'] []= $nestedBlock;
+    
+					   continue 2;
+				    }
+    
+				    $context = null;
+    
+				    break;
+    
+				case 'paragraph':
+    
+				    if ($line === '')
+				    {
+					   $block['name'] = 'p'; # dense li
+    
+					   $context = null;
+    
+					   continue 2;
+				    }
+    
+				    if ($line[0] === '=' and chop($line, '=') === '')
+				    {
+					   $block['name'] = 'h1';
+    
+					   $context = null;
+    
+					   continue 2;
+				    }
+    
+				    if ($line[0] === '-' and chop($line, '-') === '')
+				    {
+					   $block['name'] = 'h2';
+    
+					   $context = null;
+    
+					   continue 2;
+				    }
+    
+				    if (strpos($line, '|') !== false and strpos($block['content'], '|') !== false and chop($line, ' -:|') === '')
+				    {
+					   $values = array();
+    
+					   $substring = trim($line, ' |');
+    
+					   $parts = explode('|', $substring);
+    
+					   foreach ($parts as $part)
+					   {
+						  $substring = trim($part);
+    
+						  $value = null;
+    
+						  if ($substring[0] === ':')
+						  {
+							 $value = 'left';
+						  }
+    
+						  if (substr($substring, -1) === ':')
+						  {
+							 $value = $value === 'left' ? 'center' : 'right';
+						  }
+    
+						  $values []= $value;
+					   }
+    
+					   # ~
+    
+					   $nestedBlocks = array();
+    
+					   $substring = preg_replace('/^[|][ ]*/', '', $block['content']);
+					   $substring = preg_replace('/[|]?[ ]*$/', '', $substring);
+    
+					   $parts = explode('|', $substring);
+    
+					   foreach ($parts as $index => $part)
+					   {
+						  $substring = trim($part);
+    
+						  $nestedBlock = array(
+							 'name' => 'th',
+							 'content type' => 'line',
+							 'content' => $substring,
+						  );
+    
+						  if (isset($values[$index]))
+						  {
+							 $value = $values[$index];
+    
+							 $nestedBlock['attributes'] = array(
+								'align' => $value,
+							 );
+						  }
+    
+						  $nestedBlocks []= $nestedBlock;
+					   }
+    
+					   # ~
+    
+					   $block = array(
+						  'name' => 'table',
+						  'content type' => 'blocks',
+						  'content' => array(),
+					   );
+    
+					   $block['content'] []= array(
+						  'name' => 'thead',
+						  'content type' => 'blocks',
+						  'content' => array(),
+					   );
+    
+					   $block['content'] []= array(
+						  'name' => 'tbody',
+						  'content type' => 'blocks',
+						  'content' => array(),
+					   );
+    
+					   $block['content'][0]['content'] []= array(
+						  'name' => 'tr',
+						  'content type' => 'blocks',
+						  'content' => array(),
+					   );
+    
+					   $block['content'][0]['content'][0]['content'] = $nestedBlocks;
+    
+					   # ~
+    
+					   $context = 'table';
+    
+					   $contextData = array(
+						  'alignments' => $values,
+					   );
+    
+					   # ~
+    
+					   continue 2;
+				    }
+    
+				    break;
+    
+				default:
+    
+				    throw new Exception('Unrecognized context - '.$context);
+			}
+
+			if ($indentation >= 4)
+			{
+			    $blocks []= $block;
+   
+			    $string = htmlspecialchars($line, ENT_NOQUOTES, 'UTF-8');
+			    $string = str_repeat(' ', $indentation - 4) . $string;
+   
+			    $block = array(
+				   'name' => 'pre',
+				   'content type' => 'blocks',
+				   'content' => array(
+					  array(
+						 'name' => 'code',
+						 'content type' => null,
+						 'content' => $string,
+						 'attributes' => array(
+						   'class' => 'language-none'
+						 )
+					  ),
+				   ),
+				   'attributes' => array(
+					   'class' => 'code line-numbers language-none'
+				   )
+			    );
+   
+			    $context = 'code';
+   
+			    continue;
+			}
 
             switch ($line[0])
             {
@@ -579,17 +545,17 @@ class Parsedown
 						$substring = substr($substring, 0, -1);
 					}
 					$position = strpos($substring, ' ');
-					if ($position){
+					if ($position !== false){
 						$name = substr($substring, 0, $position);
 					}else{
 						$name = $substring;
 					}
 					$name = strtolower($name);
-					if ($name[0] == 'h' and strpos('r123456', $name[1]) !== false){
+					if(in_array($name,array('br','hr','img'))){
+						$isClosing = true;
+					}
+					if ($name[0] == 'h' and strpos('123456', $name[1]) !== false){
 						#  hr, h1, h2, ...
-						if ($name == 'hr'){
-							$isClosing = true;
-						}
 					}elseif ( ! ctype_alpha($name)){
 						break;
 					}
@@ -609,11 +575,15 @@ class Parsedown
 					}
 					$context = 'markup';
 					$contextData = array(
-						'start' => '<'.$name.'',
+						'start' => '<'.$name,
 						'end' => '</'.$name.'>',
-						'depth' => 0,
+						'depth' => 0
 					);
-					if (stripos($line, $contextData['end']) !== false){
+					$contextData['depth'] = substr_count($line,$contextData['start']) - substr_count($line,$contextData['end']);
+					if(
+						stripos($line, $contextData['end']) !== false
+						&& substr_count($line,$contextData['start']) == substr_count($line,$contextData['end'])
+					){
 						$context = null;
 					}
 					continue 2;
@@ -733,7 +703,7 @@ class Parsedown
                                 ),
                             ),
 					   'attributes' => array(
-							'class' => 'code line-numbers'
+							'class' => 'code line-numbers language-'.(isset($matches[2]) ? $matches[2] : 'none')
 						)
                         );
 
@@ -852,42 +822,29 @@ class Parsedown
         return $blocks;
     }
 
-    private function compile(array $blocks)
-    {
-        $markup = '';
-
-        foreach ($blocks as $block)
-        {
-            $markup .= "\n";
-
-            if (isset($block['name']))
-            {
-                $markup .= '<'.$block['name'];
-
-                if (isset($block['attributes']))
-                {
-                    foreach ($block['attributes'] as $name => $value)
-                    {
-                        $markup .= ' '.$name.'="'.$value.'"';
-                    }
-                }
-
-                if ($block['content'] === null)
-                {
-				
-                    $markup .= ' />';
-
-                    continue;
-                }
-                else
-                {
-                    $markup .= '>';
-                }
-            }
+	private function compile(array $blocks) {
+		$markup = '';
+  
+		foreach ($blocks as $block){
+			$markup .= "\n";
+   
+			if (isset($block['name'])){
+				$markup .= '<'.$block['name'];
+				if (isset($block['attributes'])) {
+					foreach ($block['attributes'] as $name => $value){
+						$markup .= ' '.$name.'="'.$value.'"';
+					}
+				}
+				if ($block['content'] === null){
+					$markup .= ' />';
+					continue;
+				} else {
+					$markup .= '>';
+				}
+			}
 
 			if(array_key_exists('content type',$block)){
-				switch ($block['content type'])
-				{
+				switch ($block['content type']){
 					case null:
 						$markup .= $block['content'];
 						break;
@@ -896,8 +853,8 @@ class Parsedown
 						break;
 					case 'lines':
 						$result = $this->findBlocks($block['content'], $block['name']);
-						if (is_string($result)) # dense li
-						{
+						if (is_string($result)){
+							# dense li
 							$markup .= $this->parseLine($result);
 							break;
 						}
@@ -908,17 +865,13 @@ class Parsedown
 						break;
 				}
 			}
-            
+			if (isset($block['name'])){
+			    $markup .= '</'.$block['name'].'>';
+			}
+		}
+		$markup .= "\n";
 
-            if (isset($block['name']))
-            {
-                $markup .= '</'.$block['name'].'>';
-            }
-        }
-
-        $markup .= "\n";
-
-        return $markup;
+		return $markup;
 	}
 	
 	private function parseSpecialChars($text){
@@ -927,8 +880,9 @@ class Parsedown
 		$r = array('&reg;','&copy;','&trade;','&hearts;');
 		return str_replace($s,$r,$text);
 	}
-
+private $count = 0;
 	private function parseLine($text, $markers = array("  \n", '![', '&', '*', '<', '[#]', '[', '\\', '_', '`', 'http', '~~')){
+		$this->count++;
 		$text = $this->parseSpecialChars($text);
 		if (isset($text[1]) === false or $markers === array()){
 		    return $text;
@@ -1313,14 +1267,14 @@ class Parsedown
     );
 
     private static $textLevelElements = array(
-        'a', 'br', 'bdo', 'abbr', 'blink', 'nextid', 'acronym', 'basefont',
-        'b', 'em', 'big', 'cite', 'small', 'spacer', 'listing',
-        'i', 'rp', 'sub', 'code',          'strike', 'marquee',
-        'q', 'rt', 'sup', 'font',          'strong',
-        's', 'tt', 'var', 'mark',
-        'u', 'xm', 'wbr', 'nobr',
-                          'ruby',
-                          'span',
-                          'time',
+		'a', 'br', 'bdo', 'abbr', 'blink', 'nextid', 'acronym', 'basefont',
+		'b', 'em', 'big', 'cite', 'small', 'spacer', 'listing',
+		'i', 'rp', 'sub', 'code',          'strike', 'marquee',
+		'q', 'rt', 'sup', 'font',          'strong',
+		's', 'tt', 'var', 'mark',
+		'u', 'xm', 'wbr', 'nobr',
+					   'ruby',
+					   'span',
+					   'time',
     );
 }
