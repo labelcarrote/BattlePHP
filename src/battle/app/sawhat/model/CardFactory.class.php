@@ -220,8 +220,15 @@ class CardElement{
 		}
 		// Link to card
 		elseif(preg_match('/^\#([\S]*)$/',$html,$matches)){
-			$html = '<a href="[ROOT_URL]'.$matches[1].'"><b><span class="bigger">&rsaquo;</span>&nbsp;'.Card::get_display_name($matches[1])
-			.'</b></a> <a class="load_card" data-action="load" data-card-name="'.$matches[1].'">( load )</a>';
+			$html = '<div class="banner loadable">'
+				.'<a href="[ROOT_URL]'.$matches[1].'" class="white_text '.(!CardStore::exist($matches[1]) ? 'striked light' : '').'">'
+				.'<b><span class="bigger">&rsaquo;</span>&nbsp;'.Card::get_display_name($matches[1]).'</b>'
+				.'</a>'
+				.'<a class="right lighter_text load_card" data-action="load" data-card-name="'.$matches[1].'">LOAD</a>'
+				.'<div class="clearer"></div>'
+				.'</div>'
+				.'<div class="darker hidden"></div>'
+				.'<div class="marginbottom"></div>';
 		}
 		// Local File / Image
 		elseif(preg_match('/^\@([\S]+)$/',$html,$matches)){

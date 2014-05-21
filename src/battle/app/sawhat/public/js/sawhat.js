@@ -223,20 +223,22 @@ $(window).load(function(){
 		if(card_action === "load"){
 			var card_name = $(this).attr("data-card-name");
 			$.ajax({
-				url: card_name+"/as_html",
+				url: card_name+"/as_html/?show_banner=0",
 				type: 'get',
 				dataType: 'json',
 				success: function(data) {
-					element.after(data.body);
+					element.closest('.banner.loadable').next().html(data.body).slideDown(300);
 					element.attr("data-action","unload")
-					element.text("( unload )")
+					element.text("CLOSE")
 				}
 			});
 		}
 		else{
-			$(this).next().remove();
+			$(this).closest('.banner.loadable').next().slideUp(200,function(){
+				$(this).html('');
+			});
 			element.attr("data-action","load");
-			element.text("( load )")
+			element.text("LOAD")
 		}
 	});
 

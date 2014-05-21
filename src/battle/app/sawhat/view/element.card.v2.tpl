@@ -18,7 +18,9 @@
 	</div>
 	{else}
 	<style scoped>{$card->style_definition}</style>
-	{include file="element.card.banner.tpl" card=$card}
+	{if !isset($show_banner) || !$show_banner}
+		{include file="element.card.banner.tpl" card=$card}
+	{/if}
 	<div class="things">
 		{if !$logged and $card->is_private}
 		<form id="sawhatlogin" method="post" enctype="multipart/form-data">

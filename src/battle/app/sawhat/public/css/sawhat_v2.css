@@ -199,6 +199,11 @@ footer.content{
 	display: block;
 	vertical-align: middle;
 }
+.banner.loadable{
+	min-height: 0;
+	padding: 3px 6px;
+	line-height: 1em;
+}
 
 .banner h1,
 .banner h2,

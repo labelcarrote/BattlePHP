@@ -1,10 +1,10 @@
 <div class="banner">
 	<h{$card->recursive_level+1}>
-	{if !$card->is_recursive}
+	<!--{if !$card->is_recursive}
 		<a href="{$current_app_virtual_url}" class="lighter_text">
 			<b class="bigger">&lsaquo;</b>
 		</a>
-	{/if}
+	{/if}-->
 	<a href="{$current_app_virtual_url}{$card->name}" class="white_text {if !$card->exists}striked light{/if}">
 		{$card->display_name}
 	</a>
