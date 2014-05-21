@@ -1,6 +1,6 @@
 {if isset($cards)}
 <div class="content line">
-	{include file="element.breadcrumb.tpl"}
+	{include file="element.breadcrumbs.tpl"}
 	{foreach from=$cards item=card}
 	<section class="unit size1of3">
 		<div class="smallermargin" id="{$card->name}">
@@ -12,14 +12,14 @@
 </div>
 {elseif isset($card)}
 <div class="content">
-	{include file="element.breadcrumb.tpl"}
+	{include file="element.breadcrumbs.tpl"}
 	<section class="size1of1">
 	{include file="element.card.v2.tpl"}
 	</section>
 </div>
 {else}
 <div class="content">
-	{include file="element.breadcrumb.tpl"}
+	{include file="element.breadcrumbs.tpl"}
 	<section class="size1of1">
 	<div class="sawhat things">
 	No card were found.
