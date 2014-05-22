@@ -18,7 +18,7 @@
 	</div>
 	{else}
 	<style scoped>{$card->style_definition}</style>
-	{if !isset($show_banner) || !$show_banner}
+	{if !isset($show_banner) || $show_banner}
 		{include file="element.card.banner.tpl" card=$card}
 	{/if}
 	<div class="things">
