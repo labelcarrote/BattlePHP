@@ -10,6 +10,7 @@
 		</div>
 	</section>
 	{/foreach}
+	<div class="clearer"></div>
 	</div>
 </div>
 {elseif isset($card)}

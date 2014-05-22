@@ -218,8 +218,8 @@ footer.content{
 
 /* ---- Breadcrumbs ---- */
 .breadcrumbs {
-	padding: 0;
-	margin: 4px 0;
+	padding: 4px 0;
+	margin: 0;
 	border-radius: 0;
 	background: transparent;
 	color: #888;
@@ -411,6 +411,12 @@ footer.content{
 }
 .ace_scrollbar {
     display: none !important;
+}
+
+/* Search */
+#search_result {
+	background: rgba(255,255,255,0.3);
+	padding: 3px;
 }
 
 /* Footer */

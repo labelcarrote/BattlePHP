@@ -18,11 +18,32 @@ class CardStore{
 		foreach (glob($dir,GLOB_ONLYDIR) as $filename){
 			$basename = basename($filename);
 			if(
-				is_null($filter) ||
-				(!is_null($filter) && strpos($filter,'-') === 0 && stripos($basename,trim($filter,'-')) === false) ||
-				(!is_null($filter) && strpos($filter,'-') !== 0 && stripos($basename,$filter) !== false)
-			)
+				is_null($filter)
+			){
 				$result[] = self::get($basename);
+			}
+			elseif(!empty($filter)) {
+				$keywords = SearchHelper::explode_keywords($filter);
+				$add_result = true;
+				$filename = self::get_folder().$basename.'/'.$basename.'.txt';
+				foreach($keywords['in'] as $keyword){
+					if(!SearchHelper::keyword_in_file($keyword,$filename)){
+						$add_result = false;
+						break;
+					}
+				}
+				if($add_result){
+					foreach($keywords['out'] as $keyword){
+						if(SearchHelper::keyword_in_file($keyword,$filename)){
+							$add_result = false;
+							break;
+						}
+					}
+					if($add_result){
+						$result[] = self::get($basename);
+					}
+				}
+			}
 		}
 		return $result;
 	}
