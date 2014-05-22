@@ -1,6 +1,7 @@
 {if isset($cards)}
 <div class="content line">
 	{include file="element.breadcrumbs.tpl"}
+	<div id="search_result">
 	{foreach from=$cards item=card}
 	<section class="unit size1of3">
 		<div class="smallermargin" id="{$card->name}">
@@ -9,6 +10,7 @@
 		</div>
 	</section>
 	{/foreach}
+	</div>
 </div>
 {elseif isset($card)}
 <div class="content">

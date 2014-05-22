@@ -279,4 +279,15 @@ $(window).load(function(){
 
 	init_width_mode();
 
+	// SEARCH RESULT RESIZE //
+	var banner_min_height = parseInt($('.banner').css('min-height'));
+	$('#search_result .banner').each(function(){
+		var item_height = $(this).height();
+		var item_padding = ($(this).innerHeight() - $(this).height()) / 2;
+		var item_margin = ($(this).parent().outerHeight(true) - $(this).parent().innerHeight()) / 2;
+		if(item_height % banner_min_height > 0){
+			var next_ratio = Math.ceil(item_height/banner_min_height);
+			$(this).css('height',(next_ratio*(banner_min_height+item_padding+item_margin))+'px');
+		}
+	});
 });
