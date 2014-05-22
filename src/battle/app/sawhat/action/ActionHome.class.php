@@ -57,7 +57,9 @@ class ActionHome extends Controller{
 					break;
 				}
 				case 'search' : {
-					header('location: '.Request::get_application_virtual_root().$_POST['search'].'/all_cards');
+					// parse searching terms
+					$request = $_POST['search'];
+					header('location: '.Request::get_application_virtual_root().'all_cards/search/?request='.$request);
 					break;
 				}
 			}
@@ -107,9 +109,13 @@ class ActionHome extends Controller{
 					}
 					echo $result->to_json();
 					break;
-				case 'all_cards':
-					$this->assign('breadcrumbs',NavigationHelper::add_item(!is_null($params['card_name']) ? '<i>search:</i> '.$params['card_name'] : 'All cards'));
-					$ass_cards = CardStore::get_all($params['card_name']);
+				case 'search':
+					/* @todo
+					 * Add search in card
+					 */
+					$request = Request::isset_or($_GET['request'],null);
+					$this->assign('breadcrumbs',NavigationHelper::add_item(!is_null($request) ? '<i>search:</i> '.$request : 'nothing'));
+					$ass_cards = CardStore::get_all($request);
 					if(!empty($ass_cards))
 						$this->assign('cards',$ass_cards);
 					$this->display_page('section.card.tpl');
@@ -118,22 +124,25 @@ class ActionHome extends Controller{
 			return;
 		}
 		elseif($params = Request::get_params("@card_name")){
-			if($params['card_name'] == 'all_cards'){
-				$this->assign('breadcrumbs',NavigationHelper::add_item('All cards'));
-				$ass_cards = CardStore::get_all();
-				if(!empty($ass_cards)){
-					$this->assign('cards',$ass_cards);
+			switch($params['card_name']){
+				case 'all_cards':
+					$this->assign('breadcrumbs',NavigationHelper::add_item('All cards'));
+					$ass_cards = CardStore::get_all();
+					if(!empty($ass_cards)){
+						$this->assign('cards',$ass_cards);
+						$this->display_page('section.card.tpl');
+					}
+					break;
+				default;
+					// TEMP FIX for wrong get_params() behavior
+					$card_name = (isset($_GET['controller']) || (array_key_exists('controller',$_GET) && $_GET['controller'] === null)) 
+						? $params['card_name'] 
+						: ConfigurationSawhat::DEFAULT_CARD_NAME;
+					$ass_card = CardStore::get($card_name);
+					$this->assign('breadcrumbs',NavigationHelper::add_item($ass_card->display_name));
+					$this->assign('card',$ass_card);
 					$this->display_page('section.card.tpl');
-				}
-			}else{
-				// TEMP FIX for wrong get_params() behavior
-				$card_name = (isset($_GET['controller']) || (array_key_exists('controller',$_GET) && $_GET['controller'] === null)) 
-					? $params['card_name'] 
-					: ConfigurationSawhat::DEFAULT_CARD_NAME;
-				$ass_card = CardStore::get($card_name);
-				$this->assign('breadcrumbs',NavigationHelper::add_item($ass_card->display_name));
-				$this->assign('card',$ass_card);
-				$this->display_page('section.card.tpl');
+					break;
 			}
 			return;
 		}
