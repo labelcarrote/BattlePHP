@@ -220,7 +220,7 @@ footer.content{
 /* ---- Breadcrumbs ---- */
 .breadcrumbs {
 	padding: 0;
-	margin: 0 0 0 0;
+	margin: 4px 0;
 	border-radius: 0;
 	background: transparent;
 	color: #888;
