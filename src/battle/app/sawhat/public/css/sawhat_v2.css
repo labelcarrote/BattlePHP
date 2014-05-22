@@ -319,7 +319,10 @@ footer.content{
 	column-count:2;
 }
 
-.include .things { border-width: 0; }
+.include .things,.include .files {
+	border-width: 0 1px 1px;
+	border-style: dotted;
+}
 
 /* ---- Card Edit ---- */
 #card_edit_form legend {

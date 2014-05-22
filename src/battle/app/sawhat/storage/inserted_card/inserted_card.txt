@@ -1,6 +1,6 @@
 inserted_card
-lastedit: 20140521_1205
+lastedit: 20140522_0605
 color: #00ccff
 
-&gt; This card is inserted in the [insertion syntax](../syntax__expert) example.
+&gt; This card is inserted in the [insertion syntax](../syntax__expert) example.  
 &gt; Jon.

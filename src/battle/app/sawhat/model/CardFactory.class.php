@@ -101,8 +101,8 @@ class Card{
 	private function get_style_definition(){
 		$this->style_definition =
 			'#'.$this->name.' a:not(.white_text):not(.lighter_text):not(.black_text):not(.darker_text):not(.btn){color:'.$this->color.';}'
-			.'#'.$this->name.' h2,#'.$this->name.' h3,#'.$this->name.' h4,#'.$this->name.' .things{border-color:'.$this->color.';}'
-			.'#'.$this->name.' .banner{background-color:'.$this->color.';}'
+			.'#'.$this->name.' h2,#'.$this->name.' h3,#'.$this->name.' h4,#'.$this->name.' .things, #'.$this->name.' .files{border-color:'.$this->color.';}'
+			.'#'.$this->name.' .banner:not(.loadable){background-color:'.$this->color.';}'
 		;
 	}
 	
@@ -221,13 +221,13 @@ class CardElement{
 		// Link to card
 		elseif(preg_match('/^\#([\S]*)$/',$html,$matches)){
 			$html = '<div class="banner loadable">'
-				.'<a href="[ROOT_URL]'.$matches[1].'" class="white_text '.(!CardStore::exist($matches[1]) ? 'striked light' : '').'">'
+				.'<a href="[ROOT_URL]'.$matches[1].'" class="white_text '.(!CardStore::exist($matches[1]) ? 'striked light' : '').'" title="'.Card::get_display_name($matches[1]).'">'
 				.'<b><span class="bigger">&rsaquo;</span>&nbsp;'.Card::get_display_name($matches[1]).'</b>'
 				.'</a>'
 				.'<a class="right lighter_text load_card" data-action="load" data-card-name="'.$matches[1].'">LOAD</a>'
 				.'<div class="clearer"></div>'
 				.'</div>'
-				.'<div class="darker hidden"></div>'
+				.'<div class="darker include hidden"></div>'
 				.'<div class="marginbottom"></div>';
 		}
 		// Local File / Image

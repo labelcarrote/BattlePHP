@@ -5,7 +5,7 @@
 			<b class="bigger">&lsaquo;</b>
 		</a>
 	{/if}-->
-	<a href="{$current_app_virtual_url}{$card->name}" class="white_text {if !$card->exists}striked light{/if}">
+	<a href="{$current_app_virtual_url}{$card->name}" class="white_text {if !$card->exists}striked light{/if}" title="{$card->display_name}">
 		{$card->display_name}
 	</a>
 	</h{$card->recursive_level+1}>
