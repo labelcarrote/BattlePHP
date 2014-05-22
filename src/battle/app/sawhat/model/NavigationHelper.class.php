@@ -19,15 +19,19 @@ class NavigationHelper{
 		
 		$current_url = Request::get_full_url().$_SERVER['REQUEST_URI'];
 		// remove if already there
-		if(isset($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name][$item_name]) && $_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name][$item_name]['url'] == $current_url){
-			unset($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name][$item_name]);
+		if(isset($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'][$item_name]) && $_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'][$item_name]['url'] == $current_url){
+			unset($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'][$item_name]);
 		}
 		if($current_url != Request::get_full_url().Request::get_application_virtual_root()){
-			$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name][$item_name] = array('url' => $current_url, 'name' => $item_name);
+			$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'][$item_name] = array('url' => $current_url, 'name' => $item_name);
+			$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['position'] = array_search($item_name, array_keys($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'])) +1;
+		} else {
+			$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['position'] = 0;
 		}
 
-		if(count($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]) >= 6){
-			array_shift($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]);
+		if(count($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items']) > self::MAX_ITEM){
+			array_shift($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items']);
+			$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['position'] = 5;
 		}
 		
 		return self::get($breadcrumbs_name);
@@ -57,7 +61,7 @@ class NavigationHelper{
 	private static function set_in_session($breadcrumbs_name = self::DEFAULT_NAME){
 		$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name] =
 			!isset($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name])
-				?	array()
+				?	array('position' => 0, 'items' => array())
 				:	$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]
 		;
 	}

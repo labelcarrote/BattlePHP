@@ -1,20 +1,30 @@
 {if isset($breadcrumbs)}
 	<div class="breadcrumbs">
-		<a href="{$current_app_virtual_url}">{ConfigurationSawhat::SITE_TITLE}</a>
-			{if count($breadcrumbs) > 0}
+		<a
+			href="{$current_app_virtual_url}"
+			{if $breadcrumbs['position'] == 0}
+				class="current"
+				{if isset($card)}style="color:{$card->color};"{/if}
+			{/if}
+		>
+			{ConfigurationSawhat::SITE_TITLE}
+		</a>
+		{if count($breadcrumbs['items']) > 0}
 			<span class="bigger">&rsaquo;</span>&nbsp;...&nbsp;<span class="bigger">&rsaquo;</span>
-			{foreach from=$breadcrumbs item=breadcrumbs_item}
+			{foreach from=$breadcrumbs['items'] item=breadcrumbs_item}
 				<a
 					href="{$breadcrumbs_item['url']}"
-					{if $breadcrumbs_item@iteration == count($breadcrumbs)}class="last"{/if}
-					{if isset($card) && $breadcrumbs_item@iteration == count($breadcrumbs)}style="color:{$card->color};"{/if}
+					{if $breadcrumbs_item@iteration == $breadcrumbs['position']}
+						class="current"
+						{if isset($card)}style="color:{$card->color};"{/if}
+					{/if}
 				>
 					{$breadcrumbs_item['name']}
 				</a>
-				{if $breadcrumbs_item@iteration < count($breadcrumbs)}
+				{if $breadcrumbs_item@iteration < count($breadcrumbs['items'])}
 					<span class="bigger">&rsaquo;</span>
 				{/if}
 			{/foreach}
-			{/if}
+		{/if}
 	</div>
 {/if}

@@ -226,7 +226,7 @@ footer.content{
 	background: transparent;
 	color: #888;
 }
-.breadcrumbs a.last {
+.breadcrumbs a.current {
 	font-weight: bold;
 }
 .breadcrumbs a:hover {
