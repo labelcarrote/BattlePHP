@@ -1,16 +1,15 @@
 help
-lastedit: 20140521_0805
+lastedit: 20140522_1605
 color: #ff6523
 
 ===== Main principles 
 [**Sawhat**](https://github.com/labelcarrote/BattlePHP) is a card based wiki.  
 As it is a wiki, you can edit everything the way you like for everyone but unlike other *classic* wiki, the card based interface means there's no hierarchical link between cards. It's more like you'd have a gigantic post-it (R) wall with a search functionality.
 
-
-
 ===== Basic usage
 ==== Creating a card
 Cards can be accessed by typing their name in the url. If you type an url that is not already used as a card name, Sawhat will show you an empty card with an *Edit* link to create it.
+
 
 Since it's url encoded, you can only use *Latin characters* (from *a* to *z* and from *A* to *Z*) and *Arabic numerals* (from *0* to *9*).  
 You can use underscores `_` or hyphens `-` to add spaces.  
