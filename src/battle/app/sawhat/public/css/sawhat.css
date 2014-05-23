@@ -42,6 +42,9 @@ body{
 	word-wrap:break-word;
 }
 section, article, header, footer, nav, aside, hgroup{ display: block; }
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+	page-break-inside: avoid;
+}
 h1, .h1{font-size:2em;font-weight:bold; font-style: normal;}
 h2, .h2{font-size:1.67em;font-weight:bold; font-style: normal;}
 h3, .h3{font-size:1.3em; font-weight:bold; font-style: normal;}
@@ -113,6 +116,8 @@ blockquote + h6, blockquote + .h6 {
 	margin-top: 1em;
 }
 p {
+	widows: 4;
+	orphans: 4;
 	/* Not yet completely defined in CSS3 on 2014-05-23 */
 	hyphenate: auto;
 	hyphenate-before: 2;

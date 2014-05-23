@@ -1,5 +1,4 @@
 <?php
-
 #
 #
 # Parsedown
@@ -880,10 +879,17 @@ class Parsedown
 		$r = array('&reg;','&copy;','&trade;','&hearts;');
 		return str_replace($s,$r,$text);
 	}
-private $count = 0;
+	
+	private function parseNumericalExpression($text){
+		$text = preg_replace('/(\d) ([a-zA-Z_\-\+\/\*]+) (\d)/','$1&nbsp;$2&nbsp;$3',$text);
+		$text = preg_replace('/(\d) ([a-zA-Z])/','$1&nbsp;$2',$text);
+		return $text;
+	}
+	
 	private function parseLine($text, $markers = array("  \n", '![', '&', '*', '<', '[#]', '[', '\\', '_', '`', 'http', '~~')){
-		$this->count++;
 		$text = $this->parseSpecialChars($text);
+		$text = $this->parseNumericalExpression($text);
+		
 		if (isset($text[1]) === false or $markers === array()){
 		    return $text;
 		}
