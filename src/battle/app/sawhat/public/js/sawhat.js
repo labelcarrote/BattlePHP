@@ -229,8 +229,9 @@ $(window).load(function(){
 				success: function(data) {
 					element.closest('.banner.loadable').css({'background-color':data.color});
 					element.closest('.banner.loadable').next().html(data.body).slideDown(300);
-					element.attr("data-action","unload")
-					element.text("CLOSE")
+					element.attr("data-action","unload");
+					element.text("CLOSE");
+					Prism.highlightAll();
 				}
 			});
 		}
