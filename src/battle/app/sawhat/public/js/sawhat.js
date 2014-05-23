@@ -287,7 +287,7 @@ $(window).load(function(){
 		var item_margin = ($(this).parent().outerHeight(true) - $(this).parent().innerHeight()) / 2;
 		if(item_height % banner_min_height > 0){
 			var next_ratio = Math.ceil(item_height/banner_min_height);
-			$(this).css('height',(next_ratio*(banner_min_height+item_padding+item_margin))+'px');
+			$(this).css('height',((next_ratio*banner_min_height)+(((next_ratio*2)-2)*(item_padding+item_margin)))+'px');
 		}
 	});
 });
