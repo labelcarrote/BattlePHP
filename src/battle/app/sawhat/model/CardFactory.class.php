@@ -76,7 +76,7 @@ class Card{
 					$view_manager = Viewer::getInstance();
 					$view_manager->assign('logged',AuthHelper::is_authenticated());
 					$view_manager->assign('card',$card);
-					$card_content = $view_manager->fetch_view('element.card.v2.tpl');
+					$card_content = $view_manager->fetch_view('element.card.tpl');
 					$this->html .= 
 						'<div class="unit size1of'.count($element->cards).'">'
 							.'<div class="darker include">'
