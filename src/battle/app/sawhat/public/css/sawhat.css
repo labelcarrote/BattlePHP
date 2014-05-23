@@ -69,8 +69,8 @@ article{ padding: 0; }
 fieldset{ width: 100%; }
 
 img{
-    max-width: 100%;
-    vertical-align: middle;
+	max-width: 100%;
+	vertical-align: middle;
 }
 
 *:not(pre) > code {
@@ -139,10 +139,9 @@ blockquote > :last-child {
 	margin-bottom: 0;
 }
 
-
 table th, table td { padding: 0.2em 0.4em; border: 1px solid rgba(0,0,0,0.2); }
 tbody tr:nth-child(odd) {
-   background-color: rgba(0,0,0,0.1);
+	background-color: rgba(0,0,0,0.1);
 }
 
 /* "One Liners" */
@@ -458,7 +457,7 @@ footer.content{
 	left: 0;
 }
 .ace_scrollbar {
-    display: none !important;
+	display: none !important;
 }
 
 /* Search */
