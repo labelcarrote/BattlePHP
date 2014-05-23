@@ -220,7 +220,7 @@ class CardElement{
 		}
 		// Link to card
 		elseif(preg_match('/^\#([\S]*)$/',$html,$matches)){
-			$html = '<div class="banner loadable">'
+			$html = '<div class="banner loadable margintop">'
 				.'<a href="[ROOT_URL]'.$matches[1].'" class="white_text '.(!CardStore::exist($matches[1]) ? 'striked light' : '').'" title="'.Card::get_display_name($matches[1]).'">'
 				.'<b><span class="bigger">&rsaquo;</span>&nbsp;'.Card::get_display_name($matches[1]).'</b>'
 				.'</a>'

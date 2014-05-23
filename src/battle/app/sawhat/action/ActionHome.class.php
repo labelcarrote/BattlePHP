@@ -3,6 +3,7 @@ require_once 'app/sawhat/config/config_sawhat.php';
 require_once 'app/sawhat/model/CardFactory.class.php';
 require_once 'app/sawhat/model/CardStore.class.php';
 require_once 'app/sawhat/model/NavigationHelper.class.php';
+require_once 'app/sawhat/model/SearchHelper.class.php';
 require_once 'core/storage/Uploader.class.php';
 require_once 'core/auth/AuthHelper.class.php';
 require_once 'core/model/AjaxResult.class.php';
@@ -57,9 +58,9 @@ class ActionHome extends Controller{
 					break;
 				}
 				case 'search' : {
-					// parse searching terms
-					$request = $_POST['search'];
-					header('location: '.Request::get_application_virtual_root().'all_cards/search/?request='.$request);
+					// parsing search terms
+					$request = SearchHelper::prepare_request($_POST['search']);
+					header('location: '.Request::get_application_virtual_root().'all_cards/search/?request='.urlencode($request));
 					break;
 				}
 			}
