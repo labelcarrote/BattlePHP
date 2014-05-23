@@ -142,6 +142,7 @@ class ActionHome extends Controller{
 					$ass_card = CardStore::get($card_name);
 					$this->assign('breadcrumbs',NavigationHelper::add_item($ass_card->display_name));
 					$this->assign('card',$ass_card);
+					/*var_dump(self::get_broken_links($ass_card));*/
 					$this->display_page('section.card.tpl');
 					break;
 			}
@@ -190,6 +191,32 @@ class ActionHome extends Controller{
 			}
 		}
 		echo $result->to_json();
+	}
+
+	// ---- Helpers ----
+
+	private static function get_broken_links($card){
+		$broken_links = array();
+		$all_links = $card->get_all_links();
+		foreach ($all_links as $link) {
+			if(self::is_broken_link($link)){
+				$broken_links[] = $link;
+			}
+		}
+		return $broken_links;
+	}
+
+	private static function is_broken_link($url){
+	    $ch = curl_init();
+	    curl_setopt($ch, CURLOPT_URL, $url);
+	    curl_setopt($ch, CURLOPT_HEADER, 1);
+	    curl_setopt($ch , CURLOPT_RETURNTRANSFER, 1);
+	    $data = curl_exec($ch);
+	    $headers = curl_getinfo($ch);
+	    curl_close($ch);
+	    $http_code = $headers['http_code'];
+	    /*echo $url . " " . $http_code;*/
+	    return ($http_code != '200' && $http_code != '301' && $http_code != '302' );
 	}
 }
 ?>

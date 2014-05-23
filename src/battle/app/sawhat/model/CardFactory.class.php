@@ -151,6 +151,11 @@ class Card{
 		
 		return $card_name;
 	}
+
+	public function get_all_links(){
+		preg_match_all('#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#', $this->text_code, $output);
+		return $output[0];
+	}
 }
 
 class CardElement{
