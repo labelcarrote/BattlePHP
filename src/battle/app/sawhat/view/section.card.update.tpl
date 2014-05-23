@@ -35,15 +35,13 @@
 						<input type="checkbox" name="is_private" {if $card->is_private}checked{/if}> Is Private ?
 					</label>
 				</div>
-				<!-- TEXT -->
+				
+				<!-- TEXT EDITOR -->
 				<div id="editor-mask">
 					<div id="editor-container">
 					<pre id="editor">{$card->text_code}</pre>
 					</div>
 				</div>
-				<!-- 
-				<textarea class="hidden" type="text" name="card"></textarea>
-				-->
 			</fieldset>
 		</form>
 	

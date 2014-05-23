@@ -17,7 +17,7 @@
 <div class="content">
 	{include file="element.breadcrumbs.tpl"}
 	<section class="size1of1">
-	{include file="element.card.v2.tpl"}
+	{include file="element.card.tpl"}
 	</section>
 </div>
 {else}

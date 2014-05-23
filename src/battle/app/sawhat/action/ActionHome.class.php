@@ -105,7 +105,7 @@ class ActionHome extends Controller{
 						$this->assign('card',$ass_card);
 						$this->assign('logged',$logged);
 						$this->assign('show_banner',Request::isset_or($_GET['show_banner'],1));
-						$result->body = $this->fetch_view('element.card.v2.tpl');
+						$result->body = $this->fetch_view('element.card.tpl');
 						$result->color = $ass_card->color;
 					}
 					echo $result->to_json();
