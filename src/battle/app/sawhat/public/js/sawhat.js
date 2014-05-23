@@ -8,7 +8,7 @@ if(typeof ace !== 'undefined'){
 	editor.setShowPrintMargin(false);
 	editor.setOptions({
 		minLines: 12,
-        maxLines: Infinity
+        maxLines: 120000
     });
     editor.setAutoScrollEditorIntoView();
 	editor.resize();
