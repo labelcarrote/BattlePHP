@@ -6,7 +6,7 @@
 		<meta name="description" content="Label Carrote fluent wiki. Powered by Sawhat." />
 		<meta name="author" content="label carrote"/>
 		<meta name="robots" content="noindex, nofollow"/>
-		<title>{if isset($card->display_name)}{$card->display_name} | {/if}{ConfigurationSawhat::SITE_TITLE}</title>
+		<title>{if !isset($cards) && isset($card->display_name)}{$card->display_name} | {elseif isset($cards)} All cards | {/if}{ConfigurationSawhat::SITE_TITLE}</title>
 		<link rel="stylesheet" href="{$root_url}public/css/reset.css" />
 		<link rel="stylesheet" href="{$root_url}lib/bootstrap/bootstrap.min.css" />
 		<link rel="stylesheet" href="{$root_url}lib/bootstrap/jasny-bootstrap.min.css" />
