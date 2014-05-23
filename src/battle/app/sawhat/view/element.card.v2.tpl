@@ -32,7 +32,7 @@
 <div class="clearer"></div>
 		</div>
 		{if count($card->files) > 0}
-		<div class="smallpadding files marginbottom">
+		<div class="smallpadding files marginbottom darker">
 			<div class="image_preview hidden">
 				<img alt="image preview" src="" class="verticaly_centered" />
 			</div>
