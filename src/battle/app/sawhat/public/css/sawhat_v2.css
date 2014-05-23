@@ -112,7 +112,13 @@ blockquote + h5, blockquote + .h5 {
 blockquote + h6, blockquote + .h6 {
 	margin-top: 1em;
 }
-
+p {
+	/* Not yet completely defined in CSS3 on 2014-05-23 */
+	hyphenate: auto;
+	hyphenate-before: 2;
+	hyphenate-after: 3;
+	hyphenate-lines: 3;
+}
 p + p { margin-top: 1.5em; }
 ol,ul{ margin-bottom: 1.5em; }
 li > ul, li > ol {
