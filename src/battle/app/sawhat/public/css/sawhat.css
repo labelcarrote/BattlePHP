@@ -101,12 +101,12 @@ footer.content{ background-color: #666;	color: #999; }
 	border-color: #ccc;
 }
 .uploadprogress{
-	background-color: #FFF;
-	border-color: #FAFAFA;
+	background-color: #fff;
+	border-color: #fafafa;
 }
-.uploadprogress .bar{ background-color: #44CC00; }
+.uploadprogress .bar{ background-color: #44cc00; }
 .image_preview { background: rgba(80,80,80,0.8); }
-#editor { border: 1px solid rgba(0, 0, 0, 0.05); }
+#editor { border-color: rgba(0, 0, 0, 0.05); }
 #search_result { background: rgba(255,255,255,0.3); }
 footer a, footer .btn-link {
 	color: #ccc;
@@ -151,7 +151,8 @@ img{
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	line-height: 1em;
-	border: 1px solid;
+	border-width: 1px;
+	border-style: solid;
 }
 
 /* Typography */
@@ -201,13 +202,16 @@ li > ul, li > ol {
 blockquote {
 	padding: 0.5em;
 	margin: 1em 0 1em 0.5em;
-	border-left: 2px solid;
+	border-left-width: 2px;
+	border-style: solid;
 }
 blockquote > :first-child { margin-top: 0; }
 blockquote > :last-child { margin-bottom: 0; }
 table th, table td {
 	padding: 0.2em 0.4em; 
-	border: 1px solid;}
+	border-width: 1px;
+	border-style: solid;
+}
 
 /* "One Liners" */
 .hidden{ display: none; }
@@ -233,8 +237,8 @@ table th, table td {
 .margintopbottom{ margin-top: 12px; margin-bottom: 12px; }
 .marginleftright{ margin-left: 12px; margin-right: 12px; }
 .error{ font-weight: bold; }
-.border{ border: 1px solid; }
-.largeborderbottom{ border-bottom: 6px solid; }
+.border{ border-width: 1px; border-style: solid; }
+.largeborderbottom{ border-bottom-width: 6px; border-style: solid; }
 .noborder{ border: 0; }
 .fullwidth { width: 100%; }
 .clear { clear: both; }
@@ -260,7 +264,8 @@ small, .small { font-size: 0.9em; }
 
 header{ 
 	vertical-align: bottom; 
-	border-bottom: 2px solid;
+	border-bottom-width: 2px;
+	border-style: solid;
 }
 #super_wrapper {
 	position: fixed;
@@ -418,7 +423,8 @@ footer.content{
 	box-sizing: border-box;
 	padding: 3px;
 	z-index: 10;
-	border: 1px solid;
+	border-width: 1px;
+	border-style: solid;
 }
 .color_picker_item {
 	width: 24px;
@@ -426,7 +432,8 @@ footer.content{
 	float: left;
 	margin: 3px;
 	cursor: pointer;
-	border: 3px double;
+	border-width: 3px;
+	border-style: double;
 }
 
 /* Upload */
@@ -437,7 +444,8 @@ footer.content{
 	height: 40px;
 	line-height: 40px;
 	text-align: center;
-	border: 1px solid;
+	border-width: 1px;
+	border-style: solid;
 }
 .uploadprogress .bar{
 	width: 0%;
@@ -475,6 +483,8 @@ footer.content{
 	right: 0;
 	bottom: 0;
 	left: 0;
+	border-width: 1px;
+	border-style: solid;
 }
 .ace_scrollbar { display: none !important; }
 
