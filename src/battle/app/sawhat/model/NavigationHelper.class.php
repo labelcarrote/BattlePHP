@@ -18,6 +18,8 @@ class NavigationHelper{
 		self::set_in_session($breadcrumbs_name);
 		
 		$current_url = Request::get_full_url().$_SERVER['REQUEST_URI'];
+		$current_url = rtrim($current_url,'/')."/";
+		
 		// remove if already there
 		if(isset($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'][$item_name]) && $_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'][$item_name]['url'] == $current_url){
 			unset($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'][$item_name]);
