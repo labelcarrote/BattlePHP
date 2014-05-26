@@ -404,7 +404,7 @@ footer.content{
 
 .include .things,.include .files {
 	border-width: 0 1px 1px;
-	border-style: dotted;
+	border-style: solid;
 }
 
 /* ---- Card Edit ---- */
