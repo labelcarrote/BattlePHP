@@ -1,4 +1,5 @@
 <div class="banner">
+	<span class="big favorite lighter_text fa fa-star-o" data-card-name="{$card->name}"></span>&nbsp;
 	<h{$card->recursive_level+1}>
 	<!--{if !$card->is_recursive}
 		<a href="{$current_app_virtual_url}" class="lighter_text">
@@ -9,19 +10,20 @@
 		{$card->display_name}
 	</a>
 	</h{$card->recursive_level+1}>
-	{if !$logged and $card->is_private}
-		<div class="right align_right "><span class="lighter_text">PRIVATE</span></div>
-	{elseif !$card->exists}
-		<div class="right align_right">
+	<div class="right align_right">
+		{if !$card->exists}
 			<a class="lighter_text" href="{$current_app_virtual_url}{$card->name}/edit">CREATE</a>
-		</div>
-	{elseif $card->is_recursive}
-		<div class="right align_right">
-			<span class="white_text">{$card->last_edit}</span><br>
-			<a class="lighter_text" href="{$current_app_virtual_url}{$card->name}/edit">EDIT</a>
-		</div>
-	{else}
-		<a class="right lighter_text" href="{$current_app_virtual_url}{$card->name}/edit">EDIT</a>
-	{/if}
+		{else}
+			{if !$card->is_recursive}
+				<span class="white_text">{$card->last_edit}</span>
+			{/if}
+			
+			{if !$logged and $card->is_private}
+				<br><span class="lighter_text">PRIVATE</span>
+			{else}
+				<br><a class="right lighter_text" href="{$current_app_virtual_url}{$card->name}/edit">EDIT</a>
+			{/if}
+		{/if}
+	</div>
 	<div class="clearer"></div>
 </div>

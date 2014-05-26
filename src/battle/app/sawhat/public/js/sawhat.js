@@ -291,4 +291,29 @@ $(window).load(function(){
 			$(this).css('height',((next_ratio*banner_min_height)+(((next_ratio*2)-2)*(item_padding+item_margin)))+'px');
 		}
 	});
+	
+	// Favorite
+	var favorite_cards = localStorage['favorite_cards'];
+	if(typeof favorite_cards === 'undefined' || favorite_cards === null){
+		favorite_cards = new Array;
+	} else {
+		favorite_cards = JSON.parse(favorite_cards);
+	}
+	for(var key in favorite_cards){
+		$('.favorite[data-card-name="'+favorite_cards[key]+'"]').addClass('fa-star').removeClass('fa-star-o');
+	}
+	$('.banner').on('click','.favorite',function(){
+		var is_checked = $(this).hasClass('fa-star');
+		var card_name = $(this).attr('data-card-name')
+		if(is_checked){
+			$(this).addClass('fa-star-o').removeClass('fa-star');
+			// remove from storage
+			favorite_cards.splice(favorite_cards.indexOf(card_name),1);
+		} else {
+			$(this).addClass('fa-star').removeClass('fa-star-o');
+			// add in storage
+			favorite_cards.push(card_name);
+		}
+		localStorage['favorite_cards'] = JSON.stringify(favorite_cards);
+	});
 });

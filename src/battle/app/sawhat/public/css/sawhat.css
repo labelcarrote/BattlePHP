@@ -241,6 +241,8 @@ table th, table td {
 .clearer { clear: both;height: 0; margin: 0; padding: 0; display: block; }
 .clear_left, .clearer_left { clear: left; }
 .clear_right, .clearer_right { clear: right; }
+.smaller { font-size: 0.7em; }
+small, .small { font-size: 0.9em; }
 .big { font-size: 1.1em; }
 .bigger { font-size: 1.2em; }
 .striked {text-decoration: line-through;}
@@ -283,7 +285,7 @@ footer.content{
 	line-height: normal;
 	padding: 6px 12px;
 	display: block;
-	vertical-align: middle;
+	vertical-align: top;
 }
 .banner.loadable{
 	min-height: 0;
@@ -297,11 +299,16 @@ footer.content{
 .banner h4,
 .banner h5,
 .banner h6{
-	vertical-align: middle;
-	display: inline-block;
+	vertical-align: bottom;
+	display: inline;
 	line-height: 40px;
 	margin: 0;
 	border: 0;
+}
+.banner .favorite {
+	vertical-align: bottom;
+	cursor: pointer;
+	line-height: 40px;
 }
 
 /* ---- Breadcrumbs ---- */
