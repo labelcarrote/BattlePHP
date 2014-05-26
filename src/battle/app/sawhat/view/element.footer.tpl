@@ -7,7 +7,7 @@
 		{/if}
 		<b class="bigger">&rsaquo;&nbsp;</b><a href="{$current_app_virtual_url}all_cards">See all cards</a>
 		<br>
-		<b class="bigger">&rsaquo;&nbsp;</b><a href="{$current_app_virtual_url}">Home</a>
+		<b class="bigger">&rsaquo;&nbsp;</b><a href="{$current_app_virtual_url}help">Help</a>
 		<br>
 		<b class="bigger">&rsaquo;&nbsp;</b><a id="toggle_width" data-width-mode="stretch">Toggle Width</a>
 	</div>
