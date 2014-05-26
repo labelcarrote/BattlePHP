@@ -45,12 +45,12 @@ section, article, header, footer, nav, aside, hgroup{ display: block; }
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 	page-break-inside: avoid;
 }
-h1, .h1{font-size:2em;font-weight:bold; font-style: normal;}
-h2, .h2{font-size:1.67em;font-weight:bold; font-style: normal;}
-h3, .h3{font-size:1.3em; font-weight:bold; font-style: normal;}
-h4, .h4{font-size:1.25em; font-weight:normal; font-style: normal;}
-h5, .h5{font-size:1.15em; font-weight:bold; font-style: normal;}
-h6, .h6{font-size:1em; font-weight:normal;  font-style: italic;}
+h1, .h1{font-weight:bold; font-style: normal;}
+h2, .h2{font-weight:bold; font-style: normal;}
+h3, .h3{font-weight:bold; font-style: normal;}
+h4, .h4{font-weight:normal; font-style: normal;}
+h5, .h5{font-weight:bold; font-style: normal;}
+h6, .h6{font-weight:normal;  font-style: italic;}
 h1 { color: #999; }
 h1,h2,h3,h4 {
 	border-width: 0 0 0.1em;
@@ -123,6 +123,7 @@ p {
 	hyphenate-before: 2;
 	hyphenate-after: 3;
 	hyphenate-lines: 3;
+	font-variant-numeric: oldstyle-nums;
 }
 p + p { margin-top: 1.5em; }
 ol,ul{ margin-bottom: 1.5em; }
