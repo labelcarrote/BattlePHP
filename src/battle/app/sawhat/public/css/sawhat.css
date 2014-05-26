@@ -49,13 +49,13 @@ hr{
 h1,h2,h3,h4 { border-color: rgba(0,0,0,0.3); }
 *:not(pre) > code {
 	background: #eee;
-	border: 1px solid #ccc;
+	border-color: #ccc;
 }
 blockquote {
-	border-left: 2px solid rgba(0,0,0,0.2);
+	border-color: rgba(0,0,0,0.2);
 	background: rgba(0,0,0,0.05);
 }
-table th, table td { border: 1px solid rgba(0,0,0,0.2); }
+table th, table td { border-color: rgba(0,0,0,0.2); }
 tbody tr:nth-child(odd) { background-color: rgba(0,0,0,0.1); }
 
 .hidden_background{ background-color: transparent !important; }
@@ -66,16 +66,14 @@ tbody tr:nth-child(odd) { background-color: rgba(0,0,0,0.1); }
 .white { background-color: #fff; }
 .white_text { color: #fff; }
 .black_text { color: #000; }
-
-.border{ border: 1px solid rgba(0, 0, 0, 0.05); }
-.largeborderbottom{ border-bottom: 6px solid #999; }
+.border{ border-color: rgba(0, 0, 0, 0.05); }
+.largeborderbottom{ border-color: #999; }
 .error{ color : red; }
 
-header{ border-bottom: 2px solid #fff; }
+header{ border-color: #fff; }
 .content{ background-color: #ccc; }
 footer.content{ background-color: #666;	color: #999; }
 .width_constraint{ background-color: transparent; }
-
 .content > section > .sawhat,
 .content > section > div > .sawhat {
 	background-color: #fff;
@@ -96,22 +94,20 @@ footer.content{ background-color: #666;	color: #999; }
 }
 .color_picker {
 	background-color: #fff;
-	border: 1px solid #ccc;
+	border-color: #ccc;
 }
 .color_picker_item {
 	background-color: #fff;
-	border: 3px double #ccc;
+	border-color: #ccc;
 }
 .uploadprogress{
 	background-color: #FFF;
-	border: 1px solid #FAFAFA;
+	border-color: #FAFAFA;
 }
 .uploadprogress .bar{ background-color: #44CC00; }
 .image_preview { background: rgba(80,80,80,0.8); }
-
 #editor { border: 1px solid rgba(0, 0, 0, 0.05); }
 #search_result { background: rgba(255,255,255,0.3); }
-
 footer a, footer .btn-link {
 	color: #ccc;
 	text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
@@ -119,7 +115,6 @@ footer a, footer .btn-link {
 footer a:hover, footer .btn-link:hover {
 	color: #eee;
 }
-
 .btn-link {	color: #ccc; }
 
 /* ---- Base Rules / Element Selector ---- */
@@ -156,6 +151,7 @@ img{
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	line-height: 1em;
+	border: 1px solid;
 }
 
 /* Typography */
@@ -205,10 +201,13 @@ li > ul, li > ol {
 blockquote {
 	padding: 0.5em;
 	margin: 1em 0 1em 0.5em;
+	border-left: 2px solid;
 }
 blockquote > :first-child { margin-top: 0; }
 blockquote > :last-child { margin-bottom: 0; }
-table th, table td { padding: 0.2em 0.4em; }
+table th, table td {
+	padding: 0.2em 0.4em; 
+	border: 1px solid;}
 
 /* "One Liners" */
 .hidden{ display: none; }
@@ -234,6 +233,8 @@ table th, table td { padding: 0.2em 0.4em; }
 .margintopbottom{ margin-top: 12px; margin-bottom: 12px; }
 .marginleftright{ margin-left: 12px; margin-right: 12px; }
 .error{ font-weight: bold; }
+.border{ border: 1px solid; }
+.largeborderbottom{ border-bottom: 6px solid; }
 .noborder{ border: 0; }
 .fullwidth { width: 100%; }
 .clear { clear: both; }
@@ -255,7 +256,10 @@ table th, table td { padding: 0.2em 0.4em; }
 
 /* ---- Layout ---- */
 
-header{ vertical-align: bottom; }
+header{ 
+	vertical-align: bottom; 
+	border-bottom: 2px solid;
+}
 #super_wrapper {
 	position: fixed;
 	width: 100%;
@@ -407,6 +411,7 @@ footer.content{
 	box-sizing: border-box;
 	padding: 3px;
 	z-index: 10;
+	border: 1px solid;
 }
 .color_picker_item {
 	width: 24px;
@@ -414,6 +419,7 @@ footer.content{
 	float: left;
 	margin: 3px;
 	cursor: pointer;
+	border: 3px double;
 }
 
 /* Upload */
@@ -424,6 +430,7 @@ footer.content{
 	height: 40px;
 	line-height: 40px;
 	text-align: center;
+	border: 1px solid;
 }
 .uploadprogress .bar{
 	width: 0%;
