@@ -88,6 +88,13 @@ footer.content{ background-color: #666;	color: #999; }
 .fa.darker_text:hover {
 	color: #000;
 }
+.starred_title {
+	background: #bbb;
+	color: #fff;
+}
+.starred_container {
+	border-color: #bbb;
+}
 .breadcrumbs {
 	background-color: transparent;
 	color: #888;
@@ -325,8 +332,22 @@ footer.content{
 	margin: 0;
 	border: 0;
 }
-.banner .favorite {
+.banner .starred {
 	cursor: pointer;
+}
+
+/* Starred */
+.starred_title {
+	padding: 3px 6px;
+	margin-top: 0.75em;
+}
+.starred_container {
+	padding: 3px;
+	border-width: 0 1px 1px;
+	border-style: solid;
+}
+.starred_container .loadable_card {
+	margin: 3px;
 }
 
 /* ---- Breadcrumbs ---- */
@@ -350,7 +371,7 @@ footer.content{
 .things > :first-child { margin-top: 0; }
 .things > :nth-last-child(2) { margin-bottom: 0; }
 
-.column_container { margin: 1em 0; }
+.column_container { margin: 0.75em 0; }
 .column_container .size1of1,
 .column_container .size1of2,
 .column_container .size1of3 {
