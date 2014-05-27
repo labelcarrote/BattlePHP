@@ -68,59 +68,65 @@ class ActionHome extends Controller{
 		
 		$params = Request::get_params("@card_name/@action");
 		if($params){
-			switch($params['action']){
-				case 'edit':
-					$ass_card = CardStore::get($params['card_name']);
-					$this->assign('card',$ass_card);
-					$this->assign('breadcrumbs',NavigationHelper::add_item(($ass_card->exists ? '<i>edit:</i>' : '<i>create:</i>').' '.$ass_card->display_name));
-					if(($ass_card->is_private && $logged) || !$ass_card->is_private){
-						$ass_card->history = CardStore::get_card_history($params['card_name']);
-						$this->display_page('section.card.update.tpl');
-					}else{
-						$this->display_page('section.card.tpl');
-					}
-					break;
-				case 'as_code':
-					$result = new AjaxResult();
-					if($params['card_name'] == 'all_cards'){
-						$result->body = "";
-					}else{
-						$card_version = Request::isset_or($_GET["card_version"],null);
-						if($card_version !== null){
-							$old_card = CardStore::get_card_version($params['card_name'],$card_version);
-							$result->body = $old_card->text_code;
-						}else{
-							$card = CardStore::get($params['card_name']);
-							$result->body = $card->text_code;
-						}
-					}
-					echo $result->to_json();
-					break;
-				case 'as_html':
-					$result = new AjaxResult();
-					if($params['card_name'] == 'all_cards'){
-						$result->body = "";
-					}else{
+			if(!in_array($params['card_name'],array('all_cards','favorite'))){
+				switch($params['action']){
+					case 'edit':
 						$ass_card = CardStore::get($params['card_name']);
 						$this->assign('card',$ass_card);
-						$this->assign('logged',$logged);
-						$this->assign('show_banner',Request::isset_or($_GET['show_banner'],1));
-						$result->body = $this->fetch_view('element.card.tpl');
-						$result->color = $ass_card->color;
-					}
-					echo $result->to_json();
-					break;
-				case 'search':
-					/* @todo
-					 * Add search in card
-					 */
-					$request = Request::isset_or($_GET['request'],null);
-					$this->assign('breadcrumbs',NavigationHelper::add_item(!is_null($request) ? '<i>search:</i> '.$request : 'nothing'));
-					$ass_cards = CardStore::get_all($request);
-					if(!empty($ass_cards))
-						$this->assign('cards',$ass_cards);
-					$this->display_page('section.card.tpl');
-					break;
+						$this->assign('breadcrumbs',NavigationHelper::add_item(($ass_card->exists ? '<i>edit:</i>' : '<i>create:</i>').' '.$ass_card->display_name));
+						if(($ass_card->is_private && $logged) || !$ass_card->is_private){
+							$ass_card->history = CardStore::get_card_history($params['card_name']);
+							$this->display_page('section.card.update.tpl');
+						}else{
+							$this->display_page('section.card.tpl');
+						}
+						break;
+					case 'as_code':
+						$result = new AjaxResult();
+						if($params['card_name'] == 'all_cards'){
+							$result->body = "";
+						}else{
+							$card_version = Request::isset_or($_GET["card_version"],null);
+							if($card_version !== null){
+								$old_card = CardStore::get_card_version($params['card_name'],$card_version);
+								$result->body = $old_card->text_code;
+							}else{
+								$card = CardStore::get($params['card_name']);
+								$result->body = $card->text_code;
+							}
+						}
+						echo $result->to_json();
+						break;
+					case 'as_html':
+						$result = new AjaxResult();
+						if($params['card_name'] == 'all_cards'){
+							$result->body = "";
+						}else{
+							$ass_card = CardStore::get($params['card_name']);
+							$this->assign('card',$ass_card);
+							$this->assign('logged',$logged);
+							$this->assign('show_banner',Request::isset_or($_GET['show_banner'],1));
+							$this->assign('card_name',$ass_card->name);
+							$this->assign('card_display_name',$ass_card->display_name);
+							$this->assign('card_exists',$ass_card->exists);
+							$result->body = $this->fetch_view('element.card.tpl');
+							$result->loadable_link = $this->fetch_view('element.card.loadable.tpl');
+							$result->color = $ass_card->color;
+						}
+						echo $result->to_json();
+						break;
+					case 'search':
+						/* @todo
+						 * Add search in card
+						 */
+						$request = Request::isset_or($_GET['request'],null);
+						$this->assign('breadcrumbs',NavigationHelper::add_item(!is_null($request) ? '<i>search:</i> '.$request : 'nothing'));
+						$ass_cards = CardStore::get_all($request);
+						if(!empty($ass_cards))
+							$this->assign('cards',$ass_cards);
+						$this->display_page('section.card.tpl');
+						break;
+				}
 			}
 			return;
 		}
@@ -134,7 +140,11 @@ class ActionHome extends Controller{
 						$this->display_page('section.card.tpl');
 					}
 					break;
-				default;
+				case 'favorite':
+					$this->assign('breadcrumbs',NavigationHelper::add_item('Favorite'));
+					$this->display_page('section.card.favorite.tpl');
+					break;
+				default:
 					// TEMP FIX for wrong get_params() behavior
 					$card_name = (isset($_GET['controller']) || (array_key_exists('controller',$_GET) && $_GET['controller'] === null)) 
 						? $params['card_name'] 

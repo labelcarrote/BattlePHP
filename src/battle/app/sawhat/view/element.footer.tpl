@@ -1,4 +1,4 @@
-<footer class="content">
+<footer class="content auto_clear">
 	<div class="left">
 		{if $logged}
 		<form method="POST">
@@ -15,5 +15,4 @@
 		<input type="text" class="input-medium" name="search" placeholder="keywords go here" value="" required="required" pattern="[a-zA-Z0-9 _-]+">
 		<button class="btn" type="submit" name="submit" value="search" title="search"><span class="fa fa-search"></span></button> 
 	</form>
-	<div class="clearer"></div>
 </footer>

@@ -13,7 +13,10 @@ if(typeof ace !== 'undefined'){
     editor.setAutoScrollEditorIntoView();
 	editor.resize();
 }
-
+// extends jQuery for selector existence //
+jQuery.fn.exists = function () {
+    return this.length !== 0;
+}
 $(document).ready(function(){
 	// BANNER AUTO TEXT COLOR //
 	/* @todo
@@ -317,4 +320,19 @@ $(window).load(function(){
 		}
 		localStorage['favorite_cards'] = JSON.stringify(favorite_cards);
 	});
+	if($('.favorite_container').exists()){
+		console.log(favorite_cards);
+		for(var key in favorite_cards){
+			//$('.favorite_container').append(favorite_cards[key]+'<br>');
+			var card_name = favorite_cards[key];
+			$.ajax({
+				url: card_name+"/as_html/",
+				type: 'get',
+				dataType: 'json',
+				success: function(data) {
+					$('.favorite_container').append('<div class="left size1of2">'+data.loadable_link+'</div>');
+				}
+			});
+		}
+	}
 });

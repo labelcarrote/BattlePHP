@@ -14,21 +14,20 @@
 					<!--  Color for headers, links and horizontal bar  -->
 					<span class="help-inline">Color : </span>
 					<input type="text" class="input-large" name="color" placeholder="ex: #FF9900" value="{if $card->exists}{$card->color}{/if}" pattern="^#[a-fA-F0-9]{literal}{{/literal}3,6{literal}}{/literal}$">
-					<div class="color_picker hidden">
+					<div class="color_picker hidden auto_clear">
 						<div class="color_picker_item" data-color="#000"></div>
 						<div class="color_picker_item" data-color="#fff"></div>
 						<div class="color_picker_item" data-color="#2b2b2b"></div>
 						<div class="color_picker_item" data-color="#f90"></div>
 						<div class="color_picker_item" data-color="#ff6523"></div>
 						<div class="color_picker_item" data-color="#5bc0de"></div>
-						<br class="clearer">
+						<br>
 						<div class="color_picker_item" data-color="#7cfc00"></div>
 						<div class="color_picker_item" data-color="#1497a2"></div>
 						<div class="color_picker_item" data-color="#ffd801"></div>
 						<div class="color_picker_item" data-color="#ff2b08"></div>
 						<div class="color_picker_item" data-color="#00ccff"></div>
 						<div class="color_picker_item" data-color="#ff69a6"></div>
-						<div class="clearer"></div>
 					</div>
 					<!-- Private Card ? -->
 					<label class="checkbox">
@@ -75,9 +74,8 @@
 					</div>
 				</div>
 			</div>
-			<div id="files" class="files">
+			<div id="files" class="files auto_clear">
 				{include file="element.file_set.tpl" }
-				<div class="clearer"></div>
 		   </div>
 		</div>
 
@@ -86,11 +84,10 @@
 			<h2>History</h2>
 			<ul>
 				{foreach from=$card->history item=old_version}
-				<li>
+				<li class="auto_clear">
 					<span class="left block">{$old_version->name}</span>
 					<span class="image_size left block">{$old_version->human_readable_size}</span>
 					<a href="#" class="load_card_as_current marginleftright" data-card-name="{$card->name}" data-card-version="{$old_version->name}">Set as current card</a>
-					<div class="clearer_left"></div>
 				</li>
 				{/foreach}
 			</ul>

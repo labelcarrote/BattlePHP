@@ -73,7 +73,7 @@ class Card{
 		$card_to_include = array();
 		foreach($this->elements AS $k => $element){
 			if(isset($element->cards) && count($element->cards) > 0){
-				$this->html .= '<div class="column_container">';
+				$this->html .= '<div class="column_container auto_clear">';
 				foreach($element->cards AS $card){
 					$view_manager = Viewer::getInstance();
 					$view_manager->assign('logged',AuthHelper::is_authenticated());
@@ -87,7 +87,7 @@ class Card{
 						.'</div>'
 					;
 				}
-				$this->html .= '<div class="clearer"></div></div>';
+				$this->html .= '</div>';
 			} else {
 				$this->html .= $element->html;
 			}
@@ -185,10 +185,14 @@ class CardElement{
 		// Cards!
 		if(preg_match('/^\[#([a-zA-Z0-9\|#_-]+)\]$/',$line,$matches)){
 			$cards_names = array_slice(explode('|', $matches[1]),0,3);
+			// remove special favorite card
+			if(($key = array_search('#favorite',$cards_names)) !== false) {
+				unset($cards_names[$key]);
+			}
 			$column_count = count($cards_names);
 			if(!isset($this->cards))
 				$recursive_level++;
-			$this->html .= '<div class="column_container">';
+			$this->html .= '<div class="column_container auto_clear">';
 			foreach($cards_names as $card_name) {
 				$card_name = str_replace('#','',$card_name);
 				if($recursive_level < CardStore::MAX_RECURSIVE_LEVEL)
@@ -203,7 +207,7 @@ class CardElement{
 					$this->html .= '<div class="size1of'.$column_count.' left" id="'.$included_card->name.'"><style>'.$included_card->style_definition.'</style>'.$banner_content.'</div>';
 				}
 			}
-			$this->html .= '<div class="clearer"></div></div>';
+			$this->html .= '</div>';
 		}
 		// Parse line
 		else{
@@ -228,11 +232,15 @@ class CardElement{
 		}
 		// Link to card
 		elseif(preg_match('/^\#([\S]*)$/',$html,$matches)){
-			$view_manager = Viewer::getInstance();
-			$view_manager->assign('card_name',$matches[1]);
-			$view_manager->assign('card_display_name',Card::get_display_name($matches[1]));
-			$view_manager->assign('card_exists',!CardStore::exist($matches[1]));
-			$html = $view_manager->fetch_view('element.card.loadable.tpl');
+			if($matches[1] !== 'favorite'){
+				$view_manager = Viewer::getInstance();
+				$view_manager->assign('card_name',$matches[1]);
+				$view_manager->assign('card_display_name',Card::get_display_name($matches[1]));
+				$view_manager->assign('card_exists',CardStore::exist($matches[1]));
+				$html = $view_manager->fetch_view('element.card.loadable.tpl');
+			} else {
+				$html = '<div class="favorite_container auto_clear"></div>';
+			}
 		}
 		// Local File / Image
 		elseif(preg_match('/^\@([\S]+)$/',$html,$matches)){

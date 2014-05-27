@@ -1,4 +1,4 @@
-<div class="banner">
+<div class="banner auto_clear">
 	<h{$card->recursive_level+1}>
 	<a href="{$current_app_virtual_url}{$card->name}" class="white_text {if !$card->exists}striked light{/if}" title="{$card->display_name}">
 		{$card->display_name}
@@ -23,5 +23,4 @@
 			{/if}
 		{/if}
 	</div>
-	<div class="clearer"></div>
 </div>

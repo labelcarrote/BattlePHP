@@ -1,6 +1,6 @@
 <div class="sawhat" {if isset($card)}id="{$card->name}"{/if}>
 	{if !isset($card)}
-	<div class="banner">
+	<div class="banner auto_clear">
 		<div class="left">
 			<div>
 				<a href="{$current_app_virtual_url}" class="white_text">
@@ -8,20 +8,16 @@
 				</a>
 			</div>
 		</div>
-		<div class="clear"></div>
 	</div>
 	<div class="things">
-		<div>
-			ERROR: included card doesn't exist.
-			<div class="clearer"></div>
-		</div>
+		ERROR: included card doesn't exist.
 	</div>
 	{else}
 	<style scoped>{$card->style_definition}</style>
 	{if !isset($show_banner) || $show_banner}
 		{include file="element.card.banner.tpl" card=$card}
 	{/if}
-	<div class="things">
+	<div class="things auto_clear">
 		{if !$logged and $card->is_private}
 		<form id="sawhatlogin" method="post" enctype="multipart/form-data">
 			<input class="input-large" type="password" id="password" name="password" value="" size="20" /><br/>
@@ -29,7 +25,6 @@
 		</form> 
 		{else}
 {$card->html}
-<div class="clearer"></div>
 		</div>
 		{if count($card->files) > 0}
 		<div class="smallpadding files marginbottom darker">
