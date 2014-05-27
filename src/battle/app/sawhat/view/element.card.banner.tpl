@@ -1,5 +1,4 @@
 <div class="banner">
-	<span class="big favorite lighter_text fa fa-star-o" data-card-name="{$card->name}"></span>&nbsp;
 	<h{$card->recursive_level+1}>
 	<!--{if !$card->is_recursive}
 		<a href="{$current_app_virtual_url}" class="lighter_text">
@@ -12,16 +11,20 @@
 	</h{$card->recursive_level+1}>
 	<div class="right align_right">
 		{if !$card->exists}
-			<a class="lighter_text" href="{$current_app_virtual_url}{$card->name}/edit">CREATE</a>
+			<a class="lighter_text" href="{$current_app_virtual_url}{$card->name}/edit" title="create">
+				<span class="favorite lighter_text fa fa-pencil fa-fw" data-card-name="{$card->name}"></span>
+			</a>
 		{else}
 			{if !$card->is_recursive}
-				<span class="white_text">{$card->last_edit}</span>
+				<span class="white_text">{$card->last_edit}</span><br>
 			{/if}
-			
+			<span class="favorite lighter_text fa fa-star-o fa-fw" data-card-name="{$card->name}" title="add in favorite"></span>&nbsp;
 			{if !$logged and $card->is_private}
-				<br><span class="lighter_text">PRIVATE</span>
+				<span class="lighter_text">PRIVATE</span>
 			{else}
-				<br><a class="right lighter_text" href="{$current_app_virtual_url}{$card->name}/edit">EDIT</a>
+				<a class="right lighter_text" href="{$current_app_virtual_url}{$card->name}/edit" title="edit">
+					<span class="favorite lighter_text fa fa-pencil fa-fw" data-card-name="{$card->name}"></span>
+				</a>
 			{/if}
 		{/if}
 	</div>

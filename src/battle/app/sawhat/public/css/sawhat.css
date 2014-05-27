@@ -82,6 +82,12 @@ footer.content{ background-color: #666;	color: #999; }
 	background-color: #999;
 	color: #fff; 
 }
+.fa.lighter_text:hover {
+	color: #fff;
+}
+.fa.darker_text:hover {
+	color: #000;
+}
 .breadcrumbs {
 	background-color: transparent;
 	color: #888;
@@ -311,9 +317,7 @@ footer.content{
 	border: 0;
 }
 .banner .favorite {
-	vertical-align: bottom;
 	cursor: pointer;
-	line-height: 40px;
 }
 
 /* ---- Breadcrumbs ---- */

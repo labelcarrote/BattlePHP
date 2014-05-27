@@ -28,7 +28,6 @@ $(document).ready(function(){
 		var g = parseInt(rgb[2]);
 		var b = parseInt(rgb[3]);
 		var luminance = (r+r+b+g+g+g)/6
-		//alert(luminance);
 		if(luminance > 190){
 			$(this).find('.lighter_text').removeClass('lighter_text').addClass('darker_text');
 			$(this).find('.white_text').removeClass('white_text').addClass('black_text');
@@ -230,7 +229,8 @@ $(window).load(function(){
 					element.closest('.banner.loadable').css({'background-color':data.color});
 					element.closest('.banner.loadable').next().html(data.body).slideDown(300);
 					element.attr("data-action","unload");
-					element.text("CLOSE");
+					element.attr('title','close');
+					element.find('span.fa').removeClass('fa-chevron-down').addClass('fa-times');
 					Prism.highlightAll();
 				}
 			});
@@ -240,7 +240,8 @@ $(window).load(function(){
 				$(this).html('');
 			});
 			element.attr("data-action","load");
-			element.text("LOAD")
+			element.attr('title','load');
+			element.find('span.fa').removeClass('fa-times').addClass('fa-chevron-down');
 		}
 	});
 
