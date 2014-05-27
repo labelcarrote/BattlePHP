@@ -185,8 +185,8 @@ class CardElement{
 		// Cards!
 		if(preg_match('/^\[#([a-zA-Z0-9\|#_-]+)\]$/',$line,$matches)){
 			$cards_names = array_slice(explode('|', $matches[1]),0,3);
-			// remove special favorite card
-			if(($key = array_search('#favorite',$cards_names)) !== false) {
+			// remove special starred card
+			if(($key = array_search('#starred',$cards_names)) !== false) {
 				unset($cards_names[$key]);
 			}
 			$column_count = count($cards_names);
@@ -232,14 +232,20 @@ class CardElement{
 		}
 		// Link to card
 		elseif(preg_match('/^\#([\S]*)$/',$html,$matches)){
-			if($matches[1] !== 'favorite'){
+			if($matches[1] !== 'starred'){
 				$view_manager = Viewer::getInstance();
 				$view_manager->assign('card_name',$matches[1]);
 				$view_manager->assign('card_display_name',Card::get_display_name($matches[1]));
 				$view_manager->assign('card_exists',CardStore::exist($matches[1]));
 				$html = $view_manager->fetch_view('element.card.loadable.tpl');
 			} else {
-				$html = '<div class="favorite_container auto_clear"></div>';
+				$html = '<div class="starred_title smaller">'
+						.'<span class="fa-stack">'
+						.'<span class="lighter_text fa fa-circle-thin fa-stack-2x"></span>'
+						.'<span class="fa fa-star fa-stack-1x"></span>'
+						.'</span>'
+					.'</div>'
+					.'<div class="starred_container auto_clear"></div>';
 			}
 		}
 		// Local File / Image

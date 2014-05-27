@@ -13,7 +13,7 @@
 			{if !$card->is_recursive}
 				<span class="white_text">{$card->last_edit}</span><br>
 			{/if}
-			<span class="favorite lighter_text fa fa-star-o fa-fw" data-card-name="{$card->name}" title="add in favorite"></span>&nbsp;
+			<span class="starred lighter_text fa fa-star-o fa-fw" data-card-name="{$card->name}" title="add in starred"></span>&nbsp;
 			{if !$logged and $card->is_private}
 				<span class="lighter_text">PRIVATE</span>
 			{else}

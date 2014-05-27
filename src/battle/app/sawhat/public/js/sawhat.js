@@ -235,6 +235,7 @@ $(window).load(function(){
 					element.attr('title','close');
 					element.find('span.fa').removeClass('fa-chevron-circle-down').addClass('fa-times');
 					Prism.highlightAll();
+					//load_starred_cards();
 				}
 			});
 		}
@@ -296,43 +297,44 @@ $(window).load(function(){
 		}
 	});
 	
-	// Favorite
-	var favorite_cards = localStorage['favorite_cards'];
-	if(typeof favorite_cards === 'undefined' || favorite_cards === null){
-		favorite_cards = new Array;
+	// Starred
+	var starred_cards = localStorage['starred_cards'];
+	if(typeof starred_cards === 'undefined' || starred_cards === null){
+		starred_cards = new Array;
 	} else {
-		favorite_cards = JSON.parse(favorite_cards);
+		starred_cards = JSON.parse(starred_cards);
 	}
-	for(var key in favorite_cards){
-		$('.favorite[data-card-name="'+favorite_cards[key]+'"]').addClass('fa-star').removeClass('fa-star-o');
+	for(var key in starred_cards){
+		$('.starred[data-card-name="'+starred_cards[key]+'"]').addClass('fa-star').removeClass('fa-star-o');
 	}
-	$('.banner').on('click','.favorite',function(){
+	$('.banner').on('click','.starred',function(){
 		var is_checked = $(this).hasClass('fa-star');
 		var card_name = $(this).attr('data-card-name')
 		if(is_checked){
 			$(this).addClass('fa-star-o').removeClass('fa-star');
 			// remove from storage
-			favorite_cards.splice(favorite_cards.indexOf(card_name),1);
+			starred_cards.splice(starred_cards.indexOf(card_name),1);
 		} else {
 			$(this).addClass('fa-star').removeClass('fa-star-o');
 			// add in storage
-			favorite_cards.push(card_name);
+			starred_cards.push(card_name);
 		}
-		localStorage['favorite_cards'] = JSON.stringify(favorite_cards);
+		localStorage['starred_cards'] = JSON.stringify(starred_cards);
 	});
-	if($('.favorite_container').exists()){
-		console.log(favorite_cards);
-		for(var key in favorite_cards){
-			//$('.favorite_container').append(favorite_cards[key]+'<br>');
-			var card_name = favorite_cards[key];
-			$.ajax({
-				url: card_name+"/as_html/",
-				type: 'get',
-				dataType: 'json',
-				success: function(data) {
-					$('.favorite_container').append('<div class="left size1of2">'+data.loadable_link+'</div>');
-				}
-			});
+	function load_starred_cards(){
+		if($('.starred_container').exists()){
+			for(var key in starred_cards){
+				var card_name = starred_cards[key];
+				$.ajax({
+					url: card_name+"/as_html/",
+					type: 'get',
+					dataType: 'json',
+					success: function(data) {
+						$('.starred_container').append('<div class="left size1of2">'+data.loadable_link+'</div>');
+					}
+				});
+			}
 		}
 	}
+	load_starred_cards();
 });

@@ -68,7 +68,7 @@ class ActionHome extends Controller{
 		
 		$params = Request::get_params("@card_name/@action");
 		if($params){
-			if(!in_array($params['card_name'],array('all_cards','favorite'))){
+			if(!in_array($params['card_name'],array('all_cards','starred'))){
 				switch($params['action']){
 					case 'edit':
 						$ass_card = CardStore::get($params['card_name']);
@@ -140,9 +140,9 @@ class ActionHome extends Controller{
 						$this->display_page('section.card.tpl');
 					}
 					break;
-				case 'favorite':
-					$this->assign('breadcrumbs',NavigationHelper::add_item('Favorite'));
-					$this->display_page('section.card.favorite.tpl');
+				case 'starred':
+					$this->assign('breadcrumbs',NavigationHelper::add_item('Starred'));
+					$this->display_page('section.card.starred.tpl');
 					break;
 				default:
 					// TEMP FIX for wrong get_params() behavior
