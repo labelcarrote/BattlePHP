@@ -100,7 +100,7 @@ class ActionHome extends Controller{
 					case 'as_html':
 						$result = new AjaxResult();
 						if($params['card_name'] == 'all_cards'){
-							$result->body = "";
+							$result->body = '';
 						}else{
 							$ass_card = CardStore::get($params['card_name']);
 							$this->assign('card',$ass_card);
