@@ -228,34 +228,20 @@ class CardElement{
 		}
 		// Link to card
 		elseif(preg_match('/^\#([\S]*)$/',$html,$matches)){
-			$html = '<div class="loadable_card">'
-				.'<div class="banner loadable">'
-				.'<a href="[ROOT_URL]'.$matches[1].'" class="white_text '.(!CardStore::exist($matches[1]) ? 'striked light' : '').'" title="'.Card::get_display_name($matches[1]).'">'
-				.'<b><span class="bigger">&rsaquo;</span>&nbsp;'.Card::get_display_name($matches[1]).'</b>'
-				.'</a>'
-				.'<a class="right lighter_text load_card" data-action="load" data-card-name="'.Request::get_application_virtual_root().$matches[1].'" title="load">'
-				.'<span class="favorite lighter_text fa fa-chevron-down"></span>'
-				.'</a>'
-				.'<div class="clearer"></div>'
-				.'</div>'
-				.'<div class="darker include hidden"></div>'
-				.'</div>';
+			$view_manager = Viewer::getInstance();
+			$view_manager->assign('card_name',$matches[1]);
+			$view_manager->assign('card_display_name',Card::get_display_name($matches[1]));
+			$view_manager->assign('card_exists',!CardStore::exist($matches[1]));
+			$html = $view_manager->fetch_view('element.card.loadable.tpl');
 		}
 		// Local File / Image
 		elseif(preg_match('/^\@([\S]+)$/',$html,$matches)){
+			$file_root = Request::get_root_url().CardStore::get_folder().$this->card_name.'/';
 			if(preg_match('/^\@.+\.(?:png|jpg|jpe?g|gif)?$/',$html)) 
-				$html = '<img src="[IMAGE_URL]'.$matches[1].'" alt="image" />';
+				$html = '<img src="'.$file_root.$matches[1].'" alt="image" />';
 			else
-				$html = '<a href="[IMAGE_URL]'.$matches[1].'">'.$matches[1].'</a>';
+				$html = '<a href="'.$file_root.$matches[1].'">'.$matches[1].'</a>';
 		}
-		
-		// Replace vars
-		$s = array('[ROOT_URL]','[IMAGE_URL]');
-		$r = array(
-			Request::get_application_virtual_root(),
-			Request::get_root_url().CardStore::get_folder().$this->card_name.'/',
-		);
-		$html = str_replace($s,$r,$html);
 		
 		return array('html_code' => $html, 'multiple_line' => $multiple_line, 'closure_tag' => $closure_tag, 'coding_language' => '');
 	}
