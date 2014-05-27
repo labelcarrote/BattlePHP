@@ -7,7 +7,7 @@
 	<div class="right align_right">
 		{if !$card->exists}
 			<a class="lighter_text" href="{$current_app_virtual_url}{$card->name}/edit" title="create">
-				<span class="favorite lighter_text fa fa-pencil fa-fw" data-card-name="{$card->name}"></span>
+				<span class="lighter_text fa fa-pencil fa-fw" data-card-name="{$card->name}"></span>
 			</a>
 		{else}
 			{if !$card->is_recursive}
@@ -18,7 +18,7 @@
 				<span class="lighter_text">PRIVATE</span>
 			{else}
 				<a class="right lighter_text" href="{$current_app_virtual_url}{$card->name}/edit" title="edit">
-					<span class="favorite lighter_text fa fa-pencil fa-fw" data-card-name="{$card->name}"></span>
+					<span class="lighter_text fa fa-pencil fa-fw" data-card-name="{$card->name}"></span>
 				</a>
 			{/if}
 		{/if}

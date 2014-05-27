@@ -230,7 +230,7 @@ $(window).load(function(){
 					element.closest('.banner.loadable').next().html(data.body).slideDown(300);
 					element.attr("data-action","unload");
 					element.attr('title','close');
-					element.find('span.fa').removeClass('fa-chevron-down').addClass('fa-times');
+					element.find('span.fa').removeClass('fa-chevron-circle-down').addClass('fa-times');
 					Prism.highlightAll();
 				}
 			});
@@ -241,7 +241,7 @@ $(window).load(function(){
 			});
 			element.attr("data-action","load");
 			element.attr('title','load');
-			element.find('span.fa').removeClass('fa-times').addClass('fa-chevron-down');
+			element.find('span.fa').removeClass('fa-times').addClass('fa-chevron-circle-down');
 		}
 	});
 
