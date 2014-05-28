@@ -66,11 +66,13 @@ class ActionHome extends Controller{
 			}
 		}
 		
+		$fake_cards = array('all_cards','starred');
+		
 		$params = Request::get_params("@card_name/@action");
 		if($params){
-			if(!in_array($params['card_name'],array('all_cards','starred'))){
-				switch($params['action']){
-					case 'edit':
+			switch($params['action']){
+				case 'edit':
+					if(!in_array($params['card_name'],$fake_cards)){
 						$ass_card = CardStore::get($params['card_name']);
 						$this->assign('card',$ass_card);
 						$this->assign('breadcrumbs',NavigationHelper::add_item(($ass_card->exists ? '<i>edit:</i>' : '<i>create:</i>').' '.$ass_card->display_name));
@@ -80,8 +82,10 @@ class ActionHome extends Controller{
 						}else{
 							$this->display_page('section.card.tpl');
 						}
-						break;
-					case 'as_code':
+					}
+					break;
+				case 'as_code':
+					if(!in_array($params['card_name'],$fake_cards)){
 						$result = new AjaxResult();
 						if($params['card_name'] == 'all_cards'){
 							$result->body = "";
@@ -96,8 +100,10 @@ class ActionHome extends Controller{
 							}
 						}
 						echo $result->to_json();
-						break;
-					case 'as_html':
+					}
+					break;
+				case 'as_html':
+					if(!in_array($params['card_name'],$fake_cards)){
 						$result = new AjaxResult();
 						if($params['card_name'] == 'all_cards'){
 							$result->body = '';
@@ -114,19 +120,19 @@ class ActionHome extends Controller{
 							$result->color = $ass_card->color;
 						}
 						echo $result->to_json();
-						break;
-					case 'search':
-						/* @todo
-						 * Add search in card
-						 */
-						$request = Request::isset_or($_GET['request'],null);
-						$this->assign('breadcrumbs',NavigationHelper::add_item(!is_null($request) ? '<i>search:</i> '.$request : 'nothing'));
-						$ass_cards = CardStore::get_all($request);
-						if(!empty($ass_cards))
-							$this->assign('cards',$ass_cards);
-						$this->display_page('section.card.tpl');
-						break;
-				}
+					}
+					break;
+				case 'search':
+					/* @todo
+					 * Add search in card
+					 */
+					$request = Request::isset_or($_GET['request'],null);
+					$this->assign('breadcrumbs',NavigationHelper::add_item(!is_null($request) ? '<i>search:</i> '.$request : 'nothing'));
+					$ass_cards = CardStore::get_all($request);
+					if(!empty($ass_cards))
+						$this->assign('cards',$ass_cards);
+					$this->display_page('section.card.tpl');
+					break;
 			}
 			return;
 		}
