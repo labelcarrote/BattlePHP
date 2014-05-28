@@ -50,7 +50,7 @@ $(document).ready(function(){
 					'left' : position.left+'px',
 					'top' : (position.top+$(this).outerHeight()-3)+'px'
 				});
-				related_color_picker.slideDown(200);
+				related_color_picker.hide().removeClass('hidden').slideDown(200);
 			},
 			'blur' : function(){
 				related_color_picker.delay(100).slideUp(200);
@@ -230,7 +230,7 @@ $(window).load(function(){
 				dataType: 'json',
 				success: function(data) {
 					element.closest('.banner.loadable').css({'background-color':data.color});
-					element.closest('.banner.loadable').next().html(data.body).slideDown(300);
+					element.closest('.banner.loadable').next().html(data.body).hide().removeClass('hidden').slideDown(300);
 					element.attr("data-action","unload");
 					element.attr('title','close');
 					element.find('span.fa').removeClass('fa-chevron-circle-down').addClass('fa-times');

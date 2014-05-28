@@ -227,7 +227,6 @@ table th, table td {
 }
 
 /* "One Liners" */
-.hidden{ display: none; }
 .left{ float: left; }
 .right{ float: right; }
 .align_right{ text-align: right; }
