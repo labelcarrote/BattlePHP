@@ -322,17 +322,22 @@ $(window).load(function(){
 		localStorage['starred_cards'] = JSON.stringify(starred_cards);
 	});
 	function load_starred_cards(){
-		if($('.starred_container').exists()){
-			for(var key in starred_cards){
-				var card_name = starred_cards[key];
-				$.ajax({
-					url: card_name+"/as_html/",
-					type: 'get',
-					dataType: 'json',
-					success: function(data) {
-						$('.starred_container').append('<div class="left size1of2">'+data.loadable_link+'</div>');
-					}
-				});
+		var starred_card_container = $('.starred_container');
+		if(starred_card_container.exists()){
+			if(starred_cards.length !== 0){
+				for(var key in starred_cards){
+					var card_name = starred_cards[key];
+					$.ajax({
+						url: card_name+"/as_html/",
+						type: 'get',
+						dataType: 'json',
+						success: function(data) {
+							starred_card_container.append('<div class="left size1of2">'+data.loadable_link+'</div>');
+						}
+					});
+				}
+			} else {
+				starred_card_container.append('<div class="placeholder_message">Click the <span class="fa fa-star-o" title="star icon"></span> icon on any card to bookmark it here.</div>');
 			}
 		}
 	}

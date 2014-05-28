@@ -281,9 +281,13 @@ small, .small { font-size: 0.9em; }
 	-ms-transform: translateY(-50%);
 	transform: translateY(-50%);
 }
+.placeholder_message {
+	font-style: italic;
+	color: #999;
+	padding: 0.5em;
+}
 
 /* ---- Layout ---- */
-
 header{ 
 	vertical-align: bottom; 
 	border-bottom-width: 2px;
