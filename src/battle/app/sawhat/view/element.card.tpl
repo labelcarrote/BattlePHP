@@ -19,9 +19,16 @@
 	{/if}
 	<div class="things auto_clear">
 		{if !$logged and $card->is_private}
-		<form id="sawhatlogin" method="post" enctype="multipart/form-data">
-			<input class="input-large" type="password" id="password" name="password" value="" size="20" /><br/>
-			<button type="submit" class="btn" name="submit" value="login">Show Card</button>
+		<form id="sawhatlogin" class="form-inline" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon">pwd</span>
+					<input class="form-control" type="password" id="password" name="password" value="" size="20" />
+				</div>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-default" name="submit" value="login">Show Card</button>
+			</div>
 		</form> 
 		{else}
 {$card->html}

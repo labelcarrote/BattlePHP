@@ -115,9 +115,9 @@ footer.content{ background-color: #666;	color: #999; }
 }
 .uploadprogress{
 	background-color: #fff;
-	border-color: #fafafa;
+	border-color: #ddd;
 }
-.uploadprogress .bar{ background-color: #44cc00; }
+.uploadprogress .progress-bar{ background-color: #4c0; }
 .image_preview { background: rgba(80,80,80,0.8); }
 #editor { border-color: rgba(0, 0, 0, 0.05); }
 #search_result { background: rgba(255,255,255,0.3); }
@@ -128,11 +128,11 @@ footer a, footer .btn-link {
 footer a:hover, footer .btn-link:hover {
 	color: #eee;
 }
-.btn-link {	color: #ccc; }
+.btn-link { color: #ccc; }
 
 /* ---- Base Rules / Element Selector ---- */
 body{
-	font: 100%/1.5 Arial, Verdana, sans-serif;
+	font: 160%/1.5 Arial, Verdana, sans-serif;
 	text-align: left;
 	word-wrap:break-word;
 }
@@ -485,7 +485,7 @@ footer.content{
 	border-width: 1px;
 	border-style: solid;
 }
-.uploadprogress .bar{
+.uploadprogress .progress-bar{
 	width: 0%;
 	height: 40px;
 }

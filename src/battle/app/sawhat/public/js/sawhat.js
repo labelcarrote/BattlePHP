@@ -114,7 +114,7 @@ $(window).load(function(){
 				$(".uploadprogress p").html( "Completing upload...");
 			else
 				$(".uploadprogress p").html(percentage + "%");
-			$(".uploadprogress .bar").css("width", percentage + "%")
+			$(".uploadprogress .progress-bar").css("width", percentage + "%")
 		}
 		xhr.onload = function(oEvent){
 			var result = "";
@@ -130,7 +130,7 @@ $(window).load(function(){
 		    	else 
 		    		$(".uploadprogress p").html(ajaxresult.errors);
 		    }
-		    $(".uploadprogress .bar").css("width", percentage + "%")
+		    $(".uploadprogress .progress-bar").css("width", percentage + "%")
 		}
 		xhr.send(formData);
 	}

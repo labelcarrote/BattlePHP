@@ -40,7 +40,7 @@ h5, .h5{ font-size:1.15em; font-weight:normal; font-style: normal;margin: 0;}
 h6, .h6{ font-size:1em; line-height: 1.5em; font-weight:normal;  font-style: normal; /*italic;*/ margin: 0;}
 a, a:hover{	text-decoration: none; }
 article{ padding: 0; }
-form, .form-actions{ margin: 0; }
+form{ margin: 0; }
 
 /* ---- Layout ---- */
 
