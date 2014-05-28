@@ -7,6 +7,8 @@
 		{/if}
 		<span class="fa fa-caret-right"></span>&nbsp;<a href="{$current_app_virtual_url}all_cards">See all cards</a>
 		<br>
+		<span class="fa fa-caret-right"></span>&nbsp;<a href="{$current_app_virtual_url}starred">See starred cards</a>
+		<br>
 		<span class="fa fa-caret-right"></span>&nbsp;<a href="{$current_app_virtual_url}help">Help</a>
 		<br>
 		<span class="fa fa-caret-right"></span>&nbsp;<a id="toggle_width" data-width-mode="stretch">Toggle Width</a>
