@@ -108,6 +108,7 @@ footer.content{ background-color: #666;	color: #999; }
 .color_picker {
 	background-color: #fff;
 	border-color: #ccc;
+	box-shadow: 0 0 3px rgba(0,0,0,0.3);
 }
 .color_picker_item {
 	background-color: #fff;
@@ -464,13 +465,11 @@ footer.content{
 	border-style: solid;
 }
 .color_picker_item {
-	width: 24px;
-	height: 24px;
-	float: left;
-	margin: 3px;
+	height: 20px;
+	margin: 1px 0 0 0;
 	cursor: pointer;
-	border-width: 3px;
-	border-style: double;
+	border-width: 1px;
+	border-style: solid;
 }
 
 /* Upload */

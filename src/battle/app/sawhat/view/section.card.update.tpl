@@ -15,19 +15,9 @@
 						<label for="color" class="control-label">Color</label>
 						<input type="text" class="form-control" id="color" name="color" placeholder="ex: #FF9900" value="{if $card->exists}{$card->color}{/if}" pattern="^#[a-fA-F0-9]{literal}{{/literal}3,6{literal}}{/literal}$">
 						<div class="color_picker hidden auto_clear">
-							<div class="color_picker_item" data-color="#000"></div>
-							<div class="color_picker_item" data-color="#fff"></div>
-							<div class="color_picker_item" data-color="#2b2b2b"></div>
-							<div class="color_picker_item" data-color="#f90"></div>
-							<div class="color_picker_item" data-color="#ff6523"></div>
-							<div class="color_picker_item" data-color="#5bc0de"></div>
-							<br>
-							<div class="color_picker_item" data-color="#7cfc00"></div>
-							<div class="color_picker_item" data-color="#1497a2"></div>
-							<div class="color_picker_item" data-color="#ffd801"></div>
-							<div class="color_picker_item" data-color="#ff2b08"></div>
-							<div class="color_picker_item" data-color="#00ccff"></div>
-							<div class="color_picker_item" data-color="#ff69a6"></div>
+							{foreach from=$palette item=color}
+								<div class="color_picker_item" data-color="#{$color['color']}" title="{$color['name']}"></div>
+							{/foreach}
 						</div>
 					</div>
 					<div class="padding form-group">

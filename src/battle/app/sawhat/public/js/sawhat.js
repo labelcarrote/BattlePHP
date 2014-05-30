@@ -48,7 +48,8 @@ $(document).ready(function(){
 				var position = $(this).position();
 				related_color_picker.css({
 					'left' : position.left+'px',
-					'top' : (position.top+$(this).outerHeight()-3)+'px'
+					'top' : (position.top+$(this).outerHeight()-3)+'px',
+					'width' : $(this).outerWidth()
 				});
 				related_color_picker.hide().removeClass('hidden').slideDown(200);
 			},

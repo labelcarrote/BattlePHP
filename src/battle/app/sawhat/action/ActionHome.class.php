@@ -74,6 +74,15 @@ class ActionHome extends Controller{
 				case 'edit':
 					if(!in_array($params['card_name'],$fake_cards)){
 						$ass_card = CardStore::get($params['card_name']);
+						$palette = $ass_card->palette;
+						$palette_by_hue = array();
+						foreach($palette AS $name => $hex){
+							// Calculate HUE //
+							$hsl = ImageHelper::rgb_to_hsl(ImageHelper::hex_to_rgb($hex));
+							$palette_by_hue[($hsl[0]*1000).($hsl[1]*1000).((1/($hsl[2]+0.00001))*1000)] = array('name' => $name, 'color' => $hex);
+						}
+						ksort($palette_by_hue);
+						$this->assign('palette',$palette_by_hue);
 						$this->assign('card',$ass_card);
 						$this->assign('breadcrumbs',NavigationHelper::add_item(($ass_card->exists ? '<i>edit:</i>' : '<i>create:</i>').' '.$ass_card->display_name));
 						if(($ass_card->is_private && $logged) || !$ass_card->is_private){
