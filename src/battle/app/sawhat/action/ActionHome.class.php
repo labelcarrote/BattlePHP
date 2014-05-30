@@ -79,7 +79,11 @@ class ActionHome extends Controller{
 						foreach($palette AS $name => $hex){
 							// Calculate HUE //
 							$hsl = ImageHelper::rgb_to_hsl(ImageHelper::hex_to_rgb($hex));
-							$palette_by_hue[($hsl[0]*1000).($hsl[1]*1000).((1/($hsl[2]+0.00001))*1000)] = array('name' => $name, 'color' => $hex);
+							$order = '1'.str_replace('.','',sprintf("%010f", $hsl[0]))
+								//.str_replace('.','',sprintf("%010f", $hsl[1]))
+								.str_replace('.','',sprintf("%010f", ($hsl[2] > 0 ? 1/$hsl[2] : 999)))
+								;
+							$palette_by_hue[$order] = array('name' => $name, 'color' => $hex);
 						}
 						ksort($palette_by_hue);
 						$this->assign('palette',$palette_by_hue);
