@@ -186,6 +186,12 @@ class ImageHelper{
 		return true;
 	}
 	
+	/* Gets rgb values from a hexadecimal color value
+	 *
+	 * @param string $hex
+	 * @return array [r,g,b]
+	 *
+	 */
 	public static function hex_to_rgb($hex){
 		$hex = str_replace('#','',$hex);
 		if(strlen($hex) == 3) {
@@ -198,6 +204,43 @@ class ImageHelper{
 			$b = hexdec(substr($hex,4,2));
 		}
 		return array($r,$g,$b);
+	}
+	
+	/* Gets hsl values from a rgb array
+	 *
+	 * @param array $rgb [r,g,b]
+	 * @return array [h,s,l]
+	 *
+	 */
+	public static function rgb_to_hsl($rgb){
+		$r = $rgb[0]/255;
+		$g = $rgb[1]/255;
+		$b = $rgb[2]/255;
+		$max = max($r,$g,$b);
+		$min = min($r,$g,$b);
+		$h = $s = $l = ($max+$min)/2;
+		
+		if($max == $min){
+			// achromatic
+			$h = $s = 0;
+		} else {
+			$diff = $max-$min;
+			$s = $l > 0.5 ? $diff/(2-$max-$min) : $diff/($max+$min);
+			switch($max){
+				case $r:
+					$h = ($g-$b)/$diff+($g < $b ? 6 : 0);
+					break;
+				case $g:
+					$h = ($b-$r)/$diff+2;
+					break;
+				case $b:
+					$h = ($r-$g)/$diff+4;
+					break;
+			}
+			$h /= 6;
+		}
+		
+		return array($h,$s,$l);
 	}
 }
 ?>
