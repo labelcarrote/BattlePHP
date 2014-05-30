@@ -1,5 +1,5 @@
 <div class="content">
-	{include file="element.breadcrumbs.tpl"}
+	{include file="element.header.tpl"}
 	<section class="white" {if $card->exists}id="{$card->name}"{/if}>
 		{if $card->exists}<style>{$card->style_definition}</style>{/if}
 		<form id="card_edit_form" method="POST" enctype="multipart/form-data" action="{$current_app_virtual_url}">

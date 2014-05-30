@@ -10,8 +10,6 @@
 		<span class="fa fa-caret-right"></span>&nbsp;<a href="{$current_app_virtual_url}starred">See starred cards</a>
 		<br>
 		<span class="fa fa-caret-right"></span>&nbsp;<a href="{$current_app_virtual_url}help">Help</a>
-		<br>
-		<span class="fa fa-caret-right"></span>&nbsp;<a id="toggle_width" data-width-mode="stretch">Toggle Width</a>
 	</div>
 	<form method="POST" class="right form-inline">
 		<div class="input-group">

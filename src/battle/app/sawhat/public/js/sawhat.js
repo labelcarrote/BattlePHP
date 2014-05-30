@@ -251,40 +251,40 @@ $(window).load(function(){
 	});
 
 	// Toggle Content Width
-	function init_width_mode(){
+	function set_width_mode(init){
 		var element = $('#toggle_width');
-		var width_mode = (localStorage["width_mode"] != undefined)
-			? localStorage["width_mode"]
-			: element.attr("data-width-mode");
-		if(width_mode === "stretch")
-			$('.content').removeClass("width_constraint");
-		else
-			$('.content').addClass("width_constraint");
-		localStorage["width_mode"] = width_mode;
-		if(typeof ace !== 'undefined'){
-			var editor = ace.edit("editor");
-			editor.resize();
+		var current_mode = (localStorage['width_mode'] != undefined)
+			? localStorage['width_mode']
+			: 'constraint'
+		;
+		var width_mode = element.attr('data-width-mode');
+		if(current_mode !== width_mode && !init){
+			current_mode = width_mode;
+			localStorage['width_mode'] = current_mode;
+		}
+		if(current_mode === 'constraint'){
+			$('.content').addClass('width_constraint');
+			element.attr({
+				'data-width-mode':'stretch',
+				'title':'Stretch view'
+			});
+			element.find('span.fa').removeClass('fa-compress').addClass('fa-expand');
+		} else {
+			$('.content').removeClass('width_constraint');
+			element.attr({
+				'data-width-mode':'constraint',
+				'title':'Constraint view'
+			});
+			element.find('span.fa').removeClass('fa-expand').addClass('fa-compress');
 		}
 	}
+	
 	$('body').on('click','#toggle_width',function(e){
 		e.preventDefault();
-		var element = $(this);
-		var width_mode = (localStorage["width_mode"] != undefined)
-			? localStorage["width_mode"]
-			: element.attr("data-width-mode");
-		if(width_mode === "stretch"){
-			$('.content').addClass("width_constraint");
-			width_mode = "constraint";
-			element.attr("data-width-mode",width_mode);
-		}else{
-			$('.content').removeClass("width_constraint");
-			width_mode = "stretch";
-			element.attr("data-width-mode",width_mode);
-		}
-		localStorage["width_mode"] = width_mode;
+		set_width_mode(false);
 	});
 
-	init_width_mode();
+	set_width_mode(true);
 
 	// SEARCH RESULT RESIZE //
 	var banner_min_height = parseInt($('.banner').css('min-height'));

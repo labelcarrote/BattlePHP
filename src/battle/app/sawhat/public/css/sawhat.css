@@ -96,7 +96,6 @@ footer.content{ background-color: #666;	color: #999; }
 	border-color: #bbb;
 }
 .breadcrumbs {
-	background-color: transparent;
 	color: #888;
 }
 .breadcrumbs a:hover { color: #fff; }
@@ -356,11 +355,18 @@ footer.content{
 
 /* ---- Breadcrumbs ---- */
 .breadcrumbs {
+	display: inline-block;
 	padding: 4px 0;
 	margin: 0;
 	border-radius: 0;
 }
 .breadcrumbs a.current { font-weight: bold; }
+
+/* ---- User Utils ---- */
+.user_utils {
+	display: inline-block;
+	padding: 4px;
+}
 
 /* ---- Card Content ---- */
 .things{ padding: 12px; }
@@ -550,6 +556,16 @@ form{ margin: 0;}
 	font-size: 1em;
 }
 
+/* Font Awesome extends */
+.fa-rotate-45 {
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0.5);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
 /* ---- Media Queries ---- */
 @media screen and (max-width: 1200px) {
 	.size1of3 { width: 50%; }
@@ -588,7 +604,7 @@ form{ margin: 0;}
 	.content:not(footer) {
 		padding: 0;
 	}
-	.breadcrumbs { padding: 6px 6px 0; }
+	.breadcrumbs { padding: 4px; }
 	.include {
 		margin: 0 -6px;
 	}
