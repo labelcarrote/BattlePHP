@@ -329,7 +329,6 @@ footer.content{
 .banner h4,
 .banner h5,
 .banner h6{
-	vertical-align: bottom;
 	display: inline;
 	line-height: 40px;
 	margin: 0;

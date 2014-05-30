@@ -1,8 +1,8 @@
 <div class="banner auto_clear">
+	{if !$logged and $card->is_private}
+		<span class="lighter_text fa fa-lock" title="private"></span>
+	{/if}
 	<h{$card->recursive_level+1}>
-		{if !$logged and $card->is_private}
-			<span class="lighter_text fa fa-lock" title="private"></span>
-		{/if}
 	<a href="{$current_app_virtual_url}{$card->name}" class="white_text {if !$card->exists}striked light{/if}" title="{$card->display_name}">
 		{$card->display_name}
 	</a>
