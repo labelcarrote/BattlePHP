@@ -7,9 +7,7 @@
 				{if isset($card)}style="color:{$card->color};"{/if}
 			{/if}
 			title="{ConfigurationSawhat::SITE_TITLE}"
-		>
-			<span class="fa fa-home"></span>
-		</a>
+		><span class="fa fa-home"></span></a>
 		{if count($breadcrumbs['items']) > 0}
 			<span class="fa fa-angle-right"></span>&nbsp;...&nbsp;<span class="fa fa-angle-right"></span>
 			{foreach from=$breadcrumbs['items'] item=breadcrumbs_item}
@@ -19,9 +17,7 @@
 						class="current"
 						{if isset($card)}style="color:{$card->color};"{/if}
 					{/if}
-				>
-					{$breadcrumbs_item['name']}
-				</a>
+				>{$breadcrumbs_item['name']}</a>
 				{if $breadcrumbs_item@iteration < count($breadcrumbs['items'])}
 					<span class="fa fa-angle-right"></span>
 				{/if}
