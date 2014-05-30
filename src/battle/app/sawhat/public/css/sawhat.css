@@ -99,6 +99,13 @@ footer.content{ background-color: #666;	color: #999; }
 	color: #888;
 }
 .breadcrumbs a:hover { color: #fff; }
+.user_utils button,
+.user_utils button:focus {
+	color: #999;
+}
+.user_utils button:hover {
+	color: #fff;
+}
 .column_2, .column_3 {
 	-webkit-column-rule: 1px solid rgba(0,0,0,0.1);
 	-moz-column-rule: 1px solid rgba(0,0,0,0.1);
@@ -266,6 +273,7 @@ table th, table td {
     zoom: 1; /* For IE 6/7 (trigger hasLayout) */
 }
 .clear { clear: both; }
+.inline { display: inline; }
 .smaller { font-size: 0.7em; }
 small, .small { font-size: 0.9em; }
 .big { font-size: 1.1em; }

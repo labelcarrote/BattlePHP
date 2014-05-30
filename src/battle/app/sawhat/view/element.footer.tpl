@@ -1,10 +1,5 @@
 <footer class="content auto_clear">
 	<div class="left">
-		{if $logged}
-		<form method="POST">
-			<span class="fa fa-caret-right"></span>&nbsp;<button class="btn btn-link" type="submit" name="submit" value="logout">Logout</button> 
-		</form>
-		{/if}
 		<span class="fa fa-caret-right"></span>&nbsp;<a href="{$current_app_virtual_url}all_cards">See all cards</a>
 		<br>
 		<span class="fa fa-caret-right"></span>&nbsp;<a href="{$current_app_virtual_url}starred">See starred cards</a>
