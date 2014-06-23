@@ -991,8 +991,8 @@ class Parsedown
 						}
 					}
     
-				    if (isset($element))
-				    {
+					if (isset($element))
+					{
 					   $element['link'] = str_replace('&', '&amp;', $element['link']);
 					   $element['link'] = str_replace('<', '&lt;', $element['link']);
     
