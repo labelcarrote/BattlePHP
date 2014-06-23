@@ -951,68 +951,48 @@ class Parsedown
 					break;
 				case '![':
 				case '[':
-				    if (strpos($text, ']') and preg_match('/\[((?:[^][]|(?R))*)\]/', $text, $matches))
-				    {
-					   $element = array(
-						  '!' => $text[0] === '!',
-						  'text' => $matches[1],
-					   );
+					if (strpos($text, ']') and preg_match('/\[((?:[^][]|(?R))*)\]/', $text, $matches)) {
+						$element = array(
+							'!' => $text[0] === '!',
+							'text' => $matches[1],
+						);
+						$offset = strlen($matches[0]);
+	 
+						if ($element['!']) {
+						    $offset++;
+						}
+						$remainingText = substr($text, $offset);
+
+						//if ($remainingText[0] === '(' and preg_match('/\([ ]*(.*?)(?:[ ]+[\'"](.+?)[\'"])?[ ]*\)/', $remainingText, $matches)) {
+						if ($remainingText[0] === '(' and preg_match('/\( *(.*)(?: +[\'"](.+)[\'"])? *\)/', $remainingText, $matches)) {
+							$element['link'] = $matches[1];
+							if (isset($matches[2])) {
+								$element['title'] = $matches[2];
+							}
+							$offset += strlen($matches[0]);
+						} elseif ($this->referenceMap) {
+							$reference = $element['text'];
+							if (preg_match('/^\s*\[(.*?)\]/', $remainingText, $matches)) {
+								$reference = $matches[1] === '' ? $element['text'] : $matches[1];
+								$offset += strlen($matches[0]);
+							}
+	  
+							$reference = strtolower($reference);
+							if (isset($this->referenceMap[$reference])) {
+								$element['link'] = $this->referenceMap[$reference]['link'];
+								if (isset($this->referenceMap[$reference]['title'])) {
+								    $element['title'] = $this->referenceMap[$reference]['title'];
+								}
+							} else {
+								unset($element);
+							}
+						} else {
+							unset($element);
+						}
+					}
     
-					   $offset = strlen($matches[0]);
-    
-					   if ($element['!'])
-					   {
-						  $offset++;
-					   }
-    
-					   $remainingText = substr($text, $offset);
-    
-					   if ($remainingText[0] === '(' and preg_match('/\([ ]*(.*?)(?:[ ]+[\'"](.+?)[\'"])?[ ]*\)/', $remainingText, $matches))
-					   {
-						  $element['link'] = $matches[1];
-    
-						  if (isset($matches[2]))
-						  {
-							 $element['title'] = $matches[2];
-						  }
-    
-						  $offset += strlen($matches[0]);
-					   }
-					   elseif ($this->referenceMap)
-					   {
-						  $reference = $element['text'];
-    
-						  if (preg_match('/^\s*\[(.*?)\]/', $remainingText, $matches))
-						  {
-							 $reference = $matches[1] === '' ? $element['text'] : $matches[1];
-    
-							 $offset += strlen($matches[0]);
-						  }
-    
-						  $reference = strtolower($reference);
-    
-						  if (isset($this->referenceMap[$reference]))
-						  {
-							 $element['link'] = $this->referenceMap[$reference]['link'];
-    
-							 if (isset($this->referenceMap[$reference]['title']))
-							 {
-								$element['title'] = $this->referenceMap[$reference]['title'];
-							 }
-						  }
-						  else
-						  {
-							 unset($element);
-						  }
-					   }
-					   else
-					   {
-						  unset($element);
-					   }
-				    }
-    
-				    if (isset($element))
-				    {
+					if (isset($element))
+					{
 					   $element['link'] = str_replace('&', '&amp;', $element['link']);
 					   $element['link'] = str_replace('<', '&lt;', $element['link']);
     
