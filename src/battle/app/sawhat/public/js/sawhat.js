@@ -18,25 +18,6 @@ jQuery.fn.exists = function () {
     return this.length !== 0;
 }
 $(document).ready(function(){
-	// BANNER AUTO TEXT COLOR //
-	/* @todo
-	 * set as prototype
-	 */
-	$('.banner').each(function(){
-		var color = $(this).css('background-color');
-		var rgb = color.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-		// calculate luminance
-		// from http://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
-		var r = parseInt(rgb[1]);
-		var g = parseInt(rgb[2]);
-		var b = parseInt(rgb[3]);
-		var luminance = (r+r+b+g+g+g)/6
-		if(luminance > 190){
-			$(this).find('.lighter_text').removeClass('lighter_text').addClass('darker_text');
-			$(this).find('.white_text').removeClass('white_text').addClass('black_text');
-		}
-	});
-	
 	// COLOR PICKER //
 	/* @todo
 	 * set as prototype
@@ -91,16 +72,10 @@ $(document).ready(function(){
 			target = target.length ? target : $('[name='+this.hash.slice(1)+']');
 			if(target.length){
 				$('html,body').animate({
-					scrollTop: target.offset().top 
+					scrollTop: target.offset().top
 				}, 500);
 			}
-		} else {
-			$('html,body').animate({
-				scrollTop: 0
-			}, 500);
 		}
-		
-		return false;
 	});
 })
 
@@ -230,7 +205,6 @@ $(window).load(function(){
 				type: 'get',
 				dataType: 'json',
 				success: function(data) {
-					element.closest('.banner.loadable').css({'background-color':data.color});
 					element.closest('.banner.loadable').next().html(data.body).hide().removeClass('hidden').slideDown(300);
 					element.attr("data-action","unload");
 					element.attr('title','close');

@@ -6,8 +6,8 @@
 			<input type="hidden" name="name" value="{$card->name}"/>
 			<fieldset>
 				<legend class="banner">
-					<h1 class="lighter_text">
-						<i>{if $card->exists}Update{else}Create{/if}</i> <a href="{$current_app_virtual_url}{$card->name}" class="white_text">{$card->display_name}</a>
+					<h1 class="{if $card->is_light}lighter_text{else}darker_text{/if}">
+						<i>{if $card->exists}Update{else}Create{/if}</i> <a href="{$current_app_virtual_url}{$card->name}" class="{if $card->is_light}white_text{else}black_text{/if}">{$card->display_name}</a>
 					</h1>
 				</legend>
 				<div class="form-inline">

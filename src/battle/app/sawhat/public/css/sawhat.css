@@ -78,6 +78,10 @@ footer.content{ background-color: #666;	color: #999; }
 .content > section > div > .sawhat {
 	background-color: #fff;
 }
+.things.dark {
+	background: #777;
+	color: #fff;
+}
 .banner{ 
 	background-color: #999;
 	color: #fff; 
@@ -385,8 +389,22 @@ footer.content{
 	padding-left: 1em;
 	list-style: decimal-leading-zero inside;
 }
+.things li ul li {
+	list-style-type: disc;
+}
+.things li ol li {
+	list-style-type: upper-roman;
+}
+.things li li ul li {
+	list-style-type: circle;
+}
+.things li li ol li {
+	list-style-type: lower-roman;
+}
+
 .things > :first-child { margin-top: 0; }
-.things > :nth-last-child(2) { margin-bottom: 0; }
+/*.things > :nth-last-child(2) { margin-bottom: 0; }*/
+.things > :last-child { margin-bottom: 0; }
 
 .column_container { margin: 0.75em 0; }
 .column_container .size1of1,

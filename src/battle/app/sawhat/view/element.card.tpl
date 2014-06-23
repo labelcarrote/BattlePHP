@@ -17,7 +17,7 @@
 	{if !isset($show_banner) || $show_banner}
 		{include file="element.card.banner.tpl" card=$card}
 	{/if}
-	<div class="things auto_clear">
+	<div class="things {if $card->is_light}light{else}dark{/if} auto_clear">
 		{if !$logged and $card->is_private}
 		<form id="sawhatlogin" class="form-inline" method="post" enctype="multipart/form-data">
 			<div class="form-group">

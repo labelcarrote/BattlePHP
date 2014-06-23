@@ -130,7 +130,6 @@ class ActionHome extends Controller{
 							$this->assign('card_exists',$ass_card->exists);
 							$result->body = $this->fetch_view('element.card.tpl');
 							$result->loadable_link = $this->fetch_view('element.card.loadable.tpl');
-							$result->color = $ass_card->color;
 						}
 						echo $result->to_json();
 					}

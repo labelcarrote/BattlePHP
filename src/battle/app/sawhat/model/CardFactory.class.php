@@ -50,6 +50,7 @@ class Card{
 	public $is_private = false;
 	public $is_recursive;
 	public $color = self::DEFAULT_COLOR;
+	public $is_light = true;
 	public $properties;
 	public $last_edit;
 	public $name;
@@ -171,6 +172,8 @@ class Card{
 		}
 		elseif(preg_match("/color: (#[A-Fa-f0-9]{3,6})/",trim($line),$matches)){
 			$this->color = $matches[1];
+			$perceived_brightness = ImageHelper::rgb_to_perceived_brightness(ImageHelper::hex_to_rgb($this->color));
+			$this->is_light = $perceived_brightness < 0.83 ? true : false;
 		}
 		elseif(preg_match("/is_private/",trim($line))){
 			$this->is_private = true;
