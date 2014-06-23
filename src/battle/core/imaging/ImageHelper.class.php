@@ -242,5 +242,14 @@ class ImageHelper{
 		
 		return array($h,$s,$l);
 	}
+	
+	/*
+	 * Gets the perveived brightness from a rgb array
+	 * thanks to http://alienryderflex.com/hsp.html
+	 *
+	 */
+	public static function rgb_to_perceived_brightness($rgb){
+		return (sqrt((0.299*pow($rgb[0],2))+(0.587*pow($rgb[1],2))+(0.114*pow($rgb[2],2)))) / 255;
+	}
 }
 ?>
