@@ -280,9 +280,8 @@ class CardElement{
 		elseif(preg_match('/^\#([\S]*)$/',$html,$matches)){
 			if($matches[1] !== 'starred'){
 				$view_manager = Viewer::getInstance();
-				$view_manager->assign('card_name',$matches[1]);
-				$view_manager->assign('card_display_name',Card::get_display_name($matches[1]));
-				$view_manager->assign('card_exists',CardStore::exist($matches[1]));
+				$ass_card = new Card($matches[1]);
+				$view_manager->assign('card',$ass_card);
 				$html = $view_manager->fetch_view('element.card.loadable.tpl');
 			} else {
 				$html = '<div class="starred_title smaller">'
