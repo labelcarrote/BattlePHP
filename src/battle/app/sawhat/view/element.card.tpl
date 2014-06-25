@@ -21,12 +21,14 @@
 		{if !$logged and $card->is_private}
 		<form id="sawhatlogin" class="form-inline" method="post" enctype="multipart/form-data">
 			<div class="form-group">
-				<div class="input-group" style="width: 300px;">
+				<div class="input-group">
 					<span class="input-group-addon">pwd</span>
 					<input class="form-control" type="password" id="password" name="password" value="" size="20" />
 				</div>
 			</div>
-			<button type="submit" class="btn btn-default" name="submit" value="login">Show Card</button>
+			<div class="form-group">
+				<button type="submit" class="btn btn-default" name="submit" value="login">Show Card</button>
+			</div>
 		</form> 
 		{else}
 {$card->html}
