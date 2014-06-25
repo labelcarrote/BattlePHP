@@ -574,7 +574,11 @@ footer form, footer input {
 }
 
 /* ---- Bootstrap fixes ?? ---- */
-form{ margin: 0;}
+form{ margin: 0; }
+.form-inline .input-group,
+.form-inline .form-group {
+	width: 18em;
+}
 .btn-link {
 	display: inline;
 	padding: 0;
