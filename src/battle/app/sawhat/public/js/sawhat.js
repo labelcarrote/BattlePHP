@@ -4,7 +4,6 @@
 // -----------------------
 if(typeof ace !== 'undefined'){
 	var editor = ace.edit("editor");
-	editor.getSession().setUseWrapMode(true);
 	editor.setShowPrintMargin(false);
 	editor.setOptions({
 		minLines: 12,
@@ -12,6 +11,10 @@ if(typeof ace !== 'undefined'){
     });
     editor.setAutoScrollEditorIntoView();
 	editor.resize();
+	editor.getSession().setUseWrapMode(true);
+	editor.getSession().setWrapLimitRange(124, 124);
+	editor.resize();
+
 }
 // extends jQuery for selector existence //
 jQuery.fn.exists = function () {
