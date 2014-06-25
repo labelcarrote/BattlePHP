@@ -12,7 +12,7 @@ if(typeof ace !== 'undefined'){
     editor.setAutoScrollEditorIntoView();
 	editor.resize();
 	editor.getSession().setUseWrapMode(true);
-	editor.getSession().setWrapLimitRange(124, 124);
+	editor.getSession().setWrapLimitRange(0, 124);
 	editor.resize();
 
 }
