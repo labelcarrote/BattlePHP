@@ -96,7 +96,7 @@ footer.content{ background-color: #666;	color: #999; }
 	background: #bbb;
 	color: #fff;
 }
-.starred_container {
+.starred_container, .all_cards_container {
 	border-color: #bbb;
 }
 .breadcrumbs {
@@ -350,18 +350,21 @@ footer.content{
 	cursor: pointer;
 }
 
-/* Starred */
+/* Starred & All Cards*/
 .starred_title {
 	padding: 3px 6px;
 	margin-top: 0.75em;
 }
-.starred_container {
+.starred_container{
 	padding: 3px;
 	border-width: 0 1px 1px;
 	border-style: solid;
 }
-.starred_container .loadable_card {
+.starred_container .loadable_card{
 	margin: 3px;
+}
+.all_cards_container .loadable_card{
+	margin: 3px 0;
 }
 
 /* ---- Breadcrumbs ---- */
