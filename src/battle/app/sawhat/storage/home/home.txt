@@ -1,5 +1,5 @@
 home
-lastedit: 20140418_0204
+lastedit: 20140723_1807
 color: #F90
 
 This is a wiki card containing other wiki cards.  
@@ -8,6 +8,6 @@ Want to go back to battle.php ? http://labelcarrote.com/battle
 
 [View all cards](http://localhost/dev/git/BattlePHP/src/battle/sawhat/all_cards)
 
-#help
+#help 
 
 [#webdev]

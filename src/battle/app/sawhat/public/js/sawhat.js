@@ -133,7 +133,22 @@ $(window).load(function(){
 		    },
 		    readOnly: true // false if this command should not apply in readOnly mode
 		});
+
+		// ---- Auto save
+		// latency in milliseconds between editor change and the actual call to server
+		var latency = 10000;
+		// id of the save_to_server request
+		var sts_id = 0;
+		editor.getSession().on('change', function(e) {
+			clearTimeout(self.sts_id);
+			// http://stackoverflow.com/questions/1101668/how-to-use-settimeout-to-invoke-object-itself
+			self.sts_id = setTimeout(function(){save_card($("#editor_save"));},latency);
+		});
 	}
+	
+	$('#editor_save').click(function(e){
+		save_card($(this));
+	});
 
 	function save_card(save_button){
 		var btn = save_button,
@@ -175,9 +190,6 @@ $(window).load(function(){
 		}
 	}
 
-	$('#editor_save').click(function(e){
-		save_card($(this));
-	});
 
 	// Card Edit : Set As Current
 	$('body').on('click','.load_card_as_current',function(e){
