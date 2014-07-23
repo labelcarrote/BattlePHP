@@ -18,20 +18,27 @@ class NavigationHelper{
 		self::set_in_session($breadcrumbs_name);
 		
 		$current_url = Request::get_full_url().$_SERVER['REQUEST_URI'];
-		$current_url = rtrim($current_url,'/')."/";
+		$current_url = rtrim($current_url,'/');//."/";
 		
+		echo $current_url;
+
 		// remove if already there
-		if(isset($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'][$item_name]) && $_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'][$item_name]['url'] == $current_url){
+		if(isset($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'][$item_name]) 
+			&& $_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'][$item_name]['url'] == $current_url){
+			echo "1";
 			unset($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'][$item_name]);
 		}
 		if($current_url != Request::get_full_url().Request::get_application_virtual_root()){
 			$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'][$item_name] = array('url' => $current_url, 'name' => $item_name);
 			$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['position'] = array_search($item_name, array_keys($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'])) +1;
+			echo "2";
 		} else {
 			$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['position'] = 0;
+			echo "3";
 		}
 
 		if(count($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items']) > self::MAX_ITEM){
+			echo "4";
 			array_shift($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items']);
 			$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['position'] = 5;
 		}
