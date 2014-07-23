@@ -1,5 +1,5 @@
 webdev
-lastedit: 20140625_1606
+lastedit: 20140625_1706
 color: #C7F464
 
 ==== Color ====
@@ -257,3 +257,7 @@ http://research.microsoft.com/en-us/projects/trueskill/faq.aspx
   n = LF = 0x0A (10 in decimal) new line in linux/unix/Mac OS X.  
   r = CR = 0x0D (13 in decimal) new line in Mac OSes from the 80s and 90s (e.g., apple II through Mac OS-9)
   rn = CR LF = new line in Windows/DOS.
+
+#help
+#sawhat
+#sawhat

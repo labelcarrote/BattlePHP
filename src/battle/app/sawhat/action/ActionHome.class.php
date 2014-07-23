@@ -149,6 +149,7 @@ class ActionHome extends Controller{
 			return;
 		}
 		elseif($params = Request::get_params("@card_name")){
+
 			switch($params['card_name']){
 				case 'all_cards':
 					$this->assign('breadcrumbs',NavigationHelper::add_item('All cards'));
