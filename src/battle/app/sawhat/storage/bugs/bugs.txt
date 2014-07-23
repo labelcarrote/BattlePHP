@@ -1,0 +1,18 @@
+bugs
+lastedit: 20140723_1507
+color: #ff9900
+
+---- Sublime Text 3 ----
+**Shortcuts**
+
+&lt;br&gt;&lt;br&gt;
+
+```
+    go to def = alt + click  
+            = ctrl + win + alt + up
+```  
+#dev__web
+#dev_nodejs
+#dev__desktop
+#dev__processing
+#dev__game
