@@ -13,7 +13,7 @@
 				<div class="form-inline">
 					<div class="padding form-group">
 						<label for="color" class="control-label">Color</label>
-						<input type="text" class="form-control" id="color" name="color" placeholder="ex: #FF9900" value="{if $card->exists}{$card->color}{/if}" pattern="^#[a-fA-F0-9]{literal}{{/literal}3,6{literal}}{/literal}$">
+						<input type="text" class="form-control" id="color" name="color" placeholder="ex: #FF9900" value="{if $card->exists}{$card->color}{else}#ff9900{/if}" pattern="^#[a-fA-F0-9]{literal}{{/literal}3,6{literal}}{/literal}$">
 						<div class="color_picker hidden auto_clear">
 							{foreach from=$palette item=color}
 								<div class="color_picker_item" data-color="#{$color['color']}" title="{$color['name']}"></div>
