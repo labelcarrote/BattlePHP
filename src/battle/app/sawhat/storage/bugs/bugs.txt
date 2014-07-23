@@ -1,16 +1,13 @@
 bugs
-lastedit: 20140723_1507
+lastedit: 20140723_1607
 color: #ff9900
 
----- Sublime Text 3 ----
-**Shortcuts**
+Y'a 1 br en dessous de moi.
 
-&lt;br&gt;&lt;br&gt;
+&lt;br&gt;
 
-```
-    go to def = alt + click  
-            = ctrl + win + alt + up
-```  
+banane
+
 #dev__web
 #dev_nodejs
 #dev__desktop

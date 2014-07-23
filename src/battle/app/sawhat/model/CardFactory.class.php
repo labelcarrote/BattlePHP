@@ -279,6 +279,7 @@ class CardElement{
 		// Link to card
 		elseif(preg_match('/^\#([\S]*)$/',$html,$matches)){
 			if($matches[1] !== 'starred'){
+				/*echo "WAT";*/
 				$view_manager = Viewer::getInstance();
 				$ass_card = new Card($matches[1]);
 				$view_manager->assign('card',$ass_card);
