@@ -1,5 +1,5 @@
 <div class="sawhat" {if isset($card)}id="{$card->name}"{/if}>
-	{if !isset($card)}
+{if !isset($card)}
 	<div class="banner auto_clear">
 		<div class="left">
 			<div>
@@ -17,8 +17,8 @@
 	{if !isset($show_banner) || $show_banner}
 		{include file="element.card.banner.tpl" card=$card}
 	{/if}
-	<div class="things {if $card->is_light}light{else}dark{/if} auto_clear">
-		{if !$logged and $card->is_private}
+	<div class="things {if $card->is_light}light{else}dark{/if} auto_clear" data-edit-url="{$current_app_virtual_url}{$card->name}/edit">
+	{if !$logged and $card->is_private}
 		<form id="sawhatlogin" class="form-inline" method="post" enctype="multipart/form-data">
 			<div class="form-group">
 				<div class="input-group">
@@ -30,8 +30,9 @@
 				<button type="submit" class="btn btn-default" name="submit" value="login">Show Card</button>
 			</div>
 		</form> 
-		{else}
-{$card->html}
+	{else}
+		{$card->html}
+		<!-- WTF is this ending div? -->
 		</div>
 		{if count($card->files) > 0}
 		<div class="smallpadding files marginbottom darker">
@@ -46,5 +47,5 @@
 		</div>
 		{/if}
 	{/if}
-	{/if}
+{/if}
 </div>

@@ -196,6 +196,14 @@ $(window).load(function(){
 		});
 	});
 
+	// Double click to edit card
+	$(".things").dblclick(function(e){
+		e.preventDefault();
+		// go to card edit form
+		window.location.href = $(this).attr("data-edit-url");
+		return false;
+	});
+
 	// Load Card Dynamically
 	$('body').on('click','.load_card',function(e){
 		//card to load 
