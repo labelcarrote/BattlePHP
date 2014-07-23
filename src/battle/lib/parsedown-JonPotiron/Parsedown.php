@@ -101,7 +101,6 @@ class Parsedown
 			}
    
 			# ~
-
 			switch ($context) {
 				case null:
 					$contextData = null;
@@ -116,6 +115,7 @@ class Parsedown
 						$block['content'][0]['content'] .= "\n";
 						continue 2;
 					}
+					
 					if (preg_match('/^[ ]*'.$contextData['marker'].'{3,}[ ]*$/', $line)){
 						$context = null;
 					} else {
@@ -550,7 +550,10 @@ class Parsedown
 						$name = $substring;
 					}
 					$name = strtolower($name);
-					if(in_array($name,array('br','hr','img'))){
+
+					// FIX for <br> breaking loadable card
+					/*if(in_array($name,array('br','hr','img'))){*/
+					if(in_array($name,array('hr','img'))){
 						$isClosing = true;
 					}
 					if ($name[0] == 'h' and strpos('123456', $name[1]) !== false){
