@@ -1,13 +1,13 @@
 home
-lastedit: 20140723_1807
+lastedit: 20140724_2007
 color: #F90
 
 This is a wiki card containing other wiki cards.  
 You can edit this card by pressing the EDIT button at the bottom!
-Want to go back to battle.php ? http://labelcarrote.com/battle  
+[Want to go back to battle.php ?](http://labelcarrote.com/battle)
 
-[View all cards](http://localhost/dev/git/BattlePHP/src/battle/sawhat/all_cards)
-
-#help 
+#help
 
 [#webdev]
+
+[View all cards](http://localhost/dev/git/BattlePHP/src/battle/sawhat/all_cards)

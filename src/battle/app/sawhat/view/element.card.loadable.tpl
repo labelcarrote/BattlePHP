@@ -18,7 +18,7 @@
 			&nbsp;
 		</div>
 		{if (isset($logged) && $logged) || !$card->is_private}
-			<a class="right {if $card->is_light}lighter_text{else}darker_text{/if}" href="{$current_app_virtual_url}{$card->name}/edit" title="edit">
+			<a class="right {if $card->is_light}lighter_text{else}darker_text{/if} no-print" href="{$current_app_virtual_url}{$card->name}/edit" title="edit">
 				<span class="{if $card->is_light}lighter_text{else}darker_text{/if} fa fa-pencil" data-card-name="{$card->name}"></span>
 			</a>
 		{/if}

@@ -18,7 +18,7 @@
 			{/if}
 			<span class="starred {if $card->is_light}lighter_text{else}darker_text{/if} fa fa-star-o" data-card-name="{$card->name}" title="add in starred"></span>&nbsp;
 			{if $logged || !$card->is_private}
-				&nbsp;<a class="right {if $card->is_light}lighter_text{else}darker_text{/if}" href="{$current_app_virtual_url}{$card->name}/edit" title="edit">
+				&nbsp;<a class="right {if $card->is_light}lighter_text{else}darker_text{/if} no-print" href="{$current_app_virtual_url}{$card->name}/edit" title="edit">
 					<span class="{if $card->is_light}lighter_text{else}darker_text{/if} fa fa-pencil" data-card-name="{$card->name}"></span>
 				</a>
 			{/if}

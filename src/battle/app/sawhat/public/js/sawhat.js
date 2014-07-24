@@ -134,7 +134,7 @@ $(window).load(function(){
 		    readOnly: true // false if this command should not apply in readOnly mode
 		});
 
-		// ---- Auto save
+		// ---- Auto save WIP
 		// latency in milliseconds between editor change and the actual call to server
 		var latency = 10000;
 		// id of the save_to_server request
