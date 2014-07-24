@@ -660,3 +660,31 @@ form{ margin: 0; }
 		column-count:1;
 	}
 }
+
+@media print{
+	/* hide un-relevant content */
+	footer,
+	.no-print,
+	.breadcrumbs, 
+	.btn,
+	.fa { 
+		display: none !important; 
+	}
+	
+	/* hide "(url)" after links (added by browser when printed) */
+	h1 a, h1 a:after,
+	h2 a, h2 a:after { 
+		content: normal !important; 
+	}
+
+	/* refine borders */
+	#webdev .things, #webdev .files {
+	    border: 0px solid !important;
+	}
+	.sawhat{
+		border: #dedede 1px solid !important;
+	}
+	.banner{
+		border-bottom: #dedede 1px solid !important;	
+	}
+}
