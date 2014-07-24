@@ -8,20 +8,31 @@
 class ReflectionHelper{
 
 	// ---- yUML ----
-    
-    // Generate yUML class diagram definition from each ".class.php" files in folder.
-    // example: [User|+Forename+;Surname;+HashedPassword;-Salt|+Login();+Logout()]
-    public static function generate_yuml_class_diagram_definitions($app_folder = null){
+	
+	// Generate yUML class diagram definition from each ".class.php" files in folder.
+	// example: [User|+Forename+;Surname;+HashedPassword;-Salt|+Login();+Logout()]
+	public static function generate_yuml_class_diagram_definitions($app_folder = null, $diagrams = null, $depth = 2, $with_submethods = false, $with_magical_methods = false){
 
 		if($app_folder === null)
 			return "NADA";
 		
-		$diagrams = array();
+		if($diagrams === null)
+			$diagrams = array();
+
 		$definition = "";
-		
+
 		foreach (glob($app_folder,GLOB_ONLYDIR) as $dirname) {
-			$classes = $dirname."/*.class.php";
-	    	foreach(glob($classes) as $filename){
+
+			if($depth > 0){
+				foreach (glob($dirname."/*",GLOB_ONLYDIR) as $subdirname) {
+					$diagrams = array_merge ($diagrams, self::generate_yuml_class_diagram_definitions($subdirname, $diagrams, --$depth));
+				}
+			}
+
+			$classes_selector = $dirname."/*.class.php";
+			$classes = glob($classes_selector);
+			rsort($classes);
+			foreach($classes as $filename){
 				$controller_class_file_path = $filename;
 				$split = explode("/",$filename);
 				$controller_name = $split[count($split) - 1];
@@ -40,16 +51,21 @@ class ReflectionHelper{
 						foreach ($properties as $prop) {
 							if($prop->isPublic())
 								$definition .= "+".$prop->getName().";";
-	         				elseif($prop->isPrivate())
-	         					$definition .= "-".$prop->getName().";";
+							elseif($prop->isPrivate())
+								$definition .= "-".$prop->getName().";";
 						}
 						$definition .= "|";
 						$methods = $class->getMethods();
 						foreach ($methods as $meth) {
-							if($meth->isPublic())
+							echo substr($meth->name, 0, 2);
+							$is_displayed_method = $meth->isPublic() 
+								&& ($with_submethods || $meth->class === "$controller_class")
+								&& ($with_magical_methods || substr($meth->name, 0, 2) !== "__" );
+
+							if($is_displayed_method)
 								$definition .= "+".$meth->name.";";
-	         				/*elseif($meth->isPrivate())
-	         					$definition .= "-".$meth->name.";";*/
+							/*elseif($meth->isPrivate())
+								$definition .= "-".$meth->name.";";*/
 						}
 						$definition .= "],";
 					}
@@ -60,12 +76,12 @@ class ReflectionHelper{
 			$definition = "";
 		}
 		return $diagrams;
-    }
+	}
 
-    // Generate yUML class diagram definition from each "CREATE TABLE" statements in every sql files contained in given folder.
-    // example: [btl_user|id int(11);name varchar(255);]
-    public static function generate_yuml_class_diagram_definitions_from_sql($app_folder){
-    	if($app_folder === null)
+	// Generate yUML class diagram definition from each "CREATE TABLE" statements in every sql files contained in given folder.
+	// example: [btl_user|id int(11);name varchar(255);]
+	public static function generate_yuml_class_diagram_definitions_from_sql($app_folder){
+		if($app_folder === null)
 			return "NADA";
 		
 		$diagrams = array();
@@ -74,7 +90,7 @@ class ReflectionHelper{
 		
 		foreach (glob($app_folder,GLOB_ONLYDIR) as $dirname) {
 			$classes = $dirname."/*.sql";
-	    	foreach(glob($classes) as $filename){
+			foreach(glob($classes) as $filename){
 				// Load the file
 				$sql_file_as_lines = file($filename);
 				foreach ($sql_file_as_lines as $line) {
@@ -103,5 +119,5 @@ class ReflectionHelper{
 			}
 		}
 		return $diagrams;
-    }
+	}
 }
