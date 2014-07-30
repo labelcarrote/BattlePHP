@@ -43,7 +43,9 @@ class FileSystemIO{
 	}
 
 	public static function delete_file($file_path){
-		return unlink($file_path);
+		if(is_file($file_path))
+			return unlink($file_path);
+		return false;
 	}
 }
 ?>

@@ -3,12 +3,18 @@ require_once 'core/auth/db/UserDB.class.php';
 require_once 'core/auth/datamodel/User.class.php';
 require_once 'core/auth/datamodel/Identity.class.php';
 require_once 'lib/phpass-0.3/PasswordHash.php';
+//require_once 'core/auth/FacebookService.class.php';
+
 /**
- * AuthManager (Singleton)
- * Responsible of the ULTRA BASIC user authentication management.
+ * AuthManager
+ * Responsible of the user authentication management.
+ * Note : 
+ * - requires an mysql db containing the user & role tables
+ * - currently, all data validation happens before calling any of these methods (in the 'validate()'' methods of form models), 
+ * so there is NO DATA VALIDATION HERE
  */
-class AuthHelper{
-	
+class AuthManager{
+
 	const AuthTypePassword = 0;
 	const AuthTypeUser = 1;
 	const AuthTypeFB = 2;
@@ -85,7 +91,6 @@ class AuthHelper{
     		: User::create_user_from_db(UserDB::getInstance()->get_user($user_id));
 	}
 
-	// TODO : move to Request !!
     public static function get_user_ip(){
     	return $_SERVER['REMOTE_ADDR'];
     }
@@ -143,4 +148,79 @@ class AuthHelper{
     public static function is_current_user_customer(){
     	return self::has_role("user");
     }
+	
+
+    // OLD AuthService
+
+	public static function login($login,$password){
+		$identity = new Identity();
+		$identity->login = $login;
+		$identity->password = $password;
+		return self::authenticate(self::AuthTypeUser,$identity);
+	}
+	
+	public static function logout(){
+		self::unauthenticate();
+	}
+	
+	public static function register($mail,$login,$password,$application){
+		// Initialize the hasher without portable hashes (this is more secure)
+		$hasher = new PasswordHash(8, false);
+
+		$user = new User();
+		$user->mail = $mail;
+		$user->login = $login;
+		$user->hashed_password = $hasher->HashPassword($password);//crypt($password,Configuration::SUPA_SALT);
+		$user->confirmation_token = sha1(uniqid($user->login, true));
+		$user->role_id = self::role_name_to_id("user");
+		$user->last_ip = self::get_user_ip();
+		$user->application = $application;
+
+		// send confirmation mail ? Currently in ActionAuth...
+		return UserDB::getInstance()->add($user);
+	}
+	
+	// TODO
+	public static function confirmation($userid, $confirmationtoken){
+		//confirm registration of user (from confirmation mail)
+		// getuser from id
+		// compare confirmation tokens
+		// if(same) userdb->has_confirmed = true/1;
+	}
+	
+	// TODO
+	public static function change_password($old,$new){
+		// update password
+		// send mail?
+	}
+	
+	// TODO
+	public static function unregister(){
+		// update user state to unregistered
+	}
+	
+	// ---- FACEBOOK ----
+
+	/**
+	 * Note : to check if user is authenticated on facebook :
+	 * isset(get_user_profile($fbm))
+	 */
+	public static function get_user_profile($facebook_manager){
+		return $facebook_manager->get_user_profile();
+	}	
+
+	public static function get_loginout_url($facebook_manager,$user_profile){
+		return $facebook_manager->get_url_loginout($user_profile);
+	}
+	
+	// ---- Helpers ----
+	
+	public static function get_identity_from_post(){
+		$identity = new Identity();
+		$identity->login = Request::isset_or($_POST['login'],"");
+		$identity->mail = Request::isset_or($_POST['mail'],"");
+		$identity->password = Request::isset_or($_POST['password'],"");
+		return $identity;
+	}
 }
+?>

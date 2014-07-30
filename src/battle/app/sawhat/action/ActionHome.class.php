@@ -5,7 +5,7 @@ require_once 'app/sawhat/model/CardStore.class.php';
 require_once 'app/sawhat/model/NavigationHelper.class.php';
 require_once 'app/sawhat/model/SearchHelper.class.php';
 require_once 'core/storage/Uploader.class.php';
-require_once 'core/auth/AuthHelper.class.php';
+require_once 'core/auth/AuthManager.class.php';
 require_once 'core/model/AjaxResult.class.php';
 
 // SAWHAT main controller
@@ -15,7 +15,7 @@ class ActionHome extends Controller{
 	// all the cards otherwise.
 	// Treats any creation/update query submission.
 	public function index(){
-		$logged = AuthHelper::is_authenticated();
+		$logged = AuthManager::is_authenticated();
 
 		// check if any form submission (save or login-to-see-the-private-card)
 		if(isset($_POST['submit'])){
@@ -42,8 +42,8 @@ class ActionHome extends Controller{
 				case 'login' : {
 					$identity = new Identity();
 					$identity->password = Request::isset_or($_POST['password'], "prout");
-					$result_code = AuthHelper::authenticate(AuthHelper::AuthTypePassword,$identity);
-					$logged = AuthHelper::is_authenticated();
+					$result_code = AuthManager::authenticate(AuthManager::AuthTypePassword,$identity);
+					$logged = AuthManager::is_authenticated();
 
 					if($result_code > 0){
 						// TODO Error::get_message($result_code);
@@ -54,7 +54,7 @@ class ActionHome extends Controller{
 					break;
 				}
 				case 'logout' : {
-					AuthHelper::unauthenticate();
+					AuthManager::unauthenticate();
 					break;
 				}
 				case 'search' : {
