@@ -150,7 +150,7 @@ class AuthManager{
     }
 	
 
-    // OLD AuthService
+    // OLD AuthManager
 
 	public static function login($login,$password){
 		$identity = new Identity();
@@ -164,13 +164,10 @@ class AuthManager{
 	}
 	
 	public static function register($mail,$login,$password,$application){
-		// Initialize the hasher without portable hashes (this is more secure)
-		$hasher = new PasswordHash(8, false);
-
 		$user = new User();
 		$user->mail = $mail;
 		$user->login = $login;
-		$user->hashed_password = $hasher->HashPassword($password);//crypt($password,Configuration::SUPA_SALT);
+		$user->hashed_password = self::hash_password($password);
 		$user->confirmation_token = sha1(uniqid($user->login, true));
 		$user->role_id = self::role_name_to_id("user");
 		$user->last_ip = self::get_user_ip();
@@ -221,6 +218,12 @@ class AuthManager{
 		$identity->mail = Request::isset_or($_POST['mail'],"");
 		$identity->password = Request::isset_or($_POST['password'],"");
 		return $identity;
+	}
+
+	public static function hash_password($password){
+		// Initialize the hasher without portable hashes (this is more secure)
+		$hasher = new PasswordHash(8, false);
+		return $hasher->HashPassword($password);
 	}
 }
 ?>

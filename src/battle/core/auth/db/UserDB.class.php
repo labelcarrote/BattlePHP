@@ -70,11 +70,52 @@ class UserDB{
 		$user['hashed_password'] = stripslashes($row['hashed_password']);
 		$user['has_confirmed'] = ($row['has_confirmed'] > 0);
 		$user['date_creation'] = stripslashes($row['date_creation']);
+		$user['date_last_connection'] = stripslashes($row['date_last_connection']);
 		$user['last_ip'] = stripslashes($row['last_ip']);
 		$user['marked_for_deletion'] = ($row['marked_for_deletion'] > 0);
 		$user['marked_for_deletion_date'] = stripslashes($row['marked_for_deletion_date']);
 		$user['confirmation_token'] = stripslashes($row['confirmation_token']);
 		return $user;
+	}
+
+
+	// ---- COMMANDS : Create, Update, Delete 
+
+	public function upsert_user($user){
+		try{
+			$index = 1;
+			if($this->get_user($user->id) !== null){
+				$stmt = $this->get_statement("update_user");
+				$stmt->bindValue($index++, $user->role_id, PDO::PARAM_INT);
+				$stmt->bindValue($index++, $user->mail, PDO::PARAM_STR);
+				$stmt->bindValue($index++, $user->login, PDO::PARAM_STR);
+				$stmt->bindValue($index++, $user->hashed_password, PDO::PARAM_STR);
+				$stmt->bindValue($index++, $user->has_confirmed, PDO::PARAM_INT);
+				$stmt->bindValue($index++, $user->date_creation->format('Y-m-d H:i:s'), PDO::PARAM_STR);
+				$stmt->bindValue($index++, $user->last_ip, PDO::PARAM_STR);
+				$stmt->bindValue($index++, $user->marked_for_deletion, PDO::PARAM_INT);
+				$stmt->bindValue($index++, $user->marked_for_deletion_date->format('Y-m-d H:i:s'), PDO::PARAM_STR);
+				$stmt->bindValue($index++, $user->confirmation_token, PDO::PARAM_STR);
+				$stmt->bindValue($index++, $user->application, PDO::PARAM_STR);
+				$stmt->bindValue($index++, $user->id, PDO::PARAM_INT);
+				$stmt->execute();
+				return true;
+			}else{
+				$stmt = $this->get_statement("create_user");
+				$stmt->bindValue($index++, $user->role_id, PDO::PARAM_INT);
+				$stmt->bindValue($index++, $user->mail, PDO::PARAM_STR);
+				$stmt->bindValue($index++, $user->login, PDO::PARAM_STR);
+				$stmt->bindValue($index++, $user->hashed_password, PDO::PARAM_STR);
+				$stmt->bindValue($index++, $user->last_ip, PDO::PARAM_STR);
+				$stmt->bindValue($index++, $user->application, PDO::PARAM_STR);
+				$stmt->bindValue($index++, $user->confirmation_token, PDO::PARAM_STR);
+				$res = $stmt->execute();
+				return $res;
+			}
+		}
+		catch(PDOException $e){
+			$this->query_error($e);
+		}
 	}
 
 	// [CREATE] creates a new user (id auto incremented)
@@ -94,6 +135,60 @@ class UserDB{
 			$this->query_error($e);
 		}
 	}
+
+	// [UPDATE] updates the given user
+	public function update($user){
+		try{
+			$stmt = $this->get_statement("update_user");
+			$stmt->bindValue(1, $user->role_id, PDO::PARAM_INT);
+			$stmt->bindValue(2, $user->mail, PDO::PARAM_STR);
+			$stmt->bindValue(3, $user->login, PDO::PARAM_STR);
+			$stmt->bindValue(4, $user->hashed_password, PDO::PARAM_STR);
+			$stmt->bindValue(5, $user->has_confirmed);
+			$stmt->bindValue(6, $user->date_creation, PDO::PARAM_STR);
+			$stmt->bindValue(7, $user->last_ip, PDO::PARAM_STR);
+			$stmt->bindValue(8, $user->mark_for_deletion);
+			$stmt->bindValue(9, $user->mark_for_deletion_date, PDO::PARAM_STR);
+			$stmt->bindValue(10, $user->confirmation_token, PDO::PARAM_STR);
+			$stmt->bindValue(11, $user->application, PDO::PARAM_STR);
+			$stmt->bindValue(12, $user->id, PDO::PARAM_INT);
+
+			$stmt->execute();
+		}
+		catch(PDOException $e){
+			$this->query_error($e);
+		}
+	}
+
+	// [UPDATE] Updates a user last connection informations (ip,date)
+	public function update_user_last_connection($user_id){
+		try{
+			$ip = $_SERVER['REMOTE_ADDR'];
+			$now = new DateTime();
+			$stmt = $this->get_statement("update_user_last_connection");
+			$stmt->bindValue(1, $ip);
+			$stmt->bindValue(2, $now->format('Y-m-d H:i:s'));
+			$stmt->bindValue(3, $user_id, PDO::PARAM_INT);
+			$stmt->execute();
+		}
+		catch(PDOException $e){
+			$this->query_error($e);
+		}
+	}
+
+	// [UPDATE] Validate a user account from a confirmation token
+	public function validate_user_account($confirmation_token){
+		try{
+			$stmt = $this->get_statement("validate_user_account");
+			$stmt->bindParam(1, $confirmation_token);
+			return $stmt->execute();
+		}
+		catch(PDOException $e){
+			$this->query_error($e);
+		}
+	}
+
+	// ---- QUERIES
 
 	public function exists_user_from_login($login,$application){
 		try{
@@ -224,47 +319,12 @@ class UserDB{
 		}
 	}
 
-	// [UPDATE] updates the given user
-	public function update($user){
-		try{
-			$stmt = $this->get_statement("update_user");
-			$stmt->bindValue(1, $user->role_id, PDO::PARAM_INT);
-			$stmt->bindValue(2, $user->mail, PDO::PARAM_STR);
-			$stmt->bindValue(3, $user->login, PDO::PARAM_STR);
-			$stmt->bindValue(4, $user->hashed_password, PDO::PARAM_STR);
-			$stmt->bindValue(5, $user->has_confirmed);
-			$stmt->bindValue(6, $user->date_creation, PDO::PARAM_STR);
-			$stmt->bindValue(7, $user->last_ip, PDO::PARAM_STR);
-			$stmt->bindValue(8, $user->mark_for_deletion);
-			$stmt->bindValue(9, $user->mark_for_deletion_date, PDO::PARAM_STR);
-			$stmt->bindValue(10, $user->confirmation_token, PDO::PARAM_STR);
-			$stmt->bindValue(11, $user->application, PDO::PARAM_STR);
-			$stmt->bindValue(12, $user->id, PDO::PARAM_INT);
-
-			$stmt->execute();
-		}
-		catch(PDOException $e){
-			$this->query_error($e);
-		}
-	}
-
-	// [UPDATE] Validate a user account from a confirmation token
-	public function validate_user_account($confirmation_token){
-		try{
-			$stmt = $this->get_statement("validate_user_account");
-			$stmt->bindParam(1, $confirmation_token);
-			return $stmt->execute();
-		}
-		catch(PDOException $e){
-			$this->query_error($e);
-		}
-	}
 
 	// [DELETE] deletes the given user (from its id)
-	public function delete($userid){
+	public function delete($user_id){
 		try{
 			$stmt = $this->get_statement("delete_user");
-			$stmt->bindParam(1, $userid);
+			$stmt->bindParam(1, $user_id, PDO::PARAM_INT);
 			$stmt->execute();
 		}
 		catch(PDOException $e){
