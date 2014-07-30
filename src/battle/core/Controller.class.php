@@ -1,6 +1,5 @@
 <?php
-require_once 'core/auth/AuthHelper.class.php';
-require_once 'core/auth/AuthService.class.php';
+require_once 'core/auth/AuthManager.class.php';
 require_once 'core/i18n/Localization.php';
 
 /**
@@ -94,19 +93,19 @@ class Controller{
 	// Checks if user is authentified and assign authentication template-variables
 	// TODO : move to authcontroller (executed after requested action)
 	private function assign_auth_values(){
-		$is_authenticated = AuthHelper::is_authenticated();
+		$is_authenticated = AuthManager::is_authenticated();
 		$this->assign('logged', $is_authenticated);
 		if($is_authenticated && $this->is_db_available()){
 			// check if logged in local server
-			$this->assign('admin', AuthHelper::is_current_user_admin());
-			$this->assign('userprofile', AuthHelper::get_user_infos());
+			$this->assign('admin', AuthManager::is_current_user_admin());
+			$this->assign('userprofile', AuthManager::get_user_infos());
 
 		}else{
 			// check if logged in on FB
 			/*$facebook_manager = new FacebookService();
-			$userprofile = AuthService::get_user_profile($facebook_manager);
+			$userprofile = AuthManager::get_user_profile($facebook_manager);
 			$this->assign('userprofile', $userprofile);
-			$this->assign('fbloginouturl', AuthService::get_loginout_url($facebook_manager,$userprofile));*/
+			$this->assign('fbloginouturl', AuthManager::get_loginout_url($facebook_manager,$userprofile));*/
 		}
 	}
 	

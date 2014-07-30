@@ -1,5 +1,6 @@
 <?php
 require_once 'core/imaging/ImageHelper.class.php';
+require_once 'core/auth/AuthManager.class.php';
 
 class Card{
 	const DEFAULT_COLOR = '#f90';
@@ -120,7 +121,7 @@ class Card{
 				$this->html .= '<div class="column_container auto_clear">';
 				foreach($element->cards AS $card){
 					$view_manager = Viewer::getInstance();
-					$view_manager->assign('logged',AuthHelper::is_authenticated());
+					$view_manager->assign('logged',AuthManager::is_authenticated());
 					$view_manager->assign('card',$card);
 					$card_content = $view_manager->fetch_view('element.card.tpl');
 					$this->html .= 
@@ -247,7 +248,7 @@ class CardElement{
 					$included_card = CardStore::get($card_name,$recursive_level);
 				if(isset($included_card)){
 					$view_manager = Viewer::getInstance();
-					$view_manager->assign('logged',AuthHelper::is_authenticated());
+					$view_manager->assign('logged',AuthManager::is_authenticated());
 					$view_manager->assign('card',$included_card);
 					$banner_content = $view_manager->fetch_view('element.card.banner.tpl');
 					$this->html .= '<div class="size1of'.$column_count.' left" id="'.$included_card->name.'"><style>'.$included_card->style_definition.'</style>'.$banner_content.'</div>';
