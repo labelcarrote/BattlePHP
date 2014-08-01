@@ -5,18 +5,18 @@ require_once 'core/auth/db/UserDB.class.php';
  */
 class UserManager{
 
-    public static function save($user){
-    	if($user === null)
-    		return false;
+	public static function save($user){
+		if($user === null)
+			return false;
 
-    	return UserDB::getInstance()->upsert_user($user);
-    }
+		return UserDB::getInstance()->upsert_user($user);
+	}
 
-    public static function delete($user_id){
-    	if(!isset($user_id) || $user_id < 1)
-    		return false;
+	public static function delete($user_id){
+		if(!isset($user_id) || $user_id < 1)
+			return false;
 
-    	return UserDB::getInstance()->delete($user_id);
-    }
+		return UserDB::getInstance()->delete($user_id);
+	}
 }
 ?>

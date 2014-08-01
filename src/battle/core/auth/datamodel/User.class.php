@@ -1,5 +1,6 @@
 <?php
 require_once 'core/model/ValueObject.class.php';
+require_once 'core/auth/datamodel/UserRole.class.php';
 
 /**
  * User
@@ -28,6 +29,8 @@ class User extends ValueObject{
 			foreach($userdb as $field => $value)
 				$this->$field = $value; //note : $this->$field ! with a $ before the field!
 		}
+		
+		$this->role_name = UserRole::get_roles()[$this->role_id];
 	}
 	
 	public static function create_user_from_db($userdb){

@@ -18,8 +18,8 @@ class FacebookService{
 
 	public function __construct(){
 		$this->facebook = new Facebook(array(
-		  'appId'  => Configuration::FB_APP_ID,
-		  'secret' => Configuration::FB_SECRET //,'cookie' => true
+			'appId'  => Configuration::FB_APP_ID,
+			'secret' => Configuration::FB_SECRET //,'cookie' => true
 		));
 	}
 
@@ -34,13 +34,14 @@ class FacebookService{
 		// token is invalid if the user logged out of Facebook.
 
 		if ($user) {
-		  try {
-		    // Proceed knowing you have a logged in user who's authenticated.
-		    $user_profile = $this->facebook->api('/me');
-		  } catch (FacebookApiException $e) {
-		    error_log($e);
-		    //echo $e;
-		  }
+			try {
+				// Proceed knowing you have a logged in user who's authenticated.
+				$user_profile = $this->facebook->api('/me');
+			}
+			catch (FacebookApiException $e) {
+				error_log($e);
+				//echo $e;
+			}
 		}
 		return $user_profile;
 	}
