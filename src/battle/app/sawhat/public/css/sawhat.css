@@ -110,7 +110,7 @@ footer.content{ background-color: #666;	color: #999; }
 .user_utils button:hover {
 	color: #fff;
 }
-.column_2, .column_3 {
+.column {
 	-webkit-column-rule: 1px solid rgba(0,0,0,0.1);
 	-moz-column-rule: 1px solid rgba(0,0,0,0.1);
 	column-rule: 1px solid rgba(0,0,0,0.1);
@@ -442,38 +442,15 @@ footer.content{
 	padding: 0;
 }
 
-.column_2, .column_3 {
+.column {
 	-webkit-column-gap:24px;
 	-moz-column-gap:24px;
 	column-gap:24px;
+	-webkit-column-width:23em;
+	-moz-column-width:23em;
+	column-width:23em;
 	margin: 0 0 12px;
 }
-.column_2 {
-	-webkit-column-count:2;
-	-moz-column-count:2;
-	column-count:2;
-}
-.column_3 {
-	-webkit-column-count:3;
-	-moz-column-count:3;
-	column-count:3;
-}
-.size1of2 .column_3 {
-	-webkit-column-count:2;
-	-moz-column-count:2;
-	column-count:2;
-}
-.size1of3 .column_2 {
-	-webkit-column-count:1;
-	-moz-column-count:1;
-	column-count:1;
-}
-.size1of3 .column_3 {
-	-webkit-column-count:2;
-	-moz-column-count:2;
-	column-count:2;
-}
-
 .include .things,.include .files {
 	border-width: 0 1px 1px;
 	border-style: solid;
@@ -618,17 +595,6 @@ form{ margin: 0; }
 		padding: 0;
 		width: 100%;
 	}
-	
-	.column_2 {
-		-webkit-column-count:1;
-		-moz-column-count:1;
-		column-count:1;
-	}
-	.column_3 {
-		-webkit-column-count:2;
-		-moz-column-count:2;
-		column-count:2;
-	}
 }
 @media screen and (max-width: 800px) {
 	.unit{ float: none;}
@@ -652,12 +618,33 @@ form{ margin: 0; }
 		width: 100%;
 		padding: 0;
 	}
+}
+
+@media print{
+	/* hide un-relevant content */
+	footer,
+	.no-print,
+	.breadcrumbs, 
+	.btn,
+	.fa { 
+		display: none !important; 
+	}
 	
-	.column_2,
-	.column_3 {
-		-webkit-column-count:1;
-		-moz-column-count:1;
-		column-count:1;
+	/* hide "(url)" after links (added by browser when printed) */
+	h1 a, h1 a:after,
+	h2 a, h2 a:after { 
+		content: normal !important; 
+	}
+
+	/* refine borders */
+	#webdev .things, #webdev .files {
+	    border: 0px solid !important;
+	}
+	.sawhat{
+		border: #dedede 1px solid !important;
+	}
+	.banner{
+		border-bottom: #dedede 1px solid !important;	
 	}
 }
 

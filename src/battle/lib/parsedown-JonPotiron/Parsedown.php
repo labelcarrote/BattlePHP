@@ -608,7 +608,7 @@ class Parsedown
                     }
                     break;
 			case '|':
-                    if (preg_match('/^(\|{1,2})[ ](.*)/', $line, $matches))
+                    if (preg_match('/^(\|{1})[ ](.*)/', $line, $matches))
                     {
 					$blocks []= $block;
 					$block = array(
@@ -618,7 +618,7 @@ class Parsedown
 							$matches[2]
 						),
 						'attributes' => array(
-							'class' => 'column_'.(strlen($matches[1])+1)
+							'class' => 'column'
 						)
 					);
 					$context = 'column';
