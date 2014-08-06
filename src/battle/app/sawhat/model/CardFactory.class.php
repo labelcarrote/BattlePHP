@@ -138,8 +138,7 @@ class Card{
 			}
 		}
 		// over-parse with external parser
-		$parsedown = new Parsedown();
-		$this->html = $parsedown->parse($this->html);
+		$this->html = Parsedown::instance()->parse($this->html);
 
 		// @TODO : need cleaning ?
 		//$this->html = stripslashes(strip_tags($this->html));
