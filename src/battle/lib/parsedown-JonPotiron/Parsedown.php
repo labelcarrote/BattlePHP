@@ -77,10 +77,8 @@ class Parsedown{
 	 */
 	private function findBlocks(array $lines, $containerBlockName = null){
 		$block = null;
-  
 		$context = null;
 		$contextData = null;
-  
 		/*
 		 * Iterates through lines to identify blocks
 		 */
@@ -125,7 +123,9 @@ class Parsedown{
 					}
 					continue 2;
 				case 'markup':
-					// Adds or removes nested markup depth
+					/*
+					 * Adds or removes nested markup depth
+					 */
 					if (stripos($line, $contextData['start']) !== false){
 						// opening tag
 						$contextData['depth'] += substr_count($line,$contextData['start']);
@@ -134,7 +134,9 @@ class Parsedown{
 						// closing tag
 						$contextData['depth'] -= substr_count($line,$contextData['end']);
 					}
-					// stops "markup" block
+					/*
+					 * Stops "markup" context
+					 */
 					if($contextData['depth'] == 0){
 						$context = null;
 					}
@@ -290,17 +292,17 @@ class Parsedown{
 						$context = null;
 						continue 2;
 					}
-					if ($line[0] === '=' and chop($line, '=') === ''){
+					if ($line[0] === '=' && chop($line, '=') === ''){
 						$block['name'] = 'h1';
 						$context = null;
 						continue 2;
 					}
-					if ($line[0] === '-' and chop($line, '-') === ''){
+					if ($line[0] === '-' && chop($line, '-') === ''){
 						$block['name'] = 'h2';
 						$context = null;
 						continue 2;
 					}
-					if (strpos($line, '|') !== false and strpos($block['content'], '|') !== false and chop($line, ' -:|') === ''){
+					if (strpos($line, '|') !== false && strpos($block['content'], '|') !== false && chop($line, ' -:|') === ''){
 						$values = array();
 						$substring = trim($line, ' |');
 						$parts = explode('|', $substring);
@@ -434,23 +436,23 @@ class Parsedown{
 					}
 					break;
 				case '<':
-					$position = strpos($line, '>');
-					if ($position > 1){
+					$closing_bracket_position = strpos($line, '>');
+					if ($closing_bracket_position > 1){
 						// finds tag name
-						$substring = substr($line, 1, $position - 1);
+						$substring = substr($line, 1, $closing_bracket_position - 1);
 						$substring = chop($substring);
 						if (substr($substring, -1) === '/'){
 							// auto closing tag
 							$isClosing = true;
 							$substring = substr($substring, 0, -1);
 						}
-						$position = strpos($substring, ' ');
-						if ($position !== false){
-							$name = substr($substring, 0, $position);
-						}else{
+						$first_space_position = strpos($substring, ' ');
+						if ($first_space_position !== false){
+							$name = substr($substring, 0, $first_space_position);
+						} else {
 							$name = $substring;
 						}
-						$name = strtolower($substring);
+						$name = strtolower($name);
 						/*
 						 * Checks if tag_name is alpha (no need since we don't check "real" existence of tag name)
 						 */
@@ -484,7 +486,7 @@ class Parsedown{
 							'content type' => null,
 							'content' => $indentedLine
 						);
-						if (isset($isClosing)){
+						if(isset($isClosing) && $isClosing){
 							/*
 							 * continue to next line
 							 */
@@ -501,10 +503,12 @@ class Parsedown{
 								'end' => '</'.$name.'>',
 								'depth' => 0
 							);
-							$contextData['depth'] = substr_count($line,$contextData['start']) - substr_count($line,$contextData['end']);
+							$openning_tag_count = substr_count($line,$contextData['start']);
+							$closing_tag_count = substr_count($line,$contextData['end']);
+							$contextData['depth'] = $openning_tag_count - $closing_tag_count;
 							if(
 								stripos($line, $contextData['end']) !== false
-								&& substr_count($line,$contextData['start']) == substr_count($line,$contextData['end'])
+								&& $openning_tag_count == $closing_tag_count
 							){
 								$context = null;
 							}
