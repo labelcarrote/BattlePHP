@@ -994,7 +994,7 @@ class Parsedown{
 						$markers[$closestMarkerIndex] = $closestMarker;
 						$matches[1] = $this->parseLine($matches[1], $markers);
 						$markup .= '<strong>'.$matches[1].'</strong>';
-					} elseif (preg_match(self::$emRegex[$closestMarker], $text, $matches)){
+					} elseif(preg_match(self::$emRegex[$closestMarker], $text, $matches)){
 						/*
 						 * Found <em> marker
 						 */
@@ -1002,7 +1002,7 @@ class Parsedown{
 						$matches[1] = $this->parseLine($matches[1], $markers);
 						$markup .= '<em>'.$matches[1].'</em>';
 					}
-					if (isset($matches) && $matches !== false){
+					if (isset($matches) && $matches !== false && !empty($matches)){
 						$offset = strlen($matches[0]);
 					} else {
 						$markup .= $closestMarker;
