@@ -58,8 +58,12 @@ class CardStore{
 		$folder = self::get_folder()."$card_name/";
 		$filename = $folder.$card_name.".txt";
 		$lines = (!file_exists($filename)) ? array() : file($filename);
-		$card = new Card($card_name,$lines,$recursive_level); 
+		$card = new Card($card_name,$lines,$recursive_level);
 		$card->files = FileSystemIO::get_files_in_dir($folder.'{*.jpg,*.jpeg,*.JPG,*.png,*.gif,*.zip}');
+		foreach($card->files AS $key => $file){
+			$file_type = preg_match('/^(.+)\.(zip)$/',$file->name) ? 'zip' : 'image';
+			$card->files[$key]->type = $file_type;
+		}
 		return $card;
 	}
 

@@ -15,5 +15,5 @@ RewriteCond %{REQUEST_URI} !public
 RewriteRule ^([a-zA-Z0-9_-]+)(/*)$ index.php?application=$1 [L]
 RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)(/*)$ index.php?application=$1&controller=$2 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/?$ index.php?application=$1&controller=$2&action=$3 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/(.+)\.(png|jpg|jpeg|gif|css|js|pde|ttf|mp3|svg|eot|woff)$ $1/$2/$3/$4.$5 [L,NC]
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/(.+)\.(png|jpg|jpeg|gif|css|js|pde|ttf|mp3|svg|eot|woff|zip)$ $1/$2/$3/$4.$5 [L,NC]
 RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/(.+)$ index.php?application=$1&controller=$2&action=$3&param=$4 [L,QSA]

@@ -41,7 +41,7 @@
 			</div>
 			<ul>
 			{foreach from=$card->files item=file}
-				<li><a href="{$root_url}{$file->fullname}" class="image_link">{$file->name}</a></li>
+				<li><a href="{$root_url}{$file->fullname}" class="{$file->type}_link">{$file->name}</a></li>
 			{/foreach}
 			</ul>
 		</div>

@@ -60,7 +60,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		var element = $(this).closest('.files');
 		element.find('.image_preview img').attr('src',$(this).attr('href')).focus();
-		element.find('.image_preview').fadeIn(200);
+		element.find('.image_preview').hide().removeClass('hidden').fadeIn(200);
 	});
 	$(document).on('click','.files .image_preview',function(){
 		$(this).fadeOut(200);
