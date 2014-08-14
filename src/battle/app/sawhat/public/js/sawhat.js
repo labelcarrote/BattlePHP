@@ -190,7 +190,6 @@ $(window).load(function(){
 		}
 	}
 
-
 	// Card Edit : Set As Current
 	$('body').on('click','.load_card_as_current',function(e){
 		//card to load 
@@ -283,6 +282,22 @@ $(window).load(function(){
 
 	set_width_mode(true);
 
+	// CSS STYLE CHANGER //
+	function change_color_scheme(color_scheme){
+		var link_element = $('#color_scheme');
+		var new_css_link = link_element.attr('href').replace(/^(.+)\/[a-zA-Z0-9_-]+\.css$/,'$1/'+color_scheme+'.css');
+		$('#color_scheme').attr('href',new_css_link);
+		localStorage['color_scheme'] = color_scheme;
+	}
+	$('#style_changer').on('change',function(){
+		var color_scheme = $(this).val();
+		change_color_scheme(color_scheme);
+	});
+	if(typeof localStorage['color_scheme'] !== 'undefined'){
+		$('#style_changer').val(localStorage['color_scheme']);
+		change_color_scheme(localStorage['color_scheme']);
+	}
+	
 	// SEARCH RESULT RESIZE //
 	var banner_min_height = parseInt($('.banner').css('min-height'));
 	$('#search_result .banner').each(function(){

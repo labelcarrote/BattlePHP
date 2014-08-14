@@ -19,6 +19,13 @@ class ActionHome extends Controller{
 
 		// Assign default color
 		$this->assign('color_scheme',(!empty(ConfigurationSawhat::COLOR_SCHEME) ? ConfigurationSawhat::COLOR_SCHEME : 'default'));
+		// Sets color scheme available
+		$files = FileSystemIO::get_files_in_dir($_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.Request::get_application_root().'public/css/color_scheme/{*.css}');
+		foreach($files AS $key => $css_file){
+			$files[$key]->name = str_replace('.css','',$css_file->name);
+			$files[$key]->is_default = ConfigurationSawhat::COLOR_SCHEME === $files[$key]->name ? true : false;
+		}
+		$this->assign('color_schemes',$files);
 		
 		// check if any form submission (save or login-to-see-the-private-card)
 		if(isset($_POST['submit'])){

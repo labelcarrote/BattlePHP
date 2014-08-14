@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="{$root_url}lib/bootstrap/css/jasny-bootstrap.min.css" />
 		<link rel="stylesheet" href="{$root_url}lib/prism/prism_okaida_mod.css" />
 		<link rel="stylesheet" href="{$root_url}lib/font-awesome-4.1.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="{$current_app_url}public/css/color_scheme/{$color_scheme}.css" />
+		<link rel="stylesheet" href="{$current_app_url}public/css/color_scheme/{$color_scheme}.css" id="color_scheme"/>
 		<link rel="stylesheet" href="{$current_app_url}public/css/sawhat.css" />
 		<script type="text/javascript" src="{$root_url}lib/jquery/jquery.js"></script>
 		<script type="text/javascript" src="{$root_url}lib/bootstrap/js/bootstrap.min.js"></script>
