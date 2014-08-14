@@ -17,6 +17,9 @@ class ActionHome extends Controller{
 	public function index(){
 		$logged = AuthManager::is_authenticated();
 
+		// Assign default color
+		$this->assign('color_scheme',(!empty(ConfigurationSawhat::COLOR_SCHEME) ? ConfigurationSawhat::COLOR_SCHEME : 'default'));
+		
 		// check if any form submission (save or login-to-see-the-private-card)
 		if(isset($_POST['submit'])){
 			$submit_action = $_POST['submit'];
@@ -149,7 +152,6 @@ class ActionHome extends Controller{
 			return;
 		}
 		elseif($params = Request::get_params("@card_name")){
-
 			switch($params['card_name']){
 				case 'all_cards':
 					$this->assign('breadcrumbs',NavigationHelper::add_item('All cards'));

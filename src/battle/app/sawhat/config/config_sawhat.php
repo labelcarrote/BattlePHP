@@ -9,6 +9,7 @@ class ConfigurationSawhat{
 	const SITE_TITLE = "Sawhat ";
 	const DEFAULT_CARD_NAME = "home";
 	const DEFAULT_WIDTH_MODE = "stretch"; //[stretch,constraint]
+	const COLOR_SCHEME = "";
 
 	// ...
 }

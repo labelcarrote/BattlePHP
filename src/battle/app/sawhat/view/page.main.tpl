@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="{$root_url}lib/bootstrap/css/jasny-bootstrap.min.css" />
 		<link rel="stylesheet" href="{$root_url}lib/prism/prism_okaida_mod.css" />
 		<link rel="stylesheet" href="{$root_url}lib/font-awesome-4.1.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{$current_app_url}public/css/color_scheme/{$color_scheme}.css" />
 		<link rel="stylesheet" href="{$current_app_url}public/css/sawhat.css" />
 		<script type="text/javascript" src="{$root_url}lib/jquery/jquery.js"></script>
 		<script type="text/javascript" src="{$root_url}lib/bootstrap/js/bootstrap.min.js"></script>
@@ -19,7 +20,7 @@
 		<script type="text/javascript" src="{$root_url}lib/prism/prism.js"></script>
 	</head>
 	<body>
-		<div><!-- id="super_wrapper" TODO : FIX Scrolling -->
+		<div id="super_wrapper"><!--  TODO : FIX Scrolling -->
 			{include file=$content}
 		</div>
 		<script type="text/javascript" src="{$current_app_url}public/js/sawhat.js"></script>
