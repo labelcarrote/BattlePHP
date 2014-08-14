@@ -715,8 +715,8 @@ class Parsedown{
 		/*
 		 * Method has been called on a <li> substring
 		 */
-		if ($containerBlockName === 'li' && $block['name'] === null){
-			return $block['content'];
+		if ($containerBlockName === 'li' && (is_null($block) || is_null($block['name']))){
+			return is_null($block) ? '' : $block['content'];
 		}
 		/*
 		 * Adds last block, removes first empty block and returns
