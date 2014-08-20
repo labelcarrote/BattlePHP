@@ -809,8 +809,8 @@ class Parsedown{
 	 */
 	private function parseSpecialChars($text){
 		// replace special chars
-		$s = array('(R)','(C)','(TM)','<3');
-		$r = array('&reg;','&copy;','&trade;','&hearts;');
+		$s = array('(R)','(C)','(TM)','<3','=>','<=');
+		$r = array('&reg;','&copy;','&trade;','&hearts;','&rarr;','&larr;');
 		return str_replace($s,$r,$text);
 	}
 	
