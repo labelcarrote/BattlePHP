@@ -26,13 +26,18 @@ session_start();
 require_once('config/config.php');
 
 // include core in autoload
-function autoloadcore($classname) {
-	if((@include_once $classname.'.class.php') === false) {
-		// try other naming convention
-		if((@include_once $classname.'.php') === false) {
-			// and try again for fu***g Smarty sh**y naming convention
-			include_once strtolower($classname).'.php';
-		}
+function autoloadcore($class_name) {
+	// set namespace as dir path
+	$class_path = str_replace('\\','/',$class_name);
+	// must try X naming convention due to shi**y lib implementation 
+	if(stream_resolve_include_path($class_path.'.class.php')){
+		require_once $class_path.'.class.php';
+	} elseif(stream_resolve_include_path($class_path.'.php')){
+		require_once $class_path.'.php';
+	} elseif(stream_resolve_include_path('class.'.strtolower($class_path).'.php')){
+		require_once 'class.'.strtolower($class_path).'.php';
+	} elseif(stream_resolve_include_path(strtolower($class_path).'.php')){
+		require_once strtolower($class_path).'.php';
 	}
 }
     
