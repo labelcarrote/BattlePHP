@@ -4,49 +4,6 @@ require_once 'core/auth/AuthManager.class.php';
 
 class Card{
 	const DEFAULT_COLOR = '#f90';
-	public $palette = array(
-		"all cs" => "CCCCCC",
-		"aoi" => "69D2E7",
-		"apple chic" => "C7F464",
-		"arrowblue" => "00CCFF",
-		"Baby Blanket" => "24C2E6",
-		"beach storm" => "E0E4CC",
-		"Bee" => "FFCC00",
-		"big buppa bubs" => "00DB7F",
-		"blu" => "5BC0DE",
-		"Bond" => "D5DED9",
-		"Cheery Cherries" => "E93B54",
-		"Clean Pondwater" => "A7DBD8",
-		"Darkest" => "2B2B2B",
-		"DirtyMartin's Yellow" => "FFD801",
-		"Driftwood" => "D6B278",
-		"fetch me some" => "9DE0AD",
-		"full black" => "000000",
-		"full white" => "FFFFFF",
-		"Forever" => "99B2B7",
-		"Fresh Mint Gum" => "76F0B7",
-		"grandma's pillow" => "C44D58",
-		"Kind Giant" => "948C75",
-		"LawnGreen" => "7CFC00",
-		"med. green blue" => "45ADA8",
-		"Mighty Slate" => "556270",
-		"olives" => "837B47",
-		"Orange 3.3" => "FF6523",
-		"Pacifica" => "4ECDC4",
-		"paladin" => "529F88",
-		"Power-Player" => "3D6B86",
-		"Purple Blues" => "837CFE",
-		"Red One" => "FF2B08",
-		"red runaway #2" => "A7003C",
-		"Rock my world" => "547980",
-		"Rounge" => "FF6600",
-		"Saïan cyan" => "1497A2",
-		"She Mellow" => "FF69A6",
-		"sunny sand" => "F9C59E",
-		"unreal food pills" => "FA6900",
-		"Vitamin C" => "FF9900",
-		"Yellow Karma" => "EEF020"
-	);
 
 	public $is_private = false;
 	public $is_recursive;

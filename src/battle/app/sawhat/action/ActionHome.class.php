@@ -2,6 +2,7 @@
 require_once 'app/sawhat/config/config_sawhat.php';
 require_once 'app/sawhat/model/CardFactory.class.php';
 require_once 'app/sawhat/model/CardStore.class.php';
+require_once 'app/sawhat/model/ColorScheme.class.php';
 require_once 'app/sawhat/model/NavigationHelper.class.php';
 require_once 'app/sawhat/model/SearchHelper.class.php';
 require_once 'core/storage/Uploader.class.php';
@@ -17,18 +18,12 @@ class ActionHome extends Controller{
 	public function index(){
 		$logged = AuthManager::is_authenticated();
 
-		// Assign default color
-		$default_color = (defined('ConfigurationSawhat::COLOR_SCHEME') && ConfigurationSawhat::COLOR_SCHEME !== "") 
-			? ConfigurationSawhat::COLOR_SCHEME 
-			: 'default';
-		$this->assign('color_scheme',$default_color);
+		// Assign default color scheme
+		$color_scheme = new ColorScheme();
+		$this->assign('color_scheme',$color_scheme->name);
 		
 		// Sets color scheme available
-		$files = FileSystemIO::get_files_in_dir($_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.Request::get_application_root().'public/css/color_scheme/{*.css}');
-		foreach($files AS $key => $css_file){
-			$files[$key]->name = str_replace('.css','',$css_file->name);
-			$files[$key]->is_default = ConfigurationSawhat::COLOR_SCHEME === $files[$key]->name ? true : false;
-		}
+		$files = ColorScheme::get_available_color_schemes();
 		$this->assign('color_schemes',$files);
 		
 		// check if any form submission (save or login-to-see-the-private-card)
@@ -88,7 +83,8 @@ class ActionHome extends Controller{
 				case 'edit':
 					if(!in_array($params['card_name'],$fake_cards)){
 						$ass_card = CardStore::get($params['card_name']);
-						$palette = $ass_card->palette;
+						// Sets palette
+						$palette = $color_scheme->palette;
 						$palette_by_hue = array();
 						foreach($palette AS $name => $hex){
 							// Calculate HUE //
