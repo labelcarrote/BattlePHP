@@ -18,6 +18,7 @@
 					</div>
 				</form>
 			</div>
+			{if count($color_schemes) > 1}
 			<form method="POST" class="form-inline">
 				<div class="form-group align_right">
 					<label for="style_changer" class="control-label">Color theme</label>
@@ -28,6 +29,7 @@
 					</select>
 				</div>
 			</form>
+			{/if}
 		</div>
 	</div>
 </footer>
