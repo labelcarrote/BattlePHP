@@ -40,7 +40,7 @@ class Card{
 		"red runaway #2" => "A7003C",
 		"Rock my world" => "547980",
 		"Rounge" => "FF6600",
-		"Saïan cyan" => "1497A2",
+		"SaÃ¯an cyan" => "1497A2",
 		"She Mellow" => "FF69A6",
 		"sunny sand" => "F9C59E",
 		"unreal food pills" => "FA6900",
