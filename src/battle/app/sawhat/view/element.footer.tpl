@@ -9,7 +9,7 @@
 		</div>
 		<div class="right">
 			<div class="marginbottom">
-				<form method="POST" class="form-horizontal">
+				<form method="POST" class="form-inline">
 					<div class="input-group">
 						<input type="text" class="form-control" name="search" placeholder="keywords go here" value="" required="required" pattern="[a-zA-Z0-9 _-]+">
 						<span class="input-group-btn">
@@ -18,7 +18,7 @@
 					</div>
 				</form>
 			</div>
-			<form method="POST" class="form-inline margintop">
+			<form method="POST" class="form-inline">
 				<div class="form-group align_right">
 					<label for="style_changer" class="control-label">Color theme</label>
 					<select class="form-control" id="style_changer" name="style_changer">
