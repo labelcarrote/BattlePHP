@@ -33,8 +33,12 @@ class Request{
     }
 
 	public static function get_application_root(){
-        return self::get_root_url()."app/".self::get_application()."/";
-    }
+		return self::get_root_url()."app/".self::get_application()."/";
+	}
+	
+	public static function get_application_path(){
+		return $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'app/'.self::get_application().'/';
+	}
 
 	public static function get_full_url(){
 		$protocol = 'http'.(isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 's' : '');
