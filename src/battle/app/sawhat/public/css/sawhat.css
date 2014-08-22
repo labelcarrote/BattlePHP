@@ -1,4 +1,6 @@
 @CHARSET "UTF-8";
+/* Google Fonts */
+@import url(http://fonts.googleapis.com/css?family=Arvo|Open+Sans:400,700,400italic,700italic&subset=latin,latin-ext);
 
 /* ---- OOCSS - Grid.css --- */
 .line,.lastUnit{overflow:hidden; *overflow:visible;*zoom:1;}
@@ -35,7 +37,7 @@
 
 /* ---- Base Rules / Element Selector ---- */
 body{
-	font: 160%/1.5 Arial, Verdana, sans-serif;
+	font: 160%/1.5 'Open Sans',Arial, Verdana, sans-serif;
 	text-align: left;
 	word-wrap:break-word;
 }
@@ -66,7 +68,6 @@ img{
 	padding: 0 0.3em;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	line-height: 1em;
 	border-width: 1px;
 	border-style: solid;
 }
@@ -74,12 +75,24 @@ img{
 /* Typography */
 /* main line height = 1.5em => 1.5/font-size h = line-height h */
 /* line are not perfect because of border-bottom in some headers */
-h1, .h1{font-size:2em; margin:0.75em 0 0.675em; line-height: 1.5em; font-weight:bold; font-style: normal;}
-h2, .h2{font-size:1.67em; margin:0.898em 0 0.898em; line-height: 0.898em; font-weight:bold; font-style: normal;}
-h3, .h3{font-size:1.3em; margin:1.154em 0 1.154em; line-height: 1.154em; font-weight:bold; font-style: normal;}
-h4, .h4{font-size:1.25em; margin:1.2em 0 1.2em; line-height: 1.2em; font-weight:normal; font-style: normal;}
-h5, .h5{font-size:1.15em; margin:1.304em 0 1.304em; line-height: 1.304em; font-weight:bold; font-style: normal;}
-h6, .h6{font-size:1em; margin:1.5em 0 1.5em; line-height: 1.5em; font-weight:normal; font-style: italic;}
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6
+{
+	font-family: 'Arvo', serif;
+	font-weight:400;
+	font-style: normal;
+}
+
+h1, .h1{font-size:2em; margin:0.75em 0 0.675em; line-height: 1.5em;}
+h2, .h2{font-size:1.67em; margin:0.898em 0 0.898em; line-height: 0.898em;}
+h3, .h3{font-size:1.3em; margin:1.154em 0 1.154em; line-height: 1.154em;}
+h4, .h4{font-size:1.25em; margin:1.2em 0 1.2em; line-height: 1.2em;}
+h5, .h5{font-size:1.15em; margin:1.304em 0 1.304em; line-height: 1.304em;}
+h6, .h6{font-size:1em; margin:1.5em 0 1.5em; line-height: 1.5em; font-style: italic;}
 /* normal margin + 2/3 */
 blockquote + h1, blockquote + .h1 {
 	margin-top: 1.25em;
@@ -124,7 +137,7 @@ blockquote {
 blockquote > :first-child { margin-top: 0; }
 blockquote > :last-child { margin-bottom: 0; }
 table th, table td {
-	padding: 0.2em 0.4em; 
+	padding: 0.2em 0.4em;
 	border-width: 1px;
 	border-style: solid;
 }
@@ -161,7 +174,7 @@ table th, table td {
 .auto_clear:after {
     content: "";
     display: table;
-} 
+}
 .auto_clear:after {
     clear: both;
 }
@@ -191,8 +204,8 @@ small, .small { font-size: 0.9em; }
 }
 
 /* ---- Layout ---- */
-header{ 
-	vertical-align: bottom; 
+header{
+	vertical-align: bottom;
 	border-bottom-width: 2px;
 	border-style: solid;
 }
@@ -436,7 +449,6 @@ footer a,
 footer .btn-link {
 	display: inline;
 	padding: 0;
-	font-weight: bold;
 	font-size: 1em;
 }
 footer a:hover, footer .btn-link:hover {
@@ -457,6 +469,9 @@ form{ margin: 0; }
 	padding: 0;
 	font-size: 1em;
 }
+.control-label {
+	font-weight: normal;
+}
 
 /* Font Awesome extends */
 .fa-rotate-45 {
@@ -472,12 +487,12 @@ form{ margin: 0; }
 @media screen and (max-width: 1200px) {
 	.size1of3 { width: 50%; }
 	.size1of2 { width: 100%; }
-	
+
 	.column_container .size1of2:nth-child(1),
 	.column_container .size1of2:nth-child(2) {
 		padding: 0;
 	}
-	
+
 	.column_container .size1of3:nth-child(1) {
 		padding-right: 3px;
 	}
@@ -499,7 +514,7 @@ form{ margin: 0; }
 	.include {
 		margin: 0 -6px;
 	}
-	
+
 	.column_container .size1of2:nth-child(1),
 	.column_container .size1of2:nth-child(2),
 	.column_container .size1of3:nth-child(1),
@@ -517,16 +532,16 @@ form{ margin: 0; }
 	/* hide un-relevant content */
 	footer,
 	.no-print,
-	.breadcrumbs, 
+	.breadcrumbs,
 	.btn,
-	.fa { 
-		display: none !important; 
+	.fa {
+		display: none !important;
 	}
-	
+
 	/* hide "(url)" after links (added by browser when printed) */
 	h1 a, h1 a:after,
-	h2 a, h2 a:after { 
-		content: normal !important; 
+	h2 a, h2 a:after {
+		content: normal !important;
 	}
 
 	/* refine borders */
@@ -537,7 +552,7 @@ form{ margin: 0; }
 		border: #dedede 1px solid !important;
 	}
 	.banner{
-		border-bottom: #dedede 1px solid !important;	
+		border-bottom: #dedede 1px solid !important;
 	}
 }
 
@@ -545,16 +560,16 @@ form{ margin: 0; }
 	/* hide un-relevant content */
 	footer,
 	.no-print,
-	.breadcrumbs, 
+	.breadcrumbs,
 	.btn,
-	.fa { 
-		display: none !important; 
+	.fa {
+		display: none !important;
 	}
-	
+
 	/* hide "(url)" after links (added by browser when printed) */
 	h1 a, h1 a:after,
-	h2 a, h2 a:after { 
-		content: normal !important; 
+	h2 a, h2 a:after {
+		content: normal !important;
 	}
 
 	/* refine borders */
@@ -565,6 +580,6 @@ form{ margin: 0; }
 		border: #dedede 1px solid !important;
 	}
 	.banner{
-		border-bottom: #dedede 1px solid !important;	
+		border-bottom: #dedede 1px solid !important;
 	}
 }
