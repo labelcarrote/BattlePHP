@@ -18,8 +18,8 @@ class ActionHome extends Controller{
 		$logged = AuthManager::is_authenticated();
 
 		// Assign default color
-		$default_color = (defined("Configuration::COLOR_SCHEME") && Configuration::COLOR_SCHEME !== "") 
-			? Configuration::COLOR_SCHEME 
+		$default_color = (defined('ConfigurationSawhat::COLOR_SCHEME') && ConfigurationSawhat::COLOR_SCHEME !== "") 
+			? ConfigurationSawhat::COLOR_SCHEME 
 			: 'default';
 		$this->assign('color_scheme',$default_color);
 		
