@@ -1,6 +1,8 @@
 @CHARSET "UTF-8";
 /* Google Fonts */
-@import url(http://fonts.googleapis.com/css?family=Arvo|Open+Sans:400,700,400italic,700italic&subset=latin,latin-ext);
+/*@import url(http://fonts.googleapis.com/css?family=Arvo|Open+Sans:400,700,400italic,700italic&subset=latin,latin-ext);*/
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400,700,700italic,400italic&subset=latin,latin-ext);
+
 
 /* ---- OOCSS - Grid.css --- */
 .line,.lastUnit{overflow:hidden; *overflow:visible;*zoom:1;}
@@ -82,7 +84,8 @@ h4, .h4,
 h5, .h5,
 h6, .h6
 {
-	font-family: 'Arvo', serif;
+	/*font-family: 'Arvo', serif;*/
+	font-family: 'Roboto Slab', serif;
 	font-weight:400;
 	font-style: normal;
 }
