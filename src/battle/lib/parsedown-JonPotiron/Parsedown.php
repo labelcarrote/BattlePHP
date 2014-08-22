@@ -805,12 +805,12 @@ class Parsedown{
 	}
 	
 	/*
-	 * Parses special html chars ( ®, ©, ™, ♥ )
+	 * Parses special html chars ( ®, ©, ™, ♥, →, ←)
 	 */
 	private function parseSpecialChars($text){
 		// replace special chars
-		$s = array('(R)','(C)','(TM)','<3','=>','<=');
-		$r = array('&reg;','&copy;','&trade;','&hearts;','&rarr;','&larr;');
+		$s = array('(R)','(C)','(TM)','<3','=>','->','<=','<-');
+		$r = array('&reg;','&copy;','&trade;','&hearts;','&rarr;','&rarr;','&larr;','&larr;');
 		return str_replace($s,$r,$text);
 	}
 	
