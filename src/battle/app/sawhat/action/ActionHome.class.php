@@ -1,6 +1,6 @@
 <?php
 require_once 'app/sawhat/config/config_sawhat.php';
-require_once 'app/sawhat/model/CardFactory.class.php';
+require_once 'app/sawhat/model/Card.class.php';
 require_once 'app/sawhat/model/CardStore.class.php';
 require_once 'app/sawhat/model/ColorScheme.class.php';
 require_once 'app/sawhat/model/NavigationHelper.class.php';
@@ -35,7 +35,7 @@ class ActionHome extends Controller{
 					$card_color = Request::isset_or($_POST['color'], Card::DEFAULT_COLOR);
 					$card_lines = Request::isset_or($_POST['card'], "");
 					$is_private = isset($_POST['is_private']);
-					$card = CardStore::get($card_name);
+					$card = CardStore::get_card($card_name);
 
 					// do nothing if card is private and user is not authentified
 					if($card === null || !$card->is_private || ($card->is_private && $logged)){
@@ -82,7 +82,7 @@ class ActionHome extends Controller{
 			switch($params['action']){
 				case 'edit':
 					if(!in_array($params['card_name'],$fake_cards)){
-						$ass_card = CardStore::get($params['card_name']);
+						$ass_card = CardStore::get_card($params['card_name']);
 						// Sets palette
 						$palette = $color_scheme->palette;
 						$palette_by_hue = array();
@@ -118,7 +118,7 @@ class ActionHome extends Controller{
 								$old_card = CardStore::get_card_version($params['card_name'],$card_version);
 								$result->body = $old_card->text_code;
 							}else{
-								$card = CardStore::get($params['card_name']);
+								$card = CardStore::get_card($params['card_name']);
 								$result->body = $card->text_code;
 							}
 						}
@@ -131,7 +131,7 @@ class ActionHome extends Controller{
 						if($params['card_name'] == 'all_cards'){
 							$result->body = '';
 						}else{
-							$ass_card = CardStore::get($params['card_name']);
+							$ass_card = CardStore::get_card($params['card_name']);
 							$this->assign('card',$ass_card);
 							$this->assign('logged',$logged);
 							$this->assign('show_banner',Request::isset_or($_GET['show_banner'],1));
@@ -150,7 +150,7 @@ class ActionHome extends Controller{
 					 */
 					$request = Request::isset_or($_GET['request'],null);
 					$this->assign('breadcrumbs',NavigationHelper::add_item(!is_null($request) ? '<i>search:</i> '.$request : 'nothing'));
-					$ass_cards = CardStore::get_all($request);
+					$ass_cards = CardStore::get_all_cards($request);
 					if(!empty($ass_cards))
 						$this->assign('cards',$ass_cards);
 					$this->display_page('section.card.tpl');
@@ -162,7 +162,7 @@ class ActionHome extends Controller{
 			switch($params['card_name']){
 				case 'all_cards':
 					$this->assign('breadcrumbs',NavigationHelper::add_item('All cards'));
-					$ass_cards = CardStore::get_all();
+					$ass_cards = CardStore::get_all_cards();
 					if(!empty($ass_cards)){
 						$this->assign('cards',$ass_cards);
 						$this->display_page('section.card.tpl');
@@ -177,7 +177,7 @@ class ActionHome extends Controller{
 					$card_name = (isset($_GET['controller']) || (array_key_exists('controller',$_GET) && $_GET['controller'] === null)) 
 						? $params['card_name'] 
 						: ConfigurationSawhat::DEFAULT_CARD_NAME;
-					$ass_card = CardStore::get($card_name);
+					$ass_card = CardStore::get_card($card_name);
 					$this->assign('breadcrumbs',NavigationHelper::add_item($ass_card->display_name));
 					$this->assign('card',$ass_card);
 					/*var_dump(self::get_broken_links($ass_card));*/
@@ -187,13 +187,13 @@ class ActionHome extends Controller{
 			return;
 		}
 
-		$ass_card = CardStore::get(ConfigurationSawhat::DEFAULT_CARD_NAME);
+		$ass_card = CardStore::get_card(ConfigurationSawhat::DEFAULT_CARD_NAME);
 		if($ass_card->exists){
 			$this->assign('breadcrumbs',NavigationHelper::add_item($ass_card->display_name));
 			$this->assign('card',$ass_card);
 		}else{
 			$this->assign('breadcrumbs',NavigationHelper::add_item('All cards'));
-			$ass_cards = CardStore::get_all();
+			$ass_cards = CardStore::get_all_cards();
 			if(!empty($ass_cards))
 				$this->assign('cards',$ass_cards);
 		}
@@ -221,7 +221,7 @@ class ActionHome extends Controller{
 					}
 
 					// returns files
-					$card = CardStore::get($card_name);
+					$card = CardStore::get_card($card_name);
 					$this->assign("card", $card);
 					$body = $this->fetch_view("element.file_set.tpl");
 					$result->body = $body;
