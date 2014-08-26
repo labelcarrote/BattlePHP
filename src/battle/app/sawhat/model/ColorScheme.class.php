@@ -24,9 +24,9 @@ class ColorScheme{
 			$this->is_defined = true;
 		}
 		
-		$colors_definition_path = Request::get_application_path().self::FILE_PATH.$this->name.'.colors';
-		if(is_file($colors_definition_path)){
-			$lines = file($colors_definition_path);
+		$palette_definition_path = Request::get_application_path().self::FILE_PATH.$this->name.'_palette.less';
+		if(is_file($palette_definition_path)){
+			$lines = file($palette_definition_path);
 			foreach($lines AS $line){
 				if(preg_match('/^\s*@(.+) = #(\w+)\s*;\s*$/',$line,$matches)){
 					$this->palette[$matches[1]] = $matches[2];
