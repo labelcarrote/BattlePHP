@@ -16,7 +16,7 @@
 			<div class="content">
 				<header>
 					<div class="maintitle">
-						<a href="{$root_url}">
+						<a href="{$batl_root_url}">
 							<h1>BattlePHP</h1>
 						</a>
 					</div>

@@ -6,13 +6,13 @@
 		<meta name="author" content="label carrote"/>
 		<meta name="keywords" content="label carrote, battle, jon dalton, touchypunchy, p2b, moustachu, mitch" />
 		<title>TOMATORO</title>
-		<link rel="stylesheet" href="{$root_url}public/css/reset.css" />
-		<link rel="stylesheet" href="{$current_app_url}public/css/tomatoro.css" />
-		<script type="text/javascript" src="{$root_url}lib/jquery/jquery.js"></script>
-		<script type="text/javascript" src="{$root_url}lib/jquery/jquery.cookie.js"></script>
-		<script type="text/javascript" src="{$root_url}public/js/kiecoo.js"></script>
-		<script type="text/javascript" src="{$current_app_url}public/js/chartreuse.js"></script>
-		<script type="text/javascript" src="{$current_app_url}public/js/tomatoro.js"></script>
+		<link rel="stylesheet" href="{$batl_root_url}public/css/reset.css" />
+		<link rel="stylesheet" href="{$batl_current_app_url}public/css/tomatoro.css" />
+		<script type="text/javascript" src="{$batl_root_url}lib/jquery/jquery.js"></script>
+		<script type="text/javascript" src="{$batl_root_url}lib/jquery/jquery.cookie.js"></script>
+		<script type="text/javascript" src="{$batl_root_url}public/js/kiecoo.js"></script>
+		<script type="text/javascript" src="{$batl_current_app_url}public/js/chartreuse.js"></script>
+		<script type="text/javascript" src="{$batl_current_app_url}public/js/tomatoro.js"></script>
 	</head>
 	<body>
 		<div id="canvases">

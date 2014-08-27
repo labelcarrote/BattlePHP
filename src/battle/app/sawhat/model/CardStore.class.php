@@ -36,9 +36,7 @@ class CardStore{
 		$dir = self::get_folder()."*";
 		foreach (glob($dir,GLOB_ONLYDIR) as $filename){
 			$basename = basename($filename);
-			if(
-				is_null($filter)
-			){
+			if(is_null($filter)){
 				$result[] = self::get_card($basename);
 			}
 			elseif(!empty($filter)) {

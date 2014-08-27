@@ -10,10 +10,10 @@
 		<title>CrappyCrop / PROTOCROP</title>
 		<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-		<script type="text/javascript" src="{$root_url}lib/jquery/jquery-1.10.2.min.js"></script>
-		<script type="text/javascript" src="{$root_url}lib/hammer/jquery.hammer-full.min.js"></script>
+		<script type="text/javascript" src="{$batl_root_url}lib/jquery/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="{$batl_root_url}lib/hammer/jquery.hammer-full.min.js"></script>
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.6/jquery.mousewheel.js"></script>
-		<script type="text/javascript" src="{$current_app_url}public/jquery.crappycrop.js"></script>
+		<script type="text/javascript" src="{$batl_current_app_url}public/jquery.crappycrop.js"></script>
 		<style>
 
 		/* ---- General ---- */
@@ -97,7 +97,7 @@
 				<div class="clear"></div>
 			</header>
 			
-			<form id="upload_form" action="{$current_app_virtual_url}">
+			<form id="upload_form" action="{$batl_current_app_virtual_url}">
 				<div>
 					<a class="fit_in" href="#">FIT IN</a>
 					<a class="fit_out" href="#">FIT OUT</a>
@@ -108,7 +108,7 @@
 				</div>
 				<!-- Crop Container -->
 				<div class="crop_container">
-					<img class="hidden" alt="" src="{$current_app_url}public/images/lechat.jpg"/>
+					<img class="hidden" alt="" src="{$batl_current_app_url}public/images/lechat.jpg"/>
 				</div>
 				<!-- END Crop Container -->
 			</form>
@@ -119,8 +119,8 @@
 				<i class="fa fa-caret-down fa-lg"></i>
 			</p>
 			
-			<a href="{$current_app_url}public/images/result.jpg">
-				<img class="result" alt="" src="{$current_app_url}public/images/result.jpg">
+			<a href="{$batl_current_app_url}public/images/result.jpg">
+				<img class="result" alt="" src="{$batl_current_app_url}public/images/result.jpg">
 			</a>
 			
 			<p>Flip Apart / Label Carrote 2014</p>

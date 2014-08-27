@@ -79,7 +79,7 @@ class Card{
 				$this->html .= '<div class="column_container auto_clear">';
 				foreach($element->cards AS $card){
 					$view_manager = Viewer::getInstance();
-					$view_manager->assign('logged',AuthManager::is_authenticated());
+					$view_manager->assign('batl_is_logged',AuthManager::is_authenticated());
 					$view_manager->assign('card',$card);
 					$card_content = $view_manager->fetch_view('element.card.tpl');
 					$this->html .= 

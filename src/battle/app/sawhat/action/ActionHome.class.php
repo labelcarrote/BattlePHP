@@ -16,7 +16,7 @@ class ActionHome extends Controller{
 	// all the cards otherwise.
 	// Treats any creation/update query submission.
 	public function index(){
-		$logged = AuthManager::is_authenticated();
+		$batl_is_logged = AuthManager::is_authenticated();
 
 		// Assign default color scheme
 		$color_scheme = new ColorScheme();
@@ -38,7 +38,7 @@ class ActionHome extends Controller{
 					$card = CardStore::get_card($card_name);
 
 					// do nothing if card is private and user is not authentified
-					if($card === null || !$card->is_private || ($card->is_private && $logged)){
+					if($card === null || !$card->is_private || ($card->is_private && $batl_is_logged)){
 						$json = array(
 							'is_saved' => CardStore::upsert($card_name,$card_lines,$card_color,$is_private),
 							'return_url' => Request::get_application_virtual_root().$card_name
@@ -52,7 +52,7 @@ class ActionHome extends Controller{
 					$identity = new Identity();
 					$identity->password = Request::isset_or($_POST['password'], "prout");
 					$result_code = AuthManager::authenticate(AuthManager::AuthTypePassword,$identity);
-					$logged = AuthManager::is_authenticated();
+					$batl_is_logged = AuthManager::is_authenticated();
 
 					if($result_code > 0){
 						// TODO Error::get_message($result_code);
@@ -99,7 +99,7 @@ class ActionHome extends Controller{
 						$this->assign('palette',$palette_by_hue);
 						$this->assign('card',$ass_card);
 						$this->assign('breadcrumbs',NavigationHelper::add_item(($ass_card->exists ? '<i>edit:</i>' : '<i>create:</i>').' '.$ass_card->display_name));
-						if(($ass_card->is_private && $logged) || !$ass_card->is_private){
+						if(($ass_card->is_private && $batl_is_logged) || !$ass_card->is_private){
 							$ass_card->history = CardStore::get_card_history($params['card_name']);
 							$this->display_page('section.card.update.tpl');
 						}else{
@@ -133,7 +133,7 @@ class ActionHome extends Controller{
 						}else{
 							$ass_card = CardStore::get_card($params['card_name']);
 							$this->assign('card',$ass_card);
-							$this->assign('logged',$logged);
+							$this->assign('batl_is_logged',$batl_is_logged);
 							$this->assign('show_banner',Request::isset_or($_GET['show_banner'],1));
 							$this->assign('card_name',$ass_card->name);
 							$this->assign('card_display_name',$ass_card->display_name);

@@ -9,8 +9,8 @@
 		<meta name="keywords" content="label carrote, battle, jon, potiron, dalton, touchypunchy, p2b, moustachu, mitch">
 		<title>CrappyCrop / PROTOCROP</title>
 		<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-		<script type="text/javascript" src="{$root_url}lib/jquery/jquery-1.10.2.min.js"></script>
-		<script type="text/javascript" src="{$root_url}lib/hammer/jquery.hammer-full.min.js"></script>
+		<script type="text/javascript" src="{$batl_root_url}lib/jquery/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="{$batl_root_url}lib/hammer/jquery.hammer-full.min.js"></script>
 		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.6/jquery.mousewheel.js"></script>
 		<style>
@@ -265,14 +265,14 @@
 				<div class="right"><a href="#">FORK / DOWNLOAD</a></div>
 				<div class="clear"></div>
 			</div>
-			<form id="upload_form" action="{$current_app_virtual_url}">
+			<form id="upload_form" action="{$batl_current_app_virtual_url}">
 				<div>
 					<a class="fit_in" href="#">FIT IN</a>
 					<a class="fit_out" href="#">FIT OUT</a>
 					<a class="upload" href="#">UPLOAD CROP</a>
 				</div>
 				<div class="crop_container">
-					<img class="to_crop" alt="" src="{$current_app_url}public/images/lechat.jpg"/>
+					<img class="to_crop" alt="" src="{$batl_current_app_url}public/images/lechat.jpg"/>
 				</div>
 			</form>
 			<div>
@@ -282,8 +282,8 @@
 					<i class="fa fa-caret-down fa-lg"></i>
 				</p>
 			</div>
-			<a href="{$current_app_url}public/images/result.jpg">
-				<img class="result" alt="" src="{$current_app_url}public/images/result.jpg">
+			<a href="{$batl_current_app_url}public/images/result.jpg">
+				<img class="result" alt="" src="{$batl_current_app_url}public/images/result.jpg">
 			</a>
 			<p id="debug"></p>
 			<p>Label Carrote 2014</p>

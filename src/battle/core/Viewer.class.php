@@ -43,13 +43,13 @@ class Viewer extends Smarty{
 	
 	/**
 	 * Assign some template helper values (base url and form base url)
+	 * TODO : deal with single app (if monoapp -> current_app_url = root_url (+ htacess biz))
 	 */
 	private function assign_config_infos(){
 		$this->assign(Configuration::ROOT_URL, Request::get_root_url());
 		$this->assign(Configuration::CURRENT_APP_URL, Request::get_application_root());
-		// TODO : deal with single app (if monoapp -> current_app_url = root_url (+ htacess biz))
 		$this->assign(Configuration::CURRENT_APP_VIRTUAL_URL, Request::get_application_virtual_root());
-		$this->assign('full_url',Request::get_full_url());
+		$this->assign(Configuration::FULL_URL,Request::get_full_url());
 	}
 
 	// ---- Public Methods ----

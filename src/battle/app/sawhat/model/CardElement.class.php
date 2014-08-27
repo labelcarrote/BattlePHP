@@ -39,7 +39,7 @@ class CardElement{
 					$included_card = CardStore::get_card($card_name,$recursive_level);
 				if(isset($included_card)){
 					$view_manager = Viewer::getInstance();
-					$view_manager->assign('logged',AuthManager::is_authenticated());
+					$view_manager->assign('batl_is_logged',AuthManager::is_authenticated());
 					$view_manager->assign('card',$included_card);
 					$banner_content = $view_manager->fetch_view('element.card.banner.tpl');
 					$this->html .= '<div class="size1of'.$column_count.' left" id="'.$included_card->name.'"><style>'.$included_card->style_definition.'</style>'.$banner_content.'</div>';

@@ -1,8 +1,8 @@
 <?php
 /**
  * Router : 
- * Redirect execution to an action (in a controller) from the query parameters 
- * in current "Request"
+ * Redirects execution to an action (in a controller) from the query parameters 
+ * in current Request
  * @author touchypunchy
  */
 class Router{
@@ -16,7 +16,7 @@ class Router{
 	// ---- Public methods ----
 	
 	/**
-	 * Run : redirect to action specified in query and run it
+	 * Run : redirects to the action specified in query and runs it
 	 */
 	public static function run(){
 		// MONO APP

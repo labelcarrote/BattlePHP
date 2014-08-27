@@ -6,7 +6,7 @@
 {foreach from=$folders item=folder}
 <div class="dir">
 	<div class="img_container">
-		<img class="dir" data-index="{$index}" data-path="{$folder->fullname}" src="{$current_app_url}public/images/folder.png" alt="{$folder->fullname}" />
+		<img class="dir" data-index="{$index}" data-path="{$folder->fullname}" src="{$batl_current_app_url}public/images/folder.png" alt="{$folder->fullname}" />
 		{assign var="index" value=$index+1}
 	</div>
 	<div class="dir_title marginleft">{$folder->name}</div>

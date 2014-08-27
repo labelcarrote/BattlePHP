@@ -94,18 +94,18 @@ class Controller{
 	// TODO : move to authcontroller (executed after requested action)
 	private function assign_auth_values(){
 		$is_authenticated = AuthManager::is_authenticated();
-		$this->assign('logged', $is_authenticated);
+		$this->assign('batl_is_logged', $is_authenticated);
 		if($is_authenticated && $this->is_db_available()){
 			// check if logged in local server
-			$this->assign('admin', AuthManager::is_current_user_admin());
-			$this->assign('userprofile', AuthManager::get_user_infos());
+			$this->assign('batl_is_admin', AuthManager::is_current_user_admin());
+			$this->assign('batl_current_user', AuthManager::get_user_infos());
 
 		}else{
 			// check if logged in on FB
 			/*$facebook_manager = new FacebookService();
-			$userprofile = AuthManager::get_user_profile($facebook_manager);
-			$this->assign('userprofile', $userprofile);
-			$this->assign('fbloginouturl', AuthManager::get_loginout_url($facebook_manager,$userprofile));*/
+			$batl_current_user = AuthManager::get_user_profile($facebook_manager);
+			$this->assign('batl_current_user', $batl_current_user);
+			$this->assign('fbloginouturl', AuthManager::get_loginout_url($facebook_manager,$batl_current_user));*/
 		}
 	}
 	

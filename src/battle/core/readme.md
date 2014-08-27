@@ -1,7 +1,7 @@
 BattlePHP - Core
 ================
 
-The Router class is instanciated and called in index.php, check the request/query (after its .htaccess processing), creates the corresponding Controller and call its wanted method.
+The Router class is instanciated and called in index.php, checks the request/query (after its .htaccess processing), creates the corresponding Controller and call its wanted method.
 
 example :
 
@@ -23,7 +23,8 @@ Hierarchy
 Router.class.php
 Request.class.php
 Controller.class.php
-Viewer.class.php : extends Smarty, 
+Viewer.class.php : extends Smarty
+Logger
 
 
 /src/battle/
@@ -34,4 +35,21 @@ Viewer.class.php : extends Smarty,
 - public : Shared static files (home-made javascript, fonts, icons etc)
 - tmp/tpl_comp : Default smarty template cache directory
 
+Template Reserved Variables
+---------------------------
 
+BattlePHP assigns automatically these smarty variable:
+
+by Controller:  
+- $batl_is_logged : if current user is logged in
+- $batl_is_admin : if current user is an admin
+- $batl_current_user : current User
+
+by Viewer:  
+- $batl_root_url: : the url to access the root folder of the framework : the app/ folder. 
+- $batl_current_app_virtual_url
+- $batl_current_app_url
+- $batl_full_url
+
+In your smarty templates you can use these predefined variables using the usual smarty syntax:  
+{$batl_is_logged})

@@ -1,11 +1,11 @@
 <footer>
 	<div class="content auto_clear">
 		<div class="left">
-			<span class="fa fa-caret-right"></span>&nbsp;<a href="{$current_app_virtual_url}all_cards">See all cards</a>
+			<span class="fa fa-caret-right"></span>&nbsp;<a href="{$batl_current_app_virtual_url}all_cards">See all cards</a>
 			<br>
-			<span class="fa fa-caret-right"></span>&nbsp;<a href="{$current_app_virtual_url}starred">See starred cards</a>
+			<span class="fa fa-caret-right"></span>&nbsp;<a href="{$batl_current_app_virtual_url}starred">See starred cards</a>
 			<br>
-			<span class="fa fa-caret-right"></span>&nbsp;<a href="{$current_app_virtual_url}help">Help</a>
+			<span class="fa fa-caret-right"></span>&nbsp;<a href="{$batl_current_app_virtual_url}help">Help</a>
 		</div>
 		<div class="right">
 			<div class="marginbottom">

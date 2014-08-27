@@ -1,7 +1,7 @@
 {if isset($breadcrumbs)}
 	<div class="breadcrumbs">
 		<a
-			href="{$current_app_virtual_url}"
+			href="{$batl_current_app_virtual_url}"
 			{if $breadcrumbs['position'] == 0}
 				class="current"
 				{if isset($card)}style="color:{$card->color};"{/if}
