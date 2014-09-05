@@ -11,21 +11,34 @@ class UserManager{
 	public static function get_user($user_id,$application = null){
 		if($application === null)
 			$application = Request::get_application();
-		return User::create_user_from_db(UserDB::getInstance()->get_user($user_id,$application));
+
+		$userdb = UserDB::getInstance()->get_user($user_id,$application);
+		if($userdb === null)
+			return null;
+
+		return User::create_user_from_db($userdb);
 	}
 
 	public static function get_user_from_confirmation_token($confirmation_token,$application = null){
 		if($application === null)
 			$application = Request::get_application();
 
-		return User::create_user_from_db(UserDB::getInstance()->get_user_from_confirmation_token($confirmation_token,$application));
+		$userdb = UserDB::getInstance()->get_user_from_confirmation_token($confirmation_token,$application);
+		if($userdb === null)
+			return null;
+
+		return User::create_user_from_db($userdb);
 	}
 
 	public static function get_user_from_login($login,$application = null){
 		if($application === null)
 			$application = Request::get_application();
 
-		return User::create_user_from_db(UserDB::getInstance()->get_user_from_login($login,$application));
+		$userdb = UserDB::getInstance()->get_user_from_login($login,$application);
+		if($userdb === null)
+			return null;
+
+		return User::create_user_from_db($userdb);
 	}
 
 	public static function get_users($page_id, $nb_user_by_page,$application = null){
@@ -38,6 +51,10 @@ class UserManager{
 	// -------------------------------------------
 	// ---- COMMANDS : Create, Update, Delete ----
 	// -------------------------------------------
+
+	public static function update_user_last_connection($user_id){
+		return UserDB::getInstance()->update_user_last_connection($user_id);
+	}
 
 	public static function save($user){
 		if($user === null)

@@ -1,6 +1,7 @@
 <?php
 require_once 'core/auth/db/UserDB.class.php';
 require_once 'core/auth/datamodel/User.class.php';
+require_once 'core/auth/UserManager.class.php';
 require_once 'core/auth/datamodel/Identity.class.php';
 require_once 'lib/phpass-0.3/PasswordHash.php';
 //require_once 'core/auth/FacebookService.class.php';
@@ -26,14 +27,13 @@ class AuthManager{
     	if($type === self::AuthTypeUser){
 	        $login = $identity->login;
 	        $password = $identity->password;
-	        $userdb = UserDB::getInstance()->get_user_from_login($login,Request::get_application());
-			if(is_null($userdb))
-				$userdb = UserDB::getInstance()->get_user_from_mail($login,Request::get_application());
-			if(is_null($userdb))
+	        $user = UserManager::get_user_from_login($login);
+			if($user === null)
+				$user = UserManager::get_user_from_mail($login);
+			if($user === null)
 				return false;
 
 			// compare identity's password with dbuser's hashedpassword
-			$user = User::create_user_from_db($userdb);
 			$hasher = new PasswordHash(8, false);
 			if(!$hasher->CheckPassword($password, $user->hashed_password))
 				return false;
@@ -41,6 +41,10 @@ class AuthManager{
 			// if right password, store user_id in session for current application
 			$_SESSION['applications_loggedin'] = array();
 			$_SESSION['applications_loggedin'][Request::get_application()] = $user->id;
+
+			// and updates last connection date
+			UserManager::update_user_last_connection($user->id);
+
 			return true;
 		}
 		// otherwise compare password with the one set in config
@@ -88,7 +92,7 @@ class AuthManager{
 		$user_id = self::get_current_user_id();
     	return ($user_id < 1)
     		? null
-    		: User::create_user_from_db(UserDB::getInstance()->get_user($user_id));
+    		: UserManager::get_user($user_id);
 	}
 
     public static function get_user_ip(){
@@ -119,11 +123,10 @@ class AuthManager{
     		return false;
 
     	// TODO : don't get all user information for 1 information
-    	$userdb = UserDB::getInstance()->get_user($user_id);
-    	if(is_null($userdb))
+    	$user = UserManager::get_user($user_id);
+    	if($user === null)
     		return false;
 
-		$user = User::create_user_from_db($userdb);
     	return $user->has_confirmed;
     }
 
@@ -133,11 +136,10 @@ class AuthManager{
     		return false;
 
     	// TODO : don't get all user information for 1 information
-    	$userdb = UserDB::getInstance()->get_user($user_id);
-    	if(is_null($userdb))
+    	$user = UserManager::get_user($user_id);
+    	if($user === null)
     		return false;
 
-    	$user = User::create_user_from_db($userdb);
     	return (self::role_id_to_name($user->role_id) == $rolename);
     }
 
@@ -148,7 +150,6 @@ class AuthManager{
     public static function is_current_user_customer(){
     	return self::has_role("user");
     }
-	
 
     // OLD AuthManager
 
@@ -172,28 +173,24 @@ class AuthManager{
 		$user->role_id = self::role_name_to_id("user");
 		$user->last_ip = self::get_user_ip();
 		$user->application = $application;
+		$now = new DateTime();
+		$user->date_creation = $now;
+		$user->marked_for_deletion_date = $now;
 
 		// send confirmation mail ? Currently in ActionAuth...
-		return UserDB::getInstance()->add($user);
+		return UserManager::save($user);
 	}
 	
-	// TODO
-	public static function confirmation($userid, $confirmationtoken){
-		//confirm registration of user (from confirmation mail)
-		// getuser from id
-		// compare confirmation tokens
-		// if(same) userdb->has_confirmed = true/1;
+	public static function change_password($user_id,$new_password){
+		if($user_id < 1)
+			return false;
+		$hashed_password = self::hash_password($new_password);
+		return UserDB::getInstance()->update_user_password($user_id,$hashed_password);
 	}
-	
-	// TODO
-	public static function change_password($old,$new){
-		// update password
-		// send mail?
-	}
-	
-	// TODO
-	public static function unregister(){
-		// update user state to unregistered
+
+	public static function confirm_registration($confirmation_token){
+		// TODO : check if user has already validate account (security)
+		return UserDB::getInstance()->validate_user_account($confirmation_token);
 	}
 	
 	// ---- FACEBOOK ----
