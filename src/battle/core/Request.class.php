@@ -11,6 +11,9 @@
  */
 class Request{
 
+	// TODO : update naming to reflect difference between url / path etc 
+	// cf : http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=Pathnames_explained%3A_Absolute%2C_relative%2C_UNC%2C_and_URL
+	
 	public static function get_application(){
 		return $_SESSION['application'];
 	}	

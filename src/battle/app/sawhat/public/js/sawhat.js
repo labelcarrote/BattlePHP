@@ -284,9 +284,9 @@ $(window).load(function(){
 
 	// CSS STYLE CHANGER //
 	function change_color_scheme(color_scheme){
-		var link_element = $('#color_scheme');
-		var new_css_link = link_element.attr('href').replace(/^(.+)\/[a-zA-Z0-9_-]+\.css$/,'$1/'+color_scheme+'.css');
-		$('#color_scheme').attr('href',new_css_link);
+		var link_element = $('#color_scheme'),
+			new_css_link = link_element.attr('href').replace(/^(.+)\/[a-zA-Z0-9_-]+\.css$/,'$1/'+color_scheme+'.css');
+		link_element.attr('href',new_css_link);
 		localStorage['color_scheme'] = color_scheme;
 	}
 	$('#style_changer').on('change',function(){
