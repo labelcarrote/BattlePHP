@@ -37,7 +37,7 @@ class Request{
 	}
 	
 	public static function get_application_path(){
-		return $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'app/'.self::get_application().'/';
+		return $_SERVER['DOCUMENT_ROOT'].self::get_root_url().'app/'.self::get_application().'/';
 	}
 
 	public static function get_full_url(){
