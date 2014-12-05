@@ -7,7 +7,7 @@ require_once 'app/timeline/config/config.php';
 
 class PictureEventsSpecification extends DomainEventSpecification{
 
-	const ALL_PICTURE_EVENT_NAMES = "CigaretteSmoked";
+	const ALL_PICTURE_EVENT_NAMES = "PictureAdded";
 
 	public function __construct($since_date){
 		$this->names = self::ALL_PICTURE_EVENT_NAMES;

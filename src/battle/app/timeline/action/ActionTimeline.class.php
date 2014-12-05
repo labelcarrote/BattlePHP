@@ -30,20 +30,38 @@ class ActionTimeline extends Controller{
 					break;
 				case 'add_text':
 					$text_watcher->submit_text($_POST);
+				case 'delete_event':
+					$event_id = $_POST['event_id'];
+					EventStore::delete_event($event_id);
+					break;
 				default: break;
 			}
 			header("Location: ".Request::get_application_virtual_root());
 		}
+
+		$event_specification = new DomainEventSpecification();
+		$event_specification->page_id = 1;
+		$event_specification->nb_event_by_page = 100;
+		$event_specification->names = (isset($_GET['types'])) ? $_GET['types'] : null;
+		$event_specification->in_descending_order = true;
+		$event_specification->date1 = (isset($_GET['date1'])) ? DateTime::createFromFormat(self::FORM_DATE_FORMAT,$_GET['date1']) : null;
+		$event_specification->date2 = new DateTime();
+
+		$event_views = EventViewFactory::events_to_views(
+			DomainEventRepository::search_events($event_specification,ConfigurationTimeline::TABLE_EVENTS),
+			$this->view_manager
+		);
 
 		$this->assign_all_dates();
 		$this->assign('section',self::SECTION_DASHBOARD);
 		$this->assign('cigarette_watcher',$cigarette_watcher);
 		$this->assign('picture_watcher',$picture_watcher);
 		$this->assign('text_watcher',$text_watcher);
+		$this->assign('event_views',$event_views);
 		$this->display_view('index.tpl');
 	}
 
-	public function time(){
+	/*public function time(){
 		if(isset($_POST['submit'])){
 			$submit = $_POST['submit'];
 			switch ($submit) {
@@ -73,7 +91,7 @@ class ActionTimeline extends Controller{
 		$this->assign('section',self::SECTION_TIME);
 		$this->assign('event_views',$event_views);
 		$this->display_view('index.tpl');
-	}
+	}*/
 
 	private function assign_all_dates(){
 		$now = new DateTime();

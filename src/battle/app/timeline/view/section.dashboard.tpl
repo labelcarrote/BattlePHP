@@ -1,4 +1,4 @@
-<section class="content">
+<section class="">
 	{if isset($cigarette_watcher)}
 		{include file=$cigarette_watcher->tpl_name}
 	{/if}

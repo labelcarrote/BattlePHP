@@ -1,9 +1,7 @@
 <?php
 require_once 'core/storage/FileSystemIO.class.php';
 require_once 'app/timeline/model/Cigarette.class.php';
-require_once 'app/timeline/model/CigaretteWatcher.class.php';
 require_once 'app/timeline/model/Picture.class.php';
-require_once 'app/timeline/model/PictureWatcher.class.php';
 
 
 /********************************************************************
@@ -25,7 +23,7 @@ class EventStore{
 		if($event === null)
 			return false;
 
-		$obj = self::event_to_object($event);
+		$obj = EventViewFactory::event_to_object($event);
 		if($obj instanceof Picture)
 			FileSystemIO::delete_file($obj->get_path());
 

@@ -3,10 +3,8 @@
 		<h2>{$picture_watcher->count_since}</h2>
 		pictures added since ...
 	</p>
-	<br>
+	<button class="watcher__more_button">+</button>
+	<div class="watcher__form hidden">
 	{include file="form.picture.tpl"}
-	<br>
-	<p>
-		<strong>[{$picture_watcher->type}] watcher</strong>
-	</p>
+	</div>
 </div>

@@ -3,10 +3,8 @@
 		<h2>{$text_watcher->count_since}</h2>
 		text added since ...
 	</p>
-	<br>
+	<button class="watcher__more_button">+</button>
+	<div class="watcher__form hidden">
 	{include file="form.text.tpl"}
-	<br>
-	<p>
-		<strong>[{$text_watcher->type}] watcher</strong>
-	</p>
+	</div>
 </div>

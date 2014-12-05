@@ -10,10 +10,8 @@
 		<h2>{$cigarette_watcher->count_since}</h2>
 		cigarettes smoked since ...
 	</p>
-	<br>
+	<button class="watcher__more_button">+</button>
+	<div class="watcher__form hidden">
 	{include file="form.cigarette.tpl"}
-	<br>
-	<p>
-		<strong>[{$cigarette_watcher->type}] watcher</strong>
-	</p>
+	</div>
 </div>
