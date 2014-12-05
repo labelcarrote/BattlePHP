@@ -1,5 +1,7 @@
 <?php 
-
+/**
+* Criteria/Specification of a DomainEventRepository search (cf. DDD Specification Pattern)
+*/
 class DomainEventSpecification{
 	public $names = null;
 	public $element_id = null;
