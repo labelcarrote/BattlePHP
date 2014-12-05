@@ -11,7 +11,7 @@ ini_set('arg_separator.output','&amp;');
 $include_path = array(
 	'core/',
 	'lib/smarty/sysplugins/',
-	'lib/parsedown-JonPotiron/'
+	'lib/parsedown-JonPotiron/',
 );
 ini_set('include_path',ini_get('include_path').PATH_SEPARATOR.implode(PATH_SEPARATOR,$include_path));
 

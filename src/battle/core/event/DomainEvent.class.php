@@ -6,6 +6,13 @@ require_once 'core/model/ValueObject.class.php';
  */
 class DomainEvent extends ValueObject{
 
+	const TYPE_ADMIN_COMMAND = 100;
+	const TYPE_ADMIN_QUERY   = 101;
+	const TYPE_USER_COMMAND  = 200;
+	const TYPE_USER_QUERY    = 201;
+	const TYPE_API_COMMAND   = 300;
+	const TYPE_API_QUERY     = 301;
+
 	public function __construct($eventdb = null){
 		$this->fields = array(
 			'id' => 0,

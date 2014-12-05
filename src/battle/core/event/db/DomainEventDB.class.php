@@ -1,21 +1,25 @@
 <?php
-require_once "core/event/db/query.php";
-require_once 'app/flipapart/config/config_flipapart.php';
-
 /**--------------------------------------------------------------------
  * DomainEventDB
  * --------------------------------------------------------------------
  */
 class DomainEventDB{
 
+	const DB_DATE_FORMAT = "Y-m-d H:i:s";
+	const DEFAULT_TABLE = "btl_events";
+
+	// Queries
+	private $queries = array();
+
 	/* ---- Constructor / PDO ---- */
 	
 	// PDO connection
 	private $con = null;
-	// single instance of self shared among all instances
+
+	// Single instance of self shared among all instances
 	private static $instance = null;
 
-	// private constructor (singleton)
+	// Private constructor (singleton)
 	private function __construct(){
 		$host = Configuration::DB_HOST;
 		$dbname = Configuration::DB_NAME;
@@ -29,9 +33,13 @@ class DomainEventDB{
 		}
 	}
 
-	public static function getInstance(){
+	public static function getInstance($table_name = null){
 		if (!self::$instance instanceof self)
 			self::$instance = new self;
+
+		self::$instance->set_queries(($table_name === null) ? self::DEFAULT_TABLE : $table_name);
+		self::$instance->create_table_if_not_exist();
+
 		return self::$instance;
 	}
 
@@ -43,14 +51,49 @@ class DomainEventDB{
 		trigger_error('Deserializing is not allowed.', E_USER_ERROR);
 	}
 
+	public function create_table_if_not_exist(){
+		$stmt = $this->get_statement("create_table_event_if_not_exist");
+		return $stmt->execute();
+	}
+
+	public function set_queries($table_name){
+		$this->queries = array();
+		$this->queries["create_table_event_if_not_exist"] = 
+		"CREATE TABLE IF NOT EXISTS `".$table_name."` (
+		  `event_id` char(36) NOT NULL,
+		  `event_name` varchar(255) NOT NULL,
+		  `event_type` int(11) NOT NULL,
+		  `element_id` bigint(20) NOT NULL,
+		  `user_id` bigint(20) NOT NULL,
+		  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		  `old_value` text NOT NULL,
+		  `new_value` text NOT NULL
+		) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+		ALTER TABLE `".$table_name."` ADD PRIMARY KEY (`event_id`);";
+		$this->queries["exists_event_from_id"] = 
+		"SELECT 1 FROM ".$table_name." WHERE event_id = ?";
+		$this->queries["create_event"] = 
+		"INSERT INTO ".$table_name." (event_id,event_name,event_type,element_id,user_id,date,old_value,new_value) VALUES (?,?,?,?,?,?,?,?)";
+		$this->queries["update_event"] = 
+		"UPDATE ".$table_name." SET event_name = ?, event_type = ?, element_id = ?, user_id = ?, date = ?, old_value = ?, new_value = ? WHERE event_id = ?";
+		$this->queries["select_event"] = 
+		"SELECT * FROM ".$table_name."";
+		$this->queries["read_event"] = 
+		"SELECT * FROM ".$table_name." WHERE event_id = ?";
+		$this->queries["count_all_events"] = 
+		"SELECT count(*) FROM ".$table_name." event ";
+		$this->queries["read_events"] = 
+		"SELECT * FROM btl_events ORDER BY event_id	DESC LIMIT ?,?";
+		$this->queries["delete_event"] = 
+		"DELETE FROM ".$table_name." WHERE event_id = ?";
+	}
+
 	private function get_query($key){
-		global $DB_QUERY;
-		return $DB_QUERY[$key];
+		return $this->queries[$key];
 	}
 
 	private function get_statement($key){
-		global $DB_QUERY;
-		return $this->con->prepare($DB_QUERY[$key]);
+		return $this->con->prepare($this->queries[$key]);
 	}
 
 	private function prepare($query){
@@ -86,7 +129,7 @@ class DomainEventDB{
 				$stmt->bindValue(2, $event->event_type, PDO::PARAM_INT);
 				$stmt->bindValue(3, $event->element_id, PDO::PARAM_INT);
 				$stmt->bindValue(4, $event->user_id, PDO::PARAM_INT);
-				$stmt->bindValue(5, $event->date->format(ConfigurationFlipapart::DB_DATE_FORMAT), PDO::PARAM_STR);
+				$stmt->bindValue(5, $event->date->format(self::DB_DATE_FORMAT), PDO::PARAM_STR);
 				$stmt->bindValue(6, $event->old_value);
 				$stmt->bindValue(7, $event->new_value);
 				$stmt->bindValue(8, $event->id, PDO::PARAM_INT);
@@ -100,7 +143,7 @@ class DomainEventDB{
 				$stmt->bindValue(3, $event->event_type, PDO::PARAM_INT);
 				$stmt->bindValue(4, $event->element_id, PDO::PARAM_INT);
 				$stmt->bindValue(5, $event->user_id, PDO::PARAM_INT);
-				$stmt->bindValue(6, $event->date->format(ConfigurationFlipapart::DB_DATE_FORMAT), PDO::PARAM_STR);
+				$stmt->bindValue(6, $event->date->format(self::DB_DATE_FORMAT), PDO::PARAM_STR);
 				$stmt->bindValue(7, $event->old_value);
 				$stmt->bindValue(8, $event->new_value);
 				return $stmt->execute();
@@ -190,19 +233,25 @@ class DomainEventDB{
 	}
 	
 	// [READ] events from the given search
-	public function search_events($page_id, $nb_event_by_page, $names , $element_id = null, $ordered_by = null, $in_descending_order = null){
+	public function search_events($page_id, $nb_event_by_page, $names , $element_id = null, $ordered_by = null, $in_descending_order = null, $date1 = null, $date2 = null){
 		try{
 			// Construct query
 			$query = $this->get_query("select_event");
 
 			$names_array = explode(',', $names);
 			$any_names = isset($names);
-			if($any_names)
-				$query .= " WHERE event_name IN (".str_pad('',count($names_array) * 2 - 1,'?,').")";
-
+			$query .= ($any_names)
+				? " WHERE event_name IN (".str_pad('',count($names_array) * 2 - 1,'?,').")"
+				: " WHERE 1=1";
+			
 			$any_element_id = isset($element_id) && $element_id > 0;
 			if($any_element_id)
 				$query .= " AND element_id = ?";
+
+			$any_dates = isset($date1) && isset($date2);
+			if($any_dates){
+				$query .= " AND date BETWEEN ? AND ?";
+			}
 
 			$order = ($in_descending_order === true) ? "DESC" : "ASC";
 			$ordered_by = ($ordered_by === null || $ordered_by === "") ? "date" : $ordered_by;
@@ -219,6 +268,11 @@ class DomainEventDB{
 			if($any_element_id){
 				$stmt->bindValue($index++, $element_id, PDO::PARAM_INT);	
 			}
+			if($any_dates){
+				$stmt->bindValue($index++, $date1->format(self::DB_DATE_FORMAT));	
+				$stmt->bindValue($index++, $date2->format(self::DB_DATE_FORMAT));	
+			}
+			
 			$i = ($page_id - 1) * $nb_event_by_page;
 			$stmt->bindValue($index++, $i, PDO::PARAM_INT);
 			$stmt->bindValue($index, $nb_event_by_page, PDO::PARAM_INT);
