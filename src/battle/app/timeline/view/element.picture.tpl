@@ -5,8 +5,7 @@
 	</div>
 	<div class="event__container unit size3of4 ">
 	<a href="{$batl_root_url}{$picture->get_path()}">
-	<img src="{$batl_root_url}{$picture->get_path()}"><br>
+	<img title="{$picture->width}x{$picture->height}"src="{$batl_root_url}{$picture->get_path()}"><br>
 	</a>
-	{$picture->width}x{$picture->height}
 	</div>
 </div>

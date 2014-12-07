@@ -66,13 +66,9 @@
 				</div>
 			</div>
 		</header>
-		<div class="line">
-			<div class="unit size1of4">
-				{include file="section.dashboard.tpl"}
-			</div>
-			<div class="unit size3of4">
-				{include file="section.time.tpl"}
-			</div>
+		<div class="content">
+			{include file="section.time.tpl"}
+			{include file="section.dashboard.tpl"}
 		</div>
 	</body>
 </html>
