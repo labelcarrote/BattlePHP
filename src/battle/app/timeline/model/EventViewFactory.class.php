@@ -4,7 +4,8 @@ require_once 'app/timeline/model/Cigarette.class.php';
 require_once 'app/timeline/model/CigaretteWatcher.class.php';
 require_once 'app/timeline/model/Picture.class.php';
 require_once 'app/timeline/model/PictureWatcher.class.php';
-
+require_once 'app/timeline/model/FAPBattle.class.php';
+require_once 'app/timeline/model/FAPBattleWatcher.class.php';
 
 /********************************************************************
 * CLASS EventViewFactory
@@ -26,6 +27,10 @@ class EventViewFactory{
 			case Text::EVENT: 
 				$viewer->assign("text", new Text($event));
 				$view = $viewer->fetch_view("element.text.tpl");
+				break;
+			case FAPBattle::EVENT: 
+				$viewer->assign("fapbattle", new FAPBattle($event));
+				$view = $viewer->fetch_view("element.fapbattle.tpl");
 				break;
 			default:
 				break;
@@ -51,6 +56,8 @@ class EventViewFactory{
 				return new Picture($event);
 			case Text::EVENT: 
 				return new Text($event);
+			case FAPBattle::EVENT: 
+				return new FAPBattle($event);
 			default:
 				return null;
 		}

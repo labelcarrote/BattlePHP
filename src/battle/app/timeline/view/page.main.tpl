@@ -47,7 +47,7 @@
 					<div class="unitRight">
 						<span>types: </span>
 						<a class="" 
-							href="{$batl_current_app_virtual_url}?types=CigaretteSmoked,PictureAdded,TextAdded,FAPBattlePublished">
+							href="{$batl_current_app_virtual_url}?types=CigaretteSmoked,PictureAdded,TextAdded">
 							all
 						</a>
 						<a class="" 
@@ -70,9 +70,6 @@
 				</div>
 			</div>
 		</header>
-		<div class="content">
-			{include file="section.time.tpl"}
-			{include file="section.dashboard.tpl"}
-		</div>
+		{include file=$content}
 	</body>
 </html>

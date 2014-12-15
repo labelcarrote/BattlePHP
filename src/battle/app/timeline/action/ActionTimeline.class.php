@@ -6,6 +6,7 @@ require_once 'core/event/DomainEventSpecification.class.php';
 require_once 'app/timeline/model/EventStore.class.php';
 require_once 'app/timeline/model/EventViewFactory.class.php';
 require_once 'app/timeline/model/TextWatcher.class.php';
+require_once 'app/timeline/model/FAPBattleWatcher.class.php';
 
 class ActionTimeline extends Controller{
 
@@ -18,6 +19,7 @@ class ActionTimeline extends Controller{
 		$cigarette_watcher = new CigaretteWatcher($since_date);
 		$picture_watcher = new PictureWatcher($since_date);
 		$text_watcher = new TextWatcher($since_date);
+		$fapbattle_watcher = new FAPBattleWatcher($since_date);
 
 		if(isset($_POST['submit'])){
 			$submit = $_POST['submit'];
@@ -30,6 +32,8 @@ class ActionTimeline extends Controller{
 					break;
 				case 'add_text':
 					$text_watcher->submit_text($_POST);
+				case 'add_fapbattle':
+					$fapbattle_watcher->submit_fapbattle($_POST);
 				case 'delete_event':
 					$event_id = $_POST['event_id'];
 					EventStore::delete_event($event_id);
@@ -57,7 +61,12 @@ class ActionTimeline extends Controller{
 		$this->assign('cigarette_watcher',$cigarette_watcher);
 		$this->assign('picture_watcher',$picture_watcher);
 		$this->assign('text_watcher',$text_watcher);
+		$this->assign('fapbattle_watcher',$fapbattle_watcher);
 		$this->assign('event_views',$event_views);
+		$this->display_view('index.tpl');
+	}
+
+	public function developpers(){
 		$this->display_view('index.tpl');
 	}
 

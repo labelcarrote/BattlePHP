@@ -19,19 +19,17 @@
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
 
-a{ text-decoration: none;}
-a.underline{ text-decoration: underline;}
-header{ margin: 12px 0; }
-
+a{ text-decoration: none; }
+a.underline{ text-decoration: underline; }
+img{ max-width: 100%; }
 h1, .h1{ font-family: 'Montserrat', sans-serif; font-size:2em; line-height: 1.2em; font-weight:bold; font-style: normal; margin: 0;}
 h2, .h2{ font-family: 'Montserrat', sans-serif; font-size:2em; line-height: 1.2em; font-weight:bold; font-style: normal; margin: 0;}
 h3, .h3{ font-family: 'Montserrat', sans-serif; font-size:1.5em; font-weight:bold; font-style: normal; margin: 0;}
 h4, .h4{ font-family: 'Montserrat', sans-serif; font-size:1.25em; font-weight:normal; font-style: normal; margin: 0;}
 h5, .h5{ font-family: 'Montserrat', sans-serif; font-size:.875em; line-height: 1.5em; font-weight:normal; font-style: normal; margin: 0;}
 h6, .h6{ font-family: 'Montserrat', sans-serif; font-size: .75em; line-height: 1.5em; font-weight:normal;  font-style: normal; margin: 0;}
-
+header{ margin: 12px 0; }
 nav{ margin: 12px 0; }
-img { max-width: 100%; }
 
 .hidden{ display: none !important; }
 
@@ -75,6 +73,9 @@ img { max-width: 100%; }
 }
 .text_border{
 	border-left: 3px solid #000;
+}
+.fapbattle_border{
+	border-left: 3px solid #f00;	
 }
 
 /* FROM BOOTSTRAP */
