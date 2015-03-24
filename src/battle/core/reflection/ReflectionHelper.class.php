@@ -47,17 +47,24 @@ class ReflectionHelper{
 					try{
 						$definition .= "[$controller_class|";
 						$class = new ReflectionClass($controller_class);
+
+						$constants = $class->getConstants();
+						foreach ($constants as  $name => $value) {
+							$definition .= "+".$name.";";
+						}
+
 						$properties = $class->getProperties();
 						foreach ($properties as $prop) {
 							if($prop->isPublic())
 								$definition .= "+".$prop->getName().";";
 							elseif($prop->isPrivate())
 								$definition .= "-".$prop->getName().";";
+							elseif($prop->isStatic())
+								$definition .= "".$prop->getName().";";
 						}
 						$definition .= "|";
 						$methods = $class->getMethods();
 						foreach ($methods as $meth) {
-							echo substr($meth->name, 0, 2);
 							$is_displayed_method = $meth->isPublic() 
 								&& ($with_submethods || $meth->class === "$controller_class")
 								&& ($with_magical_methods || substr($meth->name, 0, 2) !== "__" );

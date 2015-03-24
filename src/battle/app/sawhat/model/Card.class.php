@@ -46,14 +46,14 @@ class Card{
 				if($previous_element->multiple_line
 					&& (!$card_element->multiple_line || $previous_element->html_closure_tag != $card_element->html_closure_tag))
 				{
-					$this->elements[] = $this->close_mutliple_line_tag($previous_element);
+					$this->elements[] = $this->close_multiple_line_tag($previous_element);
 					$need_closure = false;
 				}
 				// open multiple line tag
 				if($card_element->multiple_line	
 					&& (!$previous_element->multiple_line || $previous_element->html_closure_tag != $card_element->html_closure_tag))
 				{
-					$this->elements[] = $this->open_mutliple_line_tag($card_element);
+					$this->elements[] = $this->open_multiple_line_tag($card_element);
 					$need_closure = true;
 				}
 				// must add newline for post parser
@@ -68,7 +68,7 @@ class Card{
 				$init = false;
 		}
 		if($need_closure){
-			$this->elements[] = $this->close_mutliple_line_tag($previous_element);
+			$this->elements[] = $this->close_multiple_line_tag($previous_element);
 		}
 		$this->get_style_definition();
 		
@@ -156,11 +156,11 @@ class Card{
 		;
 	}
 	
-	private function open_mutliple_line_tag($card_element){
+	private function open_multiple_line_tag($card_element){
 		return (object)array('html'=>'<'.$card_element->html_closure_tag.'>');
 	}
 	
-	private function close_mutliple_line_tag($card_element){
+	private function close_multiple_line_tag($card_element){
 		$last_element_id = count($this->elements) - 1;
 		$this->elements[$last_element_id]->html = str_replace("\n",'',$this->elements[$last_element_id]->html);
 		$this->elements[$last_element_id]->html = str_replace("\r",'',$this->elements[$last_element_id]->html);

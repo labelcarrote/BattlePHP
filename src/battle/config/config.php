@@ -30,6 +30,7 @@ class Configuration{
 	const CURRENT_APP_VIRTUAL_URL = "batl_current_app_virtual_url";
 	const CURRENT_APP_URL = "batl_current_app_url";
 	const FULL_URL = "batl_full_url";
+	const IS_MOBILE_DEVICE = "batl_is_mobile_device";
 
 	// database
 	const DB_HOST = "127.0.0.1";    // host : "mysql5-1" ;

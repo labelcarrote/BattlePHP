@@ -148,5 +148,20 @@ class Router{
 			}
 		}
 	}
+
+	/**
+	* Returns the list of all the app in the app folder (except the one starting with "_")
+	*/
+	public static function get_all_apps(){
+		$all_apps = array();
+		foreach (glob("app/*",GLOB_ONLYDIR) as $dirname){
+			$split = explode("/",$dirname);
+			$shortdir = $split[count($split) - 1];
+			if(substr($shortdir, 0, 1) == "_")
+				continue;
+			$all_apps[] = $shortdir;
+		}
+		return $all_apps;
+	}
 }
 ?>

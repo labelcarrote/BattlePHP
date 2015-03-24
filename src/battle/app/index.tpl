@@ -23,7 +23,7 @@
 				</header>
 				<section>
 					<p>BattlePHP is a small open source MVC PHP framework by examples.<br><br>
-					It includes some sample-websites we've made, that ranges from the most basic single page apps (Partycul, CrappyCrop, FingerZen) to the more mature websites like Sawhat (another text-based-wiki).</p>
+					It includes some sample-websites we've made, that ranges from the most basic single page apps (Partycul, Mirror, FingerZen) to the more mature websites like Sawhat (another text-based-wiki).</p>
 					<p>Examples :</p>
 					<p>{$apps}</p>
 				</section>

@@ -287,15 +287,15 @@ $(window).load(function(){
 		var link_element = $('#color_scheme'),
 			new_css_link = link_element.attr('href').replace(/^(.+)\/[a-zA-Z0-9_-]+\.css$/,'$1/'+color_scheme+'.css');
 		link_element.attr('href',new_css_link);
-		localStorage['color_scheme'] = color_scheme;
+		localStorage['sawhat_color_scheme'] = color_scheme;
 	}
 	$('#style_changer').on('change',function(){
 		var color_scheme = $(this).val();
 		change_color_scheme(color_scheme);
 	});
-	if(typeof localStorage['color_scheme'] !== 'undefined'){
-		$('#style_changer').val(localStorage['color_scheme']);
-		change_color_scheme(localStorage['color_scheme']);
+	if(typeof localStorage['sawhat_color_scheme'] !== 'undefined'){
+		$('#style_changer').val(localStorage['sawhat_color_scheme']);
+		change_color_scheme(localStorage['sawhat_color_scheme']);
 	}
 	
 	// SEARCH RESULT RESIZE //
