@@ -1,0 +1,102 @@
+/*
+   Bap CSS
+   2007 december 8, fr
+*/
+
+a          { color: #000000; }
+a:link     { color: #000000; text-decoration: underline; }
+a:visited  { color: #000000; text-decoration: underline; }
+a:active   { color: #000000; text-decoration: underline; }
+a:hover    { color: #000000; text-decoration: underline; }
+
+.emptysection{
+	background-color: #ff9900; 
+	width: 640px; 
+	height: 20px;
+}
+.section { 
+	color: #000000; 
+	font-size: 20px; 
+	background-color: #ff9900; 
+	width: 640px; 
+	text-align:left; 
+	padding-left: 20px;
+	padding-top: 2px;
+	padding-bottom: 3px;
+}
+
+
+body {
+  margin: 0;
+  padding:0;
+  font-family: verdana, geneva, arial, helvetica, sans-serif; 
+  height: 100%;
+  font-size: 11px;		  
+  background-color: #000000;
+  /*background-image:url(./image/background.png);*/
+  text-decoration: none; 
+  font-weight: normal; 
+  line-height: normal; 
+  text-align:center;
+}
+ 
+/* Div */
+#enveloppe0{
+  margin:0 auto;
+  background-color: #111111;
+  width:760px;
+  height: 100%;
+}
+
+#enveloppe1{
+  margin:0 auto;
+  background-color: #2B2B2B;
+  width:720px;
+  height: 100%;
+}
+#enveloppe2{
+  margin:0 auto;
+  background-color: #FF9900;
+  width:680px;
+  height: 100%;
+}
+#enveloppe3{
+  margin:0 auto;
+  background-color: #ffffff;
+  width:640px;
+  height: 100%;
+}
+
+#content{
+  background-color: #ffffff;
+  margin:0 auto;
+  padding: 20px 0;
+  width: 600px;
+  height: 100%;
+  text-align:left;
+}
+
+/* Table*/
+
+table.scoreboard {
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: double;
+	border-color: #ff9900;
+	border-collapse: collapse;
+	background-color: #fff5ee;
+}
+table.scoreboard th {
+	border-width: 1px;
+	padding: 3px;
+	border-style: solid;
+	border-color: #808080;
+	background-color: #ffffff;
+}
+table.scoreboard td {
+	border-width: 1px;
+	padding: 3px;
+	border-style: solid;
+	border-color: #808080;
+	background-color: #ffffff;
+}
