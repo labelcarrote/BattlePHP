@@ -114,7 +114,6 @@ void setup(){
   // init  
   textFont(fontA, 40);
   initTitle();
-
 }
 
 //----------------------------------------------
@@ -136,7 +135,7 @@ void initEndGame(){
 
 void initGame(){
   status = STATUS_GAME;
-  
+
   // time
   time = 0;
     
@@ -250,12 +249,10 @@ void mouseDragged() {
 }
 
 void checkButtons() {
-  //carre submit
-  //rect(65,230, 235, 65);
+  // submit
   if(mouseX > 65 && mouseX < 300 && mouseY > 230 && mouseY < 295){
     overLeftButton = true; 
-  //carre retry  
-  //rect(350,230, 180, 65);
+  // retry
   }else if(mouseX > 350 && mouseX < 520 && mouseY > 230 && mouseY < 295){
     overRightButton = true; 
   } else {
@@ -269,24 +266,16 @@ void keyPressed(){
   float x = 300;
   float v = 30;
   if(key == 'd' || key == 'D'){
-	sound.playSfxBallBumper(x, v, 0);
-    //sound.playSfxBallContact(x, v);
+    sound.playSfxBallBumper(x, v, 0);
   }else if(key == 'f' || key == 'F'){
-	sound.playSfxBallBumper(x, v, 1);
-    //sound.playSfxBallPanier(x, v);
+    sound.playSfxBallBumper(x, v, 1);
   }else if(key == 'g' || key == 'G'){
-	sound.playSfxBallBumper(x, v, 2);
-    //sound.playSfxBallWallLeft(x, v);
+    sound.playSfxBallBumper(x, v, 2);
   }else if(key == 'j' || key == 'J'){
     sound.playSfxBallContact(x, v);
   }else if(key == 'k' || key == 'K'){
     sound.playSfxBallPanier(x, v);
-  }
-  /*else if(key == 'l' || key == 'L'){
-    sound.playSfxBallWallLeft(x, v);
-  }*/
-  else
-  if(key == 't' || key == 'T'){//go to title
+  }else if(key == 't' || key == 'T'){//go to title
     initTitle();
   }else if(key == ' '){
     if(status == STATUS_TITLE){//start

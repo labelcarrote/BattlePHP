@@ -100,25 +100,19 @@ public class SoundManager{
   private void playSfx(float x, float v, int numTimer, AudioSample sfxSample){
     sfxSample.play();
     if(millis() > sfxTimer[numTimer]) {
-          if(v < 30) {
-            //this.sfxGain = (v - 20);
-            this.sfxGain = (log(v) - 4) * 10 / v;
-          }else{
-            this.sfxGain = 0;
-          }
-          
-          // mappage du pan
-          this.sfxPan = map(x, 0, 600, -0.75, 0.75);
-
-          //sfxSample.setGain(this.sfxGain);
-          //sfxSample.setPan(this.sfxPan);
-          //sfxSample.trigger();
-          sfxTimer[numTimer] = millis() + 100;
-        }
+      if(v < 30){
+        this.sfxGain = (log(v) - 4) * 10 / v;
+      }else{
+        this.sfxGain = 0;
+      }
+      // mappage du pan
+      this.sfxPan = map(x, 0, 600, -0.75, 0.75);
+      sfxTimer[numTimer] = millis() + 100;
+    }
   }
 
   public void playSfxBallContact(float x, float v){
-      this.playSfx(x, v, sfxTimerContact, sfxBallContact);
+    this.playSfx(x, v, sfxTimerContact, sfxBallContact);
   }  
   public void playSfxBallPanier(float x, float v){
     this.playSfx(x, v, sfxTimerPanier, sfxBallPanier);
@@ -127,14 +121,14 @@ public class SoundManager{
     this.playSfx(x, v, sfxTimerWallLeft, sfxBallWall);
   }  
   public void playSfxBallWallRight(float x, float v){
-      this.playSfx(x, v, sfxTimerWallRight, sfxBallWall);
+    this.playSfx(x, v, sfxTimerWallRight, sfxBallWall);
   }    
   public void playSfxBallGround(float x, float v){
-      this.playSfx(x, v, sfxTimerGround, sfxBallGround);
+    this.playSfx(x, v, sfxTimerGround, sfxBallGround);
   }  
   public void playSfxBallBumper(float x, float v, int idBumper){
-      // verifier idBumper est valide
-      this.playSfx(x, v, sfxTimerBumper[idBumper], sfxBallBumper[idBumper]);
+    // verifier idBumper est valide
+    this.playSfx(x, v, sfxTimerBumper[idBumper], sfxBallBumper[idBumper]);
   }  
   
   public float songTitleLeftLevel() {
@@ -156,16 +150,16 @@ public class SoundManager{
   }
 
   public void closeSound(){
-	songInGame.close();
-	songTitle.close();
-	songEndGame.close();
-	sfxBallBumper[0].close();
-	sfxBallBumper[1].close();
-	sfxBallBumper[2].close();
-	sfxBallContact.close();
-	sfxBallPanier.close();
-	sfxBallWall.close();
-	sfxBallGround.close();
-	minim.stop();
+  	songInGame.close();
+  	songTitle.close();
+  	songEndGame.close();
+  	sfxBallBumper[0].close();
+  	sfxBallBumper[1].close();
+  	sfxBallBumper[2].close();
+  	sfxBallContact.close();
+  	sfxBallPanier.close();
+  	sfxBallWall.close();
+  	sfxBallGround.close();
+  	minim.stop();
   }
 }
