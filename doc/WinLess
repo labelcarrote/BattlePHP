@@ -1,7 +1,0 @@
-===== Install
-- Download [Winless](http://winless.org/), install it and run it
-- Click "Add folder" and select your less folder (for example /app/sawhat/public/less)
-- Select files to compile ("_[name].less" files shouldn't be selected)
-- Click the "Minify" checkbox
-- Go to File > Settings and check "Automatically compile files when saved"
-- Other options are up to you
