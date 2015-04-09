@@ -1,5 +1,7 @@
 BattlePHP
 ==========
+
+[![Join the chat at https://gitter.im/labelcarrote/BattlePHP](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/labelcarrote/BattlePHP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 BattlePHP is a small open source MVC PHP framework by examples.
 
 It includes some sample-websites we've made, that ranges from the most basic single page apps (Partycul, CrappyCrop, FingerZen) to the more mature websites like Sawhat (another text-based-wiki).
