@@ -26,14 +26,16 @@ class Parsedown{
 	# Setters
 	#
 	private $breaksEnabled = false;
+	private $lineBreak = "  \n";
 	
 	/*
 	 * Enables GFM line breaks.
-	 * @todo Add $this->breaksEnabled in code to actually do something
 	 */
 	function setBreaksEnabled($breaksEnabled){
 		$this->breaksEnabled = $breaksEnabled;
-		return $this;
+		if($breaksEnabled){
+			$this->lineBreak = "\n";
+		}
 	}
 
 	#
@@ -406,6 +408,9 @@ class Parsedown{
 						$tag_char = $line[0];
 						if($tag_char == '-' && !preg_match('/^\-{2,}/',$line)){
 							// hyphen is used for ul
+							continue;
+						} elseif($line[1] == '>'){
+							// hyphen is used for => or ->
 							continue;
 						} else {
 							/*
@@ -805,12 +810,12 @@ class Parsedown{
 	}
 	
 	/*
-	 * Parses special html chars ( ®, ©, ™, ♥ )
+	 * Parses special html chars ( ®, ©, ™, ♥, →, ←)
 	 */
 	private function parseSpecialChars($text){
 		// replace special chars
-		$s = array('(R)','(C)','(TM)','<3','=>','<=');
-		$r = array('&reg;','&copy;','&trade;','&hearts;','&rarr;','&larr;');
+		$s = array('(R)','(C)','(TM)','<3','=>','->','<=','<-');
+		$r = array('&reg;','&copy;','&trade;','&hearts;','&rarr;','&rarr;','&larr;','&larr;');
 		return str_replace($s,$r,$text);
 	}
 	
@@ -828,6 +833,16 @@ class Parsedown{
 	 * Parses inline elements
 	 */
 	private function parseLine($text, $markers = array("  \n", '![', '&', '*', '<', '[#]', '[', '\\', '_', '`', 'http', '~~')){
+		/*
+		 * Clean strict Markdown line breaks.
+		 */
+		if($this->breaksEnabled){
+			$break_key = array_search("  \n",$markers);
+			if($break_key !== false){
+				$markers[$break_key] = $this->lineBreak;
+			}
+			$text = str_replace("  \n",$this->lineBreak,$text);
+		}
 		/*
 		 * Nothing to parse
 		 */
@@ -877,12 +892,13 @@ class Parsedown{
 			 */
 			unset($markers[$closestMarkerIndex]);
 			switch ($closestMarker){
-				case "  \n":
+				case $this->lineBreak:
+				//case "  \n":
 					/*
 					 * Adds a newline
 					 */
 					$markup .= '<br>'."\n";
-					$offset = 3;
+					$offset = strlen($this->lineBreak);
 					break;
 				case '[#]':
 					/*

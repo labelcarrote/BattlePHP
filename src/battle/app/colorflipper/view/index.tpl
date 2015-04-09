@@ -6,15 +6,15 @@
 		<meta name="author" content="label carrote"/>
 		<meta name="keywords" content="label carrote, battle, jon dalton, touchypunchy, p2b, moustachu, mitch" />
 		<title>Color Flipper</title>
-		<link rel="stylesheet" href="{$root_url}public/css/normalize.css" />
-		<link rel="stylesheet" href="{$root_url}lib/minicolors/jquery.minicolors.css">
-		<link rel="stylesheet" href="{$current_app_url}public/css/colorflipper.css" />
+		<link rel="stylesheet" href="{$batl_root_url}public/css/normalize.css" />
+		<link rel="stylesheet" href="{$batl_root_url}lib/minicolors/jquery.minicolors.css">
+		<link rel="stylesheet" href="{$batl_current_app_url}public/css/colorflipper.css" />
 	</head>
 	<body>
 		<header>
 			<div class="content line">
 				<div class="unit maintitle">
-					<a href="{$root_url}">
+					<a href="{$batl_root_url}">
 						<h1>Color Flipper</h1>
 					</a>
 				</div>
@@ -31,8 +31,8 @@
 		<footer>
 			<div class="content">footer</div>
 		</footer>
-		<script type="text/javascript" src="{$root_url}lib/jquery/jquery.js"></script>
-		<script src="{$root_url}lib/minicolors/jquery.minicolors.min.js"></script>
-		<script type="text/javascript" src="{$current_app_url}public/js/colorflipper.js"></script>
+		<script type="text/javascript" src="{$batl_root_url}lib/jquery/jquery.js"></script>
+		<script src="{$batl_root_url}lib/minicolors/jquery.minicolors.min.js"></script>
+		<script type="text/javascript" src="{$batl_current_app_url}public/js/colorflipper.js"></script>
 	</body>
 </html>

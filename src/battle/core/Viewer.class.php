@@ -1,5 +1,8 @@
 <?php
 require_once 'core/i18n/Localization.php';
+// Brainy
+//require_once 'lib/brainy/brainy/Smarty.class.php';
+// or Smarty
 require_once 'lib/smarty/Smarty.class.php';
 
 /**
@@ -37,19 +40,29 @@ class Viewer extends Smarty{
 			mkdir($this->compile_dir);
 
 		$this->assign_config_infos();
+
+		// ---- Brainy Special Parameters
+		//$this->testInstall();
+
+		// TODO : find why this throws/bugs!
+		//$this->caching = Smarty::CACHING_LIFETIME_CURRENT; 
+		
+		// TODO : when using Brainy on production -> change compile check https://github.com/box/brainy/wiki/Caching
+		//$this->compile_check = false; // !defined('IS_PRODUCTION'); 
 	}
 
 	// ---- Private Helpers ----
 	
 	/**
 	 * Assign some template helper values (base url and form base url)
+	 * TODO : deal with single app (if monoapp -> current_app_url = root_url (+ htacess biz))
 	 */
 	private function assign_config_infos(){
 		$this->assign(Configuration::ROOT_URL, Request::get_root_url());
 		$this->assign(Configuration::CURRENT_APP_URL, Request::get_application_root());
-		// TODO : deal with single app (if monoapp -> current_app_url = root_url (+ htacess biz))
 		$this->assign(Configuration::CURRENT_APP_VIRTUAL_URL, Request::get_application_virtual_root());
-		$this->assign('full_url',Request::get_full_url());
+		$this->assign(Configuration::FULL_URL,Request::get_full_url());
+		$this->assign(Configuration::IS_MOBILE_DEVICE,Request::is_mobile_device());
 	}
 
 	// ---- Public Methods ----
@@ -62,11 +75,9 @@ class Viewer extends Smarty{
 			echo "no page found on root...";
 		else{
 			$content = "";
-			foreach (glob("app/*",GLOB_ONLYDIR) as $dirname) {
-				$split = explode("/",$dirname);
-				$shortdir = $split[count($split) - 1];
-				$shortdirDisplay = ucfirst($shortdir);
-				$content .= "- <a href='$shortdir'>$shortdirDisplay</a> (<a href='https://github.com/labelcarrote/Battle.PHP' alt='source on (GI)TEUB'>source</a>)<br/>";
+			foreach (Router::get_all_apps() as $app_name){
+				$shortdirDisplay = ucfirst($app_name);
+				$content .= "- <a href='$app_name'>$shortdirDisplay</a> (<a href='https://github.com/labelcarrote/Battle.PHP' alt='source on (GI)TEUB'>source</a>)<br/>";
 			}
 			$viewManager = self::getInstance();
 			$viewManager->assign('apps',$content);
@@ -100,7 +111,7 @@ class Viewer extends Smarty{
 	 */
 	public function display_view($view,$template_dir = NULL){
 		if(!is_null($template_dir))
-			$this->template_dir = $template_dir;
+			$this->setTemplateDir($template_dir);
 		$this->display($view);
 	}
 	
@@ -109,7 +120,7 @@ class Viewer extends Smarty{
 	 */
 	public function fetch_view($view,$template_dir = NULL){
 		if(!is_null($template_dir))
-			$this->template_dir = $template_dir;
+			$this->setTemplateDir($template_dir);
 		return $this->fetch($view);
 	}
 }

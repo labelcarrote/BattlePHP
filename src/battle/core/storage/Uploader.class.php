@@ -41,7 +41,7 @@ class Uploader{
         // Create directory if it does not exist
         $dir = "{$targetpath}/";
         if(!is_dir($dir))
-            mkdir($dir);
+            mkdir($dir, 0755, true);
 
         // Note: the temp file will be deleted after the script execution if not moved
         if(!move_uploaded_file($_FILES[$inputname]['tmp_name'],$dir.$output_filename))

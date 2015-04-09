@@ -4,6 +4,57 @@ require_once 'core/auth/db/UserDB.class.php';
  * UserManager
  */
 class UserManager{
+	// -----------------
+	// ---- QUERIES ----
+	// -----------------
+
+	public static function get_user($user_id,$application = null){
+		if($application === null)
+			$application = Request::get_application();
+
+		$userdb = UserDB::getInstance()->get_user($user_id,$application);
+		if($userdb === null)
+			return null;
+
+		return User::create_user_from_db($userdb);
+	}
+
+	public static function get_user_from_confirmation_token($confirmation_token,$application = null){
+		if($application === null)
+			$application = Request::get_application();
+
+		$userdb = UserDB::getInstance()->get_user_from_confirmation_token($confirmation_token,$application);
+		if($userdb === null)
+			return null;
+
+		return User::create_user_from_db($userdb);
+	}
+
+	public static function get_user_from_login($login,$application = null){
+		if($application === null)
+			$application = Request::get_application();
+
+		$userdb = UserDB::getInstance()->get_user_from_login($login,$application);
+		if($userdb === null)
+			return null;
+
+		return User::create_user_from_db($userdb);
+	}
+
+	public static function get_users($page_id, $nb_user_by_page,$application = null){
+		if($application === null)
+			$application = Request::get_application();
+
+		return User::create_users_from_db(UserDB::getInstance()->get_users(1,100,$application));
+	}
+
+	// -------------------------------------------
+	// ---- COMMANDS : Create, Update, Delete ----
+	// -------------------------------------------
+
+	public static function update_user_last_connection($user_id){
+		return UserDB::getInstance()->update_user_last_connection($user_id);
+	}
 
 	public static function save($user){
 		if($user === null)

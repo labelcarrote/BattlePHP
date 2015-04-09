@@ -7,8 +7,8 @@
 		<meta name="author" content="label carrote"/>
 		<meta name="keywords" content="label carrote, battle, jon dalton, touchypunchy, p2b, moustachu, mitch" />
 		<title>PARTYCUL</title>
-		<link rel="stylesheet" href="{$root_url}public/css/reset.css" />
-		<link rel="stylesheet" href="{$current_app_url}public/css/partycul.css" />
+		<link rel="stylesheet" href="{$batl_root_url}public/css/reset.css" />
+		<link rel="stylesheet" href="{$batl_current_app_url}public/css/partycul.css" />
 		
 	</head>
 	<body>
@@ -18,7 +18,7 @@
 			<canvas id="layer3"></canvas>
 		</div>
 
-		<script type="text/javascript" src="{$root_url}lib/jquery/jquery.js"></script>
-		<script type="text/javascript" src="{$current_app_url}public/js/partycul.js"></script>
+		<script type="text/javascript" src="{$batl_root_url}lib/jquery/jquery.js"></script>
+		<script type="text/javascript" src="{$batl_current_app_url}public/js/partycul.js"></script>
 	</body>
 </html>

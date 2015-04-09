@@ -1,9 +1,9 @@
 webdev
-lastedit: 20140724_2007
+lastedit: 20141022_1410
 color: #C7F464
 
 ==== Color ====
-- [Kuler](https://kuler.adobe.com/create/color-wheel/?base=2&amp;amp;rule=Complementary&amp;amp;selected=4&amp;amp;name=My%20Kuler%20Theme&amp;amp;mode=rgb&amp;amp;rgbvalues=0.7,0.3514830082320031,0,1,0.6093609303227103,0.2153973687568923,1,0.5021185831885759,0,0,0.532411614218131,0.7,0,0.7605880203116158,1)
+- [Kuler](https://kuler.adobe.com/create/color-wheel/?base=2&amp;amp;amp;rule=Complementary&amp;amp;amp;selected=4&amp;amp;amp;name=My%20Kuler%20Theme&amp;amp;amp;mode=rgb&amp;amp;amp;rgbvalues=0.7,0.3514830082320031,0,1,0.6093609303227103,0.2153973687568923,1,0.5021185831885759,0,0,0.532411614218131,0.7,0,0.7605880203116158,1)
 - [Color Lovers](http://www.colourlovers.com)
 - [Color wheel](http://colorschemedesigner.com)
 - [Traditionnal Colors of Japan](http://2xup.org/repos)
@@ -14,7 +14,7 @@ color: #C7F464
 - [Google Fonts](http://www.google.com/fonts)
 - [Selection de Google Fonts](http://typewelike.wirsindsmyk.de/)
 - [fontsquirrel.com](http://www.fontsquirrel.com)
-- [Font theory (readability &amp; co)](http://webaim.org/techniques/fonts)
+- [Font theory (readability &amp;amp; co)](http://webaim.org/techniques/fonts)
 - http://fortawesome.github.io/Font-Awesome/
 
 ==== Icons ====
@@ -25,10 +25,10 @@ https://www.iconfinder.com/
 - [Etapes](http://etapes.com)
 - [Smashing Magazine](http://www.smashingmagazine.com/category/design/)
 - [Blog du Web Design](http://www.blogduwebdesign.com)
-- [Aseprite : Animated sprite editor &amp;amp; pixel art tool](http://www.aseprite.org/)
+- [Aseprite : Animated sprite editor &amp;amp;amp; pixel art tool](http://www.aseprite.org/)
 - [MediaQueri.es](http://mediaqueri.es/)
 - [Riki Tanone](http://riki.co.nz/)
-- [Freebiesbug (psd, icons &amp;amp; free resources for designer)](http://freebiesbug.com/)
+- [Freebiesbug (psd, icons &amp;amp;amp; free resources for designer)](http://freebiesbug.com/)
 
 ==== Textures ====
 - [subtlepatterns.com](http://subtlepatterns.com)
@@ -60,7 +60,7 @@ https://www.iconfinder.com/
 ==== CSS ====
 - [OOCSS : le slide](http://www.slideshare.net/stubbornella/object-oriented-css)
 - [OOCSS : le site (grids : line unit size1of3 = cool)](http://oocss.org/)
-- [CSS Lint : &amp;quot;Will hurt your feelings (And help you code better)&amp;quot;](http://csslint.net/)
+- [CSS Lint : &amp;amp;quot;Will hurt your feelings (And help you code better)&amp;amp;quot;](http://csslint.net/)
 - [em vs px vs pt (SPOIL : em won!)](http://kyleschaeffer.com/best-practices/css-font-size-em-vs-px-vs-pt-vs/)
 - [Mail Chimp UI Design Patterns](http://www.flickr.com/photos/aarronwalter/5579386649/sizes/o/in/photostream/)
 - [Roman Komarov : CSS Fun Experiment (.ru = good shit)](http://kizu.ru/en/fun/)
@@ -72,10 +72,10 @@ https://www.iconfinder.com/
 - [Javascript Bad Practices](http://james.padolsey.com/javascript/javascript-bad-practices/)
 - [Shichuan Javascript Patterns](http://shichuan.github.com/javascript-patterns/)
 - [Douglas Crockford : Grand maitre Javascript](http://www.crockford.com/)
-- [John Resig : Grand cr&amp;eacute;ateur JQuery](http://ejohn.org/)
+- [John Resig : Grand cr&amp;amp;eacute;ateur JQuery](http://ejohn.org/)
 - [John Resig's advanced javascript interactive tutorial](http://ejohn.org/apps/learn/)
 - [Nicholas Zackas : Grand tueur Javascript](http://www.nczonline.net/)
-- [JavaScript APIs you&amp;rsquo;ve never heard of (and some you have)](http://www.nczonline.net/blog/2012/11/13/javascript-apis-youve-never-heard-of/)
+- [JavaScript APIs you&amp;amp;rsquo;ve never heard of (and some you have)](http://www.nczonline.net/blog/2012/11/13/javascript-apis-youve-never-heard-of/)
 - [JSHint: JS Code Quality Tool Online](http://www.jshint.com/)
 - [Timing Events](http://www.w3schools.com/js/js_timing.asp)
 - [Validation Formulaire Best Practices](http://openweb.eu.org/articles/validation_formulaire/)
@@ -89,7 +89,7 @@ https://www.iconfinder.com/
 ---- JS Loader ----
 - [YepNope (as in Modernizer)](http://yepnopejs.com/)
 - [Require.js](http://requirejs.org/)
-- [Comparatif YepNope vs Require vs Labs vs &amp;quot;nothing&amp;quot;](http://msdn.microsoft.com/en-us/magazine/hh227261.aspx)
+- [Comparatif YepNope vs Require vs Labs vs &amp;amp;quot;nothing&amp;amp;quot;](http://msdn.microsoft.com/en-us/magazine/hh227261.aspx)
 
 ---- UI Framework / Data Visualisation / Animation ----
 - [Bootstrap](http://getbootstrap.com/getting-started/)
@@ -99,10 +99,10 @@ https://www.iconfinder.com/
 - [D3JS : Data Driven Document, lib pour faire de beaux diagrammes (en SVG ou en Canvas)](http://d3js.org/)
 
 - Easel.js Tween.js etc http://www.createjs.com
-- [Raphael.js](http://raphaeljs.com/) a &amp;eacute;t&amp;eacute; remplac&amp;eacute; par [Snap.svg](http://snapsvg.io/)
+- [Raphael.js](http://raphaeljs.com/) a &amp;amp;eacute;t&amp;amp;eacute; remplac&amp;amp;eacute; par [Snap.svg](http://snapsvg.io/)
 - [Three.js : la lib 3D du moment](http://threejs.org/)
-- [Knockout.js (data-binding &amp;amp; mvvm)](http://knockoutjs.com/index.html)
-- [Processing.js : processing en js, maintenu par John Resig (cr&amp;eacute;ateur de JQuery)](http://processingjs.org/)
+- [Knockout.js (data-binding &amp;amp;amp; mvvm)](http://knockoutjs.com/index.html)
+- [Processing.js : processing en js, maintenu par John Resig (cr&amp;amp;eacute;ateur de JQuery)](http://processingjs.org/)
 - [Backbone.js (mvc)](http://backbonejs.org/)
 
 - [GSAP : Greensock Animation Platform](http://www.greensock.com/get-started-js/)
@@ -128,7 +128,7 @@ https://www.iconfinder.com/
 - http://designmodo.com/create-upload-form/
 
 ---- Text Editor ----
-- [Ace (default text editor of Github, StackO, Sawhat &amp;amp; Khan Academy)](http://ace.c9.io/#nav=about)
+- [Ace (default text editor of Github, StackO, Sawhat &amp;amp;amp; Khan Academy)](http://ace.c9.io/#nav=about)
 
 Syntax highliter:
 - [Prism : Syntax highliter (w/ colors)](http://prismjs.com/)
@@ -138,7 +138,7 @@ Diff:
 
 ==== PHP ====
 - [PHP Best Practices](https://phpbestpractices.org/)
-- [I18N &amp;amp; Smarty](http://www.schittkowski.de/?q=node/20)
+- [I18N &amp;amp;amp; Smarty](http://www.schittkowski.de/?q=node/20)
 - [YII Framework](http://www.yiiframework.com/)
 http://www.yiiframework.com/doc/guide/1.1/en/basics.best-practices)
 http://www.yiiframework.com/doc/guide/1.1/fr/form.model)
@@ -169,7 +169,7 @@ Sonarqube :
 - http://nemo.sonarqube.org/dashboard/index/net.php.pear.phpcodesniffer
 
 ==== Cookies / Client Storage ====
-- Local Storage &amp;gt; Cookie,  5MB &amp;gt; 4KB, and it works everywhere (IE8+) !
+- Local Storage &amp;amp;gt; Cookie,  5MB &amp;amp;gt; 4KB, and it works everywhere (IE8+) !
 - http://diveintohtml5.info/storage.html 
 
 ==== IFrame ====

@@ -1,5 +1,5 @@
 <?php
-require_once 'app/sawhat/model/CardFactory.class.php';
+require_once 'app/sawhat/model/Card.class.php';
 require_once 'core/storage/FileSystemIO.class.php';
 
 class CardStore{
@@ -10,17 +10,34 @@ class CardStore{
 	public static function get_folder(){
 		return "app/sawhat/".self::DIR;
 	}
+
+	public static function exist($card_name){
+		$folder = self::get_folder()."$card_name/";
+		$filename = $folder.$card_name.".txt";
+		return file_exists($filename);
+	}
+
+	public static function get_card($card_name, $recursive_level = 0){
+		$folder = self::get_folder()."$card_name/";
+		$filename = $folder.$card_name.".txt";
+		$lines = (!file_exists($filename)) ? array() : file($filename);
+		$card = new Card($card_name,$lines,$recursive_level);
+		$card->files = FileSystemIO::get_files_in_dir($folder.'{*.jpg,*.jpeg,*.JPG,*.png,*.gif,*.zip}');
+		foreach($card->files AS $key => $file){
+			$file_type = preg_match('/^(.+)\.(zip)$/',$file->name) ? 'zip' : 'image';
+			$card->files[$key]->type = $file_type;
+		}
+		return $card;
+	}
 	
-	public static function get_all($filter = null){
+	public static function get_all_cards($filter = null){
 		$result = array();
 		// look for text files in folder sawhat
 		$dir = self::get_folder()."*";
 		foreach (glob($dir,GLOB_ONLYDIR) as $filename){
 			$basename = basename($filename);
-			if(
-				is_null($filter)
-			){
-				$result[] = self::get($basename);
+			if(is_null($filter)){
+				$result[] = self::get_card($basename);
 			}
 			elseif(!empty($filter)) {
 				$keywords = SearchHelper::explode_keywords($filter);
@@ -40,31 +57,12 @@ class CardStore{
 						}
 					}
 					if($add_result){
-						$result[] = self::get($basename);
+						$result[] = self::get_card($basename);
 					}
 				}
 			}
 		}
 		return $result;
-	}
-	
-	public static function exist($card_name){
-		$folder = self::get_folder()."$card_name/";
-		$filename = $folder.$card_name.".txt";
-		return file_exists($filename);
-	}
-
-	public static function get($card_name, $recursive_level = 0){
-		$folder = self::get_folder()."$card_name/";
-		$filename = $folder.$card_name.".txt";
-		$lines = (!file_exists($filename)) ? array() : file($filename);
-		$card = new Card($card_name,$lines,$recursive_level);
-		$card->files = FileSystemIO::get_files_in_dir($folder.'{*.jpg,*.jpeg,*.JPG,*.png,*.gif,*.zip}');
-		foreach($card->files AS $key => $file){
-			$file_type = preg_match('/^(.+)\.(zip)$/',$file->name) ? 'zip' : 'image';
-			$card->files[$key]->type = $file_type;
-		}
-		return $card;
 	}
 
 	public static function upsert($card_name, $lines, $color, $is_private){

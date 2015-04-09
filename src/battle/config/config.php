@@ -26,9 +26,11 @@ class Configuration{
 	const SMARTY_CACHE_DIR = "tmp/tpl_cache";
 
 	// smarty template helpers' name
-	const ROOT_URL = "root_url";
-	const CURRENT_APP_VIRTUAL_URL = "current_app_virtual_url";
-	const CURRENT_APP_URL = "current_app_url";
+	const ROOT_URL = "batl_root_url";
+	const CURRENT_APP_VIRTUAL_URL = "batl_current_app_virtual_url";
+	const CURRENT_APP_URL = "batl_current_app_url";
+	const FULL_URL = "batl_full_url";
+	const IS_MOBILE_DEVICE = "batl_is_mobile_device";
 
 	// database
 	const DB_HOST = "127.0.0.1";    // host : "mysql5-1" ;

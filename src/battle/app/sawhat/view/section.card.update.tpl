@@ -2,12 +2,12 @@
 	{include file="element.header.tpl"}
 	<section class="white" {if $card->exists}id="{$card->name}"{/if}>
 		{if $card->exists}<style>{$card->style_definition}</style>{/if}
-		<form id="card_edit_form" method="POST" enctype="multipart/form-data" action="{$current_app_virtual_url}">
+		<form id="card_edit_form" method="POST" enctype="multipart/form-data" action="{$batl_current_app_virtual_url}">
 			<input type="hidden" name="name" value="{$card->name}"/>
 			<fieldset>
 				<legend class="banner">
 					<h1 class="{if $card->is_light}lighter_text{else}darker_text{/if}">
-						<i>{if $card->exists}Update{else}Create{/if}</i> <a href="{$current_app_virtual_url}{$card->name}" class="{if $card->is_light}white_text{else}black_text{/if}">{$card->display_name}</a>
+						<i>{if $card->exists}Update{else}Create{/if}</i> <a href="{$batl_current_app_virtual_url}{$card->name}" class="{if $card->is_light}white_text{else}black_text{/if}">{$card->display_name}</a>
 					</h1>
 				</legend>
 				<div class="form-inline">
@@ -41,7 +41,7 @@
 		<!-- SUBMIT -->
 		<div class="padding darker">
 			<button id="editor_save" class="btn btn-primary">Save</button>
-			<a class="btn btn-default" href="{$current_app_virtual_url}{$card->name}">Back to Card</a>
+			<a class="btn btn-default" href="{$batl_current_app_virtual_url}{$card->name}">Back to Card</a>
 			<span id="editor_console" class="paddingleft"></span>
 		</div>
 	
@@ -89,4 +89,4 @@
 	</section>
 </div>
 {include file="element.footer.tpl"}
-<script src="{$root_url}lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="{$batl_root_url}lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>

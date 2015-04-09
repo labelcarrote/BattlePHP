@@ -1,6 +1,6 @@
 {include file="element.breadcrumbs.tpl"}
 <div class="user_utils right">
-	{if $logged}
+	{if $batl_is_logged}
 	<form method="POST" class="inline">
 		<button class="btn btn-link" type="submit" name="submit" value="logout" title="Logout"><span class="fa fa-sign-out fa-fw"></span></button> 
 	</form>

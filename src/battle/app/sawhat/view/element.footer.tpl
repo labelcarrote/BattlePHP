@@ -1,15 +1,15 @@
 <footer>
 	<div class="content auto_clear">
 		<div class="left">
-			<span class="fa fa-caret-right"></span>&nbsp;<a href="{$current_app_virtual_url}all_cards">See all cards</a>
+			<span class="fa fa-caret-right"></span>&nbsp;<a href="{$batl_current_app_virtual_url}all_cards">See all cards</a>
 			<br>
-			<span class="fa fa-caret-right"></span>&nbsp;<a href="{$current_app_virtual_url}starred">See starred cards</a>
+			<span class="fa fa-caret-right"></span>&nbsp;<a href="{$batl_current_app_virtual_url}starred">See starred cards</a>
 			<br>
-			<span class="fa fa-caret-right"></span>&nbsp;<a href="{$current_app_virtual_url}help">Help</a>
+			<span class="fa fa-caret-right"></span>&nbsp;<a href="{$batl_current_app_virtual_url}help">Help</a>
 		</div>
 		<div class="right">
 			<div class="marginbottom">
-				<form method="POST" class="form-horizontal">
+				<form method="POST" class="form-inline">
 					<div class="input-group">
 						<input type="text" class="form-control" name="search" placeholder="keywords go here" value="" required="required" pattern="[a-zA-Z0-9 _-]+">
 						<span class="input-group-btn">
@@ -18,7 +18,8 @@
 					</div>
 				</form>
 			</div>
-			<form method="POST" class="form-inline margintop">
+			{if count($color_schemes) > 1}
+			<form method="POST" class="form-inline">
 				<div class="form-group align_right">
 					<label for="style_changer" class="control-label">Color theme</label>
 					<select class="form-control" id="style_changer" name="style_changer">
@@ -28,6 +29,7 @@
 					</select>
 				</div>
 			</form>
+			{/if}
 		</div>
 	</div>
 </footer>
