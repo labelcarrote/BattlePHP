@@ -81,6 +81,7 @@ class Parsedown{
 		$block = null;
 		$context = null;
 		$contextData = null;
+		$mono_line = count($lines) == 1;
 		/*
 		 * Iterates through lines to identify blocks
 		 */
@@ -205,24 +206,6 @@ class Parsedown{
 					}
 					if (!isset($contextData['interrupted'])){
 						// "lazy quote" line is added to quoted content
-						$block['content'][] = $line;
-						continue 2;
-					}
-					$context = null;
-					break;
-				case 'column':
-					if ($line === ''){
-						// marks current block as temporarily interrupted and continue to next line
-						$contextData['interrupted'] = true;
-						continue 2;
-					}
-					if (preg_match('/^\|{1,2}[ ](.*)/', $line, $matches)){
-						// normal column line is added to quoted content
-						$block['content'][] = $matches[1];
-						continue 2;
-					}
-					if (empty($contextData['interrupted'])){
-						// "lazy column" line is added to quoted content
 						$block['content'][] = $line;
 						continue 2;
 					}
@@ -540,28 +523,6 @@ class Parsedown{
 						continue 2;
 					}
 					break;
-				case '|':
-					if (preg_match('/^(\|{1})[ ](.*)/', $line, $matches)){
-						/*
-						 * sets a new <div class="column"> block and continue to next line
-						 * context is set to "column"
-						 */
-						$blocks[] = $block;
-						$block = array(
-							'name' => 'div',
-							'content type' => 'lines',
-							'content' => array(
-								$matches[2]
-							),
-							'attributes' => array(
-								'class' => 'column'
-							)
-						);
-						$context = 'column';
-						$contextData = array();
-						continue 2;
-					}
-					break;
 				case '[':
 					$position = strpos($line, ']:');
 					if ($position){
@@ -699,19 +660,24 @@ class Parsedown{
 			 * or Creates a new <p> block and continue to next line
 			 */
 			if ($context === 'paragraph'){
-				$block['content'] .= "\n".$line;
+				$block['content'] .= "\n".$indentedLine;
 				continue;
 			} else {
 				$blocks[] = $block;
 				$block = array(
 					'name' => 'p',
 					'content type' => 'line',
-					'content' => $line
+					'content' => $indentedLine
 				);
 				/*
-				 * Method has been called on a <li> substring => no need to create a new <p>
+				 * Method has been called on a <li> substring
+				 * OR on a single line
+				 * => no need to create a new <p>
 				 */
-				if ($containerBlockName === 'li' && !isset($blocks[1])){
+				if (
+				    ($containerBlockName === 'li' && !isset($blocks[1]))
+				    || $mono_line
+				){
 					$block['name'] = null;
 				}
 				$context = 'paragraph';
@@ -778,7 +744,7 @@ class Parsedown{
 						break;
 					case 'lines':
 						/*
-						 * <li>, <blockquote>, <div class="column"> needs content to be parsed for blocks
+						 * <li>, <blockquote> needs content to be parsed for blocks
 						 *
 						 */
 						$result = $this->findBlocks($block['content'], $block['name']);
