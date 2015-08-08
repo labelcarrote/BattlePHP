@@ -1,5 +1,5 @@
 <div class="padding marginbottom darkerbg folder_title">
-	<a class="parent_folder {if $path === ActionGround::ROOT}root_folder{/if}" href="#"><h3 class="current_folder" data-path="{$path}">/{$path}</h3></a>
+	<a class="parent_folder {if $path === ActionGround::STORAGE_PATH}root_folder{/if}" href="#"><h3 class="current_folder" data-path="{$path}">/{$path}</h3></a>
 </div>
 {assign var="index" value=0}
 {if isset($folders)}
@@ -16,7 +16,7 @@
 {if isset($other_images)}
 {foreach from=$other_images item=image}
 <div class="img_container left">
-	<img data-index="{$index}" src="{$image->fullname}" alt="{$image->name}" />
+	<img data-index="{$index}" src="{$batl_root_url}{$image->fullname}" alt="{$image->name}" />
 	{assign var="index" value=$index+1}
 </div>
 {/foreach}
@@ -24,7 +24,7 @@
 {if isset($bg_images)}
 {foreach from=$bg_images item=image}
 <div class="img_container left">
-	<img class="bg" data-index="{$index}" src="{$image->fullname}" alt="{$image->name}" />
+	<img class="bg" data-index="{$index}" src="{$batl_root_url}{$image->fullname}" alt="{$image->name}" />
 	{assign var="index" value=$index+1}
 </div>
 {/foreach}

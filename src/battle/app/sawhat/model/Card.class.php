@@ -1,6 +1,8 @@
 <?php
-require_once 'core/auth/AuthManager.class.php';
-require_once 'core/imaging/ImageHelper.class.php';
+use BattlePHP\Core\Auth\AuthManager;
+use BattlePHP\Imaging\ImageHelper;
+use BattlePHP\Core\Viewer;
+
 require_once 'app/sawhat/model/CardElement.class.php';
 
 class Card{
@@ -168,4 +170,3 @@ class Card{
 		return (object)array('html'=>'</'.$card_element->html_closure_tag.'>');
 	}
 }
-?>

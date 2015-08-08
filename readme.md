@@ -52,6 +52,7 @@ Dependencies
 ------------
 
 Core: 
+Only server-side dependencies, Smarty for templating, PHPMailer, PHPass for hashing passwords, and HTMLPurifier.
 ```
 > composer install
 ```
@@ -92,6 +93,8 @@ Applications [11]:
   - snap.svg : "0.2.0" [1]
   - jquery.minicolors : "?" [1]
   - jquery.cookie : "1.3.1" [1]
+
+  Note : no server side dependencies in applications, only frontend js and css
 
 Create a new website / application
 ----------------------------------

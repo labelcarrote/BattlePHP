@@ -1,14 +1,14 @@
 <?php
-require_once 'core/storage/FileSystemIO.class.php';
-require_once 'core/model/AjaxResult.class.php';
+use BattlePHP\Core\Controller;
+use BattlePHP\Storage\FileSystemIO;
+use BattlePHP\Api\Response;
 
 class ActionGround extends Controller{
 
-	const ROOT = "app/ground/storage/";
+	const STORAGE_PATH = "app/ground/storage";
 
 	public function index(){
-		
-		$path = self::ROOT;		
+		$path = self::STORAGE_PATH;		
 		$folders = FileSystemIO::get_folders_in_dir($path."/*");
 		$bg_images = null;
 		$other_images = null;
@@ -25,25 +25,21 @@ class ActionGround extends Controller{
 		$this->display_view('index.tpl');
 	}
 
-	public function path(){
-		$path = Request::isset_or($_GET['path'],"");
-	}
-
 	public function api(){
 		if(isset($_POST['data'])){
 			$res = json_decode(stripcslashes($_POST['data']),true);
 			$submit = $res['submit'];
-			$ajax_result = new AjaxResult();
+			$response = new Response();
 
 			switch ($submit){
 				case "get_folder" : {
     				$path = $res['path'];
     				$path = str_replace('/..', '', $path);
     				$path = str_replace('//', '/', $path);
-					if(!strncmp($path, self::ROOT, strlen(self::ROOT))){
+					if(!strncmp($path, self::STORAGE_PATH, strlen(self::STORAGE_PATH))){
 						// NADA
 					}else{
-						$path = self::ROOT;
+						$path = self::STORAGE_PATH;
 					}
     				$folders = FileSystemIO::get_folders_in_dir($path."/*");
     				$bg_images = null;
@@ -58,7 +54,7 @@ class ActionGround extends Controller{
 					$this->assign('folders', $folders);
 					$this->assign('bg_images', $bg_images);
 					$this->assign('other_images', $other_images);
-					$ajax_result->body .= $this->fetch_view('element.folder.tpl');
+					$response->body .= $this->fetch_view('element.folder.tpl');
 					break;
 				}
     			case "get_parent_folder" : {
@@ -66,11 +62,11 @@ class ActionGround extends Controller{
     				$path = $res['path'];
 					$path = substr($path, 0, strrpos($path, '/'));
 					$path = str_replace('/..', '', $path);
-					//if path start with self::ROOT
-					if(!strncmp($path, self::ROOT, strlen(self::ROOT))){
+					//if path start with self::STORAGE_PATH
+					if(!strncmp($path, self::STORAGE_PATH, strlen(self::STORAGE_PATH))){
 						// NADA
 					}else{
-						$path = self::ROOT;
+						$path = self::STORAGE_PATH;
 					}
     				$folders = FileSystemIO::get_folders_in_dir($path."/*");
     				$bg_images = null;
@@ -85,13 +81,12 @@ class ActionGround extends Controller{
 					$this->assign('folders', $folders);
 					$this->assign('bg_images', $bg_images);
 					$this->assign('other_images', $other_images);
-					$ajax_result->body .= $this->fetch_view('element.folder.tpl');
+					$response->body .= $this->fetch_view('element.folder.tpl');
 					break;
 				}
 			}
-			echo $ajax_result->to_json();
+			echo $response->to_json();
 			return;
 		}
 	}
 }
-?>

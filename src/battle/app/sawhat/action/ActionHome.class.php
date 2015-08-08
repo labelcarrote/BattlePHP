@@ -1,13 +1,17 @@
 <?php
+use BattlePHP\Core\Controller;
+use BattlePHP\Core\Auth\AuthManager;
+use BattlePHP\API\Response;
+use BattlePHP\Storage\Uploader;
+use BattlePHP\Core\Request;
+use BattlePHP\Imaging\ImageHelper;
+
 require_once 'app/sawhat/config/config_sawhat.php';
 require_once 'app/sawhat/model/Card.class.php';
 require_once 'app/sawhat/model/CardStore.class.php';
 require_once 'app/sawhat/model/ColorScheme.class.php';
 require_once 'app/sawhat/model/NavigationHelper.class.php';
 require_once 'app/sawhat/model/SearchHelper.class.php';
-require_once 'core/storage/Uploader.class.php';
-require_once 'core/auth/AuthManager.class.php';
-require_once 'core/model/AjaxResult.class.php';
 
 // SAWHAT main controller
 class ActionHome extends Controller{
@@ -77,9 +81,10 @@ class ActionHome extends Controller{
 		
 		$fake_cards = array('all_cards','starred');
 		
-		$params = Request::get_params("@card_name/@action");
+		$params = Request::get_params("@card_name/@command");
 		if($params){
-			switch($params['action']){
+			//print_r($params);
+			switch($params['command']){
 				case 'edit':
 					if(!in_array($params['card_name'],$fake_cards)){
 						$ass_card = CardStore::get_card($params['card_name']);
@@ -109,7 +114,7 @@ class ActionHome extends Controller{
 					break;
 				case 'as_code':
 					if(!in_array($params['card_name'],$fake_cards)){
-						$result = new AjaxResult();
+						$result = new Response();
 						if($params['card_name'] == 'all_cards'){
 							$result->body = "";
 						}else{
@@ -127,7 +132,7 @@ class ActionHome extends Controller{
 					break;
 				case 'as_html':
 					if(!in_array($params['card_name'],$fake_cards)){
-						$result = new AjaxResult();
+						$result = new Response();
 						if($params['card_name'] == 'all_cards'){
 							$result->body = '';
 						}else{
@@ -173,10 +178,13 @@ class ActionHome extends Controller{
 					$this->display_page('section.card.starred.tpl');
 					break;
 				default:
-					// TEMP FIX for wrong get_params() behavior
-					$card_name = (isset($_GET['controller']) || (array_key_exists('controller',$_GET) && $_GET['controller'] === null)) 
+					// WIP TEMP FIX for wrong get_params() behavior
+					/*$card_name = (isset($_GET['controller']) || (array_key_exists('controller',$_GET) && $_GET['controller'] === null)) 
 						? $params['card_name'] 
 						: ConfigurationSawhat::DEFAULT_CARD_NAME;
+						echo $card_name . Request::get_current_params();*/
+					$card_name = Request::get_current_params();
+						
 					$ass_card = CardStore::get_card($card_name);
 					$this->assign('breadcrumbs',NavigationHelper::add_item($ass_card->display_name));
 					$this->assign('card',$ass_card);
@@ -186,6 +194,7 @@ class ActionHome extends Controller{
 			}
 			return;
 		}
+
 
 		$ass_card = CardStore::get_card(ConfigurationSawhat::DEFAULT_CARD_NAME);
 		if($ass_card->exists){
@@ -201,10 +210,10 @@ class ActionHome extends Controller{
 	}
 
 	// [sawhat/api] Submit a file to upload in AJAX.
-	// returns a AjaxResult encoded in json containing the body of the response,
+	// returns a Response encoded in json containing the body of the response,
 	// and the errors if any error occured
 	public function api(){
-		$result = new AjaxResult();
+		$result = new Response();
 		// POST
 		if(isset($_POST['submit'])) {
 			$submit = $_POST['submit'];
@@ -257,4 +266,3 @@ class ActionHome extends Controller{
 	    return ($http_code != '200' && $http_code != '301' && $http_code != '302' );
 	}
 }
-?>

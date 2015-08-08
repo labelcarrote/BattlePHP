@@ -1,4 +1,5 @@
 <?php
+use BattlePHP\Core\Viewer;
 class CardElement{
 	public $html = '';
 	public $cards;
@@ -88,13 +89,11 @@ class CardElement{
 		// Local File / Image
 		elseif(preg_match('/^\@([\S]+)$/',$html,$matches)){
 			$file_root = Request::get_root_url().CardStore::get_folder().$this->card_name.'/';
-			if(preg_match('/^\@.+\.(?:png|jpg|jpe?g|gif)?$/',$html)) 
-				$html = '<img src="'.$file_root.$matches[1].'" alt="image" />';
-			else
-				$html = '<a href="'.$file_root.$matches[1].'">'.$matches[1].'</a>';
+			$html = (preg_match('/^\@.+\.(?:png|jpg|jpe?g|gif)?$/',$html))
+				? '<img src="'.$file_root.$matches[1].'" alt="image" />'
+				: '<a href="'.$file_root.$matches[1].'">'.$matches[1].'</a>';
 		}
 		
 		return array('html_code' => $html, 'multiple_line' => $multiple_line, 'closure_tag' => $closure_tag, 'coding_language' => '');
 	}
 }
-?>

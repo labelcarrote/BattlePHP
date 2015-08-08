@@ -1,8 +1,11 @@
 <?php
-require_once 'core/reflection/ReflectionHelper.class.php';
+use BattlePHP\Core\Controller;
+use BattlePHP\Core\Router;
+use BattlePHP\Core\Request;
+use BattlePHP\Reflection\ReflectionHelper;
 
 class ActionMirror extends Controller{
-
+	
 	public function index(){
 		$app_folder = "app";
 		$app_name = Request::isset_or($_GET["app"],"mirror");
@@ -18,4 +21,3 @@ class ActionMirror extends Controller{
 		$this->display_view('index.tpl');
 	}
 }
-?>

@@ -1,4 +1,6 @@
 <?php
+use BattlePHP\Core\Request;
+
 class NavigationHelper{
 	const MAX_ITEM = 5;
 	const BREADCRUMBS_SESSION_VAR = 'NavigationHelper';

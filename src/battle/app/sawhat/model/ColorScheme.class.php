@@ -1,4 +1,8 @@
 <?php
+use BattlePHP\Core\Request;
+use BattlePHP\Core\Viewer;
+use BattlePHP\Storage\FileSystemIO;
+
 class ColorScheme{
 	const FILE_PATH = 'public/css/color_scheme/';
 	public $name;
@@ -17,7 +21,6 @@ class ColorScheme{
 			}
 		}
 		$this->name = $color_scheme_name;
-		
 		$css_path = Request::get_application_path().self::FILE_PATH.$this->name.'.css';
 		if(is_file($css_path)){
 			$this->css_path = $css_path;
@@ -49,4 +52,3 @@ class ColorScheme{
 		return $color_schemes;
 	}
 }
-?>

@@ -1,6 +1,6 @@
 <?php
+use BattlePHP\Storage\FileSystemIO;
 require_once 'app/sawhat/model/Card.class.php';
-require_once 'core/storage/FileSystemIO.class.php';
 
 class CardStore{
 	const DIR = "storage/";
@@ -103,4 +103,3 @@ class CardStore{
 		return $card;
 	}
 }
-?>

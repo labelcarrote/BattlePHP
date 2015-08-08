@@ -1,0 +1,33 @@
+{
+    "name": "labelcarrote/battlephp",
+    "description": "PHP framework by examples",
+    "require": {
+        "smarty/smarty": "3.1.21",
+        "ezyang/htmlpurifier": "4.6.0",
+        "hautelook/phpass": "dev-master",
+        "phpmailer/phpmailer": "dev-master"
+    },
+    "authors": [
+        {
+            "name": "labelcarrote",
+            "email": "labelcarrote@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "": "",
+            "BattlePHP\\Core\\": ["core/"],
+            "BattlePHP\\Core\\Auth\\": ["core/auth","core/auth/datamodel","core/auth/db"],
+            "BattlePHP\\Api\\" : "core/api",
+            "BattlePHP\\String\\" : "core/string",
+            "BattlePHP\\Mail\\" : "core/mail",
+            "BattlePHP\\Event\\" : ["core/event","core/event/db"],
+            "BattlePHP\\Storage\\" : "core/storage",
+            "BattlePHP\\Imaging\\" : "core/imaging",
+            "BattlePHP\\Model\\" : "core/model",
+            "BattlePHP\\Reflection\\" : "core/reflection",
+            "BattlePHP\\View\\" : "core/view"
+        },
+        "files": [ "core/i18n/Localization.php","lib/parsedown-JonPotiron/Parsedown.php" ]
+    }
+}

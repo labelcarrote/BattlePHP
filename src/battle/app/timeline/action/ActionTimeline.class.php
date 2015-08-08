@@ -1,6 +1,8 @@
 <?php
+// WIP
+use BattlePHP\Storage\FileSystemIO;
 
-require_once 'core/storage/FileSystemIO.class.php';
+//require_once 'core/storage/FileSystemIO.class.php';
 require_once 'core/model/AjaxResult.class.php';
 require_once 'core/event/DomainEventSpecification.class.php';
 require_once 'app/timeline/model/EventStore.class.php';
