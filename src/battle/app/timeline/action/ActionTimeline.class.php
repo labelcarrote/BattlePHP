@@ -1,10 +1,15 @@
 <?php
 // WIP
+use BattlePHP\Core\Controller;
 use BattlePHP\Storage\FileSystemIO;
+use BattlePHP\API\Response;		
+use BattlePHP\Event\DomainEventSpecification;
+use BattlePHP\Event\DomainEventRepository;
+use BattlePHP\Core\Request;
 
 //require_once 'core/storage/FileSystemIO.class.php';
-require_once 'core/model/AjaxResult.class.php';
-require_once 'core/event/DomainEventSpecification.class.php';
+//require_once 'core/model/AjaxResult.class.php';
+//require_once 'core/event/DomainEventSpecification.class.php';
 require_once 'app/timeline/model/EventStore.class.php';
 require_once 'app/timeline/model/EventViewFactory.class.php';
 require_once 'app/timeline/model/TextWatcher.class.php';
@@ -84,7 +89,7 @@ class ActionTimeline extends Controller{
 	// CigaretteSmoked {"date":{"date":"2014-11-27 17:45:52.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"excuse":"bidon"} 
 	// Fap
 	public function api(){
-		$ajax_result = new AjaxResult();
+		$response = new Response();
 
 		// POST
 		if(isset($_POST['data'])){
@@ -107,14 +112,14 @@ class ActionTimeline extends Controller{
 			$service_method = Request::isset_or($_GET['m'],null);
 			switch ($service_method){
 				case 'get_events' :
-					$ajax_result = new AjaxResult();
+					$response = new Response();
 					$battle_id = Request::isset_or($_GET['battle_id'],null);
-					$ajax_result->body = BattleManager::get_battle($battle_id,AuthManager::get_current_user_id());
+					$response->body = BattleManager::get_battle($battle_id,AuthManager::get_current_user_id());
 				default: break;
 			}
 		}
 
-		echo $ajax_result->to_json();
+		echo $response->to_json();
 		return;
 	}
 

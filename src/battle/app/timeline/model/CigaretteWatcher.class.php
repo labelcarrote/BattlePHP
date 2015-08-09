@@ -1,7 +1,11 @@
 <?php
-require_once 'core/model/ValueObject.class.php';
-require_once 'core/event/DomainEvent.class.php';
-require_once 'core/event/DomainEventRepository.class.php';
+use BattlePHP\Model\Entity;
+use BattlePHP\Event\DomainEvent;
+use BattlePHP\Event\DomainEventSpecification;
+use BattlePHP\Event\DomainEventRepository;
+//require_once 'core/event/DomainEvent.class.php';
+//require_once 'core/event/DomainEventRepository.class.php';
+//require_once 'core/model/ValueObject.class.php';
 require_once 'app/timeline/config/config.php';
 
 class CigaretteEventsSpecification extends DomainEventSpecification{
@@ -19,7 +23,7 @@ class CigaretteEventsSpecification extends DomainEventSpecification{
 * CLASS CigaretteWatcher (& Form)
 *
 *********************************************************************/
-class CigaretteWatcher extends ValueObject{
+class CigaretteWatcher extends Entity{
 	
 	const ALL_CIGARETTE_EVENT_NAMES = "CigaretteSmoked";
 
