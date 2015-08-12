@@ -16,7 +16,7 @@
     "autoload": {
         "psr-4": {
             "": "",
-            "BattlePHP\\Core\\": ["core/"],
+            "BattlePHP\\Core\\": ["core/","core/i18n"],
             "BattlePHP\\Core\\Auth\\": ["core/auth","core/auth/datamodel","core/auth/db"],
             "BattlePHP\\Api\\" : "core/api",
             "BattlePHP\\String\\" : "core/string",

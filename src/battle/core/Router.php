@@ -63,7 +63,6 @@ class Router{
 		//self::debug();
 
 		// 2 - execute Request
-		
 		// If no app specified, show root index.tpl
 		if(empty(Request::get_current_application())){
 			Viewer::display_root();
@@ -111,13 +110,6 @@ class Router{
 				);
 			}
 		}
-
-		//OLD
-		/*self::go_to_action(
-			Request::get_current_controller(),
-			Request::get_current_action(),
-			Request::get_current_application()
-		);*/
 	}
 
 	/**
@@ -147,6 +139,9 @@ class Router{
 		return true;
 	}
 
+	/**
+	 * Loads and runs default action of default controller and current application (if no controller or application given), return false if not found
+	 */
 	public static function go_to_default_action($controller = null,$application = null,$errors = null){
 		if($controller === null)
 			$controller = self::DEFAULT_CONTROLLER;
@@ -178,10 +173,12 @@ class Router{
 		return true;
 	}
 
+	/**
+	 * Display default view of current controller and current application, return false if not found
+	 */
 	public static function go_to_default_view($errors = null){
 		$tpl_folder = "app/".Request::get_current_application()."/view/";
 		$tpl_name = "section.".Request::get_current_controller().".tpl";
-		echo "$tpl_name";
 		$tpl_path = $tpl_folder.$tpl_name;
 		if(!file_exists($tpl_path)){
 			$tpl_found = false;
@@ -214,7 +211,9 @@ class Router{
 		return $all_apps;
 	}
 
-	// TEMP
+	/**
+	* Debug 
+	*/
 	public static function debug(){
 		$debug = "";
 		if(defined("Configuration::MONO_APP") && Configuration::MONO_APP !== ""){
