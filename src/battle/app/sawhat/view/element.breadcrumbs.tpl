@@ -1,7 +1,14 @@
+{************************************************
+
+ Bread Crumbs Element
+ 
+ in :
+ - $breadcrumbs
+
+************************************************}
 {if isset($breadcrumbs)}
 	<div class="breadcrumbs">
-		<a
-			href="{$batl_current_app_virtual_url}"
+		<a href="{$batl_current_app_virtual_url}"
 			{if $breadcrumbs['position'] == 0}
 				class="current"
 				{if isset($card)}style="color:{$card->color};"{/if}
@@ -11,8 +18,7 @@
 		{if count($breadcrumbs['items']) > 0}
 			<span class="fa fa-angle-right"></span>&nbsp;...&nbsp;<span class="fa fa-angle-right"></span>
 			{foreach from=$breadcrumbs['items'] item=breadcrumbs_item}
-				<a
-					href="{$breadcrumbs_item['url']}"
+				<a href="{$breadcrumbs_item['url']}"
 					{if $breadcrumbs_item@iteration == $breadcrumbs['position']}
 						class="current"
 						{if isset($card)}style="color:{$card->color};"{/if}

@@ -1,8 +1,13 @@
 <?php
+/**
+ * SearchHelper
+ *
+ * @author jonpotiron, touchypunchy
+ *
+ */
 class SearchHelper{
+	
 	const MAX_ITEM = 5;
-	const BREADCRUMBS_SESSION_VAR = 'NavigationHelper';
-	const DEFAULT_NAME = 'breadcrumbs';
 
 	/* 
 	 * Cleans keywords before search request

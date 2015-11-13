@@ -1,7 +1,13 @@
 <?php
 use BattlePHP\Core\Request;
-
+/**
+ * NavigationHelper
+ *
+ * @author jonpotiron, touchypunchy
+ *
+ */
 class NavigationHelper{
+	
 	const MAX_ITEM = 5;
 	const BREADCRUMBS_SESSION_VAR = 'NavigationHelper';
 	const DEFAULT_NAME = 'breadcrumbs';

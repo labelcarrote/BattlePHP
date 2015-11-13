@@ -1,8 +1,14 @@
 <?php
 use BattlePHP\Storage\FileSystemIO;
 require_once 'app/sawhat/model/Card.class.php';
-
+/**
+ * CardStore
+ *
+ * @author jonpotiron, touchypunchy
+ *
+ */
 class CardStore{
+	
 	const DIR = "storage/";
 	const EXT = ".txt";
 	const MAX_RECURSIVE_LEVEL = 2;
@@ -12,14 +18,15 @@ class CardStore{
 	}
 
 	public static function exist($card_name){
-		$folder = self::get_folder()."$card_name/";
-		$filename = $folder.$card_name.".txt";
-		return file_exists($filename);
+		if(empty($card_name))
+			return false;
+		
+		return file_exists(self::get_folder()."$card_name/".$card_name.self::EXT);
 	}
 
 	public static function get_card($card_name, $recursive_level = 0){
 		$folder = self::get_folder()."$card_name/";
-		$filename = $folder.$card_name.".txt";
+		$filename = $folder.$card_name.self::EXT;
 		$lines = (!file_exists($filename)) ? array() : file($filename);
 		$card = new Card($card_name,$lines,$recursive_level);
 		$card->files = FileSystemIO::get_files_in_dir($folder.'{*.jpg,*.jpeg,*.JPG,*.png,*.gif,*.zip}');
@@ -42,7 +49,7 @@ class CardStore{
 			elseif(!empty($filter)) {
 				$keywords = SearchHelper::explode_keywords($filter);
 				$add_result = true;
-				$filename = self::get_folder().$basename.'/'.$basename.'.txt';
+				$filename = self::get_folder().$basename.'/'.$basename.self::EXT;
 				foreach($keywords['in'] as $keyword){
 					if(!SearchHelper::keyword_in_file($keyword,$filename)){
 						$add_result = false;
@@ -73,10 +80,12 @@ class CardStore{
 		$filenamenoext = self::get_folder()."".$card_name."/".$card_name;	
 		$filename = self::get_folder()."".$card_name."/".$card_name.self::EXT;
 		$is_private_as_string = ($is_private) ? "is_private\r\n" : "";
+
+		// if card exists, stores current card
 		if(file_exists($filename)){
-			// UPDATE : save current first !
 			copy($filename,$filenamenoext."_".$last_edit.self::EXT."old");
 		}
+
 		if(!is_dir(dirname($filename)))
 			mkdir(dirname($filename));
 

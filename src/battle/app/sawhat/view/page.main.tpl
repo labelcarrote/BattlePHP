@@ -20,7 +20,7 @@
 		<script type="text/javascript" src="{$batl_root_url}lib/prism/prism.js"></script>
 	</head>
 	<body>
-		<div id="super_wrapper"><!--  TODO : FIX Scrolling -->
+		<div id="super_wrapper">
 			{include file=$content}
 		</div>
 		<script type="text/javascript" src="{$batl_current_app_url}public/js/sawhat.js"></script>

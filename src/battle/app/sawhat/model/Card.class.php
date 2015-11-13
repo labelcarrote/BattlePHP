@@ -2,10 +2,15 @@
 use BattlePHP\Core\Auth\AuthManager;
 use BattlePHP\Imaging\ImageHelper;
 use BattlePHP\Core\Viewer;
-
 require_once 'app/sawhat/model/CardElement.class.php';
-
+/**
+ * Card
+ *
+ * @author jonpotiron, touchypunchy
+ *
+ */
 class Card{
+	
 	const DEFAULT_COLOR = '#f90';
 
 	public $is_private = false;

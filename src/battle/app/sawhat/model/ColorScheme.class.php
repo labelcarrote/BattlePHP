@@ -2,8 +2,14 @@
 use BattlePHP\Core\Request;
 use BattlePHP\Core\Viewer;
 use BattlePHP\Storage\FileSystemIO;
-
+/**
+ * ColorScheme
+ *
+ * @author jonpotiron, touchypunchy
+ *
+ */
 class ColorScheme{
+	
 	const FILE_PATH = 'public/css/color_scheme/';
 	public $name;
 	public $is_default = false;

@@ -1,16 +1,10 @@
 bugs
-lastedit: 20140924_1709
-color: #ff9900
+lastedit: 20151103_0111
+color: #f90
 
-Y'a 1 br en dessous de moi.
+Testin' API json:
+- save_card : OK
+- attach / upload file !!!!
 
-&lt;br&gt;
-ss
-
-banane
-
-#dev__web
-#dev_nodejs
-#dev__desktop
-#dev__processing
-#dev__game
+&amp;egrave;&amp;egrave;&amp;egrave;&amp;egrave;&amp;egrave;&amp;egrave;
+______

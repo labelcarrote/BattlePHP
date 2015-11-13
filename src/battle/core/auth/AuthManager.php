@@ -1,5 +1,6 @@
 <?php
 namespace BattlePHP\Core\Auth;
+use \Configuration;
 use BattlePHP\Core\Request;
 use Hautelook\Phpass\PasswordHash;
 /**
@@ -16,7 +17,7 @@ class AuthManager{
 	const AuthTypeUser = 1;
 	const AuthTypeFB = 2;
 
-    public static function authenticate($type, $identity){
+    public static function authenticate($type, Identity $identity){
         // if facebook authenticated, then lookfor corresponding user and keep its authentified state in session
         // ...
         // otherwise find dbuser corresponding to given identity login or mail
@@ -191,6 +192,14 @@ class AuthManager{
 		return UserDB::getInstance()->validate_user_account($confirmation_token);
 	}
 	
+	// ---- Helpers ----
+
+	public static function hash_password($password){
+		// Initialize the hasher without portable hashes (this is more secure)
+		$hasher = new PasswordHash(8, false);
+		return $hasher->HashPassword($password);
+	}
+	
 	// ---- FACEBOOK ----
 
 	/**
@@ -203,21 +212,5 @@ class AuthManager{
 
 	public static function get_loginout_url($facebook_manager,$user_profile){
 		return $facebook_manager->get_url_loginout($user_profile);
-	}
-	
-	// ---- Helpers ----
-	
-	public static function get_identity_from_post(){
-		$identity = new Identity();
-		$identity->login = Request::isset_or($_POST['login'],"");
-		$identity->mail = Request::isset_or($_POST['mail'],"");
-		$identity->password = Request::isset_or($_POST['password'],"");
-		return $identity;
-	}
-
-	public static function hash_password($password){
-		// Initialize the hasher without portable hashes (this is more secure)
-		$hasher = new PasswordHash(8, false);
-		return $hasher->HashPassword($password);
 	}
 }

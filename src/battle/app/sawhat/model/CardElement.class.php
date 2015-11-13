@@ -1,6 +1,15 @@
 <?php
 use BattlePHP\Core\Viewer;
+use BattlePHP\Core\Request;
+use BattlePHP\Core\Auth\AuthManager;
+/**
+ * CardElement
+ *
+ * @author jonpotiron, touchypunchy
+ *
+ */
 class CardElement{
+	
 	public $html = '';
 	public $cards;
 	public $multiple_line = false;

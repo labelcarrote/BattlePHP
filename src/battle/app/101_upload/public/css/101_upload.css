@@ -1,0 +1,61 @@
+/* ---- OOCSS - Grid.css --- */
+.line,.lastUnit{overflow:hidden; *overflow:visible;*zoom:1;}
+.unit{float:left;}
+.unitRight{float:right;}
+.size1of1{float:none;}
+.size1of2{width:50%;}
+.size1of3{width:33.33333%;}
+.size2of3{width:66.66666%;}
+.size1of4{width:25%;}
+.size3of4{width:75%;}
+.size1of5{width:20%;}
+.size2of5{width:40%;}
+.size3of5{width:60%;}
+.size4of5{width:80%;}
+.lastUnit{float:none;width:auto;_position:relative;_left:-3px;_margin-right:-3px;}
+
+/* apply a natural box layout model to all elements */
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
+a{ text-decoration: none; }
+a.underline{ text-decoration: underline; }
+img{ max-width: 100%; }
+h1, .h1{ font-family: 'Montserrat', sans-serif; font-size:2em; line-height: 1.2em; font-weight:bold; font-style: normal; margin: 0;}
+h2, .h2{ font-family: 'Montserrat', sans-serif; font-size:2em; line-height: 1.2em; font-weight:bold; font-style: normal; margin: 0;}
+h3, .h3{ font-family: 'Montserrat', sans-serif; font-size:1.5em; font-weight:bold; font-style: normal; margin: 0;}
+h4, .h4{ font-family: 'Montserrat', sans-serif; font-size:1.25em; font-weight:normal; font-style: normal; margin: 0;}
+h5, .h5{ font-family: 'Montserrat', sans-serif; font-size:.875em; line-height: 1.5em; font-weight:normal; font-style: normal; margin: 0;}
+h6, .h6{ font-family: 'Montserrat', sans-serif; font-size: .75em; line-height: 1.5em; font-weight:normal;  font-style: normal; margin: 0;}
+header{ margin: 12px 0; }
+nav{ margin: 12px 0; }
+
+.hidden{ display: none !important; }
+
+.content{ 
+	margin: auto; 
+	max-width: 960px;
+	padding: 12px;
+}
+
+form{
+	background-color: pink;
+}
+
+img{
+	max-width: 100%;
+	height: auto;
+}
+
+/* ---- BS fixes ---- */
+
+.form-group{
+	margin: 0 !important;
+}
+
+/* ---- Jasny fixes ---- */
+.fileinput {
+    margin-bottom: 0;
+    display: block;
+}

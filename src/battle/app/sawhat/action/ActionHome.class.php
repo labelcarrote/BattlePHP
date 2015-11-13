@@ -1,19 +1,36 @@
 <?php
 use BattlePHP\Core\Controller;
 use BattlePHP\Core\Auth\AuthManager;
-use BattlePHP\API\Response;
+use BattlePHP\Core\Auth\Identity;
+use BattlePHP\Api\Response;
 use BattlePHP\Storage\Uploader;
 use BattlePHP\Core\Request;
 use BattlePHP\Imaging\ImageHelper;
-
 require_once 'app/sawhat/config/config_sawhat.php';
 require_once 'app/sawhat/model/Card.class.php';
 require_once 'app/sawhat/model/CardStore.class.php';
 require_once 'app/sawhat/model/ColorScheme.class.php';
 require_once 'app/sawhat/model/NavigationHelper.class.php';
 require_once 'app/sawhat/model/SearchHelper.class.php';
-
-// SAWHAT main controller
+/**
+ * ActionHome
+ *
+ * SAWHAT main controller
+ * 
+ * - index()
+ *   - [POST] save (card)
+ *   - [POST] login
+ *   - [POST] logout
+ *   - [POST] search
+ *   - [GET] "@card_name/@command" commands=[edit,as_code,as_html,search???]
+ *   - [GET] "@card_name" card_name=[all_cards,starred]
+ *
+ * - api()
+ *   - [POST] addfile
+ *
+ * @author jonpotiron, touchypunchy
+ *
+ */
 class ActionHome extends Controller{
 
 	// Display the home page containing the home card if it exists, 
@@ -34,8 +51,9 @@ class ActionHome extends Controller{
 		if(isset($_POST['submit'])){
 			$submit_action = $_POST['submit'];
 			switch ($submit_action) {
+				// TODO move to api !
 				case 'save' : {
-					$card_name = Request::isset_or($_POST['name'], ConfigurationSawhat::DEFAULT_CARD_NAME);
+					$card_name = Request::isset_or($_POST['card_name'], ConfigurationSawhat::DEFAULT_CARD_NAME);
 					$card_color = Request::isset_or($_POST['color'], Card::DEFAULT_COLOR);
 					$card_lines = Request::isset_or($_POST['card'], "");
 					$is_private = isset($_POST['is_private']);
@@ -209,35 +227,67 @@ class ActionHome extends Controller{
 		$this->display_page('section.card.tpl');
 	}
 
-	// [sawhat/api] Submit a file to upload in AJAX.
-	// returns a Response encoded in json containing the body of the response,
-	// and the errors if any error occured
+	// WIP
+	// [/sawhat/api]
+	// Treats any POST command in JSON {data:{submit: ...,...} and respond in JSON {errors:"";body:""})
+	// - addfile -> add_file
 	public function api(){
-		$result = new Response();
+		echo "YO";
+		$response = new Response();
 		// POST
 		if(isset($_POST['submit'])) {
-			$submit = $_POST['submit'];
-			if($submit == "addfile"){
-				$card_name = Request::isset_or($_POST['name'], "");
-				if($card_name != "" && CardStore::exist($card_name)){
-					$extensions = array(".jpg",".png",".jpeg",".JPG",".gif",".zip");
-					try{
-						$file = Uploader::process_form_file("file",CardStore::get_folder().$card_name,2000000,$extensions);
-					}catch(Exception $e){ 
-						$result->errors = "DON'T DO THAT"; 
-						echo $result->to_json(); 
-						return; 
+			switch ($_POST['submit']) {
+				case 'addfile':
+					$card_name = Request::isset_or($_POST['name'], "");
+					if(CardStore::exist($card_name)){
+						$extensions = [".jpg",".png",".jpeg",".JPG",".gif",".zip"];
+						try{
+							$file = Uploader::process_form_file("file",CardStore::get_folder().$card_name,2000000,$extensions);
+							// returns files list
+							$this->assign("card", CardStore::get_card($card_name));
+							$response->body = $this->fetch_view("element.file_set.tpl");
+						}catch(Exception $e){ 
+							$response->errors = "DON'T DO THAT";
+						}
 					}
-
-					// returns files
+					break;
+				case 'save_card' :
+					$card_name = Request::isset_or($_POST['name'], ConfigurationSawhat::DEFAULT_CARD_NAME);
+					$card_color = Request::isset_or($_POST['color'], Card::DEFAULT_COLOR);
+					$card_lines = Request::isset_or($_POST['card'], "");
+					$is_private = isset($_POST['is_private']);
 					$card = CardStore::get_card($card_name);
-					$this->assign("card", $card);
-					$body = $this->fetch_view("element.file_set.tpl");
-					$result->body = $body;
-				}
+					if($card === null || !$card->is_private || ($card->is_private && $batl_is_logged)){
+						$response->body = [
+							'is_saved' => CardStore::upsert($card_name,$card_lines,$card_color,$is_private),
+							'return_url' => Request::get_application_virtual_root().$card_name
+						];
+					}else{
+						$response->errors = "DON'T DO THAT";
+					}
+					//OLD
+					/*$card_name = Request::isset_or($_POST['name'], ConfigurationSawhat::DEFAULT_CARD_NAME);
+					$card_color = Request::isset_or($_POST['color'], Card::DEFAULT_COLOR);
+					$card_lines = Request::isset_or($_POST['card'], "");
+					$is_private = isset($_POST['is_private']);
+					$card = CardStore::get_card($card_name);
+
+					// do nothing if card is private and user is not authentified
+					if($card === null || !$card->is_private || ($card->is_private && $batl_is_logged)){
+						$json = array(
+							'is_saved' => CardStore::upsert($card_name,$card_lines,$card_color,$is_private),
+							'return_url' => Request::get_application_virtual_root().$card_name
+						);
+						echo json_encode($json);
+						exit(0);
+					}*/
+					break;
+				default:
+					break;
 			}
+			
 		}
-		echo $result->to_json();
+		echo $response->to_json();
 	}
 
 	// ---- Helpers ----

@@ -126,4 +126,87 @@ Create a new website / application
     	</body>  
     </html>
     ```
+
+BattlePHP - Core
+================
+
+The Core of BattlePHP essentially does a routing from a REST-friendly URL to a corresponding action or page.
+This routing occurs from the main index.php, where we simply autoload the dependencies of the Core and run the Router.
+
+The Router run() method then checks the request/query (after its .htaccess processing), and using just a few folder and naming conventions, creates the corresponding controller and calls the right action.
+
+Actions are the public methods of any controller classes. They can be used to return a page in html or send some json data. 
+So as a developper, adding a new action "hello" to an existing app "test" accessible at the URL "http://[]/test/home/hello" goes like this :
+
+- Put the content of the 'src/battle/' folder in your root web folder, let's say in your Apache 'www/' folder.
+- Go to folder : app/Test
+- In the default controller : app/test/action/ActionHome.class.php
+    ```php
+    <?php
+  use BattlePHP\Core\Controller;
+
+  class ActionHome extends Controller{
+    public function index(){
+      $this->display_view('index.tpl');
+    }  
+    // This method ! Add this method :
+    public function hello(){
+      $person = "georges";
+      $this->assign("famous_people",$person);
+      $this->display_view('section.hello.tpl');
+    }
+  }
+    ```
+
+- Add a view to your app : app/test/view/section.hello.tpl
+    
+    ```html
+    <!doctype html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="description" content="An empty Site." />
+      <title>Hi!</title>
+    </head>
+    <body>
+      <p>Hello, I'm {$famous_people}.</p>
+    </body>
+  </html>
+    ```
+- Visit the url, enjoy :
+http://[battle_folder_path]/test/home/hello
+
+If you try to call a method that doesn't exist yet like "welcome" at the URL http://[battle_folder_path]/test/home/welcome
+the Router will try to find an "index()"" method and will call it, since the welcome() method couldn't be found.
+
+Controllers uses the Viewer class internaly for templating : retrieving / displaying view (.tpl), assigning value to view etc). 
+It provides a facade to the Viewer class, so you can just deal with the Controller's methods and forget the Viewer's.
+
+Hierarchy
+---------
+
+Router.php
+Request.php
+Controller.php
+Viewer.php : extends Smarty
+Logger.php
+
+Template Reserved Variables
+---------------------------
+
+BattlePHP assigns automatically these smarty variable:
+
+by Controller:  
+- $batl_is_logged : if current user is logged in
+- $batl_is_admin : if current user is an admin
+- $batl_current_user : current User
+
+by Viewer:  
+- $batl_root_url: : the url to access the root folder of the framework : the app/ folder. 
+- $batl_current_app_virtual_url
+- $batl_current_app_url
+- $batl_full_url
+
+In your smarty templates you can use these predefined variables using the usual smarty syntax:  
+{$batl_is_logged})
     

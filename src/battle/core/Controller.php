@@ -48,8 +48,11 @@ class Controller{
 	/**
 	 * Assign value to view/template variable
 	 */
-	protected function assign($var,$value){
-		$this->view_manager->assign($var,$value);
+	protected function assign($var,$value = null){
+		if($value === null)
+			$this->view_manager->assign($var);
+		else	
+			$this->view_manager->assign($var,$value);
 	}
 
 	// --------------------------

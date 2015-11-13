@@ -68,6 +68,7 @@ class Router{
 			Viewer::display_root();
 			return;
 		}
+		
 		$is_action_executed = self::go_to_action(
 			Request::get_current_controller(),
 			Request::get_current_action(),
@@ -120,6 +121,8 @@ class Router{
 		$controller_class = 'Action'.ucfirst($controller);
 		$controller_folder = "app/$application/action/";
 		$controller_class_file_path = $controller_folder.$controller_class.'.class.php';
+
+		//echo "$controller_class_file_path";
 
 		// Loads the file
 		if(file_exists($controller_class_file_path))
@@ -228,5 +231,11 @@ class Router{
 		$debug .= "[action] = ".Request::get_current_action()."<br>";
 		$debug .= "[param] = ".Request::get_current_params()."<br>";
 		echo $debug;
+	}
+
+	public static function debug_routing_result(){
+		$debug = "";
+		$debug .= "[param] = ".Request::get_current_params()."<br>";
+		echo $debug;	
 	}
 }

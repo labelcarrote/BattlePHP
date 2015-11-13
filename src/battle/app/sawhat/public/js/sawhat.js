@@ -2,6 +2,17 @@
 // -----------------------
 // Sawhat.js
 // -----------------------
+
+// stop event bubbling
+function stop_bubbling(e){
+	if (!e) var e = window.event;
+	e.cancelBubble = true;
+	if (e.stopPropagation) 
+		e.stopPropagation();
+	e.preventDefault();
+}
+
+// Initialize Ace Editor
 if(typeof ace !== 'undefined'){
 	var editor = ace.edit("editor");
 	editor.setShowPrintMargin(false);
@@ -25,7 +36,7 @@ $(document).ready(function(){
 	/* @todo
 	 * set as prototype
 	 */
-	$('input[name="color"]').each(function(){
+	$('input[name="card_color"]').each(function(){
 		var related_color_picker = $(this).next('.color_picker');
 		$(this).on({
 			'focus' : function(){
@@ -43,7 +54,7 @@ $(document).ready(function(){
 		});
 	});
 	$('.color_picker').each(function(){
-		var related_input = $(this).prev('input[name="color"]');
+		var related_input = $(this).prev('input[name="card_color"]');
 		var self = $(this);
 		$(this).find('.color_picker_item').each(function(){
 			var color = $(this).attr('data-color');
@@ -83,7 +94,11 @@ $(document).ready(function(){
 })
 
 $(window).load(function(){
+
+	// ------- UPLOAD ---------
+
 	function send_formdatawithupload(formData){
+		console.log(formData);
 		var xhr = new XMLHttpRequest();
 		var submit_url = $('#card_edit_form').attr("action") + "api";
 		xhr.open("POST",submit_url,true);
@@ -114,19 +129,33 @@ $(window).load(function(){
 		xhr.send(formData);
 	}
 
-	// addfile forms (not working in wp7)
+	// upload / attach file form
 	$("#file").change(function () {
-		var data = new FormData(document.getElementById("addfileform"));
+		// Check for the various File API support.
+		if (window.File && window.FileReader && window.FileList && window.Blob) {
+		  // Great success! All the File APIs are supported.
+		} else {
+		  alert('The File APIs are not fully supported in this browser.');
+		}
+		//var data = new FormData(document.getElementById("addfileform"));
+		/*var data = new FormData($("#addfileform,.add_file_form")[0]);*/
+		var datform = $("#file");
+		var datform_data = datform[0];
+		var data = new FormData();//form);
+		var file = datform_data.files[0];
+    	data.append("file", file);
+		data.append("name", "addfile");
 		data.append("submit", "addfile");
-	 	send_formdatawithupload(data);
+	 	send_formdatawithupload(JSON.stringify(data));
 	});
 
+	// ------- CARD EDIT ---------
 
 	// Card Edit Form Submission
 	if(typeof ace !== 'undefined'){
 		var editor = ace.edit("editor");
 		editor.commands.addCommand({
-		    name: 'myCommand',
+		    name: 'save_card',
 		    bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
 		    exec: function(editor) {
 		    	save_card($("#editor_save"));
@@ -146,8 +175,13 @@ $(window).load(function(){
 		});
 	}
 	
-	$('#editor_save').click(function(e){
+	$('#editor_save, .btn_save_card').click(function(e){
 		save_card($(this));
+	});
+
+	$(document).on('click',".btn_save_card", function(e){
+		stop_bubbling(e);
+		save_card_api($(this));
 	});
 
 	function save_card(save_button){
@@ -164,8 +198,8 @@ $(window).load(function(){
 		    .appendTo('#card_edit_form');
 
 		// check format
-		var pattern = new RegExp($('input[name="color"]').attr('pattern'));
-		if(!$('input[name="color"]').val().match(pattern)){
+		var pattern = new RegExp($('input[name="card_color"]').attr('pattern'));
+		if(!$('input[name="card_color"]').val().match(pattern)){
 			editor_console.html('<span class="error">Chosen color is not a valid hexadecimal value.</span>');
 		} else {
 			// ajax post
@@ -190,7 +224,36 @@ $(window).load(function(){
 		}
 	}
 
-	// Card Edit : Set As Current
+	function save_card_api(save_button){
+		var editor_console = $("#editor_console"),
+			form = $("#card_edit_form"),
+			action_url = form.attr("action") + "api",
+			form_data = {
+				submit: "save_card", 
+				card_name : $("input[name=card_name]",form).val(),
+				card_color : $("input[name=card_color]",form).val(),
+				card_is_private : $("input[name=card_is_private]").prop('checked'),
+				card_txt: editor.getSession().getValue()
+			};
+
+		save_button.prop("disabled",true);
+		editor_console.html("Saving...");
+
+		$.post(action_url, {data: JSON.stringify(form_data)}, function(response){
+			var responseJSON = JSON.parse(response);
+			if(responseJSON.errors === "" || responseJSON.errors === null){
+				save_button.prop("disabled",false);
+				editor_console.html("Last save : " + new Date());
+				//console.log(responseJSON.body);
+			}else{
+				//console.log(responseJSON.errors);
+			}
+		});
+	}
+
+	// -------- HISTORY - NAVIGATE THROUH HISTORY TREE --------
+
+	// TODO : FIX Card Edit : Set As Current
 	$('body').on('click','.load_card_as_current',function(e){
 		//card to load 
 		var element = $(this);
@@ -214,6 +277,8 @@ $(window).load(function(){
 		window.location.href = $(this).attr("data-edit-url");
 		return false;
 	});
+
+	// --------- GET CARD (JSON) ---------
 
 	// Load Card Dynamically
 	$('body').on('click','.load_card',function(e){
@@ -245,6 +310,8 @@ $(window).load(function(){
 			element.find('span.fa').removeClass('fa-times').addClass('fa-chevron-circle-down');
 		}
 	});
+
+	// -------- GENERAL DISPLAY : FULLSCREEN VS "COLUMN" MODE -------- 
 
 	// Toggle Content Width
 	function set_width_mode(init){
@@ -280,6 +347,7 @@ $(window).load(function(){
 		set_width_mode(false);
 	});
 
+	// TODO FIX THIS!!
 	set_width_mode(true);
 
 	// CSS STYLE CHANGER //
