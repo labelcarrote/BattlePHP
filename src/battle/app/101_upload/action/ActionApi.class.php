@@ -22,16 +22,26 @@ class ActionApi extends Controller{
 			$data = json_decode($_POST['data'],false); // true = array, false = object (stdClass)
 			switch ($data->submit) { 
 				case 'upload_file':
-					$extensions = [".jpg",".png",".jpeg",".JPG",".gif",".zip"];
-					$extension = pathinfo($data->file_name,PATHINFO_EXTENSION);
-					$is_extension_allowed = in_array(strtolower($extension), $extensions);
-					if(!$is_extension_allowed){
+					$extensions = ["jpg","png","jpeg","JPG","gif","zip"];
+					$extension = strtolower(pathinfo($data->file_name,PATHINFO_EXTENSION));
+					$is_extension_allowed = in_array($extension, $extensions);
+					if($is_extension_allowed === false){
+						var_dump($extension);
 						$response->errors = "File extension not allowed.";
 					}else{
-						$new_file_name = DatFileManager::DEFAULT_FOLDER.DatFileManager::DEFAULT_FILENAME.$extension;
-            			file_put_contents($new_file_name, file_get_contents($data->file));
-						$url = Request::get_application_root().$new_file_name;
-						$response->body = "<img href='".$url."'>";
+						// TODO : move to DatFileManager
+						$new_file_name = /*"app/101_upload/"*/ // DIRTY
+							 DatFileManager::DEFAULT_FOLDER
+							. DatFileManager::DEFAULT_FILENAME
+							. "."
+							. $extension;
+            			file_put_contents("app/101_upload/".$new_file_name, file_get_contents($data->file));
+						$now = new DateTime();
+						$url = Request::get_application_root()
+							. $new_file_name
+							. "#"
+							. $now->format("His");
+						$response->body = "<img src='".$url."'>";
 					}
 					break;
 			}

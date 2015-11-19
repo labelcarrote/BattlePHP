@@ -36,7 +36,9 @@ $(window).load(function(){
 		    	var ajaxresult = JSON.parse(this.response);
 		    	if(ajaxresult.errors === null){
 		    		$(".uploadprogress p").html("Completed!");
-		    		$("#dat_file").html(ajaxresult.body);
+		    		$("#dat_file_container").html(ajaxresult.body);
+		    		console.log("YO");
+		    		console.log(ajaxresult.body);
 		    	}
 		    	else 
 		    		$(".uploadprogress p").html(ajaxresult.errors);
@@ -78,7 +80,7 @@ $(window).load(function(){
 								file_name : theFile.name
 							};
 						form_data.append("data", JSON.stringify(data));
-					 	send_formdatawithupload(data);
+					 	send_formdatawithupload(form_data);
 						// Render thumbnail.
 						/*var span = document.createElement('span');
 						span.innerHTML = ['<img class="thumb" src="', e.target.result,

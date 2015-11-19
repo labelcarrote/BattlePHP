@@ -1,3 +1,16 @@
+{************************************************
+
+ Form Upload 
+ 
+ in :
+ - $title
+ [for 'form.upload_file.tpl)]
+ - $upload_form
+ - $upload_form_errors
+ - $dat_file_url
+ - ($batl_root_url)
+
+************************************************}
 <!doctype html>
 <html>
 	<head>

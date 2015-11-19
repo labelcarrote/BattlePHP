@@ -1,9 +1,12 @@
 {************************************************
 
  Form Upload 
+
  in :
  - $upload_form
  - $upload_form_errors
+ - $dat_file_url
+ - ($batl_root_url)
 
 ************************************************}
 <form class="form-horizontal"
@@ -26,10 +29,10 @@
 				</span>
 				<!-- <button class="btn btn-primary marginleft upload_btn"
 					value="{$upload_form->submit_action_name}" title="btn.upload">btn.upload</button > -->
-				<div class="fileinput-preview" style="width: 100%;">
+				<!-- <div class="fileinput-preview" style="width: 100%;">
 					<img class="constrained" src="{$batl_root_url}{$upload_form->get_file_url()}">
 					<a href="{$batl_root_url}{$upload_form->get_file_url()}">Download File</a>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		{if isset($upload_form_errors)}
@@ -46,3 +49,6 @@
 		<p></p>
 	</div>
 </form>
+<div id="dat_file_container">
+<img class="constrained" src="{$dat_file_url}">
+</div>
