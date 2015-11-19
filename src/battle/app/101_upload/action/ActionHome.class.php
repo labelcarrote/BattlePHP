@@ -2,6 +2,7 @@
 use BattlePHP\Core\Controller;
 use BattlePHP\Core\Request;
 require_once 'app/101_upload/model/UploadFileForm.php';
+require_once 'app/101_upload/model/DatFileManager.php';
 /**
  * CLASS ActionHome (Controller)
  *
@@ -18,7 +19,8 @@ class ActionHome extends Controller{
 
 		$this->assign([
 			'title' => "101_upload",
-			'upload_form' => $upload_form
+			'upload_form' => $upload_form,
+			'dat_file_url' => DatFileManager::get_dat_file_url() 
 		]);
 		
 		$this->display_view('section.index.tpl');

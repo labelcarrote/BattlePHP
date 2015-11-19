@@ -49,50 +49,35 @@ $(window).load(function(){
 	// upload / attach file form
 	$("#dat_file").change(function (e) {
 		// Check for the various File API support.
-		if (window.File && window.FileReader && window.FileList && window.Blob) {
+		var is_file_api_supported = (window.File && window.FileReader && window.FileList && window.Blob);
+		if (is_file_api_supported){
 		  	console.log('Great success! All the File APIs are supported.');
-		  	var files = e.target.files;
-		  	// files is a FileList of File objects. List some properties.
+		  	
 			var output = [];
+		  	var files = e.target.files;
 			for (var i = 0, f; f = files[i]; i++) {
-			  output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-			              f.size, ' bytes, last modified: ',
-			              f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-			              '</li>');
-			}
-			console.log(output.join(''));
-			/*document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';*/
-			 // Loop through the FileList and render image files as thumbnails.
-			for (var i = 0, f; f = files[i]; i++) {
-				// Only process image files.
-				if (!f.type.match('image.*')) {
-					continue;
-				}
+				
+				output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+				    f.size, ' bytes, last modified: ',
+					f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+					'</li>'
+				);
 
-				var reader = new FileReader();
+				// Only process image files.
+				if (!f.type.match('image.*'))
+					continue;
 
 				// Closure to capture the file information.
+				var reader = new FileReader();
 				reader.onload = (function(theFile) {
 					return function(e) {
-						var data = new FormData();/*$('#upload_form')[0]);*//*{ data : {
-							name : "addfile", 
-							file : e.target.result, 
-							submit : "addfile"
-							}};*/ //
-						var data_upload = {
-							name : "upload_file", 
-							file : e.target.result,
-							file_name : theFile.name,
-							submit : "upload_file"
-						};
-
-						//var file = e.target.result;//datform_data.files[0];
-				    	//data.append("file", file);
-						/*data.append("name", "addfile");*/
-						/*data.append("submit", "upload_file");*/
-						data.append("data", JSON.stringify(data_upload));
-						console.log(data);
-						console.log(JSON.stringify(data));
+						var form_data = new FormData(),
+							data = {
+								submit : "upload_file", 
+								file : e.target.result,
+								file_name : theFile.name
+							};
+						form_data.append("data", JSON.stringify(data));
 					 	send_formdatawithupload(data);
 						// Render thumbnail.
 						/*var span = document.createElement('span');
@@ -101,24 +86,11 @@ $(window).load(function(){
 						document.getElementById('list').insertBefore(span, null);*/
 					};
 				})(f);
-
-				// Read in the image file as a data URL.
 				reader.readAsDataURL(f);
 			}
+			console.log(output.join(''));
 		} else {
 		  	console.log('The File APIs are not fully supported in this browser.');
-
 		}
-		//var data = new FormData(document.getElementById("addfileform"));
-		/*var data = new FormData($("#addfileform,.add_file_form")[0]);*/
-		/*var datform = $("#upload_form");
-		var datform_data = datform[0];
-		var data = new FormData(datform_data);
-		var file = datform_data.files[0];
-    	data.append("file", file);
-		data.append("name", "addfile");
-		data.append("submit", "addfile");
-	 	send_formdatawithupload(JSON.stringify(data));*/
 	});
-
 });
