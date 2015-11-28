@@ -14,6 +14,9 @@ require_once 'app/101_upload/model/DatFileManager.php';
  *
  */
 class ActionApi extends Controller{
+
+	const MAX_FILE_SIZE = 5242880; // 5Mio 
+
 	// [/api]
 	public function index(){
 		$response = new Response();
@@ -22,26 +25,19 @@ class ActionApi extends Controller{
 			$data = json_decode($_POST['data'],false); // true = array, false = object (stdClass)
 			switch ($data->submit) { 
 				case 'upload_file':
-					$extensions = ["jpg","png","jpeg","JPG","gif","zip"];
+					$extensions = ["jpg","jpeg","png","gif","zip"];
 					$extension = strtolower(pathinfo($data->file_name,PATHINFO_EXTENSION));
 					$is_extension_allowed = in_array($extension, $extensions);
-					if($is_extension_allowed === false){
-						var_dump($extension);
+					$size = strlen($data->file);
+        			if($size > self::MAX_FILE_SIZE){
+        				$response->errors = "Too big.";
+        			}
+					elseif($is_extension_allowed === false){
 						$response->errors = "File extension not allowed.";
-					}else{
-						// TODO : move to DatFileManager
-						$new_file_name = /*"app/101_upload/"*/ // DIRTY
-							 DatFileManager::DEFAULT_FOLDER
-							. DatFileManager::DEFAULT_FILENAME
-							. "."
-							. $extension;
-            			file_put_contents("app/101_upload/".$new_file_name, file_get_contents($data->file));
-						$now = new DateTime();
-						$url = Request::get_application_root()
-							. $new_file_name
-							. "#"
-							. $now->format("His");
-						$response->body = "<img src='".$url."'>";
+					}
+					else{
+						$dat_file_url = DatFileManager::store_dat_file($extension,$data->file);
+						$response->body = $dat_file_url;//"<img src='".$dat_file_url."'>";
 					}
 					break;
 			}

@@ -30,7 +30,8 @@
 	<body>
 		<div class="content">
 			<p>
-				I'm the index page from BattlePHP's <strong>{$title}</strong> example, which illustrates a typical upload file form :
+				I'm the index page from BattlePHP's <strong>{$title}</strong>, a simple upload file form example, in javascript and php.<br>
+				<strong>Usage :</strong> Click on the picture or drag-n-drop a picture on it to replace the current one with any <strong>.jpg, .png or .gif</strong> file that weighs less than <strong>&lt; {$upload_form->max_file_size_human_readable}.</strong>
 			</p>
 			{include file="form.upload_file.tpl" }
 		</div>
