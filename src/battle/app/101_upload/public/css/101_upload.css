@@ -65,6 +65,8 @@ img{
 
 /* Components */
 
+
+
 .uploadprogress{
 	position: relative;
 	width: 100%;
@@ -80,6 +82,30 @@ img{
 	position: absolute;
 	top: 0;
 	left: 12px;
+}
+
+#dat_file_container{
+	position: relative;
+	display: inline-block;
+	text-align: center;
+	max-width: 100%;
+}
+#dat_file_container > input {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+    opacity: 0;
+    font-size: 23px;
+    height: 100%;
+    width: 100%;
+    direction: ltr;
+    cursor: pointer;
+}
+.uploadprogress{
+	background-color: yellow;
+	position:absolute;
+	top: 0;
 }
 
 /* ---- BS fixes ---- */

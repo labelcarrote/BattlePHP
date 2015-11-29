@@ -89,7 +89,6 @@ $(window).load(function(){
 						 	send_formdatawithupload(form_data);
 						};
 					}
-
 				})(f);
 				reader.readAsDataURL(f);
 			}

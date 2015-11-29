@@ -123,7 +123,7 @@ class Controller{
 	/**
 	 * Displays given page
 	 */
-	protected function display_page($content_template = NULL, $page_template = NULL){
+	protected function display_page($content_template = null, $page_template = null){
 		if(!is_null($content_template))
 			$this->content_template = $content_template;
 		if(!is_null($page_template))
@@ -138,9 +138,13 @@ class Controller{
 	 * Displays given view/template (as html/xml content, and not as a whole html page).
 	 * Useful in ajax scenario !
 	 */
-	protected function display_view($view = NULL){
+	protected function display_view($view = null, $var = null){
 		if(!is_null($view))
 			$this->content_template = $view;
+
+		if($var !== null)
+			$this->assign($var);
+
 		$this->assign_errors();
 		$this->assign_auth_values();//TODO Move To authcontroller
 		$this->assign_custom_values();
