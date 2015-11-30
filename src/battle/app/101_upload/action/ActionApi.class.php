@@ -40,7 +40,7 @@ class ActionApi extends Controller{
 						$response->body = [
 							'dat_file_url' => $dat_file->url,
 							'dat_file_date_modified' => $dat_file->date_modified->format("Y/m/d H:i:s")
-						];//"<img src='".$dat_file_url."'>";
+						];
 					}
 					break;
 			}
