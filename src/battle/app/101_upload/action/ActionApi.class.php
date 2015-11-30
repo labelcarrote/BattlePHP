@@ -3,19 +3,17 @@ use BattlePHP\Core\Controller;
 use BattlePHP\Core\Request;
 use BattlePHP\Api\Response;
 use BattlePHP\Storage\Uploader;
-require_once 'app/101_upload/model/DatFileManager.php';
-/**
- * CLASS ActionLol (Controller)
- *
- * Another example controller for 101_upload app.
- * 
- * Pages:
- * - index : /api
- *
- */
+require_once __DIR__.'/../model/DatFileManager.php';
+/********************************************************************
+* CLASS ActionLol (Controller)
+*
+* Another example controller for 101_upload app.
+* 
+* Pages:
+* - index : /api
+*
+*********************************************************************/
 class ActionApi extends Controller{
-
-	const MAX_FILE_SIZE = 5242880; // 5Mio 
 
 	// [/api]
 	public function index(){
@@ -29,7 +27,7 @@ class ActionApi extends Controller{
 					$extension = strtolower(pathinfo($data->file_name,PATHINFO_EXTENSION));
 					$is_extension_allowed = in_array($extension, $extensions);
 					$size = strlen($data->file);
-        			if($size > self::MAX_FILE_SIZE){
+        			if($size > DatFileManager::MAX_FILE_SIZE){
         				$response->errors = "Too big.";
         			}
 					elseif($is_extension_allowed === false){

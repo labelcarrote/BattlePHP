@@ -13,6 +13,7 @@ require_once __DIR__.'/DatFile.php';
 *********************************************************************/
 class DatFileManager{
 
+	const MAX_FILE_SIZE = 5242880; // 5Mio 
 	const DEFAULT_FOLDER = "storage/";
 	const DEFAULT_FILENAME = "dat_file";
 

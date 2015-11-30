@@ -1,17 +1,6 @@
 // ---- On Load ----
 $(window).load(function(){
 
-	// ---- Helpers ----
-
-	// stop event bubbling
-	function stop_bubbling(e){
-		if (!e) var e = window.event;
-		e.cancelBubble = true;
-		if (e.stopPropagation) 
-			e.stopPropagation();
-		e.preventDefault();
-	}
-
 	// ------- UPLOAD ---------
 
 	function send_formdatawithupload(formData){
@@ -54,16 +43,8 @@ $(window).load(function(){
 		if (!is_file_api_supported){
 		  	console.log('The File APIs are not fully supported in this browser.');
 		} else {
-			var output = [],
-				files = e.target.files;
+			var files = e.target.files;
 			for (var i = 0, f; f = files[i]; i++) {
-				
-				output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-				    f.size, ' bytes, last modified: ',
-					f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-					'</li>'
-				);
-
 				// Only process image files.
 				if (!f.type.match('image.*'))
 					continue;
@@ -71,8 +52,8 @@ $(window).load(function(){
 				// Closure to capture the file information.
 				var reader = new FileReader();
 				reader.onload = (function(datFile) {
-					var max_file_size = 5242880;
-					if(datFile.size > max_file_size){// 5Mio
+					var max_file_size = 5242880;// 5Mio
+					if(datFile.size > max_file_size){
 						alert("DAT FILE TOO BIG, MAX IS " + max_file_size + " BYTES ");
 					}else{
 						return function(e) {
@@ -89,7 +70,6 @@ $(window).load(function(){
 				})(f);
 				reader.readAsDataURL(f);
 			}
-			console.log(output.join(''));
 		} 
 	});
 });

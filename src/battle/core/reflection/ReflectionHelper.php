@@ -31,7 +31,7 @@ class ReflectionHelper{
 				}
 			}
 
-			$classes_selector = $dirname."/*.class.php";
+			$classes_selector = $dirname."/*.php";
 			$classes = glob($classes_selector);
 			rsort($classes);
 			foreach($classes as $filename){
