@@ -15,7 +15,8 @@ class DatFileManager{
 		$now = new DateTime();
 		$new_file_name = @md5_file($file_as_base64_string).".".$file_extension;
 		file_put_contents(self::get_dat_file_folder_path().$new_file_name, file_get_contents($file_as_base64_string));
-		return Request::get_application_root().self::DEFAULT_FOLDER.$new_file_name."#".$now->format("His");
+		return self::get_dat_file();
+		//return Request::get_application_root().self::DEFAULT_FOLDER.$new_file_name."#".$now->format("His");
 	}
 
 	public static function get_dat_file(){

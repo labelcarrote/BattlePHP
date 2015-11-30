@@ -5,7 +5,7 @@ use BattlePHP\Storage\FileSystemIO;
  * CLASS DatFile
  */
 class DatFile{
-	
+
 	public $url = "";
 	public $date_modified = "";
 

@@ -40,8 +40,12 @@ $(window).load(function(){
 		    		console.log("Upload completed");
 		    		$(".uploadprogress p").html("100%");
 		    		$(".uploadprogress").toggleClass("hidden");
-		    		$("#dat_file_container img").attr("src",ajaxresult.body);
+		    		$("#dat_file_container img").attr("src",ajaxresult.body.dat_file_url);
+		    		$("#dat_file_date_modified_link").attr("href",ajaxresult.body.dat_file_url);
+		    		$("#dat_file_date_modified_link").html(ajaxresult.body.dat_file_date_modified);
 		    		console.log(ajaxresult.body);
+		    		console.log(ajaxresult.body.url);
+		    		console.log(ajaxresult.body.date_modified);
 		    	}
 		    }
 		    $(".uploadprogress .bar").css("width", percentage + "%")

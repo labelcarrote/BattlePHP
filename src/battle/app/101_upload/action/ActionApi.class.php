@@ -36,8 +36,11 @@ class ActionApi extends Controller{
 						$response->errors = "File extension not allowed.";
 					}
 					else{
-						$dat_file_url = DatFileManager::store_dat_file($extension,$data->file);
-						$response->body = $dat_file_url;//"<img src='".$dat_file_url."'>";
+						$dat_file = DatFileManager::store_dat_file($extension,$data->file);
+						$response->body = [
+							'dat_file_url' => $dat_file->url,
+							'dat_file_date_modified' => $dat_file->date_modified->format("Y/m/d H:i:s")
+						];//"<img src='".$dat_file_url."'>";
 					}
 					break;
 			}

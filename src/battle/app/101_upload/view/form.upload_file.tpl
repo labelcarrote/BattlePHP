@@ -30,3 +30,4 @@
 	</div>
 	{/if}
 </form>
+<a id="dat_file_date_modified_link"href="{$dat_file->url}">{$dat_file->date_modified|date_format:"%d/%m/%Y %T"}</a>
