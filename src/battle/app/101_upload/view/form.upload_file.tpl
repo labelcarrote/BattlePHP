@@ -5,7 +5,7 @@
  in :
  - $upload_form
  - $upload_form_errors
- - $dat_file_url
+ - $dat_file : DatFile
  - ($batl_root_url)
 
 ************************************************}
@@ -15,7 +15,7 @@
 	enctype="multipart/form-data"
 	action="{$upload_form->action}">
 	<div id="dat_file_container" >
-		<img class="constrained " src="{$dat_file_url}">
+		<img class="constrained " src="{$dat_file->url}">
 		<input name="dat_file" id="dat_file" type="file" accept='image/jpeg,image/gif,image/png' />
 		<div class="uploadprogress hidden">
 			<div class="bar"></div>

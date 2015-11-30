@@ -16,11 +16,12 @@ class ActionHome extends Controller{
 	// [/home,/]
 	public function index(){
 		$rendering_mode = Request::isset_or($_GET["mode"], null);
+
 		if($rendering_mode !== "zen"){
 			$this->assign([
 				'title' => "101_upload",
 				'upload_form' => new UploadFileForm(),
-				'dat_file_url' => DatFileManager::get_dat_file_url() 
+				'dat_file' => DatFileManager::get_dat_file()
 			]);
 			$this->display_view('section.index.tpl');
 		}else{
@@ -29,7 +30,7 @@ class ActionHome extends Controller{
 				[
 					'title' => "101_upload?mode=zen",
 					'upload_form' => new UploadFileForm(),
-					'dat_file_url' => DatFileManager::get_dat_file_url()
+					'dat_file' => DatFileManager::get_dat_file()
 				]
 			);
 		}
