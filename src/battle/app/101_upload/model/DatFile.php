@@ -1,9 +1,7 @@
 <?php
-use BattlePHP\Core\Request;
-use BattlePHP\Storage\FileSystemIO;
-/**
- * CLASS DatFile
- */
+/********************************************************************
+* CLASS DatFile
+*********************************************************************/
 class DatFile{
 
 	public $url = "";

@@ -13,11 +13,12 @@ require_once 'app/101_upload/model/DatFileManager.php';
  *
  */
 class ActionHome extends Controller{
-	
+
 	// [/home,/]
 	public function index(){
 		$rendering_mode = Request::isset_or($_GET["mode"], null);
 
+		// DEFAULT display
 		if($rendering_mode !== "zen"){
 			$this->assign([
 				'title' => "101_upload",
@@ -25,7 +26,9 @@ class ActionHome extends Controller{
 				'dat_file' => DatFileManager::get_dat_file()
 			]);
 			$this->display_view('section.index.tpl');
-		}else{
+		}
+		// ZEN display
+		else{
 			$this->display_view(
 				'section.zen.tpl', 
 				[

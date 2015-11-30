@@ -15,21 +15,19 @@ $(window).load(function(){
 	// ------- UPLOAD ---------
 
 	function send_formdatawithupload(formData){
-		console.log(formData);
-		var xhr = new XMLHttpRequest();
-		var submit_url = $('#upload_form').attr("action");
+		var xhr = new XMLHttpRequest(),
+			submit_url = $('#upload_form').attr("action");
 		$(".uploadprogress").toggleClass("hidden");
 		xhr.open("POST",submit_url,true);
 		xhr.upload.onprogress = function(event){
 			var percentage = Math.floor(event.loaded / event.total * 100),
 				message = (percentage === 100) ? "Completing upload..." : percentage + "%";
-			console.log(message);
 			$(".uploadprogress p").html(message);
 			$(".uploadprogress .bar").css("width", percentage + "%")
 		}
 		xhr.onload = function(oEvent){
-			var result = "";
-			var percentage = 0;
+			var result = "",
+				percentage = 0;
 		    if (xhr.status != 200){
 		    	$(".uploadprogress p").html("Error " + xhr.status + " occurred uploading your file.");
 		    }else{
@@ -37,18 +35,14 @@ $(window).load(function(){
 		    	if(ajaxresult.errors !== null){
 		    		$(".uploadprogress p").html(ajaxresult.errors);	
 		    	}else{
-		    		console.log("Upload completed");
 		    		$(".uploadprogress p").html("100%");
 		    		$(".uploadprogress").toggleClass("hidden");
 		    		$("#dat_file_container img").attr("src",ajaxresult.body.dat_file_url);
 		    		$("#dat_file_date_modified_link").attr("href",ajaxresult.body.dat_file_url);
 		    		$("#dat_file_date_modified_link").html(ajaxresult.body.dat_file_date_modified);
-		    		console.log(ajaxresult.body);
-		    		console.log(ajaxresult.body.url);
-		    		console.log(ajaxresult.body.date_modified);
 		    	}
 		    }
-		    $(".uploadprogress .bar").css("width", percentage + "%")
+		    $(".uploadprogress .bar").css("width", percentage + "%");
 		}
 		xhr.send(formData);
 	}
@@ -77,7 +71,6 @@ $(window).load(function(){
 				// Closure to capture the file information.
 				var reader = new FileReader();
 				reader.onload = (function(datFile) {
-					console.log(datFile.size);
 					var max_file_size = 5242880;
 					if(datFile.size > max_file_size){// 5Mio
 						alert("DAT FILE TOO BIG, MAX IS " + max_file_size + " BYTES ");
