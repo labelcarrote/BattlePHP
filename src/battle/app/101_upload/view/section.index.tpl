@@ -24,7 +24,7 @@
 	</head>
 	<body>
 		<div class="content">
-			<p>
+			<p class="description">
 				I'm the index page from BattlePHP's <strong>{$title}</strong>, a simple upload file form example, in javascript and php.<br>
 				<strong>Usage :</strong> Click on the picture or drag-n-drop a picture on it to replace the current one with any <strong>.jpg, .png or .gif</strong> file that weighs less than <strong>&lt; {$upload_form->max_file_size_human_readable}.</strong>
 			</p>

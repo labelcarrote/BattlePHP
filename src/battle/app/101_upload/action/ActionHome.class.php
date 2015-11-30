@@ -13,6 +13,7 @@ require_once 'app/101_upload/model/DatFileManager.php';
  *
  */
 class ActionHome extends Controller{
+	
 	// [/home,/]
 	public function index(){
 		$rendering_mode = Request::isset_or($_GET["mode"], null);
