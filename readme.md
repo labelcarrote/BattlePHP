@@ -194,19 +194,30 @@ Logger.php
 Template Reserved Variables
 ---------------------------
 
-BattlePHP assigns automatically these smarty variable:
-
-by Controller:  
-- $batl_is_logged : if current user is logged in
-- $batl_is_admin : if current user is an admin
-- $batl_current_user : current User
+BattlePHP assigns some helper smarty variables :
 
 by Viewer:  
 - $batl_root_url: : the url to access the root folder of the framework : the app/ folder. 
 - $batl_current_app_virtual_url
 - $batl_current_app_url
 - $batl_full_url
+- $batl_is_mobile_device
+
+by Controller:  
+- $batl_is_logged : if current user is logged in
+- $batl_is_admin : if current user is an admin
+- $batl_current_user : current User
 
 In your smarty templates you can use these predefined variables using the usual smarty syntax:  
 {$batl_is_logged})
+
+You can also access this variable in Plain Ol' PHP using :
+- $batl_root_url: : Request::get_root_url()
+- $batl_current_app_virtual_url : Request::get_application_virtual_root()
+- $batl_current_app_url : Request::get_application_root()
+- $batl_full_url : Request::get_full_url()
+- $batl_is_mobile_device : Request::is_mobile_device()
+- $batl_is_logged : AuthManager::is_authenticated()
+- $batl_is_admin : AuthManager::is_current_user_admin()
+- $batl_current_user : AuthManager::get_user_infos()
     

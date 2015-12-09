@@ -35,7 +35,7 @@ class Card{
 		$this->lines = $lines;
 		$this->is_recursive = $recursive_level > 0;
 		$this->recursive_level = $recursive_level;
-		$this->elements = array();
+		$this->elements = [];
 		$init = true;
 		$element = null;
 		$previous_element = (object)array('multiple_line'=>false,'html_closure_tag'=>'');

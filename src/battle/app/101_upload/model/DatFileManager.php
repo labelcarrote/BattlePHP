@@ -22,7 +22,7 @@ class DatFileManager{
 		
 		// store file
 		$new_file_name = @md5_file($file_as_base64_string).".".$file_extension;
-		file_put_contents(self::get_dat_file_folder_path().$new_file_name, file_get_contents($file_as_base64_string));
+		FileSystemIO::save_file(self::get_dat_file_folder_path().$new_file_name, $file_as_base64_string);
 
 		return self::get_dat_file();
 	}

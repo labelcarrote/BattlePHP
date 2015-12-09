@@ -16,8 +16,8 @@ $(window).load(function(){
 	
 	// Retrieves some words from server, then load
 	$.ajax({url:"fingerzen/home/words", success:function(result){
-    	finger_zen = new FingerZen(eval(result));
-  	}});
+		finger_zen = new FingerZen(eval(result));
+	}});
 });
 
 	
@@ -40,7 +40,7 @@ function FingerZen(text){
 	this.layer2 = document.getElementById("zen1");
 	this.ctx1 = self.layer2.getContext("2d");
 	
-  	this.init = function(){
+	this.init = function(){
 		
 		self.resize();
 		
@@ -55,7 +55,7 @@ function FingerZen(text){
 		$(document).mousedown(function(e){
 			self.screen.on_mouse_down(e);
 		});
-	 	
+		
 		document.addEventListener("keydown",function(e){
 			e = e || event;
 			/*if(typeof e.key === 'undefined' || e.key.lastIndexOf("F", 0) === 0)

@@ -130,7 +130,42 @@ $(window).load(function(){
 	}
 
 	// upload / attach file form
-	$("#file").change(function () {
+	$("#file").change(function (e) {
+		// Check for the various File API support.
+		var is_file_api_supported = (window.File && window.FileReader && window.FileList && window.Blob);
+		if (!is_file_api_supported){
+			console.log('The File APIs are not fully supported in this browser.');
+		} else {
+			var files = e.target.files;
+			var card_name = $(this).attr("data-card-name");
+			for (var i = 0, f; f = files[i]; i++) {
+				// Only process image files.
+				if (!f.type.match('image.*'))
+					continue;
+
+				// Closure to capture the file information.
+				var reader = new FileReader();
+				reader.onload = (function(datFile) {
+					var max_file_size = 5242880;// 5Mio
+					if(datFile.size > max_file_size){
+						alert("DAT FILE TOO BIG, MAX IS " + max_file_size + " BYTES ");
+					}else{
+						return function(e) {
+							var data = {
+								submit : "add_file_to_card", 
+								card_name : card_name,
+								file : e.target.result,
+								file_name : escape(datFile.name)
+							};
+							send_formdatawithupload(JSON.stringify(data));
+						};
+					}
+				})(f);
+				reader.readAsDataURL(f);
+			}
+		} 
+
+		return;
 		// Check for the various File API support.
 		if (window.File && window.FileReader && window.FileList && window.Blob) {
 		  // Great success! All the File APIs are supported.

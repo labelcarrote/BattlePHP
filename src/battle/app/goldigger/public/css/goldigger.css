@@ -1,0 +1,32 @@
+/* apply a natural box layout model to all elements */
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+/* ---- COLORS ---- */
+body{
+	color: #ddd;
+	background-color: #2b2b2b;
+}
+a, a:hover{ color: #ddd; }
+.upload_form, .image_container{ background-color: #272727; }
+.uploadprogress .bar{ background-color: yellow; }
+.uploadprogress { color: #2b2b2b; }
+
+/* ---- LAYOUT ----*/
+body{ font-family: Arial; font-size: 16px; }
+a{ text-decoration: none; }
+a:hover{ text-decoration: underline; }
+footer, .footer { padding: 12px; }
+.hidden{ display: none !important; }
+.content{
+	padding: 12px; 
+	margin: auto; 
+	max-width: 960px;
+}
+.description{
+	padding: 12px 0;
+	line-height: 1.5em;
+}
+span{
+	color: white;
+}

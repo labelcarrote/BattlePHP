@@ -34,7 +34,7 @@
 						<span class="btn btn-default btn-file btn_add_file_to_card">
 							<span class="fileinput-new">Attach / Upload File</span>
 							<span class="fileinput-exists">Attach / Upload File</span>
-							<input name="file" id="file" type="file">
+							<input name="file" id="file" type="file" data-card-name="{$card->name}">
 						</span>
 						</div>
 					</form>
@@ -111,7 +111,7 @@
 							<span class="btn btn-default btn-file">
 								<span class="fileinput-new">Attach / Upload File</span>
 								<span class="fileinput-exists">Attach / Upload File</span>
-								<input name="file" id="file" type="file">
+								<input name="file" id="file" type="file" data-card-name="{$card->name}">
 							</span>
 						</div>
 					<!-- </form>  -->  

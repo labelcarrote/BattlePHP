@@ -1,10 +1,10 @@
 bugs
-lastedit: 20151103_0111
+lastedit: 20151202_1312
 color: #f90
 
 Testin' API json:
 - save_card : OK
 - attach / upload file !!!!
+- FIX set_as_current_card htmlentities characters
 
-&amp;egrave;&amp;egrave;&amp;egrave;&amp;egrave;&amp;egrave;&amp;egrave;
-______
+test&eacute;

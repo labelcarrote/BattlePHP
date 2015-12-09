@@ -12,6 +12,7 @@ class CardStore{
 	const DIR = "storage/";
 	const EXT = ".txt";
 	const MAX_RECURSIVE_LEVEL = 2;
+	const MAX_FILE_SIZE = 5242880; // 5Mio 
 	
 	public static function get_folder(){
 		return "app/sawhat/".self::DIR;

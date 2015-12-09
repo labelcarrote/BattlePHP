@@ -17,21 +17,21 @@ $(window).load(function(){
 		xhr.onload = function(oEvent){
 			var result = "",
 				percentage = 0;
-		    if (xhr.status != 200){
-		    	$(".uploadprogress p").html("Error " + xhr.status + " occurred uploading your file.");
-		    }else{
-		    	var ajaxresult = JSON.parse(this.response);
-		    	if(ajaxresult.errors !== null){
-		    		$(".uploadprogress p").html(ajaxresult.errors);	
-		    	}else{
-		    		$(".uploadprogress p").html("100%");
-		    		$(".uploadprogress").toggleClass("hidden");
-		    		$("#dat_file_container img").attr("src",ajaxresult.body.dat_file_url);
-		    		$("#dat_file_date_modified_link").attr("href",ajaxresult.body.dat_file_url);
-		    		$("#dat_file_date_modified_link").html(ajaxresult.body.dat_file_date_modified);
-		    	}
-		    }
-		    $(".uploadprogress .bar").css("width", percentage + "%");
+			if (xhr.status != 200){
+				$(".uploadprogress p").html("Error " + xhr.status + " occurred uploading your file.");
+			}else{
+				var ajaxresult = JSON.parse(this.response);
+				if(ajaxresult.errors !== null){
+					$(".uploadprogress p").html(ajaxresult.errors);	
+				}else{
+					$(".uploadprogress p").html("100%");
+					$(".uploadprogress").toggleClass("hidden");
+					$("#dat_file_container img").attr("src",ajaxresult.body.dat_file_url);
+					$("#dat_file_date_modified_link").attr("href",ajaxresult.body.dat_file_url);
+					$("#dat_file_date_modified_link").html(ajaxresult.body.dat_file_date_modified);
+				}
+			}
+			$(".uploadprogress .bar").css("width", percentage + "%");
 		}
 		xhr.send(formData);
 	}
@@ -41,7 +41,7 @@ $(window).load(function(){
 		// Check for the various File API support.
 		var is_file_api_supported = (window.File && window.FileReader && window.FileList && window.Blob);
 		if (!is_file_api_supported){
-		  	console.log('The File APIs are not fully supported in this browser.');
+			console.log('The File APIs are not fully supported in this browser.');
 		} else {
 			var files = e.target.files;
 			for (var i = 0, f; f = files[i]; i++) {
@@ -57,14 +57,12 @@ $(window).load(function(){
 						alert("DAT FILE TOO BIG, MAX IS " + max_file_size + " BYTES ");
 					}else{
 						return function(e) {
-							var form_data = new FormData(),
-								data = {
-									submit : "upload_file", 
-									file : e.target.result,
-									file_name : escape(datFile.name)
-								};
-							form_data.append("data", JSON.stringify(data));
-						 	send_formdatawithupload(form_data);
+							var data = {
+								submit : "upload_file", 
+								file : e.target.result,
+								file_name : escape(datFile.name)
+							};
+							send_formdatawithupload(JSON.stringify(data));
 						};
 					}
 				})(f);

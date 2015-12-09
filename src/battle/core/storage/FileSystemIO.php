@@ -41,6 +41,10 @@ class FileSystemIO{
 		return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . " " .@$size[$factor];
 	}
 
+	public static function save_file($full_path, $file_as_base64_string){
+		return file_put_contents($full_path, file_get_contents($file_as_base64_string));
+	}
+
 	public static function delete_file($file_path){
 		if(is_file($file_path))
 			return unlink($file_path);
