@@ -1,16 +1,23 @@
+/* ---- goldigger.css ---- */
+
 /* apply a natural box layout model to all elements */
 *, *:before, *:after {
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
+
 /* ---- COLORS ---- */
 body{
 	color: #ddd;
 	background-color: #2b2b2b;
 }
 a, a:hover{ color: #ddd; }
+span{ color: white; }
 
 /* ---- LAYOUT ----*/
-body{ font-family: Arial; font-size: 16px; }
+body{ 
+	font-family: Arial; 
+	font-size: 16px; 
+}
 .content{
 	padding: 12px; 
 	margin: auto; 
@@ -19,7 +26,4 @@ body{ font-family: Arial; font-size: 16px; }
 .description{
 	padding: 12px 0;
 	line-height: 1.5em;
-}
-span{
-	color: white;
 }

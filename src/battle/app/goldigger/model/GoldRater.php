@@ -4,8 +4,9 @@ use BattlePHP\Core\Request;
 /********************************************************************
 * CLASS GoldRater
 *
-* public static methods : 
-* - get_rate() : get current rate from cache
+* public static methods (2) : 
+* - get_rate() : get current rate from cache as an array:
+*   [ "rate" => 1024, "last_update" => ...]
 * - refresh_rate() : refresh rate / update cache
 *
 *********************************************************************/

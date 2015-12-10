@@ -10,7 +10,7 @@ require_once __DIR__.'/../model/GoldRater.php';
 *********************************************************************/
 class ActionHome extends Controller{
 
-	// [/home,/]
+	// [/home or /]
 	public function index(){
 		$this->display_view(
 			'section.index.tpl',

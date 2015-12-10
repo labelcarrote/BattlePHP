@@ -25,6 +25,8 @@ class ActionApi extends Controller{
 	// [GET /api/refresh_rate]
 	public function refresh_rate(){
 		GoldRater::refresh_rate();
-		echo "rate refreshed";
+		$response = new Response();
+		$response->body = "rate refreshed";
+		echo $response->to_json();
 	}
 }

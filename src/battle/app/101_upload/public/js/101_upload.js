@@ -1,3 +1,7 @@
+// -----------------------
+// 101_upload.js
+// -----------------------
+
 // ---- On Load ----
 $(window).load(function(){
 
@@ -54,7 +58,7 @@ $(window).load(function(){
 				reader.onload = (function(datFile) {
 					var max_file_size = 5242880;// 5Mio
 					if(datFile.size > max_file_size){
-						alert("DAT FILE TOO BIG, MAX IS " + max_file_size + " BYTES ");
+						alert("DAT FILE TOO BIG, MAX IS " + max_file_size + " BYTES, YOUR FILE IS "+ datFile.size +" BYTES! ROFL XD");
 					}else{
 						return function(e) {
 							var data = {
