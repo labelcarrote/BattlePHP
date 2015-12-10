@@ -3,8 +3,6 @@ use BattlePHP\Core\Controller;
 require_once __DIR__.'/../model/GoldRater.php';
 /********************************************************************
 * CLASS ActionHome (Controller)
-*
-* An example controller for goldigger app.
 * 
 * Pages:
 * - index : /home or /

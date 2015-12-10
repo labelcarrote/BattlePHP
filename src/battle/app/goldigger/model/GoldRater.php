@@ -1,13 +1,12 @@
 <?php
 use BattlePHP\Storage\FileSystemIO;
 use BattlePHP\Core\Request;
-
 /********************************************************************
 * CLASS GoldRater
 *
 * public static methods : 
-* - get_rate()
-* - refresh_rate()
+* - get_rate() : get current rate from cache
+* - refresh_rate() : refresh rate / update cache
 *
 *********************************************************************/
 class GoldRater{
@@ -18,7 +17,7 @@ class GoldRater{
 
 	public static function get_rate(){
 		$rate_data = file_get_contents(Request::get_application_path().self::DEFAULT_FOLDER.self::DEFAULT_FILENAME);
-		$rate_data = json_decode($rate_data, false);// object
+		$rate_data = json_decode($rate_data, false);
 		return [
 			"rate" => $rate_data->dataset->data[0][1],
 			"last_update" => $rate_data->dataset->data[0][0]
