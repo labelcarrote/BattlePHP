@@ -19,13 +19,19 @@
 	<body>
 		<div class="content">
 			<p>
-			The current gold rate from quandl.com is : <br><br>
+			The current Gold Rate (from quandl.com json API) is : <br><br>
 
-			- Client Side (direct call to quantl json api) :<br><br>
-			Gold Rate is [<span class="gold-rate">loading rate</span>] (<span class="gold-rate-last-update">loading...</span>) <span class="ping"></span>.<br><br>
+			- Client Side (direct js call to quandl json API) :<br><br>
+			<span class="gold-rate">loading rate</span> (<span class="gold-rate-last-update">loading...</span>) <span class="ping"></span>.<br><br>
 
-			- [WIP] Server Side (from php server side, which call quantl json api and cached it?) :<br><br>
-			Gold Rate is [<span class="">RATE</span>] (<span class="">DATETIME</span>).
+			- Server Side (from php server side, which call quandl json API and cache it?) :<br><br>
+			<span class="">{$rate['rate']}</span> (<span class="">{$rate['last_update']}</span>) <span>- from cache</span>
+			</p>
+			<br><br>
+			<p>
+				<strong>Goldigger JSON API :</strong><br><br>
+				<a href="{$batl_current_app_virtual_url}api/rate">GET /api/rate</a> : get current rate from cache as json<br><br>
+				<a href="{$batl_current_app_virtual_url}api/refresh_rate">GET /api/refresh_rate</a> : refresh rate and update cache
 			</p>
 		</div>
 		<script type="text/javascript" src="{$batl_root_url}lib/jquery/jquery.js"></script>

@@ -8,16 +8,9 @@ body{
 	background-color: #2b2b2b;
 }
 a, a:hover{ color: #ddd; }
-.upload_form, .image_container{ background-color: #272727; }
-.uploadprogress .bar{ background-color: yellow; }
-.uploadprogress { color: #2b2b2b; }
 
 /* ---- LAYOUT ----*/
 body{ font-family: Arial; font-size: 16px; }
-a{ text-decoration: none; }
-a:hover{ text-decoration: underline; }
-footer, .footer { padding: 12px; }
-.hidden{ display: none !important; }
 .content{
 	padding: 12px; 
 	margin: auto; 

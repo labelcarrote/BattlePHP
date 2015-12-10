@@ -28,7 +28,8 @@
 			</p>
 			{include file="form.upload_file.tpl" }
 			<footer class="footer">
-				<a href="?mode=zen">ZEN mode</a>
+				<a href="?mode=zen">ZEN mode</a> | 
+				<a href="?mode=button">Button mode</a>
 			</footer>
 		</div>
 		<script type="text/javascript" src="{$batl_root_url}lib/jquery/jquery.js"></script>

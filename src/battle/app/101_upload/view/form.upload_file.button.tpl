@@ -18,7 +18,6 @@
 		<input name="dat_file" id="dat_file" type="file" accept='image/jpeg,image/gif,image/png' />
 		<div class="uploadprogress hidden">
 			<div class="bar"></div>
-			<!-- <p></p> -->
 		</div>
 	</div>
 </form>
