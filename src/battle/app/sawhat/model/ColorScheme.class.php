@@ -2,19 +2,19 @@
 use BattlePHP\Core\Request;
 use BattlePHP\Core\Viewer;
 use BattlePHP\Storage\FileSystemIO;
-/**
- * ColorScheme
- *
- * @author jonpotiron, touchypunchy
- *
- */
+/**********************************************************************
+* ColorScheme
+*
+* @author jonpotiron, touchypunchy
+*
+***********************************************************************/
 class ColorScheme{
 	
 	const FILE_PATH = 'public/css/color_scheme/';
 	public $name;
 	public $is_default = false;
 	public $css_path = null;
-	public $palette = array();
+	public $palette = [];
 	public $is_defined = false;
 	
 	public function __construct($color_scheme_name = null){
@@ -26,6 +26,7 @@ class ColorScheme{
 				$color_scheme_name = 'default';
 			}
 		}
+		
 		$this->name = $color_scheme_name;
 		$css_path = Request::get_application_path().self::FILE_PATH.$this->name.'.css';
 		if(is_file($css_path)){
@@ -49,11 +50,11 @@ class ColorScheme{
 	 *
 	 */
 	public static function get_available_color_schemes(){
-		$color_schemes = array();
-		$files = FileSystemIO::get_files_in_dir(Request::get_application_path().self::FILE_PATH.'{*.css}');
-		foreach($files AS $key => $css_file){
+		$color_schemes = [];
+		$color_schemes_css_files = FileSystemIO::get_files_in_dir(Request::get_application_path().self::FILE_PATH.'{*.css}');
+
+		foreach($color_schemes_css_files AS $key => $css_file)
 			$color_schemes[] = new ColorScheme(str_replace('.css','',$css_file->name));
-		}
 		
 		return $color_schemes;
 	}

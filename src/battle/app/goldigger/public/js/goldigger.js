@@ -18,6 +18,5 @@ $(window).load(function(){
 		$(".ping").html("- took " + (t1 - t0) + " milliseconds...");
 		$(".gold-rate").html(result.dataset.data[0][1]);
 		$(".gold-rate-last-update").html(result.dataset.data[0][0]);
-    	//console.log(result.dataset.data[0]);
  	}});
 });

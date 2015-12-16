@@ -11,6 +11,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
 		<meta name="description" content="Get the current gold rate from quandl.com">
 		<title>{$title} - BattlePHP</title>
 		<link rel="stylesheet" href="{$batl_root_url}public/css/reset.css" />

@@ -156,6 +156,9 @@ class Controller{
 	 * Useful in ajax scenario !
 	 */
 	protected function fetch_view($view,$template_dir = NULL){
+		$this->assign_errors();
+		$this->assign_auth_values();//TODO Move To authcontroller
+		$this->assign_custom_values();
 		return $this->view_manager->fetch($view, $template_dir);
 	}
 }

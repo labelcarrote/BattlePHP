@@ -25,7 +25,7 @@ class ActionHome extends Controller{
 					'section.zen.tpl', 
 					[
 						'title' => "NanoChan",
-						'upload_form' => new UploadFileForm(),
+						'upload_form' => new UploadFileForm(DatFileManager::MAX_FILE_SIZE),
 						'dat_file' => DatFileManager::get_dat_file()
 					]
 				);
@@ -35,7 +35,7 @@ class ActionHome extends Controller{
 					'section.button.tpl', 
 					[
 						'title' => "101_upload?mode=button",
-						'upload_form' => new UploadFileForm(),
+						'upload_form' => new UploadFileForm(DatFileManager::MAX_FILE_SIZE),
 						'dat_file' => DatFileManager::get_dat_file()
 					]
 				);
@@ -43,7 +43,7 @@ class ActionHome extends Controller{
 			default:
 				$this->assign([
 					'title' => "101_upload",
-					'upload_form' => new UploadFileForm(),
+					'upload_form' => new UploadFileForm(DatFileManager::MAX_FILE_SIZE),
 					'dat_file' => DatFileManager::get_dat_file()
 				]);
 				$this->display_view('section.index.tpl');

@@ -2,12 +2,12 @@
 use BattlePHP\Core\Viewer;
 use BattlePHP\Core\Request;
 use BattlePHP\Core\Auth\AuthManager;
-/**
- * CardElement
- *
- * @author jonpotiron, touchypunchy
- *
- */
+/**********************************************************************
+* CardElement
+*
+* @author jonpotiron, touchypunchy
+*
+***********************************************************************/
 class CardElement{
 	
 	public $html = '';
@@ -26,9 +26,7 @@ class CardElement{
 		$this->card_name = $card_name;
 		
 		// Replace newlines
-		$s = array("\r","\n");
-		$r = array('','');
-		$line = str_replace($s,$r,$line);
+		$line = str_replace(["\r","\n"],['',''],$line);
 		
 		// Cards!
 		if(preg_match('/^\[#([a-zA-Z0-9\|#_-]+)\]$/',$line,$matches)){
@@ -103,6 +101,11 @@ class CardElement{
 				: '<a href="'.$file_root.$matches[1].'">'.$matches[1].'</a>';
 		}
 		
-		return array('html_code' => $html, 'multiple_line' => $multiple_line, 'closure_tag' => $closure_tag, 'coding_language' => '');
+		return [
+			'html_code' => $html, 
+			'multiple_line' => $multiple_line, 
+			'closure_tag' => $closure_tag, 
+			'coding_language' => ''
+		];
 	}
 }

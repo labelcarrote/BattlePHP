@@ -1,10 +1,10 @@
 <?php
-/**
- * SearchHelper
- *
- * @author jonpotiron, touchypunchy
- *
- */
+/**********************************************************************
+* SearchHelper
+*
+* @author jonpotiron, touchypunchy
+*
+***********************************************************************/
 class SearchHelper{
 	
 	const MAX_ITEM = 5;
@@ -20,21 +20,22 @@ class SearchHelper{
 	public static function prepare_request($string_request, $min_char_per_word = 3){
 		$request = ' '.preg_replace('/[^a-zA-Z0-9 _-]/',' ',$string_request).' ';
 		$clean_pattern = '/ [a-zA-Z0-9_-]{1,'.($min_char_per_word-1).'} /';
-		while(preg_match($clean_pattern,$request)){
+		
+		while(preg_match($clean_pattern,$request))
 			$request = preg_replace($clean_pattern,' ',$request);
-		}
+		
 		return preg_replace('/ +/',' ',trim($request));
 	}
 
 	public static function explode_keywords($keywords, $delimiter = ' '){
-		$rtn = array('in'=>array(),'out'=>array());
+		$rtn = ['in' => [], 'out' => []];
 		$keywords = explode($delimiter,$keywords);
+
 		foreach($keywords as $keyword){
-			if(strpos($keyword,'-') === 0){
+			if(strpos($keyword,'-') === 0)
 				$rtn['out'][] = substr($keyword,1);
-			} else {
+			else
 				$rtn['in'][] = $keyword;
-			}
 		}
 		
 		return $rtn;
@@ -58,9 +59,6 @@ class SearchHelper{
 	}
 	
 	private static function clean_newline($string){
-		$s = array("\r","\n");
-		$r = array(' ',' ');
-		return str_replace($s,$r,$string);
+		return str_replace(["\r","\n"],[' ',' '],$string);
 	}
 }
-?>

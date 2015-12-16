@@ -1,3 +1,11 @@
+{************************************************
+
+ Loadable Card Element (small banner?)
+ 
+ in :
+ - $card : Card
+ 
+************************************************}
 <div class="loadable_card">
 	<div class="banner loadable auto_clear" {if $card->exists}style="background-color:{$card->color};"{/if}>
 		<a href="{$batl_current_app_virtual_url}{$card->name}"
@@ -7,7 +15,8 @@
 		</a>
 		<a class="right {if !$card->exists || $card->is_light}lighter_text{else}darker_text{/if} load_card"
 			data-action="load"
-			data-card-name="{$batl_current_app_virtual_url}{$card->name}"
+			data-card-name="{$card->name}"
+			data-card-url="{$batl_current_app_virtual_url}api/?m=get_card&amp;name={$card->name}"
 			title="load">
 			<span class="fa fa-chevron-circle-down"></span>
 		</a>

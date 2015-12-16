@@ -1,3 +1,11 @@
+{************************************************
+
+ Header Element 
+ 
+ in :
+ - ($batl_is_logged)
+ 
+************************************************}
 {include file="element.breadcrumbs.tpl"}
 <div class="user_utils right">
 	{if $batl_is_logged}

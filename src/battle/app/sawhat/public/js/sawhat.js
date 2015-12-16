@@ -21,17 +21,19 @@ if(typeof ace !== 'undefined'){
         maxLines: 120000
     });
     editor.setAutoScrollEditorIntoView();
-	editor.resize();
 	editor.getSession().setUseWrapMode(true);
-	editor.getSession().setWrapLimitRange(0, 124);
-	editor.resize();
-
+	editor.getSession().setWrapLimitRange(0, 88);
 }
+
 // extends jQuery for selector existence //
 jQuery.fn.exists = function () {
     return this.length !== 0;
 }
 $(document).ready(function(){
+
+	// Set editor width
+	editor.resize();
+
 	// COLOR PICKER //
 	/* @todo
 	 * set as prototype
@@ -97,7 +99,7 @@ $(window).load(function(){
 
 	// ------- UPLOAD ---------
 
-	function send_formdatawithupload(formData){
+	/*function send_formdatawithupload(formData){
 		console.log(formData);
 		var xhr = new XMLHttpRequest();
 		var submit_url = $('#card_edit_form').attr("action") + "api";
@@ -172,8 +174,6 @@ $(window).load(function(){
 		} else {
 		  alert('The File APIs are not fully supported in this browser.');
 		}
-		//var data = new FormData(document.getElementById("addfileform"));
-		/*var data = new FormData($("#addfileform,.add_file_form")[0]);*/
 		var datform = $("#file");
 		var datform_data = datform[0];
 		var data = new FormData();//form);
@@ -182,6 +182,78 @@ $(window).load(function(){
 		data.append("name", "addfile");
 		data.append("submit", "addfile");
 	 	send_formdatawithupload(JSON.stringify(data));
+	});*/
+
+	// NNNEEEEEWWWWWWWWWWW
+
+	function send_formdatawithupload(formData){
+		var xhr = new XMLHttpRequest(),
+			submit_url = $('#upload_form').attr("action");
+		$(".uploadprogress").toggleClass("hidden");
+		xhr.open("POST",submit_url,true);
+		xhr.upload.onprogress = function(event){
+			var percentage = Math.floor(event.loaded / event.total * 100),
+				message = (percentage === 100) ? "Completing upload..." : percentage + "%";
+			$(".uploadprogress p").html(message);
+			$(".uploadprogress .bar").css("width", percentage + "%")
+		}
+		xhr.onload = function(oEvent){
+			var result = "",
+				percentage = 0;
+			if (xhr.status != 200){
+				$(".uploadprogress p").html("Error " + xhr.status + " occurred uploading your file.");
+			}else{
+				var ajaxresult = JSON.parse(this.response);
+				if(ajaxresult.errors !== null){
+					$(".uploadprogress p").html(ajaxresult.errors);	
+				}else{
+					$(".uploadprogress p").html("100%");
+					$(".uploadprogress").toggleClass("hidden");
+					$("#files").html(ajaxresult.body);
+					/*$("#dat_file_container img").attr("src",ajaxresult.body.dat_file_url);
+					$("#dat_file_date_modified_link").attr("href",ajaxresult.body.dat_file_url);
+					$("#dat_file_date_modified_link").html(ajaxresult.body.dat_file_date_modified);*/
+				}
+			}
+			$(".uploadprogress .bar").css("width", percentage + "%");
+		}
+		xhr.send(formData);
+	}
+
+	// upload / attach file form
+	$("#dat_file").change(function (e) {
+		// Check for the various File API support.
+		var is_file_api_supported = (window.File && window.FileReader && window.FileList && window.Blob);
+		if (!is_file_api_supported){
+			console.log('The File APIs are not fully supported in this browser.');
+		} else {
+			var files = e.target.files;
+			for (var i = 0, f; f = files[i]; i++) {
+				// Only process image files.
+				if (!f.type.match('image.*'))
+					continue;
+
+				// Closure to capture the file information.
+				var reader = new FileReader();
+				reader.onload = (function(datFile) {
+					var max_file_size = 5242880;// 5Mio
+					if(datFile.size > max_file_size){
+						alert("DAT FILE TOO BIG, MAX IS " + max_file_size + " BYTES, YOUR FILE IS "+ datFile.size +" BYTES! ROFL");
+					}else{
+						return function(e) {
+							var data = {
+								submit : "add_file_to_card", 
+								file : e.target.result,
+								file_name : escape(datFile.name),
+								card_name : $('#upload_form').attr("data-card-name")
+							};
+							send_formdatawithupload(JSON.stringify(data));
+						};
+					}
+				})(f);
+				reader.readAsDataURL(f);
+			}
+		} 
 	});
 
 	// ------- CARD EDIT ---------
@@ -206,20 +278,20 @@ $(window).load(function(){
 		editor.getSession().on('change', function(e) {
 			clearTimeout(self.sts_id);
 			// http://stackoverflow.com/questions/1101668/how-to-use-settimeout-to-invoke-object-itself
-			self.sts_id = setTimeout(function(){save_card($("#editor_save"));},latency);
+			self.sts_id = setTimeout(function(){save_card_api($("#editor_save"));},latency);
 		});
 	}
 	
-	$('#editor_save, .btn_save_card').click(function(e){
+	/*$('#editor_save, .btn_save_card').click(function(e){
 		save_card($(this));
-	});
+	});*/
 
 	$(document).on('click',".btn_save_card", function(e){
 		stop_bubbling(e);
 		save_card_api($(this));
 	});
 
-	function save_card(save_button){
+	/*function save_card(save_button){
 		var btn = save_button,
 			editor_console = $("#editor_console");
 
@@ -257,7 +329,7 @@ $(window).load(function(){
 				}
 			});
 		}
-	}
+	}*/
 
 	function save_card_api(save_button){
 		var editor_console = $("#editor_console"),
@@ -274,7 +346,7 @@ $(window).load(function(){
 		save_button.prop("disabled",true);
 		editor_console.html("Saving...");
 
-		$.post(action_url, {data: JSON.stringify(form_data)}, function(response){
+		$.post(action_url, JSON.stringify(form_data), function(response){
 			var responseJSON = JSON.parse(response);
 			if(responseJSON.errors === "" || responseJSON.errors === null){
 				save_button.prop("disabled",false);
@@ -291,22 +363,25 @@ $(window).load(function(){
 	// TODO : FIX Card Edit : Set As Current
 	$('body').on('click','.load_card_as_current',function(e){
 		//card to load 
-		var element = $(this);
-		var card_name = $(this).attr("data-card-name");
-		var card_version = $(this).attr("data-card-version");
+		var element = $(this),
+			card_name = element.attr("data-card-name"),
+			card_version = element.attr("data-card-version"),
+			api_url = element.attr("data-card-url");
+
 		$.ajax({
-			url: "as_code?card_version="+card_version,
+			url: element.attr("data-card-url"),//"as_code?card_version="+card_version,
 			type: 'get',
 			dataType: 'json',
 			success: function(data) {
+				console.log(data);
 				var editor = ace.edit("editor");
-				editor.setValue(data.body);
+				editor.setValue(data.body.text_code);
 			}
 		});
 	});
 
 	// Double click to edit card
-	$(".things").dblclick(function(e){
+	$(".card__content").dblclick(function(e){
 		e.preventDefault();
 		// go to card edit form
 		window.location.href = $(this).attr("data-edit-url");
@@ -321,18 +396,18 @@ $(window).load(function(){
 		var card_action = $(this).attr("data-action");
 		var element = $(this);
 		if(card_action === "load"){
-			var card_name = $(this).attr("data-card-name");
+			var card_name = $(this).attr("data-card-name"),
+				api_url = element.attr("data-card-url");//"api?m=get_card&name=" + card_name;
 			$.ajax({
-				url: card_name+"/as_html/?show_banner=0",
+				url: api_url,
 				type: 'get',
 				dataType: 'json',
 				success: function(data) {
-					element.closest('.banner.loadable').next().html(data.body).hide().removeClass('hidden').slideDown(300);
+					element.closest('.banner.loadable').next().html(data.body.html).hide().removeClass('hidden').slideDown(300);
 					element.attr("data-action","unload");
 					element.attr('title','close');
 					element.find('span.fa').removeClass('fa-chevron-circle-down').addClass('fa-times');
 					Prism.highlightAll();
-					//load_starred_cards();
 				}
 			});
 		}

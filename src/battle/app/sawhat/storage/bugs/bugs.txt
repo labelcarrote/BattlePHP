@@ -1,10 +1,22 @@
 bugs
-lastedit: 20151202_1312
+lastedit: 20151216_1512
 color: #f90
 
 Testin' API json:
-- save_card : OK
-- attach / upload file !!!!
-- FIX set_as_current_card htmlentities characters
+http://localhost/dev/git/BattlePHP/src/battle/sawhat/api
 
-test&eacute;
+- get_card(name): OK
+- get_card(name,version): OK
+- search_cards(query): !OK
+
+- save_card(json) : OK
+- add_file_to_card(json): OK
+
+abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdef.
+abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdef.
+abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdef.
+
+
+
+
+
