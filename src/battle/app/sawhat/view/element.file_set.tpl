@@ -1,3 +1,11 @@
+{************************************************
+
+ Card's File Set Element
+ 
+ in :
+ - $card : Card
+ 
+************************************************}
 <div class="image_preview hidden">
 	<img alt="image preview" src="" class="verticaly_centered" />
 </div>

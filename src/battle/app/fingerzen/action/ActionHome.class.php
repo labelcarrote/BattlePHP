@@ -1,4 +1,6 @@
 <?php
+use BattlePHP\Core\Controller;
+
 class ActionHome extends Controller{
 
 	// WORDS FOR FINGERS
@@ -9,11 +11,10 @@ class ActionHome extends Controller{
 		$this->display_view('index.tpl');
 	}
 
-	// ---- AJAX ----
+	// ---- API / Json ----
 
 	// [home/words] Some words
 	public function words(){
 		echo json_encode($this->words);
 	}
 }
-?>

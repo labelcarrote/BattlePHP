@@ -1,5 +1,15 @@
 <?php
+use BattlePHP\Core\Viewer;
+use BattlePHP\Core\Request;
+use BattlePHP\Core\Auth\AuthManager;
+/**********************************************************************
+* CardElement
+*
+* @author jonpotiron, touchypunchy
+*
+***********************************************************************/
 class CardElement{
+	
 	public $html = '';
 	public $cards;
 	public $multiple_line = false;
@@ -16,9 +26,7 @@ class CardElement{
 		$this->card_name = $card_name;
 		
 		// Replace newlines
-		$s = array("\r","\n");
-		$r = array('','');
-		$line = str_replace($s,$r,$line);
+		$line = str_replace(["\r","\n"],['',''],$line);
 		
 		// Cards!
 		if(preg_match('/^\[#([a-zA-Z0-9\|#_-]+)\]$/',$line,$matches)){
@@ -88,13 +96,16 @@ class CardElement{
 		// Local File / Image
 		elseif(preg_match('/^\@([\S]+)$/',$html,$matches)){
 			$file_root = Request::get_root_url().CardStore::get_folder().$this->card_name.'/';
-			if(preg_match('/^\@.+\.(?:png|jpg|jpe?g|gif)?$/',$html)) 
-				$html = '<img src="'.$file_root.$matches[1].'" alt="image" />';
-			else
-				$html = '<a href="'.$file_root.$matches[1].'">'.$matches[1].'</a>';
+			$html = (preg_match('/^\@.+\.(?:png|jpg|jpe?g|gif)?$/',$html))
+				? '<img src="'.$file_root.$matches[1].'" alt="image" />'
+				: '<a href="'.$file_root.$matches[1].'">'.$matches[1].'</a>';
 		}
 		
-		return array('html_code' => $html, 'multiple_line' => $multiple_line, 'closure_tag' => $closure_tag, 'coding_language' => '');
+		return [
+			'html_code' => $html, 
+			'multiple_line' => $multiple_line, 
+			'closure_tag' => $closure_tag, 
+			'coding_language' => ''
+		];
 	}
 }
-?>

@@ -3,17 +3,9 @@ SetEnv SESSION_USE_TRANS_SID 0
 
 RewriteEngine on
 
-RewriteCond %{HTTP_HOST} !^beta\.flipapart\.com$
-RewriteRule .? - [S=5]
-RewriteRule ^(/*)$ index.php?application=flipapart [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/?$ index.php?application=flipapart&controller=$1&action=$2 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/*$ index.php?application=flipapart&controller=$1 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/(.+)\.(png|jpg|jpeg|gif|css|js|pde|ttf|mp3|svg|eot|woff|tsv|zip|ogg)$ $1/$2/$3.$4 [L,NC]
-RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/(.+)$ index.php?application=flipapart&controller=$1&action=$2&param=$3 [L,QSA]
-
 RewriteCond %{REQUEST_URI} !public
-RewriteRule ^([a-zA-Z0-9_-]+)(/*)$ index.php?application=$1 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)(/*)$ index.php?application=$1&controller=$2 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/?$ index.php?application=$1&controller=$2&action=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)(/*)$ index.php?param1=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)(/*)$ index.php?param1=$1&param2=$2 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/?$ index.php?param1=$1&param2=$2&param3=$3 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/(.+)\.(png|jpg|jpeg|gif|css|js|pde|ttf|mp3|svg|eot|woff|tsv|zip|ogg)$ $1/$2/$3/$4.$5 [L,NC]
-RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/(.+)$ index.php?application=$1&controller=$2&action=$3&param=$4 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/(.+)$ index.php?param1=$1&param2=$2&param3=$3&param4=$4 [L,QSA]

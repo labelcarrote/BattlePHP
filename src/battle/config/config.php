@@ -8,8 +8,8 @@
 class Configuration{
 
 	// general information
-	const PROJECT_NAME = "battlephpv1";//?
-	const PROJECT_VERSION = "0.2";
+	const PROJECT_NAME = "battlephp";//?
+	const PROJECT_VERSION = "0.3";
 	const PROJECT_CONTACT = "labelcarrote@gmail.com";
 
 	// debug / trace settings
@@ -18,6 +18,7 @@ class Configuration{
 
 	// Mono App : set to "" or comment this for multiple apps
 	//const MONO_APP = "sawhat";
+	//const MONO_APP = "ground";
 
 	// smarty configuration
 	const SMARTY_TEMPLATE_DIR = "/view";

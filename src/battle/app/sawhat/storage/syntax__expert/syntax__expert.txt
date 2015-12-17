@@ -1,5 +1,5 @@
 syntax__expert
-lastedit: 20140521_0805
+lastedit: 20150413_1404
 color: #ff6523
 
 ===== Inserting cards =====
@@ -30,22 +30,6 @@ Place 3 or more `*`, `-` or `_` on a line by themselves.
 &gt; So nice !
 &gt; __________________
 &gt; wonderfull
-
-
-
-===== Columns =====
-Text (or other elements, but typicaly text) can be cut and displayed as columns.  
-Just add `|` (for 2 columns) or `||` (for 3 columns) in front of each line of the text you want to divide in column.
-
-Please keep in mind that this uses css3 rules which means it might not work perfectly on every browser as the time we speak. If it's the case for you please change your browser/device/life to enjoy the future.  
-Furthermore this behaviour as not been optimized yet and might slightly bug when associated with other syntax patterns.
-
-&gt; | Nunc elementum, elit eget iaculis accumsan, est nulla commodo eros, a pellentesque orci neque euismod felis. Suspendisse sodales consequat sapien vitae ultrices. Fusce nec quam consequat, blandit risus quis, rhoncus diam.
-&gt; | 
-&gt; | Lorem ipsum dolor sit amet, *consectetur adipiscing* elit. 
-&gt; | 
-&gt; | Nulla pulvinar eleifend lacus adipiscing luctus. Pellentesque rhoncus, tortor at rhoncus porta, quam ipsum pellentesque nunc, at placerat risus augue vitae massa.  
-&gt; | Quisque iaculis ullamcorper mi a tincidunt. Integer eget pharetra turpis.  
 
 
 

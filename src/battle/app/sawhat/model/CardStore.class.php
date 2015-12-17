@@ -1,26 +1,34 @@
 <?php
+use BattlePHP\Storage\FileSystemIO;
 require_once 'app/sawhat/model/Card.class.php';
-require_once 'core/storage/FileSystemIO.class.php';
-
+/**********************************************************************
+* CardStore
+*
+* @author jonpotiron, touchypunchy
+*
+***********************************************************************/
 class CardStore{
+	
 	const DIR = "storage/";
 	const EXT = ".txt";
 	const MAX_RECURSIVE_LEVEL = 2;
+	const MAX_FILE_SIZE = 5242880; // 5Mio 
 	
 	public static function get_folder(){
 		return "app/sawhat/".self::DIR;
 	}
 
 	public static function exist($card_name){
-		$folder = self::get_folder()."$card_name/";
-		$filename = $folder.$card_name.".txt";
-		return file_exists($filename);
+		if(empty($card_name))
+			return false;
+		
+		return file_exists(self::get_folder()."$card_name/".$card_name.self::EXT);
 	}
 
 	public static function get_card($card_name, $recursive_level = 0){
 		$folder = self::get_folder()."$card_name/";
-		$filename = $folder.$card_name.".txt";
-		$lines = (!file_exists($filename)) ? array() : file($filename);
+		$filename = $folder.$card_name.self::EXT;
+		$lines = (!file_exists($filename)) ? [] : file($filename);
 		$card = new Card($card_name,$lines,$recursive_level);
 		$card->files = FileSystemIO::get_files_in_dir($folder.'{*.jpg,*.jpeg,*.JPG,*.png,*.gif,*.zip}');
 		foreach($card->files AS $key => $file){
@@ -31,18 +39,18 @@ class CardStore{
 	}
 	
 	public static function get_all_cards($filter = null){
-		$result = array();
+		$all_cards = [];
 		// look for text files in folder sawhat
 		$dir = self::get_folder()."*";
 		foreach (glob($dir,GLOB_ONLYDIR) as $filename){
 			$basename = basename($filename);
 			if(is_null($filter)){
-				$result[] = self::get_card($basename);
+				$all_cards[] = self::get_card($basename);
 			}
 			elseif(!empty($filter)) {
 				$keywords = SearchHelper::explode_keywords($filter);
 				$add_result = true;
-				$filename = self::get_folder().$basename.'/'.$basename.'.txt';
+				$filename = self::get_folder().$basename.'/'.$basename.self::EXT;
 				foreach($keywords['in'] as $keyword){
 					if(!SearchHelper::keyword_in_file($keyword,$filename)){
 						$add_result = false;
@@ -57,12 +65,12 @@ class CardStore{
 						}
 					}
 					if($add_result){
-						$result[] = self::get_card($basename);
+						$all_cards[] = self::get_card($basename);
 					}
 				}
 			}
 		}
-		return $result;
+		return $all_cards;
 	}
 
 	public static function upsert($card_name, $lines, $color, $is_private){
@@ -73,10 +81,11 @@ class CardStore{
 		$filenamenoext = self::get_folder()."".$card_name."/".$card_name;	
 		$filename = self::get_folder()."".$card_name."/".$card_name.self::EXT;
 		$is_private_as_string = ($is_private) ? "is_private\r\n" : "";
-		if(file_exists($filename)){
-			// UPDATE : save current first !
+
+		// if card exists, stores current card
+		if(file_exists($filename))
 			copy($filename,$filenamenoext."_".$last_edit.self::EXT."old");
-		}
+
 		if(!is_dir(dirname($filename)))
 			mkdir(dirname($filename));
 
@@ -97,10 +106,9 @@ class CardStore{
 		// look for .txtold file in card folder 
 		$folder = self::get_folder()."$card_name/";
 		$filename = self::get_folder()."$card_name/$version";
-		$lines = (!file_exists($filename)) ? array() : file($filename);
+		$lines = (!file_exists($filename)) ? [] : file($filename);
 		$card = new Card($card_name,$lines,0); 
 		$card->files = FileSystemIO::get_files_in_dir($folder.'{*.jpg,*.jpeg,*.JPG,*.png,*.gif}');
 		return $card;
 	}
 }
-?>

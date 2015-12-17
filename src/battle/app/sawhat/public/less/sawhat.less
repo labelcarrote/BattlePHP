@@ -83,6 +83,7 @@ h5, .h5,
 h6, .h6
 {
 	/*font-family: 'Arvo', serif;*/
+	/*font-family: 'Arial';*/
 	font-family: 'Roboto Slab', serif;
 	font-weight:400;
 	font-style: normal;
@@ -229,6 +230,7 @@ footer .content{
 	padding: 6px 12px;
 	display: block;
 	vertical-align: top;
+	margin: 0;
 }
 .banner.loadable{
 	min-height: 0;
@@ -284,31 +286,31 @@ footer .content{
 }
 
 /* ---- Card Content ---- */
-.things{ padding: 12px; }
-.things ul li{
+.card__content{ padding: 12px; }
+.card__content ul li{
 	padding-left: 1em;
 	list-style: square inside;
 }
-.things ol li{
+.card__content ol li{
 	padding-left: 1em;
 	list-style: decimal-leading-zero inside;
 }
-.things li ul li {
+.card__content li ul li {
 	list-style-type: disc;
 }
-.things li ol li {
+.card__content li ol li {
 	list-style-type: upper-roman;
 }
-.things li li ul li {
+.card__content li li ul li {
 	list-style-type: circle;
 }
-.things li li ol li {
+.card__content li li ol li {
 	list-style-type: lower-roman;
 }
 
-.things > :first-child { margin-top: 0; }
-/*.things > :nth-last-child(2) { margin-bottom: 0; }*/
-.things > :last-child { margin-bottom: 0; }
+.card__content > :first-child { margin-top: 0; }
+/*.card__content > :nth-last-child(2) { margin-bottom: 0; }*/
+.card__content > :last-child { margin-bottom: 0; }
 
 .column_container { margin: 0.75em 0; }
 .column_container .size1of1,
@@ -352,9 +354,12 @@ footer .content{
 	column-width:23em;
 	margin: 0 0 12px;
 }
-.include .things,.include .files {
+.include .card__content,.include .files {
 	border-width: 0 1px 1px;
 	border-style: solid;
+}
+.files ul{
+	margin-bottom: 0;
 }
 
 /* ---- Card Edit ---- */
@@ -405,6 +410,40 @@ footer .content{
 	left: 12px;
 }
 
+/* Sawhat Default Button + Sawhat Upload Button */
+.btn-sawhat-default, .upload-btn_container{
+	position: relative;
+	max-width: 100%;
+}
+.upload-btn_container > input {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+    opacity: 0;
+    font-size: 23px;
+    height: 100%;
+    width: 100%;
+    direction: ltr;
+    cursor: pointer;
+}
+.btn-sawhat-default, .upload-btn_title{
+	display: block;
+	padding: 12px;
+}
+.upload-btn_container .uploadprogress{
+	position: absolute;
+	bottom: 0;
+	top: auto;
+	height: 6px;
+	line-height: 6px;
+}
+.upload-btn_container .uploadprogress .bar{
+	width: 0;
+	height: 6px;
+}
+
+
 /* File list */
 .image_link { width: 26em; }
 .image_size {
@@ -436,6 +475,11 @@ footer .content{
 }
 .ace_scrollbar { display: none !important; }
 
+#editor{
+	border: 0;
+	border-radius: 0;
+}
+
 /* Search */
 #search_result { padding: 3px; }
 
@@ -454,7 +498,6 @@ footer form, footer input {
 }
 
 /* ---- Bootstrap fixes ?? ---- */
-form{ margin: 0; }
 .form-inline .input-group,
 .form-inline .form-group {
 	width: 18em;
@@ -540,7 +583,7 @@ form{ margin: 0; }
 	}
 
 	/* refine borders */
-	#webdev .things, #webdev .files {
+	#webdev .card__content, #webdev .files {
 	    border: 0px solid !important;
 	}
 	.sawhat{
@@ -568,7 +611,7 @@ form{ margin: 0; }
 	}
 
 	/* refine borders */
-	#webdev .things, #webdev .files {
+	#webdev .card__content, #webdev .files {
 	    border: 0px solid !important;
 	}
 	.sawhat{

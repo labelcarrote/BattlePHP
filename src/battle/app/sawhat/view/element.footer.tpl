@@ -1,3 +1,11 @@
+{************************************************
+
+ Footer Element 
+ 
+ in :
+ - $color_schemes
+ 
+************************************************}
 <footer>
 	<div class="content auto_clear">
 		<div class="left">

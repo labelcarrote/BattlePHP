@@ -1,16 +1,22 @@
 bugs
-lastedit: 20140924_1709
-color: #ff9900
+lastedit: 20151216_1512
+color: #f90
 
-Y'a 1 br en dessous de moi.
+Testin' API json:
+http://localhost/dev/git/BattlePHP/src/battle/sawhat/api
 
-&lt;br&gt;
-ss
+- get_card(name): OK
+- get_card(name,version): OK
+- search_cards(query): !OK
 
-banane
+- save_card(json) : OK
+- add_file_to_card(json): OK
 
-#dev__web
-#dev_nodejs
-#dev__desktop
-#dev__processing
-#dev__game
+abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdef.
+abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdef.
+abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdef.
+
+
+
+
+

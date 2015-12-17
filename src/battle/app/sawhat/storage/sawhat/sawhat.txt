@@ -1,17 +1,17 @@
 sawhat
-lastedit: 20140623_1606
+lastedit: 20151216_1512
 color: #00ccff
 is_private
 
 ---- TODO
-- add line of images
 - logout from private card
-- site-map (show listing of all cards)
+- add line of images
 - dark skin (like battle.php's index)
 - syntax helper
-- lazy loading inplace
 
 ---- DONE
+- lazy loading inplace
+- site-map (show listing of all cards)
 - clean auth code (+ in battle.php) : auth controller, db 
 - add code block
 - change textarea to ACE EDITOR

@@ -1,7 +1,11 @@
 <?php
-require_once 'core/model/ValueObject.class.php';
+use BattlePHP\Model\Entity;
+use BattlePHP\Event\DomainEvent;
+use BattlePHP\Event\DomainEventSpecification;
+use BattlePHP\Event\DomainEventRepository;
+/*require_once 'core/model/ValueObject.class.php';
 require_once 'core/event/DomainEvent.class.php';
-require_once 'core/event/DomainEventRepository.class.php';
+require_once 'core/event/DomainEventRepository.class.php';*/
 require_once 'app/timeline/config/config.php';
 
 /**
@@ -23,7 +27,7 @@ class FAPBattleEventsSpecification extends DomainEventSpecification{
 * CLASS FAPBattleWatcher (& Form)
 *
 *********************************************************************/
-class FAPBattleWatcher extends ValueObject{
+class FAPBattleWatcher extends Entity{
 
 	public $type ="fapbattlepublished";
 	public $tpl_name = "watcher.fapbattle.tpl";

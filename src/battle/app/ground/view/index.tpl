@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<img class="centered_img hidden" alt="" src="">
-		<form class="ground_api_form" action="{$batl_current_app_virtual_url}api"></form>
+		<form class="ground_api_form" action="{$batl_current_app_virtual_url}ground/api"></form>
 		<section id="explorer" class="content whitebg hidden shadow">
 			{include file="element.folder.tpl"}
 		</section>

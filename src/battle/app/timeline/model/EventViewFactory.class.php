@@ -1,5 +1,5 @@
 <?php
-require_once 'core/storage/FileSystemIO.class.php';
+use BattlePHP\Storage\FileSystemIO;
 require_once 'app/timeline/model/Cigarette.class.php';
 require_once 'app/timeline/model/CigaretteWatcher.class.php';
 require_once 'app/timeline/model/Picture.class.php';

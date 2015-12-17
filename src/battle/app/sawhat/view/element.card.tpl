@@ -1,3 +1,12 @@
+{************************************************
+
+ Card Element 
+ 
+ in :
+ - $card : Card
+ - $show_banner
+ 
+************************************************}
 <div class="sawhat" {if isset($card)}id="{$card->name}"{/if}>
 {if !isset($card)}
 	<div class="banner auto_clear">
@@ -9,15 +18,15 @@
 			</div>
 		</div>
 	</div>
-	<div class="things">
+	<div class="card__content">
 		ERROR: included card doesn't exist.
 	</div>
-	{else}
+{else}
 	<style scoped>{$card->style_definition}</style>
 	{if !isset($show_banner) || $show_banner}
 		{include file="element.card.banner.tpl" card=$card}
 	{/if}
-	<div class="things {if $card->is_light}light{else}dark{/if} auto_clear" data-edit-url="{$batl_current_app_virtual_url}{$card->name}/edit">
+	<div class="card__content {if $card->is_light}light{else}dark{/if} auto_clear" data-edit-url="{$batl_current_app_virtual_url}{$card->name}/edit">
 	{if !$batl_is_logged and $card->is_private}
 		<form id="sawhatlogin" class="form-inline" method="post" enctype="multipart/form-data">
 			<div class="form-group">
@@ -30,6 +39,7 @@
 				<button type="submit" class="btn btn-default" name="submit" value="login">Show Card</button>
 			</div>
 		</form> 
+	</div>
 	{else}
 		{$card->html}
 		<!-- WTF is this ending div? -->

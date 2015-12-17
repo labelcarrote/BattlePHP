@@ -1,6 +1,6 @@
 home
-lastedit: 20140822_1508
-color: #F90
+lastedit: 20151102_1911
+color: #f90
 
 This is a wiki card containing other wiki cards.  
 You can edit this card by pressing the EDIT button at the bottom!

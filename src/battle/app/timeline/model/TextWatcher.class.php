@@ -1,7 +1,11 @@
 <?php
-require_once 'core/model/ValueObject.class.php';
+use BattlePHP\Model\Entity;
+use BattlePHP\Event\DomainEvent;
+use BattlePHP\Event\DomainEventSpecification;
+use BattlePHP\Event\DomainEventRepository;
+/*require_once 'core/model/ValueObject.class.php';
 require_once 'core/event/DomainEvent.class.php';
-require_once 'core/event/DomainEventRepository.class.php';
+require_once 'core/event/DomainEventRepository.class.php';*/
 require_once 'app/timeline/config/config.php';
 require_once 'app/timeline/model/Text.class.php';
 
@@ -20,7 +24,7 @@ class TextEventsSpecification extends DomainEventSpecification{
 * CLASS TextWatcher (& Form)
 *
 *********************************************************************/
-class TextWatcher extends ValueObject{
+class TextWatcher extends Entity{
 	
 	const ALL_TEXT_EVENT_NAMES = "TextAdded";
 

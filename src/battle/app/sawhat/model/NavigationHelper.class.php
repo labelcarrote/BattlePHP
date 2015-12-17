@@ -1,5 +1,13 @@
 <?php
+use BattlePHP\Core\Request;
+/**********************************************************************
+* NavigationHelper
+*
+* @author jonpotiron, touchypunchy
+*
+***********************************************************************/
 class NavigationHelper{
+	
 	const MAX_ITEM = 5;
 	const BREADCRUMBS_SESSION_VAR = 'NavigationHelper';
 	const DEFAULT_NAME = 'breadcrumbs';
@@ -26,7 +34,7 @@ class NavigationHelper{
 			unset($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'][$item_name]);
 		}
 		if($current_url != Request::get_full_url().Request::get_application_virtual_root()){
-			$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'][$item_name] = array('url' => $current_url, 'name' => $item_name);
+			$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'][$item_name] = ['url' => $current_url, 'name' => $item_name];
 			$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['position'] = array_search($item_name, array_keys($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['items'])) +1;
 		} else {
 			$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]['position'] = 0;
@@ -49,7 +57,6 @@ class NavigationHelper{
 	 */
 	public static function get($breadcrumbs_name = self::DEFAULT_NAME){
 		self::set_in_session($breadcrumbs_name);
-		
 		return $_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name];
 	}
 	
@@ -62,11 +69,9 @@ class NavigationHelper{
 	 *
 	 */
 	private static function set_in_session($breadcrumbs_name = self::DEFAULT_NAME){
-		$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name] =
+		$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name] = 
 			!isset($_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name])
-				?	array('position' => 0, 'items' => array())
-				:	$_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name]
-		;
+			? ['position' => 0, 'items' => []]
+			: $_SESSION[self::BREADCRUMBS_SESSION_VAR][$breadcrumbs_name];
 	}
 }
-?>

@@ -1,9 +1,16 @@
 <?php
-require_once 'core/auth/AuthManager.class.php';
-require_once 'core/imaging/ImageHelper.class.php';
+use BattlePHP\Core\Auth\AuthManager;
+use BattlePHP\Imaging\ImageHelper;
+use BattlePHP\Core\Viewer;
 require_once 'app/sawhat/model/CardElement.class.php';
-
-class Card{
+/**********************************************************************
+* Card
+*
+* @author jonpotiron, touchypunchy
+*
+***********************************************************************/
+class Card implements JsonSerializable{
+	
 	const DEFAULT_COLOR = '#f90';
 
 	public $is_private = false;
@@ -21,17 +28,17 @@ class Card{
 	public $exists = false;
 	public $history;
 	
-	public function __construct($name, $lines = array(), $recursive_level = 0){
+	public function __construct($name, $lines = [], $recursive_level = 0){
 		$this->exists = CardStore::exist($name);
 		$this->name = $name;
 		$this->display_name = self::get_display_name($name);
 		$this->lines = $lines;
 		$this->is_recursive = $recursive_level > 0;
 		$this->recursive_level = $recursive_level;
-		$this->elements = array();
+		$this->elements = [];
 		$init = true;
 		$element = null;
-		$previous_element = (object)array('multiple_line'=>false,'html_closure_tag'=>'');
+		$previous_element = (object)['multiple_line' => false, 'html_closure_tag' => ''];
 		$need_closure = false;
 		
 		foreach($lines as $line){
@@ -117,6 +124,26 @@ class Card{
 		return '';
 	}
 
+	// ---- JsonSerializable
+
+	public function jsonSerialize() {
+        return [
+        	"is_private" => $this->is_private,
+			"is_recursive" => $this->is_recursive,
+			"color" => $this->color,
+			"is_light" => $this->is_light,
+			"properties" => $this->properties,
+			"last_edit" => $this->last_edit,
+			"name" => $this->name,
+			"display_name" => $this->display_name,
+			"files" => $this->files,
+			"exists" => $this->exists,
+			"history" => $this->history,
+			"text_code" => $this->text_code,
+			"html" => $this->html
+        ];
+    }
+
 	// ---- Helper Methods ----
 
 	private static function get_display_name($card_name){
@@ -151,13 +178,13 @@ class Card{
 		$this->style_definition =
 			'#'.$this->name.' a:not(.white_text):not(.lighter_text):not(.black_text):not(.darker_text):not(.btn){color:'.$this->color.';}'
 			.'#'.$this->name.' h2,#'.$this->name.' h3,#'.$this->name.' h4{border-color:'.$this->color.';}'
-			.'#'.$this->name.' .things, #'.$this->name.' .files{border-color:rgba('.implode(',',ImageHelper::hex_to_rgb($this->color)).',0.2);}'
+			.'#'.$this->name.' .card__content, #'.$this->name.' .files{border-color:rgba('.implode(',',ImageHelper::hex_to_rgb($this->color)).',0.2);}'
 			.'#'.$this->name.' .banner:not(.loadable){background-color:'.$this->color.';}'
 		;
 	}
 	
 	private function open_multiple_line_tag($card_element){
-		return (object)array('html'=>'<'.$card_element->html_closure_tag.'>');
+		return (object)['html' => '<'.$card_element->html_closure_tag.'>'];
 	}
 	
 	private function close_multiple_line_tag($card_element){
@@ -165,7 +192,10 @@ class Card{
 		$this->elements[$last_element_id]->html = str_replace("\n",'',$this->elements[$last_element_id]->html);
 		$this->elements[$last_element_id]->html = str_replace("\r",'',$this->elements[$last_element_id]->html);
 		
-		return (object)array('html'=>'</'.$card_element->html_closure_tag.'>');
+		return (object)['html' => '</'.$card_element->html_closure_tag.'>'];
+	}
+
+	public function to_json(){
+		return json_encode($this);
 	}
 }
-?>
