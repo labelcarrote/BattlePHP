@@ -1,6 +1,6 @@
 BattlePHP
 ==========
-BattlePHP is a small open source MVC PHP framework by [https://github.com/labelcarrote/BattlePHP/tree/master/src/battle/app](examples).
+BattlePHP is a small open source MVC PHP framework by [examples](https://github.com/labelcarrote/BattlePHP/tree/master/src/battle/app).
 
 It includes some sample-websites we've made, that ranges from the single page apps (Partycul, CrappyCrop, FingerZen) to more mature websites like Sawhat (another text-based-wiki). It targets PHP 5.5 and up.
 
