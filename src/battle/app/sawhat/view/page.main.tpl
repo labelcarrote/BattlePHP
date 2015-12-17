@@ -2,6 +2,9 @@
 
  Main Page 
 
+ in:
+ - $color_scheme
+
 ************************************************}
 <!doctype html>
 <html>
@@ -11,21 +14,15 @@
 		<meta name="description" content="Label Carrote fluent wiki. Powered by Sawhat." />
 		<meta name="author" content="label carrote"/>
 		<meta name="robots" content="noindex, nofollow"/>
-		<title>{if !isset($cards) && isset($card->display_name)}{$card->display_name} | {elseif isset($cards)} All cards | {/if}{ConfigurationSawhat::SITE_TITLE}</title>
+		<title>{if !isset($cards) && isset($card->display_name)}{$card->display_name} | {elseif isset($cards)} All cards | {elseif isset($title)}{$title}{/if}{ConfigurationSawhat::SITE_TITLE}</title>
 		<link rel="stylesheet" href="{$batl_root_url}public/css/reset.css" />
 		<link rel="stylesheet" href="{$batl_root_url}lib/bootstrap/css/bootstrap.min.css" />
-		<!-- 
-		<link rel="stylesheet" href="{$batl_root_url}lib/bootstrap/css/jasny-bootstrap.min.css" />
-		 -->
 		<link rel="stylesheet" href="{$batl_root_url}lib/prism/prism_okaida_mod.css" />
 		<link rel="stylesheet" href="{$batl_root_url}lib/font-awesome-4.1.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="{$batl_current_app_url}public/css/color_scheme/{$color_scheme}.css" id="color_scheme"/>
 		<link rel="stylesheet" href="{$batl_current_app_url}public/css/sawhat.css" />
 		<script type="text/javascript" src="{$batl_root_url}lib/jquery/jquery.js"></script>
 		<script type="text/javascript" src="{$batl_root_url}lib/bootstrap/js/bootstrap.min.js"></script>
-		<!-- 
-		<script type="text/javascript" src="{$batl_root_url}lib/bootstrap/js/jasny-bootstrap.min.js"></script>
-		 -->
 		<script type="text/javascript" src="{$batl_root_url}lib/prism/prism.js"></script>
 	</head>
 	<body>

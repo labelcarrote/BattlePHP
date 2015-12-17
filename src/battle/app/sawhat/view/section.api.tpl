@@ -48,7 +48,34 @@
 	}
 }</code></pre>
 				<li>- Search Cards (query) : GET <a href="{$batl_current_app_virtual_url}api?m=search&amp;query=carrote">/sawhat/api?m=search&amp;query=carrote</a>
-					<pre class="code line-numbers  language-javascript"><code>{literal}{/literal}</code></pre>
+					<pre class="code line-numbers  language-javascript"><code>{
+	"errors":null,
+	"body":[
+		{
+			"is_private":false,
+			"is_recursive":false,
+			"color":"#f90",
+			"is_light":true,
+			"properties":null,
+			"last_edit":"2015-10-12",
+			"name":"labelcarrote",
+			"display_name":"labelcarrote",
+			"files":[
+				{
+					"name":"13943532f70ed5d711138122825e7d44.png",
+					"fullname":"app\/sawhat\/storage\/labelcarrote\/13943532f70ed5d711138122825e7d44.png",
+					"size":11724,
+					"human_readable_size":"11.45 ko",
+					"type":"image"
+				}
+			],
+			"exists":true,
+			"history":null,
+			"text_code":"*some text or markdown*",
+			"html":"..."
+		}
+	]
+}</code></pre>
 				</li>
 			</ul>
 

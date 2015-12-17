@@ -60,46 +60,6 @@ class ActionApi extends Controller{
 					$this->assign('show_banner',Request::isset_or($_GET['show_banner'],1));
 					$card->html = $this->fetch_view('element.card.tpl');
 					$response->body = $card;
-					
-					// OLD (was in ActionHome)
-					/*
-					case 'as_code':
-					if(!in_array($params['card_name'],$fake_cards)){
-						$result = new Response();
-						if($params['card_name'] == 'all_cards'){
-							$result->body = "";
-						}else{
-							$card_version = Request::isset_or($_GET["card_version"],null);
-							if($card_version !== null){
-								$old_card = CardStore::get_card_version($params['card_name'],$card_version);
-								$result->body = $old_card->text_code;
-							}else{
-								$card = CardStore::get_card($params['card_name']);
-								$result->body = $card->text_code;
-							}
-						}
-						echo $result->to_json();
-					}
-					break;
-					case 'as_html':
-					if(!in_array($params['card_name'],$fake_cards)){
-						$result = new Response();
-						if($params['card_name'] == 'all_cards'){
-							$result->body = '';
-						}else{
-							$ass_card = CardStore::get_card($params['card_name']);
-							$this->assign('card',$ass_card);
-							$this->assign('batl_is_logged',$batl_is_logged);
-							$this->assign('show_banner',Request::isset_or($_GET['show_banner'],1));
-							$this->assign('card_name',$ass_card->name);
-							$this->assign('card_display_name',$ass_card->display_name);
-							$this->assign('card_exists',$ass_card->exists);
-							$result->body = $this->fetch_view('element.card.tpl');
-							$result->loadable_link = $this->fetch_view('element.card.loadable.tpl');
-						}
-						echo $result->to_json();
-					}
-					break;*/
 					break;
 				case 'search' :
 					// TODO
@@ -118,6 +78,7 @@ class ActionApi extends Controller{
 			$data = json_decode(file_get_contents('php://input'), false); // true = array, false = object (stdClass)
 			if($data === null){
 				//$response->errors = self::ERR_UNKNOWN_API_METHOD;
+				$this->assign('title', "API | ");
 				$this->display_page('section.api.tpl');
 				return;
 			}else{
@@ -149,7 +110,6 @@ class ActionApi extends Controller{
 										Request::get_application_path().CardStore::DIR.$data->card_name."/".$data->file_name,
 										$data->file
 									);
-
 									// returns files list
 									$this->assign("card", CardStore::get_card($data->card_name));
 									$response->body = $this->fetch_view("element.file_set.tpl");
@@ -172,44 +132,4 @@ class ActionApi extends Controller{
 		}
 		echo $response->to_json();
 	}
-
-	/*public function OLDindex(){
-		$batl_is_logged = AuthManager::is_authenticated();
-		$response = new Response();
-		// POST
-		if(isset($_POST['data'])){
-			$data = json_decode($_POST['data'],false); // true = array, false = object (stdClass)
-			switch ($data->submit) {
-				case 'save_card' :
-					$card = CardStore::get_card($data->card_name);
-					if($card === null || !$card->is_private || ($card->is_private && $batl_is_logged)){
-						$response->body = [
-							'is_saved' => CardStore::upsert($data->card_name,$data->card_txt,$data->card_color,$data->card_is_private),
-							'return_url' => Request::get_application_virtual_root().$data->card_name
-						];
-					}else{
-						$response->errors = "DON'T DO THAT";
-					}
-					break;
-				// TODO submit in data json object
-				// TODO pass upload in json 
-				case 'add_file_to_card':
-					$card_name = Request::isset_or($_POST['name'], "");
-					if(CardStore::exist($card_name)){
-						$extensions = [".jpg",".png",".jpeg",".JPG",".gif",".zip"];
-						try{
-							$file = Uploader::process_form_file("file",CardStore::get_folder().$card_name,2000000,$extensions);
-							// returns files list
-							$this->assign("card", CardStore::get_card($card_name));
-							$response->body = $this->fetch_view("element.file_set.tpl");
-						}catch(Exception $e){ 
-							$response->errors = "DON'T DO THAT";
-						}
-					}
-					break;
-			}
-		}
-		$response->errors = "WAT";
-		echo $response->to_json();
-	}*/
 }

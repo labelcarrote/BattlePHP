@@ -52,23 +52,6 @@ class ActionHome extends Controller{
 			$submit_action = $_POST['submit'];
 			switch ($submit_action) {
 				// TODO move to api !
-				/*case 'save' :
-					$card_name = Request::isset_or($_POST['card_name'], ConfigurationSawhat::DEFAULT_CARD_NAME);
-					$card_color = Request::isset_or($_POST['color'], Card::DEFAULT_COLOR);
-					$card_lines = Request::isset_or($_POST['card'], "");
-					$is_private = isset($_POST['is_private']);
-					$card = CardStore::get_card($card_name);
-
-					// do nothing if card is private and user is not authentified
-					if($card === null || !$card->is_private || ($card->is_private && $batl_is_logged)){
-						$json = [
-							'is_saved' => CardStore::upsert($card_name,$card_lines,$card_color,$is_private),
-							'return_url' => Request::get_application_virtual_root().$card_name
-						];
-						echo json_encode($json);
-						exit(0);
-					}
-					break;*/
 				case 'login' :
 					$identity = new Identity();
 					$identity->password = Request::isset_or($_POST['password'], "prout");
@@ -122,9 +105,6 @@ class ActionHome extends Controller{
 							'palette' => $palette_by_hue,
 							'breadcrumbs' => NavigationHelper::add_item(($ass_card->exists ? '<i>edit:</i>' : '<i>create:</i>').' '.$ass_card->display_name)
 						]);
-						/*$this->assign('palette',$palette_by_hue);
-						$this->assign('card',$ass_card);
-						$this->assign('breadcrumbs',NavigationHelper::add_item(($ass_card->exists ? '<i>edit:</i>' : '<i>create:</i>').' '.$ass_card->display_name));*/
 						if(($ass_card->is_private && $batl_is_logged) || !$ass_card->is_private){
 							$ass_card->history = CardStore::get_card_history($params['card_name']);
 							$this->display_page('section.card.update.tpl');
@@ -162,15 +142,8 @@ class ActionHome extends Controller{
 					$this->display_page('section.card.starred.tpl');
 					break;
 				default:
-					// WIP TEMP FIX for wrong get_params() behavior
-					/*$card_name = (isset($_GET['controller']) || (array_key_exists('controller',$_GET) && $_GET['controller'] === null)) 
-						? $params['card_name'] 
-						: ConfigurationSawhat::DEFAULT_CARD_NAME;
-						echo $card_name . Request::get_current_params();*/
 					$card_name = Request::get_current_params();
 					$ass_card = CardStore::get_card($card_name);
-					/*$this->assign('breadcrumbs',NavigationHelper::add_item($ass_card->display_name));
-					$this->assign('card',$ass_card);*/
 					$this->assign([
 						'card' => $ass_card,
 						'upload_form' => new UploadFileForm('add_file_to_card',$card_name),
@@ -195,69 +168,6 @@ class ActionHome extends Controller{
 				$this->assign('cards',$ass_cards);
 		}
 		$this->display_page('section.card.tpl');
-	}
-
-	// WIP
-	// [/sawhat/api]
-	// Treats any POST command in JSON {data:{submit: ...,...} and respond in JSON {errors:"";body:""})
-	// - addfile -> add_file
-	public function api(){
-		echo "YO";
-		$response = new Response();
-		// POST
-		if(isset($_POST['submit'])) {
-			switch ($_POST['submit']) {
-				case 'addfile':
-					$card_name = Request::isset_or($_POST['name'], "");
-					if(CardStore::exist($card_name)){
-						$extensions = [".jpg",".png",".jpeg",".JPG",".gif",".zip"];
-						try{
-							$file = Uploader::process_form_file("file",CardStore::get_folder().$card_name,2000000,$extensions);
-							// returns files list
-							$this->assign("card", CardStore::get_card($card_name));
-							$response->body = $this->fetch_view("element.file_set.tpl");
-						}catch(Exception $e){ 
-							$response->errors = "DON'T DO THAT";
-						}
-					}
-					break;
-				case 'save_card' :
-					$card_name = Request::isset_or($_POST['name'], ConfigurationSawhat::DEFAULT_CARD_NAME);
-					$card_color = Request::isset_or($_POST['color'], Card::DEFAULT_COLOR);
-					$card_lines = Request::isset_or($_POST['card'], "");
-					$is_private = isset($_POST['is_private']);
-					$card = CardStore::get_card($card_name);
-					if($card === null || !$card->is_private || ($card->is_private && $batl_is_logged)){
-						$response->body = [
-							'is_saved' => CardStore::upsert($card_name,$card_lines,$card_color,$is_private),
-							'return_url' => Request::get_application_virtual_root().$card_name
-						];
-					}else{
-						$response->errors = "DON'T DO THAT";
-					}
-					//OLD
-					/*$card_name = Request::isset_or($_POST['name'], ConfigurationSawhat::DEFAULT_CARD_NAME);
-					$card_color = Request::isset_or($_POST['color'], Card::DEFAULT_COLOR);
-					$card_lines = Request::isset_or($_POST['card'], "");
-					$is_private = isset($_POST['is_private']);
-					$card = CardStore::get_card($card_name);
-
-					// do nothing if card is private and user is not authentified
-					if($card === null || !$card->is_private || ($card->is_private && $batl_is_logged)){
-						$json = array(
-							'is_saved' => CardStore::upsert($card_name,$card_lines,$card_color,$is_private),
-							'return_url' => Request::get_application_virtual_root().$card_name
-						);
-						echo json_encode($json);
-						exit(0);
-					}*/
-					break;
-				default:
-					break;
-			}
-			
-		}
-		echo $response->to_json();
 	}
 
 	// ---- Helpers ----

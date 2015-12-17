@@ -15,12 +15,14 @@ class ActionHome extends Controller{
 	
 	// [/home,/]
 	public function index(){
-		$this->assign('title',"101_hello");
+		$this->assign('title',"101_hello | home");
 		$this->display_view('section.index.tpl');
 	}
 
-	// [/home/sub_page]
-	public function sub_page(){
-		echo "This is a subpage, follow <a href='".Request::get_application_virtual_root()."'>this link</a> to go back home";
+	// [/home/page1]
+	public function page1(){
+		$this->display_view('section.page1.tpl',[
+			'title' => "101_hello | page1"
+		]);
 	}
 }

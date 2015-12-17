@@ -11,9 +11,9 @@
 		</p>
 		<p>
 			- <a href="{$batl_current_app_virtual_url}home">/home</a> or <a href="{$batl_current_app_virtual_url}">/</a> = current page, calls <strong>ActionHome::index()</strong><br>
-			- <a href="{$batl_current_app_virtual_url}home/sub_page">/home/sub_page</a> = a sub page of the 'home' section, calls <strong>ActionHome::sub_page()</strong><br>
+			- <a href="{$batl_current_app_virtual_url}home/page1">/home/page1</a> = a sub page of the 'home' section, calls <strong>ActionHome::page1()</strong><br>
 			- <a href="{$batl_current_app_virtual_url}lol">/lol</a> = another section called 'lol', calls <strong>ActionLol::index()</strong><br>
-			- <a href="{$batl_current_app_virtual_url}lol/wat">/lol/wat</a> = another sub_page called 'wat' from the 'lol' section, calls <strong>ActionLol::wat()</strong>
+			- <a href="{$batl_current_app_virtual_url}lol/wat">/lol/wat</a> = another sub page called 'wat' from the 'lol' section, calls <strong>ActionLol::wat()</strong>
 		</p>
 	</body>
 </html>
