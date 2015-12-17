@@ -34,7 +34,7 @@ class Viewer extends \Smarty{
 		$this->setCompileDir(Configuration::SMARTY_COMPIL_DIR."/$application");
 
 		if(!is_dir($this->getCompileDir()))
-			mkdir($this->getCompileDir());
+			@mkdir($this->getCompileDir());
 
 		$this->assign_config_infos();
 
