@@ -31,8 +31,10 @@ jQuery.fn.exists = function () {
 }
 $(document).ready(function(){
 
-	// Set editor width
-	editor.resize();
+	if(typeof ace !== 'undefined'){
+		// Set editor width
+		editor.resize();
+	}
 
 	// COLOR PICKER //
 	/* @todo
@@ -98,93 +100,6 @@ $(document).ready(function(){
 $(window).load(function(){
 
 	// ------- UPLOAD ---------
-
-	/*function send_formdatawithupload(formData){
-		console.log(formData);
-		var xhr = new XMLHttpRequest();
-		var submit_url = $('#card_edit_form').attr("action") + "api";
-		xhr.open("POST",submit_url,true);
-		xhr.upload.onprogress = function(event){
-			var percentage = Math.floor(event.loaded / event.total * 100);
-			if(percentage === 100)
-				$(".uploadprogress p").html( "Completing upload...");
-			else
-				$(".uploadprogress p").html(percentage + "%");
-			$(".uploadprogress .progress-bar").css("width", percentage + "%")
-		}
-		xhr.onload = function(oEvent){
-			var result = "";
-			var percentage = 0;
-		    if (xhr.status != 200){
-		    	$(".uploadprogress p").html("Error " + xhr.status + " occurred uploading your file.");
-		    }else{
-		    	var ajaxresult = JSON.parse(this.response);
-		    	if(ajaxresult.errors === null){
-		    		$(".uploadprogress p").html("Completed!");
-		    		$("#files").html(ajaxresult.body);
-		    	}
-		    	else 
-		    		$(".uploadprogress p").html(ajaxresult.errors);
-		    }
-		    $(".uploadprogress .progress-bar").css("width", percentage + "%")
-		}
-		xhr.send(formData);
-	}
-
-	// upload / attach file form
-	$("#file").change(function (e) {
-		// Check for the various File API support.
-		var is_file_api_supported = (window.File && window.FileReader && window.FileList && window.Blob);
-		if (!is_file_api_supported){
-			console.log('The File APIs are not fully supported in this browser.');
-		} else {
-			var files = e.target.files;
-			var card_name = $(this).attr("data-card-name");
-			for (var i = 0, f; f = files[i]; i++) {
-				// Only process image files.
-				if (!f.type.match('image.*'))
-					continue;
-
-				// Closure to capture the file information.
-				var reader = new FileReader();
-				reader.onload = (function(datFile) {
-					var max_file_size = 5242880;// 5Mio
-					if(datFile.size > max_file_size){
-						alert("DAT FILE TOO BIG, MAX IS " + max_file_size + " BYTES ");
-					}else{
-						return function(e) {
-							var data = {
-								submit : "add_file_to_card", 
-								card_name : card_name,
-								file : e.target.result,
-								file_name : escape(datFile.name)
-							};
-							send_formdatawithupload(JSON.stringify(data));
-						};
-					}
-				})(f);
-				reader.readAsDataURL(f);
-			}
-		} 
-
-		return;
-		// Check for the various File API support.
-		if (window.File && window.FileReader && window.FileList && window.Blob) {
-		  // Great success! All the File APIs are supported.
-		} else {
-		  alert('The File APIs are not fully supported in this browser.');
-		}
-		var datform = $("#file");
-		var datform_data = datform[0];
-		var data = new FormData();//form);
-		var file = datform_data.files[0];
-    	data.append("file", file);
-		data.append("name", "addfile");
-		data.append("submit", "addfile");
-	 	send_formdatawithupload(JSON.stringify(data));
-	});*/
-
-	// NNNEEEEEWWWWWWWWWWW
 
 	function send_formdatawithupload(formData){
 		var xhr = new XMLHttpRequest(),
@@ -281,55 +196,11 @@ $(window).load(function(){
 			self.sts_id = setTimeout(function(){save_card_api($("#editor_save"));},latency);
 		});
 	}
-	
-	/*$('#editor_save, .btn_save_card').click(function(e){
-		save_card($(this));
-	});*/
 
 	$(document).on('click',".btn_save_card", function(e){
 		stop_bubbling(e);
 		save_card_api($(this));
 	});
-
-	/*function save_card(save_button){
-		var btn = save_button,
-			editor_console = $("#editor_console");
-
-		$('<input />').attr('type', 'hidden')
-			.attr('name', 'card')
-			.attr('value', editor.getSession().getValue())
-			.appendTo('#card_edit_form');
-		$('<input />').attr('type', 'hidden')
-		    .attr('name', "submit")
-		    .attr('value', "save")
-		    .appendTo('#card_edit_form');
-
-		// check format
-		var pattern = new RegExp($('input[name="card_color"]').attr('pattern'));
-		if(!$('input[name="card_color"]').val().match(pattern)){
-			editor_console.html('<span class="error">Chosen color is not a valid hexadecimal value.</span>');
-		} else {
-			// ajax post
-			var submit_url = $('#card_edit_form').attr("action");
-			$.ajax({
-				url: submit_url,
-				type: 'post',
-				dataType: 'json',
-				data: $("#card_edit_form").serialize(),
-				beforeSend: function() {
-					btn.prop("disabled",true);
-					editor_console.html("Saving...");
-				},
-				success: function(data) {
-					if(data.is_saved !== false){
-						btn.prop("disabled",false);
-						editor_console.html("Last save : " + new Date());
-						//document.location.href = data.return_url;
-					}
-				}
-			});
-		}
-	}*/
 
 	function save_card_api(save_button){
 		var editor_console = $("#editor_console"),
@@ -360,7 +231,7 @@ $(window).load(function(){
 
 	// -------- HISTORY - NAVIGATE THROUH HISTORY TREE --------
 
-	// TODO : FIX Card Edit : Set As Current
+	// Set an ancient version of the card as current (in editor)
 	$('body').on('click','.load_card_as_current',function(e){
 		//card to load 
 		var element = $(this),

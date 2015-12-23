@@ -8,7 +8,7 @@
  
 ************************************************}
 {if isset($cards)}
-<div class="content">
+<div class="content content_theme_sawhat">
 	{include file="element.header.tpl"}
 	<section>
 		<div class="sawhat card__content">
@@ -32,14 +32,14 @@
 	</section>
 </div>
 {elseif isset($card)}
-<div class="content">
+<div class="content content_theme_sawhat">
 	{include file="element.header.tpl"}
 	<section>
 	{include file="element.card.tpl"}
 	</section>
 </div>
 {else}
-<div class="content">
+<div class="content content_theme_sawhat">
 	{include file="element.header.tpl"}
 	<section>
 		<div class="sawhat card__content">

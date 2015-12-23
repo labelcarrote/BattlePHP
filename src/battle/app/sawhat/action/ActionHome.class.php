@@ -6,12 +6,12 @@ use BattlePHP\Api\Response;
 use BattlePHP\Storage\Uploader;
 use BattlePHP\Core\Request;
 use BattlePHP\Imaging\ImageHelper;
-require_once 'app/sawhat/config/config_sawhat.php';
-require_once 'app/sawhat/model/Card.class.php';
-require_once 'app/sawhat/model/CardStore.class.php';
-require_once 'app/sawhat/model/ColorScheme.class.php';
-require_once 'app/sawhat/model/NavigationHelper.class.php';
-require_once 'app/sawhat/model/SearchHelper.class.php';
+require_once __DIR__.'/../config/config_sawhat.php';
+require_once __DIR__.'/../model/Card.class.php';
+require_once __DIR__.'/../model/CardStore.class.php';
+require_once __DIR__.'/../model/ColorScheme.class.php';
+require_once __DIR__.'/../model/NavigationHelper.class.php';
+require_once __DIR__.'/../model/SearchHelper.class.php';
 require_once __DIR__.'/../model/UploadFileForm.php';
 /**********************************************************************
 * ActionHome

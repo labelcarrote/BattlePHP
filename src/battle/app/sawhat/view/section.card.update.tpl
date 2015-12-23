@@ -6,7 +6,7 @@
  - $card : Card
  
 ************************************************}
-<div class="content">
+<div class="content content_theme_sawhat">
 	{include file="element.header.tpl"}
 	<section class="white" {if $card->exists}id="{$card->name}"{/if}>
 		{if $card->exists}<style>{$card->style_definition}</style>{/if}
@@ -43,7 +43,7 @@
 					<a class="btn-sawhat-default" href="{$batl_current_app_virtual_url}{$card->name}">View</a>
 				</div>
 				<div>
-				 	{include file="form.upload_file_button.tpl"}
+				 	{include file="form/form.upload_file_button.tpl"}
 				</div>
 				<hr>
 				<div>

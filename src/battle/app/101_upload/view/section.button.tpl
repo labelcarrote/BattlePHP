@@ -16,8 +16,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width">
-	<meta name="description" content="\o/">
 	<title>{$title} - BattlePHP</title>
+	{include file="meta.open_graph.tpl"}
 	<link rel="stylesheet" href="{$batl_root_url}public/css/reset.css" />
 	<link rel="stylesheet" href="{$batl_current_app_url}public/css/101_upload.css" />
 </head>

@@ -56,6 +56,7 @@ hr {
 	break-before: avoid;
 }
 a{ text-decoration: none; cursor: pointer; }
+a:hover, a:active, a:focus { outline: 0; }
 article{ padding: 0; }
 fieldset{ width: 100%; }
 img{
@@ -90,7 +91,7 @@ h6, .h6
 }
 
 h1, .h1{font-size:2em; margin:0.75em 0 0.675em; line-height: 1.5em;}
-h2, .h2{font-size:1.67em; margin:0.898em 0 0.898em; line-height: 0.898em;}
+h2, .h2{font-size:1.67em; margin:0.898em 0 0.898em;}
 h3, .h3{font-size:1.3em; margin:1.154em 0 1.154em; line-height: 1.154em;}
 h4, .h4{font-size:1.25em; margin:1.2em 0 1.2em; line-height: 1.2em;}
 h5, .h5{font-size:1.15em; margin:1.304em 0 1.304em; line-height: 1.304em;}
@@ -156,7 +157,8 @@ table th, table td {
 .paddingbottom{ padding-bottom: 12px; }
 .paddingleft{ padding-left: 12px; }
 .paddingright{ padding-right: 12px; }
-.paddingleftright{ padding: 0px 12px; }
+.paddingleftright{ padding: 0 12px; }
+.paddingtopbottom{ padding: 12px 0; }
 .margin{ margin: 12px; }
 .smallmargin{ margin: 6px; }
 .smallermargin{ margin: 3px; }
@@ -211,7 +213,7 @@ small, .small { font-size: 0.9em; }
 	height: 100%;
 	overflow: auto;*/
 }
-.content{
+.content, .content_theme_sawhat{
 	margin: auto;
 	padding: 0 12px 12px;
 }
@@ -309,7 +311,6 @@ footer .content{
 }
 
 .card__content > :first-child { margin-top: 0; }
-/*.card__content > :nth-last-child(2) { margin-bottom: 0; }*/
 .card__content > :last-child { margin-bottom: 0; }
 
 .column_container { margin: 0.75em 0; }
@@ -545,7 +546,7 @@ footer form, footer input {
 @media screen and (max-width: 800px) {
 	.unit{ float: none;}
 	.size1of3,.size1of2,.size1of1,.size4of5,.size1of5{ width: 100%;	}
-	.content:not(footer) {
+	.content_theme_sawhat:not(footer) {
 		padding: 0;
 	}
 	.breadcrumbs { padding: 4px; }

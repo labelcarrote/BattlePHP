@@ -3,7 +3,7 @@
  Starred Card Section 
  
 ************************************************}
-<div class="content">
+<div class="content content_theme_sawhat">
 	{include file="element.header.tpl"}
 	<section class="size1of1">
 		<div class="sawhat card__content">
