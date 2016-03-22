@@ -37,4 +37,3 @@ class Text{
 		return json_encode($this);
 	}
 }
-?>

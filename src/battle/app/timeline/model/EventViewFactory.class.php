@@ -39,7 +39,7 @@ class EventViewFactory{
 	}
 
 	public static function events_to_views($events,$viewer){
-		$table_event_view = array();
+		$table_event_view = [];
 		foreach ($events as $event){
 			$event_view = self::event_to_view($event,$viewer);
 			if($event_view !== null)
@@ -63,4 +63,3 @@ class EventViewFactory{
 		}
 	}
 }
-?>

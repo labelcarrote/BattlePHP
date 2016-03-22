@@ -4,11 +4,6 @@ use BattlePHP\Event\DomainEvent;
 use BattlePHP\Event\DomainEventSpecification;
 use BattlePHP\Event\DomainEventRepository;
 use BattlePHP\Storage\Uploader;
-
-/*require_once 'core/model/ValueObject.class.php';
-require_once 'core/storage/Uploader.class.php';
-require_once 'core/event/DomainEvent.class.php';
-require_once 'core/event/DomainEventRepository.class.php';*/
 require_once 'app/timeline/config/config.php';
 
 class PictureEventsSpecification extends DomainEventSpecification{
@@ -36,7 +31,7 @@ class PictureWatcher extends Entity{
 	
 	public $since_date = null;
 	public $count_since = 0;
-	public $pictures = array(); 
+	public $pictures = []; 
 	public $picture = null;
 
 	public function __construct($since_date = null){
@@ -66,7 +61,8 @@ class PictureWatcher extends Entity{
 					Uploader::process_form_file(
 						"picture",
 						$this->picture->get_folder(),
-						2000000,Uploader::get_img_extensions(), 
+						2000000,
+                        Uploader::get_img_extensions(), 
 						$prefix
 					);
 
@@ -97,4 +93,3 @@ class PictureWatcher extends Entity{
 		$this->load();
 	}
 }
-?>

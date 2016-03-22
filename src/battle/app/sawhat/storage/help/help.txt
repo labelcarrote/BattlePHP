@@ -1,6 +1,6 @@
 help
-lastedit: 20140521_0805
-color: #ff6523
+lastedit: 20160117_0401
+color: #F9C59E
 
 ===== Main principles 
 [**Sawhat**](https://github.com/labelcarrote/BattlePHP) is a card based wiki.  

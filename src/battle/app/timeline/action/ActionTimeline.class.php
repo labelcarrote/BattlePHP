@@ -50,6 +50,7 @@ class ActionTimeline extends Controller{
 			header("Location: ".Request::get_application_virtual_root());
 		}
 
+        // specification = search filter 
 		$event_specification = new DomainEventSpecification();
 		$event_specification->page_id = 1;
 		$event_specification->nb_event_by_page = 100;
@@ -148,4 +149,3 @@ class ActionTimeline extends Controller{
 		$this->assign('last_year',$last_year);
 	}
 }
-?>

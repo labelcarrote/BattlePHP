@@ -87,7 +87,7 @@ class ActionHome extends Controller{
 						$ass_card = CardStore::get_card($params['card_name']);
 						// Sets palette
 						$palette = $color_scheme->palette;
-						$palette_by_hue = array();
+						$palette_by_hue = [];
 						foreach($palette AS $name => $hex){
 							// Calculate HUE //
 							$hsl = ImageHelper::rgb_to_hsl(ImageHelper::hex_to_rgb($hex));

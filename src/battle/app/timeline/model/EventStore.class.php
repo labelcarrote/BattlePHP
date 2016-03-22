@@ -30,4 +30,3 @@ class EventStore{
 		return DomainEventRepository::delete_event($event_id, ConfigurationTimeline::TABLE_EVENTS);
 	}
 }
-?>

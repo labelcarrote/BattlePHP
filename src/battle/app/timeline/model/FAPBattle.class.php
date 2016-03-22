@@ -33,4 +33,3 @@ class FAPBattle{
 		return json_encode($this);
 	}
 }
-?>

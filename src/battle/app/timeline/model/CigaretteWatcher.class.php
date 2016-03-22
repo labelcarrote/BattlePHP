@@ -33,7 +33,7 @@ class CigaretteWatcher extends Entity{
 	
 	public $since_date = null;
 	public $count_since = 0;
-	public $cigarettes = array(); 
+	public $cigarettes = []; 
 
 
 	public function __construct($since_date = null){
@@ -62,4 +62,3 @@ class CigaretteWatcher extends Entity{
 	public function delete($cigarette_id){
 	}
 }
-?>

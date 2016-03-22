@@ -19,6 +19,7 @@ class GoldRater{
 	public static function get_rate(){
 		$rate_data = file_get_contents(Request::get_application_path().self::DEFAULT_FOLDER.self::DEFAULT_FILENAME);
 		$rate_data = json_decode($rate_data, false);
+		var_dump($rate_data->dataset->data[0]);
 		return [
 			"rate" => $rate_data->dataset->data[0][1],
 			"last_update" => $rate_data->dataset->data[0][0]

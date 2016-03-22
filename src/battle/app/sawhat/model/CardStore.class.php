@@ -9,13 +9,13 @@ require_once 'app/sawhat/model/Card.class.php';
 ***********************************************************************/
 class CardStore{
 	
-	const DIR = "storage/";
+	const DIR = "storage/";//?
 	const EXT = ".txt";
-	const MAX_RECURSIVE_LEVEL = 2;
+	const MAX_RECURSIVE_LEVEL = 3;
 	const MAX_FILE_SIZE = 5242880; // 5Mio 
 	
 	public static function get_folder(){
-		return "app/sawhat/".self::DIR;
+		return "app/sawhat/".self::DIR;//?
 	}
 
 	public static function exist($card_name){
@@ -25,16 +25,19 @@ class CardStore{
 		return file_exists(self::get_folder()."$card_name/".$card_name.self::EXT);
 	}
 
-	public static function get_card($card_name, $recursive_level = 0){
+	public static function get_card($card_name, $recursive_level = 0, $with_files = true){
 		$folder = self::get_folder()."$card_name/";
 		$filename = $folder.$card_name.self::EXT;
-		$lines = (!file_exists($filename)) ? [] : file($filename);
+		
+		$lines = (!file_exists($filename)) ? 
+			[] : 
+			file($filename);
+
 		$card = new Card($card_name,$lines,$recursive_level);
-		$card->files = FileSystemIO::get_files_in_dir($folder.'{*.jpg,*.jpeg,*.JPG,*.png,*.gif,*.zip}');
-		foreach($card->files AS $key => $file){
-			$file_type = preg_match('/^(.+)\.(zip)$/',$file->name) ? 'zip' : 'image';
-			$card->files[$key]->type = $file_type;
-		}
+		
+		if($with_files === true)
+			$card->load_files();// SLOW SHIT
+
 		return $card;
 	}
 	

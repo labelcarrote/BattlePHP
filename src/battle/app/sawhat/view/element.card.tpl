@@ -43,19 +43,19 @@
 	{else}
 		{$card->html}
 		<!-- WTF is this ending div? -->
+	</div>
+	{if count($card->files) > 0}
+	<div class="smallpadding files marginbottom darker">
+		<div class="image_preview hidden">
+			<img alt="image preview" src="" class="verticaly_centered" />
 		</div>
-		{if count($card->files) > 0}
-		<div class="smallpadding files marginbottom darker">
-			<div class="image_preview hidden">
-				<img alt="image preview" src="" class="verticaly_centered" />
-			</div>
-			<ul>
-			{foreach from=$card->files item=file}
-				<li><a href="{$batl_root_url}{$file->fullname}" class="{$file->type}_link">{$file->name}</a></li>
-			{/foreach}
-			</ul>
-		</div>
-		{/if}
+		<ul>
+		{foreach from=$card->files item=file}
+			<li><a href="{$batl_root_url}{$file->fullname}" class="{$file->type}_link">{$file->name}</a></li>
+		{/foreach}
+		</ul>
+	</div>
+	{/if}
 	{/if}
 {/if}
 </div>

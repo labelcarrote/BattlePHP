@@ -35,7 +35,7 @@ class FAPBattleWatcher extends Entity{
 	
 	public $since_date = null;
 	public $count_since = 0;
-	public $fapbattles = array(); 
+	public $fapbattles = []; 
 
 	public function __construct($since_date = null){
 		$this->since_date = $since_date;
@@ -63,4 +63,3 @@ class FAPBattleWatcher extends Entity{
 	public function delete($fapbattle_id){
 	}
 }
-?>

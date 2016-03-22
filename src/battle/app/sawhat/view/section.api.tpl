@@ -102,3 +102,99 @@
 			</ul>
 	</section>
 </div>
+
+{**
+swagger: '2.0'
+info:
+  title: Sawhat
+  description: Sawhat wiki's json API 
+  version: 1.0.0
+host: labelcarrote.com
+schemes:
+  - http
+basePath: /battle/sawhat/api
+produces:
+  - application/json
+paths:
+  /sawhat/api?m=get_card&name={card_name}:
+    get:
+      summary: Card
+      description: |
+        The get_card endpoint returns information about the *Uber* products
+        offered at a given location. The response includes the display name
+        and other details about each product, and lists the products in the
+        proper display order.
+      parameters:
+        - name: card_name
+          in: path
+          description: Card name
+          required: true
+          type: string
+          format: string
+      tags:
+        - Card
+      responses:
+        '200':
+          description: A Card
+          schema:
+            $ref: '#/definitions/Card'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Card:
+    type: object
+    properties:
+      is_private:
+        type: boolean
+        description: 'Is the card private?'
+      is_recursive:
+        type: boolean
+        description: 'Is the card recursive?'
+      color:
+        type: string
+        description: Display name of product.
+      is_light:
+        type: boolean
+        description: ''
+      properties:
+        type: string
+        description: ''
+      last_edit:
+        type: string
+        description: ''
+      name:
+        type: string
+        description: ''
+      display_name:
+        type: string
+        description: ''
+      files:
+        type: string
+        description: ''
+      exists:
+        type: boolean
+        description: ''
+      history:
+        type: string
+        description: ''
+      text_code:
+        type: string
+        description: ''
+      html:
+        type: string
+        description: ''
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
+
+
+**}

@@ -1,4 +1,5 @@
 <?php
+use BattlePHP\Storage\FileSystemIO;
 use BattlePHP\Core\Auth\AuthManager;
 use BattlePHP\Imaging\ImageHelper;
 use BattlePHP\Core\Viewer;
@@ -13,6 +14,7 @@ class Card implements JsonSerializable{
 	
 	const DEFAULT_COLOR = '#f90';
 
+	public $exists = false;
 	public $is_private = false;
 	public $is_recursive;
 	public $color = self::DEFAULT_COLOR;
@@ -25,14 +27,12 @@ class Card implements JsonSerializable{
 	public $elements;
 	public $html = '';
 	public $files;
-	public $exists = false;
 	public $history;
 	
 	public function __construct($name, $lines = [], $recursive_level = 0){
 		$this->exists = CardStore::exist($name);
 		$this->name = $name;
 		$this->display_name = self::get_display_name($name);
-		$this->lines = $lines;
 		$this->is_recursive = $recursive_level > 0;
 		$this->recursive_level = $recursive_level;
 		$this->elements = [];
@@ -80,7 +80,6 @@ class Card implements JsonSerializable{
 		$this->get_style_definition();
 		
 		// set html as a whole
-		$card_to_include = array();
 		foreach($this->elements AS $k => $element){
 			if(isset($element->cards) && count($element->cards) > 0){
 				$this->html .= '<div class="column_container auto_clear">';
@@ -109,9 +108,22 @@ class Card implements JsonSerializable{
 		//$this->html = stripslashes(strip_tags($this->html));
 	}
 
+	public function load_files(){
+		$folder = $this->get_card_folder();
+		$this->files = FileSystemIO::get_files_in_dir($folder.'{*.jpg,*.jpeg,*.JPG,*.png,*.gif,*.zip}');
+		foreach($this->files AS $key => $file){
+			$file_type = preg_match('/^(.+)\.(zip)$/',$file->name) ? 'zip' : 'image';
+			$this->files[$key]->type = $file_type;
+		}
+	}
+
 	public function get_all_links(){
 		preg_match_all('#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#', $this->text_code, $output);
 		return $output[0];
+	}
+
+	public function get_card_folder(){
+		return CardStore::get_folder()."$this->name/";
 	}
 
 	public function __toString(){

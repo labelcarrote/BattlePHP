@@ -3,9 +3,6 @@ use BattlePHP\Model\Entity;
 use BattlePHP\Event\DomainEvent;
 use BattlePHP\Event\DomainEventSpecification;
 use BattlePHP\Event\DomainEventRepository;
-/*require_once 'core/model/ValueObject.class.php';
-require_once 'core/event/DomainEvent.class.php';
-require_once 'core/event/DomainEventRepository.class.php';*/
 require_once 'app/timeline/config/config.php';
 require_once 'app/timeline/model/Text.class.php';
 
@@ -34,7 +31,7 @@ class TextWatcher extends Entity{
 	
 	public $since_date = null;
 	public $count_since = 0;
-	public $texts = array(); 
+	public $texts = []; 
 
 	public function __construct($since_date = null){
 		$this->since_date = $since_date;
@@ -62,4 +59,3 @@ class TextWatcher extends Entity{
 	public function delete($text_id){
 	}
 }
-?>

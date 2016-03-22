@@ -34,4 +34,3 @@ class Cigarette{
 		return json_encode($this);
 	}
 }
-?>

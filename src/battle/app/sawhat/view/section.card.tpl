@@ -7,10 +7,10 @@
  - $cards : [Card]
  
 ************************************************}
-{if isset($cards)}
 <div class="content content_theme_sawhat">
 	{include file="element.header.tpl"}
 	<section>
+	{if isset($cards)}
 		<div class="sawhat card__content">
 			<!-- <div class="starred_title smaller">
 				<span class="fa-stack">
@@ -29,23 +29,13 @@
 				{/foreach}
 			</div>
 		</div>
-	</section>
-</div>
-{elseif isset($card)}
-<div class="content content_theme_sawhat">
-	{include file="element.header.tpl"}
-	<section>
-	{include file="element.card.tpl"}
-	</section>
-</div>
-{else}
-<div class="content content_theme_sawhat">
-	{include file="element.header.tpl"}
-	<section>
+	{elseif isset($card)}
+		{include file="element.card.tpl"}
+	{else}
 		<div class="sawhat card__content">
 		No card were found.
 		</div>
+	{/if}
 	</section>
 </div>
-{/if}
 {include file="element.footer.tpl"}

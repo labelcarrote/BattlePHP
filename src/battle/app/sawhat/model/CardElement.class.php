@@ -80,7 +80,7 @@ class CardElement{
 		elseif(preg_match('/^\#([\S]*)$/',$html,$matches)){
 			if($matches[1] !== 'starred'){
 				$view_manager = Viewer::getInstance();
-				$ass_card = new Card($matches[1]);
+				$ass_card = CardStore::get_card($matches[1],0,false);
 				$view_manager->assign('card',$ass_card);
 				$html = $view_manager->fetch_view('element.card.loadable.tpl');
 			} else {

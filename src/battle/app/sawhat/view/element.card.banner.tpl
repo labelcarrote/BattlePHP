@@ -11,7 +11,7 @@
  - $card
 
 ************************************************}
-<div class="banner auto_clear">
+<div class="banner auto_clear" {if $card->exists}style="background-color:{$card->color};"{/if}>
 	{if !$batl_is_logged and $card->is_private}
 		<span class="{if $card->is_light}lighter_text{else}darker_text{/if} fa fa-lock" title="private"></span>
 	{/if}

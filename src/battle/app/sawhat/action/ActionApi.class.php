@@ -107,7 +107,7 @@ class ActionApi extends Controller{
 							}else{
 								try{
 									FileSystemIO::save_file(
-										Request::get_application_path().CardStore::DIR.$data->card_name."/".$data->file_name,
+										CardStore::get_folder().$data->card_name."/".$data->file_name,
 										$data->file
 									);
 									// returns files list
