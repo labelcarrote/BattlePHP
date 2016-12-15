@@ -26,7 +26,7 @@
 				I'm the index page from BattlePHP's <strong>{$title}</strong>, a simple upload file form example, in javascript and php.<br>
 				<strong>Usage :</strong> Click on the picture or drag-n-drop a picture on it to replace the current one with any <strong>.jpg, .png or .gif</strong> file <strong>&lt; {$upload_form->max_file_size_human_readable}.</strong> 
 			</p>
-			{include file="form.upload_file.tpl" }
+			{include file="form.upload_file.tpl"}
 			<footer class="footer">
 				<a href="?mode=zen">ZEN mode</a> | 
 				<a href="?mode=button">Button mode</a>

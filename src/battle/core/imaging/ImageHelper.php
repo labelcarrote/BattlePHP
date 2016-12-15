@@ -277,6 +277,44 @@ class ImageHelper{
 		return (sqrt((0.299*pow($rgb[0],2))+(0.587*pow($rgb[1],2))+(0.114*pow($rgb[2],2)))) / 255;
 	}
 
+	public static function create_text_image($text, $output_path, $width = null, $height = null){
+		// header("Content-type: image/png");
+		$font  = 2;
+		$lines = preg_split("/\r\n|\n|\r/", $text);
+		$lines_count = count($lines);
+		if($lines_count <= 1){
+			$width  = 24 + imagefontwidth($font) * strlen($text);
+			$height = 24 + imagefontheight($font);
+			$image = imagecreatetruecolor ($width,$height);
+			$white = imagecolorallocate ($image,255,255,255);
+			$black = imagecolorallocate ($image,0,0,0);
+			imagefill($image,0,0,$black);
+			imagestring ($image,$font,12,12,$text,$white);
+		}else{
+			$longest_line = "";
+			foreach ($lines as $line) {
+				if(strlen($line) > strlen($longest_line))
+					$longest_line = $line;
+			}
+			$width  = 24 + imagefontwidth($font) * strlen($longest_line);
+			$height = 24 + (imagefontheight($font)+6) * $lines_count;
+			$image = imagecreatetruecolor ($width,$height);
+			$white = imagecolorallocate ($image,255,255,255);
+			$black = imagecolorallocate ($image,0,0,0);
+			imagefill($image,0,0,$black);
+			$i = 1;
+			foreach ($lines as $line) {
+				imagestring ($image,$font,12,(12+6)*$i,$line,$white);	
+				$i++;
+			}
+		}
+		// WIP 
+		//imagettftext($image, 14, 0, 12, 12, $white, $font, $text );
+
+		imagepng($image, $output_path, self::PNG_QUALITY);
+		imagedestroy($image);
+	}
+
 
 	// ---- Helpers ----
 	

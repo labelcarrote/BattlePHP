@@ -49,8 +49,8 @@ $(window).load(function(){
 		} else {
 			var files = e.target.files;
 			for (var i = 0, f; f = files[i]; i++) {
-				// Only process image files.
-				if (!f.type.match('image.*'))
+				// Only process image and plain text files.
+				if (!f.type.match('image.*') && !f.type.match('text/plain'))
 					continue;
 
 				// Closure to capture the file information.

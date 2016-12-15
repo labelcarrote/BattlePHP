@@ -25,7 +25,7 @@
 	<div class="content">
 		{include file="form.upload_file.tpl"}
 		<footer class="footer">
-			<a id="dat_file_date_modified_link" title="Follow this link to view source image" href="{$dat_file->url}">
+			<a id="dat_file_date_modified_link" title="Follow this link to view source file" href="{$dat_file->url}">
 				{$dat_file->date_modified|date_format:"%d/%m/%Y %T"}
 			</a>
 		</footer>

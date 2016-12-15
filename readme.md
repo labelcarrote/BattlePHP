@@ -15,28 +15,37 @@ Features
 - Uses Smarty for templating (optional)
 - Uses pdo / mysql in authentication layer (optional)
 
-Hierarchy
----------
-/src/battle/
-- app : Where the wilds apps are
-- config : Set your shared setting (DB,SMTP,Smarty Tpl Dir, etc) here
-- core : Core framework
-- lib : Shared php or js libraries used by core and apps
-- public : Shared static files (home-made javascript, fonts, icons etc)
-- tmp/tpl_comp : Default smarty template cache directory
+Hierarchy / Folder Structure 
+----------------------------
+    .
+    ├── src/
+    │   ├── battle/                 # BattlePHP root folder
+    │   │   ├── app/                # Applications (our examples and your applications)
+    │   │   ├── config/             # Shared settings (DB, SMTP, Smarty Tpl Dir, etc)
+    │   │   ├── core/               # Core framework
+    │   │   ├── lib/                # Shared php or js libraries used by core and apps (not retrieve by Composer) 
+    │   │   ├── public/             # Shared static files (home-made Javascript, fonts, icons etc)
+    │   │   ├── tmp/tpl_comp/       # Default Smarty template cache directory
+    │   │   ├── .htaccess           # Main .htaccess (REST routing starts here)
+    │   │   ├── composer.json       # Server-side dependencies configuration (via Composer)
+    │   │   └── index.php           # Index Page (serves all page requests on BattlePHP)
+    │   └── index.php               # A simple code sniffer
+    ├── .gitignore                  # 
+    └── README.md                   # This file
 
 
 Installation with Composer
 --------------------------
 - Download and unzip in your web directory
-- in /src/battle run :
+- Use Composer to download dependencies
 ```
+> cd src/battle/
 > composer install
 ```
 - Go to http://[your_web_directory]/src/battle/ in your favorite browser
 
 Optional (for examples that require a database) :
-- Change your database access in config/config.php
+- Change your database access in src/battle/config/config.php
 - Execute the "install.sql" of every app you wish to install (in : app/[app_name]/_install/)
 
 Installation without Composer
@@ -148,14 +157,17 @@ So as a developper, adding a new action "hello" to an existing app "test" access
   use BattlePHP\Core\Controller;
 
   class ActionHome extends Controller{
+    // [/home,/]
     public function index(){
-      $this->display_view('index.tpl');
-    }  
-    // This method ! Add this method :
+       $this->assign('title',"Home");
+       $this->display_view('section.index.tpl');
+    } 
+
+    // [/home/hello] TODO Add this method
     public function hello(){
-      $person = "georges";
-      $this->assign("famous_people",$person);
-      $this->display_view('section.hello.tpl');
+      $this->display_view('section.hello.tpl',[
+        'famous_people' => "Georges"
+      ]);
     }
   }
     ```

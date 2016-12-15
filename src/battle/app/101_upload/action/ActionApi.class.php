@@ -1,8 +1,5 @@
 <?php
-use BattlePHP\Core\Controller;
-use BattlePHP\Core\Request;
 use BattlePHP\Api\Response;
-use BattlePHP\Storage\Uploader;
 require_once __DIR__.'/../model/DatFileManager.php';
 /********************************************************************
 * CLASS ActionApi (Controller)
@@ -13,7 +10,7 @@ require_once __DIR__.'/../model/DatFileManager.php';
 * - index : /api
 *
 *********************************************************************/
-class ActionApi extends Controller{
+class ActionApi extends BattlePHP\Core\Controller{
 
 	const ERR_UNKNOWN_API_METHOD = "Unknown API method.";
 	const ERR_FILE_TOO_BIG = "Too big.";
@@ -26,17 +23,15 @@ class ActionApi extends Controller{
 		if($data !== null){
 			switch ($data->submit) { 
 				case 'upload_file':
-					$extensions = ["jpg","jpeg","png","gif","zip"];
 					$extension = strtolower(pathinfo($data->file_name,PATHINFO_EXTENSION));
-					$is_extension_allowed = in_array($extension, $extensions);
+					$is_extension_allowed = in_array($extension, ["jpg","jpeg","png","gif","zip","txt"]);
 					$size = strlen($data->file);
-					if($size > DatFileManager::MAX_FILE_SIZE){
-						$response->errors = self::ERR_FILE_TOO_BIG;
-					}
-					elseif($is_extension_allowed === false){
+					
+					if($is_extension_allowed === false){
 						$response->errors = self::ERR_FILE_EXT_NOT_ALLOWED;
-					}
-					else{
+					}elseif($size > DatFileManager::MAX_FILE_SIZE){
+						$response->errors = self::ERR_FILE_TOO_BIG;
+					}else{
 						try {
 							$dat_file = DatFileManager::store_dat_file($extension,$data->file);
 							$response->body = [

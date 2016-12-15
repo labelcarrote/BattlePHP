@@ -29,16 +29,18 @@
 	}
 	</style>
 	<div class="content">
-		<div>
-		{include file="form.upload_file.button.tpl"}
-		</div>
+		{include file="form.upload_file.tpl"}
 		<div id="dat_file_container" >
+			{if $dat_file->extension === "txt"}
+			<p>A text file ! :q</p>
+			{else}
 			<div class="image_container">
 				<img src="{$dat_file->url}">
 			</div>
+			{/if}
 		</div>
 		<footer class="footer">
-			<a id="dat_file_date_modified_link" title="Follow this link to view source image" href="{$dat_file->url}">
+			<a id="dat_file_date_modified_link" title="Follow this link to view source file" href="{$dat_file->url}">
 				{$dat_file->date_modified|date_format:"%d/%m/%Y %T"}
 			</a>
 		</footer>

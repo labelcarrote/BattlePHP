@@ -1,5 +1,4 @@
 <?php
-use BattlePHP\Core\Controller;
 use BattlePHP\Core\Auth\AuthManager;
 use BattlePHP\Core\Auth\Identity;
 use BattlePHP\Api\Response;
@@ -33,7 +32,7 @@ require_once 'app/sawhat/model/SearchHelper.class.php';
 * @author touchypunchy
 *
 ***********************************************************************/
-class ActionApi extends Controller{
+class ActionApi extends BattlePHP\Core\Controller{
 
 	const ERR_UNKNOWN_API_METHOD = "Unknown API method.";
 	const ERR_NOT_AUTENTICATED = "You need to be authentified to do that.";

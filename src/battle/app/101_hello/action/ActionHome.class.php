@@ -1,6 +1,4 @@
 <?php
-use BattlePHP\Core\Controller;
-use BattlePHP\Core\Request;
 /********************************************************************
 * CLASS ActionHome (Controller)
 *
@@ -11,7 +9,7 @@ use BattlePHP\Core\Request;
 * - sub_page : /home/sub_page
 *
 *********************************************************************/
-class ActionHome extends Controller{
+class ActionHome extends BattlePHP\Core\Controller{
 	
 	// [/home,/]
 	public function index(){

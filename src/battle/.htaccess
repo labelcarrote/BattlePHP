@@ -7,5 +7,5 @@ RewriteCond %{REQUEST_URI} !public
 RewriteRule ^([a-zA-Z0-9_-]+)(/*)$ index.php?param1=$1 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)(/*)$ index.php?param1=$1&param2=$2 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/?$ index.php?param1=$1&param2=$2&param3=$3 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/(.+)\.(png|jpg|jpeg|gif|css|js|pde|ttf|mp3|svg|eot|woff|tsv|zip|ogg)$ $1/$2/$3/$4.$5 [L,NC]
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/(.+)\.(png|jpg|jpeg|gif|css|js|pde|ttf|mp3|svg|eot|woff|tsv|zip|ogg|txt)$ $1/$2/$3/$4.$5 [L,NC]
 RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/(.+)$ index.php?param1=$1&param2=$2&param3=$3&param4=$4 [L,QSA]

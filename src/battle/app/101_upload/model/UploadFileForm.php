@@ -8,6 +8,7 @@ use BattlePHP\Storage\FileSystemIO;
 *********************************************************************/
 class UploadFileForm extends Form{
 
+	public $mode = "";
 	public $action = "";
 	public $submit_action_name = "upload_file";
 	public $max_file_size = 5242880;

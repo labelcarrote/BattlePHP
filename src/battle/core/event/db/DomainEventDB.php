@@ -5,6 +5,7 @@ use \PDO;
 
 /**--------------------------------------------------------------------
  * DomainEventDB
+ * - Uses PDO
  * --------------------------------------------------------------------
  */
 class DomainEventDB{
@@ -13,7 +14,7 @@ class DomainEventDB{
 	const DEFAULT_TABLE = "btl_events";
 
 	// Queries
-	private $queries = array();
+	private $queries = [];
 
 	/* ---- Constructor / PDO ---- */
 	
@@ -30,9 +31,14 @@ class DomainEventDB{
 		$dbuser = Configuration::DB_USER;
 		$dbpass = Configuration::DB_PASS;
 		try{
-			$this->con = new PDO("mysql:host=$host;dbname=$dbname", $dbuser, $dbpass, array(PDO::ATTR_PERSISTENT => true));
+			$this->con = @new PDO(
+				"mysql:host=$host;dbname=$dbname", 
+				$dbuser, 
+				$dbpass,
+				[PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+			);
 		}
-		catch(PDOException $e){
+		catch (PDOException $e){
 			$this->query_error($e);
 		}
 	}
@@ -61,7 +67,7 @@ class DomainEventDB{
 	}
 
 	public function set_queries($table_name){
-		$this->queries = array();
+		$this->queries = [];
 		$this->queries["create_table_event_if_not_exist"] = 
 		"CREATE TABLE IF NOT EXISTS `".$table_name."` (
 		  `event_id` char(36) NOT NULL,
@@ -253,9 +259,8 @@ class DomainEventDB{
 				$query .= " AND element_id = ?";
 
 			$any_dates = isset($date1) && isset($date2);
-			if($any_dates){
+			if($any_dates)
 				$query .= " AND date BETWEEN ? AND ?";
-			}
 
 			$order = ($in_descending_order === true) ? "DESC" : "ASC";
 			$ordered_by = ($ordered_by === null || $ordered_by === "") ? "date" : $ordered_by;

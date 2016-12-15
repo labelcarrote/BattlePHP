@@ -1,5 +1,4 @@
 <?php
-use BattlePHP\Core\Controller;
 use BattlePHP\Core\Request;
 /********************************************************************
 * CLASS ActionLol (Controller)
@@ -11,7 +10,7 @@ use BattlePHP\Core\Request;
 * - wat : /lol/wat
 *
 *********************************************************************/
-class ActionLol extends Controller{
+class ActionLol extends BattlePHP\Core\Controller{
 	
 	// [/lol]
 	public function index(){
